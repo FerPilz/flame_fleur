@@ -445,3 +445,208 @@ For every screen:
 * no reference images used as app assets
 * no hidden clipped content behind the tab bar
 * screen behavior should match `SCREEN_BEHAVIOR.md`
+
+# Explore Screen Behavior
+
+Reference:
+
+`Reference_Images/02_Explore_reference.png`
+
+## Explore Purpose
+
+Explore helps the user search, browse, and discover recipes by category, cuisine, and curated groups.
+
+The reference image is a static snapshot. It does not show all search/filter states or all categories.
+
+## Explore Data Rules
+
+Explore must use centralized recipe data:
+
+- `Recipe`
+- `RecipeCategory`
+- `SampleRecipes`
+- `RecipeRepository`
+
+Do not define local recipe arrays directly inside `ExploreView.swift`.
+
+## Required Explore Sections
+
+Explore should include:
+
+1. Header / app identity area
+2. Search bar
+3. Filter/category chips
+4. Visual cuisine/category browsing area
+5. Recommended or trending recipe carousel
+6. Popular or recently added recipe carousel if shown by the reference or needed to test scrolling
+
+## Search Behavior
+
+The search bar should use local UI state only.
+
+When the user types:
+
+- update local `searchText`
+- filter displayed mock recipes if practical
+- if filtering is not implemented yet, keep the UI stable and add a TODO comment
+
+Do not add networking or backend search.
+
+## Filter Chip Behavior
+
+Filter/category chips should be state-driven.
+
+When the user taps a chip:
+
+- update selected chip/category
+- visually update selected state
+- filter mock recipe/category content if practical
+
+Do not create static fake chips.
+
+## Category Card Behavior
+
+Category/cuisine cards should be tappable placeholder controls.
+
+When tapped:
+
+- update local selected category state or print/log placeholder action
+- do not implement full Category List navigation unless explicitly requested in the task
+
+## Carousel Behavior
+
+Explore horizontal recipe rows must:
+
+- use `HorizontalCarousel`
+- contain enough mock recipes to test horizontal scrolling
+- avoid clipping first/last cards
+- use consistent compact recipe card title behavior
+- use centralized recipe data
+
+## Explore Acceptance Criteria
+
+Explore is acceptable only if:
+
+- it visually follows `02_Explore_reference.png`
+- it uses shared design primitives
+- it uses centralized recipe data
+- search field uses local state
+- filter chips update selected state
+- recipe carousels scroll horizontally
+- category cards are visually consistent
+- no reference image is used as an app asset
+- no networking is added
+- no persistence is added
+- no new main tab is added
+
+# Explore Screen Behavior
+
+Reference:
+
+`Reference_Images/02_Explore_reference.png`
+
+## Search Behavior
+
+The search bar should use local state.
+
+When the user types:
+
+- update `searchText`
+- filter visible mock recipes and/or categories if practical
+- do not add backend search
+- do not add networking
+
+## Filter Chip Behavior
+
+Filter chips must be tappable and state-driven.
+
+When a filter chip is tapped:
+
+- update selected filter state
+- visually update selected chip
+- filter mock recipe/category content if practical
+
+Do not create static fake chips.
+
+## Category Selection Behavior
+
+Category/cuisine cards should be tappable placeholders.
+
+When tapped:
+
+- update selected category state
+- selected category may show a subtle selected border or background
+- do not show a selected border on a random category unless it reflects state
+- do not navigate to Category List yet unless explicitly requested
+
+## Explore Carousel Behavior
+
+Recommended recipe rows must:
+
+- use `HorizontalCarousel`
+- scroll horizontally
+- contain enough mock recipes to test scrolling
+- avoid clipping first and last cards
+- avoid being hidden behind the tab bar
+- use compact one-line title truncation
+
+## Explore Bottom Content Safety
+
+Explore scroll content must include enough bottom inset so recipe cards are not cropped behind the fixed bottom tab bar.
+
+## Explore Category Browser Behavior
+
+The main Explore screen is a category/cuisine browser.
+
+It should not show a bottom rectangular `Recommended Recipes` carousel.
+
+The main content should consist of category sections with circular category tiles.
+
+Required sections:
+
+1. World Cuisine
+2. Meat & Seafood
+3. Vegetarian
+4. Chicken
+5. Bakery
+6. High Protein
+
+Each category tile should be tappable as a placeholder control.
+
+When tapped:
+
+- update local selected category state
+- visually show the selected category if practical
+- do not navigate to Category List yet unless explicitly requested
+
+## Explore Category Recipe Data
+
+Every category represented on the Explore screen must have at least 6 placeholder recipes available in centralized sample data.
+
+This is required so later Category List and carousel functionality can be tested.
+
+Required examples:
+
+- Italian: at least 6 recipes
+- Mexican: at least 6 recipes
+- Korean: at least 6 recipes
+- Fish: at least 6 recipes
+- Meat: at least 6 recipes
+- Seafood: at least 6 recipes
+- Tofu & Tempeh: at least 6 recipes
+- Beans & Lentils: at least 6 recipes
+- Mushrooms: at least 6 recipes
+- Chicken: at least 6 recipes
+- Bakery: at least 6 recipes
+- High Protein: at least 6 recipes
+
+Recipe data must live in centralized sample data/repository files, not inside `ExploreView.swift`.
+
+Use:
+
+- `Recipe`
+- `RecipeCategory`
+- `SampleRecipes`
+- `RecipeRepository`
+
+Do not add networking or persistence yet.

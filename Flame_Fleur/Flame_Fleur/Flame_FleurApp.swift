@@ -11,7 +11,7 @@ import SwiftUI
 struct Flame_FleurApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppShellView()
         }
     }
 }

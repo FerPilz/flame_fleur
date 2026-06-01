@@ -1375,3 +1375,98 @@ When in doubt, choose:
 * simpler actions
 
 The app should always feel like Flame & Fleur, not a generic generated app.
+
+## Explore Visual QA Corrections
+
+Use these corrections when patching `Reference_Images/02_Explore_reference.png`.
+
+### Header and Top Spacing
+
+- Explore should reuse the same compact `AppHeader` behavior as Home.
+- Reduce excessive vertical spacing above and below the title.
+- The title should feel visually connected to the search area.
+- Do not let the top header area consume too much vertical space.
+
+### Search Bar
+
+- Search bar should feel premium and warm.
+- Use warm white or cream surface.
+- Use subtle warm border.
+- Search icon and placeholder text should use muted secondary color.
+- Avoid default gray search styling.
+
+### Import and Add Recipe Actions
+
+- Import and Add Recipe buttons should feel like soft secondary action pills.
+- Use consistent height, radius, border, and typography.
+- Use olive icons and text unless a stronger CTA is explicitly needed.
+- Prefer concise labels:
+  - `Import Recipe`
+  - `Add Recipe`
+
+### Explore Filter Chips
+
+- Filter chips must be state-driven.
+- Selected chip should use a consistent selected state.
+- Do not show random selected borders or colors unless controlled by state.
+- Unselected chips should use warm white/cream with subtle border.
+- Selected style should be olive or warm accent depending the screen context.
+
+### Category/Cuisine Cards
+
+- Category/cuisine icons should use consistent circular image sizes.
+- Food placeholders should fill their circular containers consistently.
+- Labels should be readable and short.
+- Category grids should feel editorial, not like a rigid utility grid.
+- Section headers and `See all` actions should be compact and refined.
+
+### Recommended Recipe Carousel
+
+- Recommended recipe cards must not be hidden behind the tab bar.
+- Compact recipe card titles should use the same one-line truncation rules as Home.
+- Maximize visible title text while preserving readability.
+- Use consistent card width, height, image size, and typography.
+
+## Explore Visual QA Corrections — Category Browser
+
+For `Reference_Images/02_Explore_reference.png`, Explore should behave primarily as a category/cuisine browsing screen.
+
+### Remove Rectangular Recipe Carousel
+
+- Do not show a bottom rectangular recipe-card carousel on the main Explore screen.
+- Remove the `Recommended Recipes` rectangular card section from this screen.
+- The main Explore screen should focus on circular category/cuisine tiles.
+- Recipe cards belong in later screens such as Category List, Home sections, Favorites, or Recipe Detail flows.
+
+### Circular Category Tile Size
+
+- Category/cuisine circles should be larger to match the reference image.
+- Increase circular tile image diameter.
+- Recommended circle diameter: approximately 72-88 pt depending available width.
+- All category circles must use the same diameter.
+- Placeholder artwork must fill the circle consistently.
+- Labels should remain below the circle and readable.
+
+### Explore Category Coverage
+
+Explore should include more category sections than the static reference shows.
+
+Required category sections:
+
+- World Cuisine
+- Meat & Seafood
+- Vegetarian
+- Chicken
+- Bakery
+- High Protein
+
+Each section should show circular category tiles.
+
+The screen should be vertically scrollable if all sections do not fit in the initial viewport.
+
+### Explore Category Visual Rules
+
+- Use circular food placeholders only on the main Explore category screen.
+- Do not mix rectangular recipe cards into the main Explore category screen.
+- Section headers should remain compact.
+- `See all` actions may remain on section headers as placeholder controls.
