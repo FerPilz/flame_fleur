@@ -22,7 +22,7 @@ Do not treat reference images as the full functionality of the screen.
 
 ---
 
-# Global Interaction Rules
+# 1. Global Interaction Rules
 
 ## Static Reference Images Are Partial
 
@@ -73,15 +73,15 @@ Examples:
 
 * top menu items should update selected state
 * carousel rows should actually scroll
+* favorite buttons should toggle local visual state
 * buttons can print/log or update simple local UI state if no real functionality exists yet
 * navigation buttons can use placeholder destinations if needed
-* favorite buttons can toggle local visual state if practical
 
 Do not add real persistence or networking unless explicitly requested.
 
 ---
 
-# Home Screen Behavior
+# 2. Home Screen Behavior
 
 Reference:
 
@@ -128,7 +128,7 @@ The selected top menu item should update its active state.
 
 Use `ScrollViewReader` or another clean SwiftUI method.
 
-The top menu should not be decorative or static.
+The top menu must not be decorative or static.
 
 ## Header and Top Menu Position
 
@@ -187,7 +187,7 @@ Required behavior:
 
 * display as a horizontal carousel
 * include at least 6 mock recipe cards
-* each card should have a title, metadata, favorite button, and image placeholder
+* each card should have a title, metadata, favorite button, image placeholder, and creator overlay
 
 Sample placeholder recipes:
 
@@ -197,6 +197,15 @@ Sample placeholder recipes:
 * Roasted Veggie Bowl
 * Lemon Ricotta Toast
 * Spiced Chickpea Stew
+
+Sample placeholder creator labels:
+
+* `@marina.cooks`
+* `@homechef.anna`
+* `@bakewithleo`
+* `@freshkitchen`
+* `@chef.luna`
+* `@tableandthyme`
 
 ### Top Picks
 
@@ -232,6 +241,7 @@ Required behavior:
 * make it visually consistent with other sections
 * do not create a separate AI Kitchen tab
 * do not add real AI/networking yet
+* position this section below Top Picks so it is not visible in the initial entry viewport
 
 Sample placeholder recipes:
 
@@ -242,39 +252,9 @@ Sample placeholder recipes:
 * Salmon Rice Plate
 * Quick Citrus Chicken
 
-## Home Buttons
+---
 
-Buttons should have placeholder behavior only unless real functionality is requested.
-
-Examples:
-
-* `View Recipe` can navigate to a placeholder recipe detail screen later, or be left as a button with a TODO comment.
-* Favorite heart buttons can optionally toggle local visual state.
-* `See all` can be present but does not need full navigation yet unless requested.
-
-## Home Acceptance Criteria
-
-Home is acceptable only if:
-
-* the visual layout remains close to `01_home_reference.png`
-* top menu contains Featured, Community, Top Picks, AI Recommend
-* each top menu item scrolls to its matching vertical section
-* selected top menu state updates when tapped
-* Community has at least 6 mock cards
-* Top Picks has at least 6 mock cards
-* AI Recommend has at least 6 mock cards
-* carousels actually scroll horizontally
-* cards are not clipped horizontally
-* images/placeholders do not overflow their containers
-* header/title stays visually stable at the top
-* the app does not add an AI Kitchen tab
-* no networking is added
-* no persistence is added
-* no reference image is used as an app asset
-
-# Home Interaction Corrections
-
-Use these interaction rules for `Reference_Images/01_home_reference.png`.
+# 3. Home Interaction Corrections
 
 ## Favorite Heart Behavior
 
@@ -284,7 +264,7 @@ When the user taps a recipe heart:
 
 * the heart state must toggle locally
 * the heart icon must stay visually selected after tapping
-* selected state should use a red or warm-red heart fill
+* selected state should use a red or warm-red filled heart
 * unselected state should use an outline heart
 * this behavior should work for Featured, Community, Top Picks, and AI Recommend recipe cards
 * do not add persistence yet
@@ -305,29 +285,163 @@ The selected top menu item must update when tapped.
 
 `AI Recommend` must exist as a real section below Top Picks, but it should not be visible in the initial entry viewport. It should become visible through vertical scrolling or by tapping the `AI Recommend` top menu item.
 
-## Home Carousel Data Requirements
+## Bottom Content Safety
 
-Each carousel must include enough placeholder recipes to test horizontal scrolling.
+Home scroll content must include enough bottom spacing so the final visible carousel/card row is not hidden or cropped behind the tab bar.
 
-Minimum counts:
+The bottom tab bar remains fixed.
 
-* Featured: at least 4 recipes
-* Community: at least 6 recipes
-* Top Picks: at least 6 recipes
-* AI Recommend: at least 6 recipes
+The scrollable content must account for the tab bar height using bottom padding or a bottom safe-area inset.
 
-All cards in the same carousel must use consistent sizing.
+## Recipe Title Behavior
 
-Community cards must include placeholder creator/user information.
+The Featured hero recipe title may use up to two lines.
 
-## Home Acceptance Additions
+Compact carousel card titles must use one line only.
 
-Home is not acceptable unless:
+For compact carousel cards:
 
+* use consistent title font size
+* show as much of the title as possible
+* keep the title readable
+* use `lineLimit(1)`
+* use `truncationMode(.tail)`
+* truncate only when necessary
+* do not shrink the font on individual cards
+* do not allow title wrapping
+* do not allow compact cards to become taller because of title wrapping
+
+This applies to:
+
+* Community carousel
+* Top Picks carousel
+* AI Recommend carousel
+
+## Community Creator Overlay Behavior
+
+Community cards should show creator metadata as an image overlay.
+
+This overlay is visual placeholder metadata only.
+
+The overlay should include:
+
+* tiny circular avatar placeholder
+* muted username text
+
+The overlay should appear near the lower edge of the image area, similar to the reference.
+
+Do not place the creator username as a separate full line below the recipe title.
+
+Do not add real user profiles, networking, or navigation yet.
+
+## Menu Icon Behavior
+
+The hamburger/menu icon is visual only for now unless navigation drawer behavior is explicitly requested.
+
+It must visually appear as three horizontal lines.
+
+---
+
+# 4. Home Buttons and Placeholder Behavior
+
+Buttons should have placeholder behavior only unless real functionality is requested.
+
+Examples:
+
+* `View Recipe` can navigate to a placeholder recipe detail screen later, or be left as a button with a TODO comment.
+* Favorite heart buttons should toggle local visual state.
+* `See all` can be present but does not need full navigation yet unless requested.
+* Top menu items must update selected state and scroll to the corresponding section.
+
+Do not add real persistence or backend behavior.
+
+---
+
+# 5. Home Acceptance Criteria
+
+Home is acceptable only if:
+
+* the visual layout remains close to `01_home_reference.png`
+* top menu contains Featured, Community, Top Picks, AI Recommend
+* each top menu item scrolls to its matching vertical section
+* selected top menu state updates when tapped
+* Community has at least 6 mock cards
+* Top Picks has at least 6 mock cards
+* AI Recommend has at least 6 mock cards
+* carousels actually scroll horizontally
+* cards are not clipped horizontally
+* images/placeholders do not overflow their containers
+* all image placeholders in the same carousel use consistent sizing
+* compact carousel card titles stay on one line
+* compact carousel card titles use consistent font size
+* long compact titles truncate only when needed
+* Community recipe cards include creator overlays on the image area
 * favorite hearts remain highlighted after tapping
-* Community recipe cards include placeholder creator labels
-* recipe image placeholders are consistently sized within each carousel
-* the Featured card is tall enough to visually match the reference
-* AI Recommend exists but is below the initial viewport
-* top menu selection scrolls to the correct section
+* hamburger/menu icon has three horizontal lines
+* header/title stays visually stable at the top
+* AI Recommend exists but starts below the initial viewport
+* bottom carousel/card rows are not cropped by the tab bar
+* the app does not add an AI Kitchen tab
+* no networking is added
+* no persistence is added
+* no reference image is used as an app asset
 
+## Home Entry Viewport Behavior
+
+The initial Home viewport must show the Top Picks carousel fully enough that the user understands it is an available section.
+
+The Home layout must not use excessive vertical spacing that hides Top Picks unnecessarily.
+
+`AI Recommend` must remain below the initial viewport and should be reachable by scrolling or tapping its top menu item.
+
+## Compact Carousel Title Behavior Update
+
+Compact carousel titles must be smaller and consistent to maximize visible recipe names.
+
+Rules:
+
+- one line only
+- consistent font size across all compact carousel cards
+- recommended size: 12-13 pt
+- tail truncation only when necessary
+- no per-card font shrinking
+- no two-line compact titles
+- no card height changes caused by title wrapping
+
+---
+
+# 6. Future Screen Behavior Template
+
+For each future screen, define behavior before implementation.
+
+Every future screen behavior section should answer:
+
+1. What can the user tap?
+2. What should change visually after tapping?
+3. What should scroll horizontally?
+4. What should scroll vertically?
+5. What sections should exist beyond the static reference image?
+6. What mock data is required to test the layout?
+7. What controls are placeholder-only?
+8. What should not be implemented yet?
+
+Future screen behavior should be added before Codex implements that screen.
+
+---
+
+# 7. Universal Behavior Acceptance Criteria
+
+For every screen:
+
+* visual controls should not be fake/static unless explicitly decorative
+* top selectors should update selected state
+* horizontal carousels should scroll
+* lists should contain enough mock data to test scrolling
+* favorite/save buttons should visually toggle if shown
+* input fields can be static or local-only until real functionality is requested
+* no networking unless explicitly requested
+* no persistence unless explicitly requested
+* no subscriptions/payments unless explicitly requested
+* no reference images used as app assets
+* no hidden clipped content behind the tab bar
+* screen behavior should match `SCREEN_BEHAVIOR.md`
