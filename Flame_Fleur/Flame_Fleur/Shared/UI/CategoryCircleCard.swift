@@ -10,7 +10,7 @@ struct CategoryCircleCard: View {
     init(
         title: String,
         imageName: String?,
-        diameter: CGFloat = 100,
+        diameter: CGFloat = 86,
         isSelected: Bool = false,
         action: @escaping () -> Void = {}
     ) {

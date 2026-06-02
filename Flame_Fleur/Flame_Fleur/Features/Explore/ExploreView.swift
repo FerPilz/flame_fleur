@@ -3,40 +3,48 @@ import SwiftUI
 struct ExploreView: View {
     @State private var searchText = ""
     @State private var selectedFilter: ExploreFilter = .all
-    @State private var selectedCategory: RecipeCategory?
+    @State private var selectedSubcategoryID: String?
     @State private var selectedQuickAction: ExploreQuickAction?
+    @State private var navigationPath: [String] = []
 
     private let recipeRepository = RecipeRepository.shared
+    private let categoryRepository = ExploreCategoryRepository.shared
 
     var body: some View {
-        AppScreen(
-            contentSpacing: AppSpacing.md,
-            headerTopPadding: AppSpacing.xs,
-            contentBottomPadding: AppSpacing.xxxl + AppSpacing.xxl
-        ) {
-            AppHeader(
-                leadingActions: [
-                    AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Open menu")
-                ],
-                trailingActions: [
-                    AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1),
-                    AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile")
-                ]
-            )
-        } content: {
-            VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                searchBar
-                quickActions
-                filterChips
-            }
+        NavigationStack(path: $navigationPath) {
+            AppScreen(
+                contentSpacing: AppSpacing.md,
+                headerTopPadding: AppSpacing.xs,
+                contentBottomPadding: AppSpacing.xxxl + AppSpacing.xxl
+            ) {
+                AppHeader(
+                    leadingActions: [
+                        AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Open menu")
+                    ],
+                    trailingActions: [
+                        AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1),
+                        AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile")
+                    ]
+                )
+            } content: {
+                VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                    searchBar
+                    quickActions
+                    filterChips
+                }
 
-            if visibleCategorySections.isEmpty {
-                emptySearchState
-            }
+                if visibleCategoryGroups.isEmpty {
+                    emptySearchState
+                }
 
-            ForEach(visibleCategorySections) { section in
-                categorySection(section)
+                ForEach(visibleCategoryGroups) { group in
+                    categorySection(group)
+                }
             }
+            .navigationDestination(for: String.self) { groupID in
+                ExploreCategoryOptionsView(group: categoryRepository.group(id: groupID) ?? categoryRepository.allGroups[0])
+            }
+            .toolbar(.hidden, for: .navigationBar)
         }
     }
 
@@ -117,18 +125,20 @@ struct ExploreView: View {
         }
     }
 
-    private func categorySection(_ section: ExploreCategorySection) -> some View {
+    private func categorySection(_ group: ExploreCategoryGroup) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.xl) {
-            SectionHeaderView(section.title, actionTitle: "See all", style: .compact) {}
+            SectionHeaderView(group.title, actionTitle: "See all", style: .compact) {
+                navigationPath.append(group.id)
+            }
 
             LazyVGrid(columns: categoryColumns, spacing: AppSpacing.xxl) {
-                ForEach(section.items) { item in
+                ForEach(group.subcategories) { subcategory in
                     CategoryCircleCard(
-                        title: item.title,
-                        imageName: item.imageName,
-                        isSelected: selectedCategory == item.category
+                        title: subcategory.title,
+                        imageName: subcategory.imageName,
+                        isSelected: selectedSubcategoryID == subcategory.id
                     ) {
-                        selectedCategory = selectedCategory == item.category ? nil : item.category
+                        selectedSubcategoryID = selectedSubcategoryID == subcategory.id ? nil : subcategory.id
                     }
                 }
             }
@@ -147,88 +157,49 @@ struct ExploreView: View {
         Array(repeating: GridItem(.flexible(), spacing: AppSpacing.sm), count: 3)
     }
 
-    private var visibleCategorySections: [ExploreCategorySection] {
+    private var visibleCategoryGroups: [ExploreCategoryGroup] {
         let trimmedSearch = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        return categorySections.compactMap { section in
-            let items = section.items.filter { item in
-                selectedFilter.matches(item.category)
-                && matchesSearch(item, sectionTitle: section.title, searchText: trimmedSearch)
+        return categoryRepository.allGroups.compactMap { group in
+            let subcategories = group.subcategories.filter { subcategory in
+                selectedFilter.matches(subcategory)
+                && matchesSearch(subcategory, group: group, searchText: trimmedSearch)
             }
 
-            guard !items.isEmpty else {
+            guard !subcategories.isEmpty else {
                 return nil
             }
 
-            return ExploreCategorySection(title: section.title, items: items)
+            return ExploreCategoryGroup(
+                id: group.id,
+                title: group.title,
+                subtitle: group.subtitle,
+                subcategories: shouldShowPreviewOnly(searchText: trimmedSearch) ? Array(subcategories.prefix(3)) : subcategories
+            )
         }
     }
 
-    private var categorySections: [ExploreCategorySection] {
-        [
-            ExploreCategorySection(
-                title: "World Cuisine",
-                items: [
-                    ExploreCategoryItem(category: .italian, imageName: "pasta"),
-                    ExploreCategoryItem(category: .mexican, imageName: "citrus"),
-                    ExploreCategoryItem(category: .korean, imageName: "bowl")
-                ]
-            ),
-            ExploreCategorySection(
-                title: "Meat & Seafood",
-                items: [
-                    ExploreCategoryItem(category: .fish, imageName: "salmon"),
-                    ExploreCategoryItem(category: .meat, imageName: "bowl"),
-                    ExploreCategoryItem(category: .seafood, imageName: "salmon")
-                ]
-            ),
-            ExploreCategorySection(
-                title: "Vegetarian",
-                items: [
-                    ExploreCategoryItem(category: .tofuTempeh, imageName: "salad"),
-                    ExploreCategoryItem(category: .beansLentils, imageName: "bowl"),
-                    ExploreCategoryItem(category: .mushrooms, imageName: "salad")
-                ]
-            ),
-            ExploreCategorySection(
-                title: "Chicken",
-                items: [
-                    ExploreCategoryItem(category: .chicken, imageName: "salmon"),
-                    ExploreCategoryItem(category: .chickenBowls, imageName: "bowl"),
-                    ExploreCategoryItem(category: .chickenPasta, imageName: "pasta")
-                ]
-            ),
-            ExploreCategorySection(
-                title: "Bakery",
-                items: [
-                    ExploreCategoryItem(category: .bakery, imageName: "dessert"),
-                    ExploreCategoryItem(category: .cakes, imageName: "dessert"),
-                    ExploreCategoryItem(category: .pastries, imageName: "dessert")
-                ]
-            ),
-            ExploreCategorySection(
-                title: "High Protein",
-                items: [
-                    ExploreCategoryItem(category: .highProtein, imageName: "salad"),
-                    ExploreCategoryItem(category: .leanMeals, imageName: "bowl"),
-                    ExploreCategoryItem(category: .fitnessMeals, imageName: "salad")
-                ]
-            )
-        ]
+    private func shouldShowPreviewOnly(searchText: String) -> Bool {
+        searchText.isEmpty && selectedFilter == .all
     }
 
-    private func matchesSearch(_ item: ExploreCategoryItem, sectionTitle: String, searchText: String) -> Bool {
+    private func matchesSearch(_ subcategory: ExploreSubcategory, group: ExploreCategoryGroup, searchText: String) -> Bool {
         guard !searchText.isEmpty else {
             return true
         }
 
-        if sectionTitle.localizedCaseInsensitiveContains(searchText)
-            || item.title.localizedCaseInsensitiveContains(searchText)
-            || item.category.title.localizedCaseInsensitiveContains(searchText) {
+        if group.title.localizedCaseInsensitiveContains(searchText)
+            || group.subtitle.localizedCaseInsensitiveContains(searchText)
+            || subcategory.title.localizedCaseInsensitiveContains(searchText)
+            || subcategory.category?.title.localizedCaseInsensitiveContains(searchText) == true {
             return true
         }
 
-        return recipeRepository.recipes(for: item.category).contains { recipe in
+        guard let category = subcategory.category else {
+            return false
+        }
+
+        return recipeRepository.recipes(for: category).contains { recipe in
             recipe.title.localizedCaseInsensitiveContains(searchText)
             || recipe.subtitle.localizedCaseInsensitiveContains(searchText)
         }
@@ -279,75 +250,71 @@ private enum ExploreFilter: String, CaseIterable, Identifiable {
         }
     }
 
-    func matches(_ category: RecipeCategory) -> Bool {
+    func matches(_ subcategory: ExploreSubcategory) -> Bool {
         switch self {
         case .all:
             return true
         case .protein:
-            return [
-                .fish,
-                .meat,
-                .seafood,
-                .chicken,
-                .grilledChicken,
-                .chickenBowls,
-                .chickenPasta,
-                .highProtein,
-                .proteinBowls,
-                .leanMeals,
-                .fitnessMeals
-            ].contains(category)
+            return matches(subcategory, categories: proteinCategories, keywords: ["protein", "chicken", "fish", "seafood", "lean", "egg", "yogurt"])
         case .vegetarian:
-            return [
-                .tofuTempeh,
-                .beansLentils,
-                .mushrooms,
-                .vegetarian,
-                .salad,
-                .grainBowl
-            ].contains(category)
+            return matches(subcategory, categories: vegetarianCategories, keywords: ["tofu", "tempeh", "beans", "lentils", "mushroom", "vegetable", "plant"])
         case .quickMeals:
-            return [
-                .fish,
-                .seafood,
-                .tofuTempeh,
-                .beansLentils,
-                .chicken,
-                .grilledChicken,
-                .chickenBowls,
-                .chickenPasta,
-                .highProtein,
-                .proteinBowls,
-                .leanMeals,
-                .fitnessMeals
-            ].contains(category)
+            return matches(subcategory, categories: quickMealCategories, keywords: ["bowl", "taco", "salad", "skewer", "protein"])
         }
     }
-}
 
-private struct ExploreCategorySection: Identifiable {
-    let id: String
-    let title: String
-    let items: [ExploreCategoryItem]
+    private func matches(_ subcategory: ExploreSubcategory, categories: Set<RecipeCategory>, keywords: [String]) -> Bool {
+        if let category = subcategory.category, categories.contains(category) {
+            return true
+        }
 
-    init(title: String, items: [ExploreCategoryItem]) {
-        self.id = title
-        self.title = title
-        self.items = items
+        return keywords.contains { subcategory.title.localizedCaseInsensitiveContains($0) }
     }
-}
 
-private struct ExploreCategoryItem: Identifiable {
-    let id: String
-    let category: RecipeCategory
-    let title: String
-    let imageName: String?
+    private var proteinCategories: Set<RecipeCategory> {
+        [
+            .fish,
+            .meat,
+            .seafood,
+            .chicken,
+            .grilledChicken,
+            .chickenBowls,
+            .chickenPasta,
+            .highProtein,
+            .proteinBowls,
+            .leanMeals,
+            .fitnessMeals,
+            .breakfast,
+            .beansLentils
+        ]
+    }
 
-    init(category: RecipeCategory, imageName: String?) {
-        self.id = category.id
-        self.category = category
-        self.title = category.title
-        self.imageName = imageName
+    private var vegetarianCategories: Set<RecipeCategory> {
+        [
+            .tofuTempeh,
+            .beansLentils,
+            .mushrooms,
+            .vegetarian,
+            .salad,
+            .grainBowl
+        ]
+    }
+
+    private var quickMealCategories: Set<RecipeCategory> {
+        [
+            .fish,
+            .seafood,
+            .tofuTempeh,
+            .beansLentils,
+            .chicken,
+            .grilledChicken,
+            .chickenBowls,
+            .chickenPasta,
+            .highProtein,
+            .proteinBowls,
+            .leanMeals,
+            .fitnessMeals
+        ]
     }
 }
 
