@@ -1,6 +1,6 @@
 import Foundation
 
-enum RecipeCategory: String, CaseIterable, Identifiable {
+enum RecipeCategory: String, CaseIterable, Identifiable, Codable {
     case italian
     case mexican
     case korean

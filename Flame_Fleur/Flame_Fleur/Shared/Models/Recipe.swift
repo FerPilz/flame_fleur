@@ -1,9 +1,12 @@
 import Foundation
 
-struct Recipe: Identifiable, Hashable {
+struct Recipe: Identifiable, Hashable, Codable {
     let id: String
     let title: String
     let subtitle: String
+    let categoryGroupID: String?
+    let subcategoryID: String?
+    let subcategoryTitle: String?
     let creatorName: String?
     let creatorAvatarName: String?
     let category: RecipeCategory
@@ -12,14 +15,20 @@ struct Recipe: Identifiable, Hashable {
     let calories: Int
     let servings: Int
     let difficulty: RecipeDifficulty
+    let tags: [String]
     let imageName: String?
     let isPremium: Bool
     let isCommunityRecipe: Bool
+    let ingredients: [String]
+    let instructions: [String]
 
     init(
         id: String,
         title: String,
         subtitle: String,
+        categoryGroupID: String? = nil,
+        subcategoryID: String? = nil,
+        subcategoryTitle: String? = nil,
         creatorName: String? = nil,
         creatorAvatarName: String? = nil,
         category: RecipeCategory,
@@ -28,13 +37,19 @@ struct Recipe: Identifiable, Hashable {
         calories: Int,
         servings: Int,
         difficulty: RecipeDifficulty,
+        tags: [String] = [],
         imageName: String? = nil,
         isPremium: Bool = false,
-        isCommunityRecipe: Bool = false
+        isCommunityRecipe: Bool = false,
+        ingredients: [String] = [],
+        instructions: [String] = []
     ) {
         self.id = id
         self.title = title
         self.subtitle = subtitle
+        self.categoryGroupID = categoryGroupID
+        self.subcategoryID = subcategoryID
+        self.subcategoryTitle = subcategoryTitle
         self.creatorName = creatorName
         self.creatorAvatarName = creatorAvatarName
         self.category = category
@@ -43,9 +58,12 @@ struct Recipe: Identifiable, Hashable {
         self.calories = calories
         self.servings = servings
         self.difficulty = difficulty
+        self.tags = tags
         self.imageName = imageName
         self.isPremium = isPremium
         self.isCommunityRecipe = isCommunityRecipe
+        self.ingredients = ingredients
+        self.instructions = instructions
     }
 
     var cookingTimeText: String {
@@ -61,7 +79,7 @@ struct Recipe: Identifiable, Hashable {
     }
 }
 
-enum RecipeDifficulty: String, CaseIterable, Identifiable {
+enum RecipeDifficulty: String, CaseIterable, Identifiable, Codable {
     case easy
     case moderate
     case advanced

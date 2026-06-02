@@ -1,6 +1,6 @@
 import Foundation
 
-enum RecipeSectionTag: String, CaseIterable, Identifiable {
+enum RecipeSectionTag: String, CaseIterable, Identifiable, Codable {
     case featured
     case community
     case topPicks
