@@ -5,7 +5,7 @@ struct ExploreView: View {
     @State private var selectedFilter: ExploreFilter = .all
     @State private var selectedSubcategoryID: String?
     @State private var selectedQuickAction: ExploreQuickAction?
-    @State private var navigationPath: [String] = []
+    @State private var navigationPath: [ExploreRoute] = []
 
     private let recipeRepository = RecipeRepository.shared
     private let categoryRepository = ExploreCategoryRepository.shared
@@ -41,8 +41,21 @@ struct ExploreView: View {
                     categorySection(group)
                 }
             }
-            .navigationDestination(for: String.self) { groupID in
-                ExploreCategoryOptionsView(group: categoryRepository.group(id: groupID) ?? categoryRepository.allGroups[0])
+            .navigationDestination(for: ExploreRoute.self) { route in
+                switch route {
+                case .categoryGroup(let groupID):
+                    ExploreCategoryOptionsView(
+                        group: categoryRepository.group(id: groupID) ?? categoryRepository.allGroups[0]
+                    ) { subcategory in
+                        navigationPath.append(.subcategory(subcategory.id))
+                    }
+                case .subcategory(let subcategoryID):
+                    if let subcategory = categoryRepository.subcategory(id: subcategoryID) {
+                        SubcategoryRecipeListView(subcategory: subcategory)
+                    } else {
+                        EmptyView()
+                    }
+                }
             }
             .toolbar(.hidden, for: .navigationBar)
         }
@@ -128,7 +141,7 @@ struct ExploreView: View {
     private func categorySection(_ group: ExploreCategoryGroup) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.xl) {
             SectionHeaderView(group.title, actionTitle: "See all", style: .compact) {
-                navigationPath.append(group.id)
+                navigationPath.append(.categoryGroup(group.id))
             }
 
             LazyVGrid(columns: categoryColumns, spacing: AppSpacing.xxl) {
@@ -227,6 +240,11 @@ private enum ExploreQuickAction: Equatable {
             return "plus"
         }
     }
+}
+
+private enum ExploreRoute: Hashable {
+    case categoryGroup(String)
+    case subcategory(String)
 }
 
 private enum ExploreFilter: String, CaseIterable, Identifiable {

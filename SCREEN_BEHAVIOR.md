@@ -650,3 +650,110 @@ Use:
 - `RecipeRepository`
 
 Do not add networking or persistence yet.
+
+# Recipe Detail Screen Behavior
+
+Reference:
+
+`Reference_Images/07_Recipe_reference.png`
+
+## Purpose
+
+RecipeDetailView shows the full overview of a selected recipe.
+
+It is opened from recipe rows in Home, Explore, Favorites, Planner, or subcategory recipe lists.
+
+## Data Source
+
+RecipeDetailView must load recipe data from centralized recipe data.
+
+Use:
+
+- `recipes.seed.json`
+- `SampleRecipes`
+- `RecipeRepository`
+
+Do not hardcode recipe details inside RecipeDetailView.
+
+## Full-Screen Rule
+
+RecipeDetailView is a full-screen detail experience.
+
+The bottom tab bar should be hidden.
+
+The normal app title/header is replaced by the recipe hero image/header.
+
+## Fixed Hero Image Rule
+
+The top hero image should remain visually fixed to the top frame while the recipe content scrolls.
+
+Do not place the hero image as ordinary content inside the ScrollView if that causes it to scroll away.
+
+## Top Actions
+
+RecipeDetailView must include:
+
+- back button
+- favorite/like button
+- share button
+
+Back returns to the previous screen.
+
+Favorite toggles local visual state for now.
+
+Share must use native iOS sharing for this build, such as `ShareLink`.
+
+## Info Carousel
+
+The carousel below the title should scroll horizontally.
+
+Carousel item labels must remain one line.
+
+Use the maximum readable font size that preserves a single line.
+
+Use:
+
+- `lineLimit(1)`
+- `truncationMode(.tail)`
+
+Do not allow carousel labels to wrap.
+
+## Chef Pilot
+
+Chef Pilot must toggle on/off locally.
+
+No real voice functionality yet.
+
+Do not request microphone permission.
+
+Do not add speech synthesis yet.
+
+## Expandable Steps
+
+Cooking steps should be expandable.
+
+Use local state.
+
+Recommended behavior:
+
+- only one expanded step at a time
+- tapping an expanded step collapses it
+- tapping another step expands the new one
+
+## Ingredients Preview
+
+RecipeDetailView may show an ingredients preview.
+
+The full ingredient checklist belongs to RecipeIngredientsView using `08_Recipe_ingredients_reference.png`.
+
+## Out of Scope
+
+Do not implement:
+
+- voice reading
+- microphone permissions
+- real AI chef assistant
+- shopping cart persistence
+- backend sharing
+- recipe editing
+- subscriptions

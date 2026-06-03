@@ -25,6 +25,10 @@ struct RecipeRepository {
         recipes(for: RecipeSectionTag.aiRecommended)
     }
 
+    func recipe(id: String) -> Recipe? {
+        allRecipes.first { $0.id == id }
+    }
+
     func recipes(for category: RecipeCategory) -> [Recipe] {
         allRecipes.filter { $0.category == category }
     }
@@ -43,6 +47,14 @@ struct RecipeRepository {
 
     func recipes(for sectionTag: RecipeSectionTag) -> [Recipe] {
         allRecipes.filter { $0.sectionTags.contains(sectionTag) }
+    }
+
+    func ingredients(for recipeID: String) -> [String] {
+        recipe(id: recipeID)?.ingredients ?? []
+    }
+
+    func instructions(for recipeID: String) -> [String] {
+        recipe(id: recipeID)?.instructions ?? []
     }
 
     func recipes(matching searchText: String) -> [Recipe] {

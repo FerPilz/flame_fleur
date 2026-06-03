@@ -16,4 +16,11 @@ struct ExploreCategoryRepository {
     func subcategories(for groupID: String) -> [ExploreSubcategory] {
         group(id: groupID)?.subcategories ?? []
     }
+
+    func subcategory(id: String) -> ExploreSubcategory? {
+        allGroups
+            .lazy
+            .flatMap(\.subcategories)
+            .first { $0.id == id }
+    }
 }

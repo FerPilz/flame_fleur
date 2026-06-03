@@ -2,10 +2,19 @@ import SwiftUI
 
 struct ExploreCategoryOptionsView: View {
     let group: ExploreCategoryGroup
+    let onSubcategorySelected: (ExploreSubcategory) -> Void
 
     @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
     @State private var selectedSubcategoryID: String?
+
+    init(
+        group: ExploreCategoryGroup,
+        onSubcategorySelected: @escaping (ExploreSubcategory) -> Void = { _ in }
+    ) {
+        self.group = group
+        self.onSubcategorySelected = onSubcategorySelected
+    }
 
     var body: some View {
         AppScreen(
@@ -39,6 +48,7 @@ struct ExploreCategoryOptionsView: View {
                             isSelected: selectedSubcategoryID == subcategory.id
                         ) {
                             selectedSubcategoryID = selectedSubcategoryID == subcategory.id ? nil : subcategory.id
+                            onSubcategorySelected(subcategory)
                         }
                     }
                 }
