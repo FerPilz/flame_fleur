@@ -19,11 +19,17 @@ struct ExploreView: View {
             ) {
                 AppHeader(
                     leadingActions: [
-                        AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Open menu")
+                        AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Open menu") {
+                            navigationPath.append(.settings)
+                        }
                     ],
                     trailingActions: [
-                        AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1),
-                        AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile")
+                        AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1) {
+                            navigationPath.append(.cart)
+                        },
+                        AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile settings") {
+                            navigationPath.append(.settings)
+                        }
                     ]
                 )
             } content: {
@@ -48,13 +54,62 @@ struct ExploreView: View {
                         group: categoryRepository.group(id: groupID) ?? categoryRepository.allGroups[0]
                     ) { subcategory in
                         navigationPath.append(.subcategory(subcategory.id))
+                    } onCartSelected: {
+                        navigationPath.append(.cart)
+                    } onSettingsSelected: {
+                        navigationPath.append(.settings)
                     }
                 case .subcategory(let subcategoryID):
                     if let subcategory = categoryRepository.subcategory(id: subcategoryID) {
-                        SubcategoryRecipeListView(subcategory: subcategory)
+                        SubcategoryRecipeListView(subcategory: subcategory) { recipeID in
+                            navigationPath.append(.recipe(recipeID))
+                        } onCartSelected: {
+                            navigationPath.append(.cart)
+                        } onSettingsSelected: {
+                            navigationPath.append(.settings)
+                        }
                     } else {
                         EmptyView()
                     }
+                case .recipe(let recipeID):
+                    if recipeRepository.recipe(id: recipeID) != nil {
+                        RecipeDetailView(
+                            recipeID: recipeID,
+                            onBack: {
+                                if !navigationPath.isEmpty {
+                                    navigationPath.removeLast()
+                                }
+                            },
+                            onViewIngredients: {
+                                navigationPath.append(.ingredients(recipeID))
+                            }
+                        )
+                    } else {
+                        EmptyView()
+                    }
+                case .ingredients(let recipeID):
+                    if recipeRepository.recipe(id: recipeID) != nil {
+                        RecipeIngredientsView(
+                            recipeID: recipeID,
+                            onBack: {
+                                if !navigationPath.isEmpty {
+                                    navigationPath.removeLast()
+                                }
+                            }
+                        )
+                    } else {
+                        EmptyView()
+                    }
+                case .cart:
+                    ShoppingCartView(
+                        onClose: {
+                            if !navigationPath.isEmpty {
+                                navigationPath.removeLast()
+                            }
+                        }
+                    )
+                case .settings:
+                    SettingsView()
                 }
             }
             .toolbar(.hidden, for: .navigationBar)
@@ -140,18 +195,19 @@ struct ExploreView: View {
 
     private func categorySection(_ group: ExploreCategoryGroup) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.xl) {
-            SectionHeaderView(group.title, actionTitle: "See all", style: .compact) {
+            SectionHeaderView(group.title, actionTitle: "See all", style: .explore) {
                 navigationPath.append(.categoryGroup(group.id))
             }
 
-            LazyVGrid(columns: categoryColumns, spacing: AppSpacing.xxl) {
+            LazyVGrid(columns: categoryColumns, spacing: AppSpacing.xl) {
                 ForEach(group.subcategories) { subcategory in
                     CategoryCircleCard(
                         title: subcategory.title,
                         imageName: subcategory.imageName,
                         isSelected: selectedSubcategoryID == subcategory.id
                     ) {
-                        selectedSubcategoryID = selectedSubcategoryID == subcategory.id ? nil : subcategory.id
+                        selectedSubcategoryID = subcategory.id
+                        navigationPath.append(.subcategory(subcategory.id))
                     }
                 }
             }
@@ -187,6 +243,7 @@ struct ExploreView: View {
                 id: group.id,
                 title: group.title,
                 subtitle: group.subtitle,
+                imageName: group.imageName,
                 subcategories: shouldShowPreviewOnly(searchText: trimmedSearch) ? Array(subcategories.prefix(3)) : subcategories
             )
         }
@@ -245,6 +302,10 @@ private enum ExploreQuickAction: Equatable {
 private enum ExploreRoute: Hashable {
     case categoryGroup(String)
     case subcategory(String)
+    case recipe(String)
+    case ingredients(String)
+    case cart
+    case settings
 }
 
 private enum ExploreFilter: String, CaseIterable, Identifiable {

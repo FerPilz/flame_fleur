@@ -2,14 +2,29 @@ import SwiftUI
 
 struct SubcategoryRecipeListView: View {
     let subcategory: ExploreSubcategory
+    let onRecipeSelected: (Recipe.ID) -> Void
+    let onCartSelected: () -> Void
+    let onSettingsSelected: () -> Void
 
+    @EnvironmentObject private var favoritesStore: FavoritesStore
     @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
     @State private var selectedFilter: RecipeListFilter = .all
     @State private var selectedSort: RecipeListSort = .popular
-    @State private var favoriteRecipeIDs: Set<Recipe.ID> = []
 
     private let recipeRepository = RecipeRepository.shared
+
+    init(
+        subcategory: ExploreSubcategory,
+        onRecipeSelected: @escaping (Recipe.ID) -> Void = { _ in },
+        onCartSelected: @escaping () -> Void = {},
+        onSettingsSelected: @escaping () -> Void = {}
+    ) {
+        self.subcategory = subcategory
+        self.onRecipeSelected = onRecipeSelected
+        self.onCartSelected = onCartSelected
+        self.onSettingsSelected = onSettingsSelected
+    }
 
     var body: some View {
         AppScreen(
@@ -24,8 +39,12 @@ struct SubcategoryRecipeListView: View {
                     }
                 ],
                 trailingActions: [
-                    AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1),
-                    AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile")
+                    AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1) {
+                        onCartSelected()
+                    },
+                    AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile settings") {
+                        onSettingsSelected()
+                    }
                 ]
             )
         } content: {
@@ -41,11 +60,13 @@ struct SubcategoryRecipeListView: View {
                     ForEach(visibleRecipes) { recipe in
                         RecipeListRow(
                             recipe: recipe,
-                            isFavorite: favoriteRecipeIDs.contains(recipe.id),
+                            isFavorite: favoritesStore.isFavorite(recipe.id),
                             onFavoriteTap: {
-                                toggleFavorite(recipe)
+                                favoritesStore.toggleFavorite(recipe.id)
                             },
-                            onTap: {}
+                            onTap: {
+                                onRecipeSelected(recipe.id)
+                            }
                         )
                     }
                 }
@@ -177,14 +198,6 @@ struct SubcategoryRecipeListView: View {
             return filteredRecipes.sorted { $0.calories < $1.calories }
         }
     }
-
-    private func toggleFavorite(_ recipe: Recipe) {
-        if favoriteRecipeIDs.contains(recipe.id) {
-            favoriteRecipeIDs.remove(recipe.id)
-        } else {
-            favoriteRecipeIDs.insert(recipe.id)
-        }
-    }
 }
 
 private enum RecipeListFilter: String, CaseIterable, Identifiable {
@@ -267,4 +280,5 @@ private enum RecipeListSort: String, CaseIterable, Identifiable {
     SubcategoryRecipeListView(
         subcategory: ExploreCategoryRepository.shared.subcategory(id: "meat-seafood-fish")!
     )
+    .environmentObject(FavoritesStore.shared)
 }

@@ -3,8 +3,23 @@ import SwiftUI
 struct RecipeListRow: View {
     let recipe: Recipe
     let isFavorite: Bool
+    let communityLikesText: String?
     let onFavoriteTap: () -> Void
     let onTap: () -> Void
+
+    init(
+        recipe: Recipe,
+        isFavorite: Bool,
+        communityLikesText: String? = nil,
+        onFavoriteTap: @escaping () -> Void,
+        onTap: @escaping () -> Void
+    ) {
+        self.recipe = recipe
+        self.isFavorite = isFavorite
+        self.communityLikesText = communityLikesText
+        self.onFavoriteTap = onFavoriteTap
+        self.onTap = onTap
+    }
 
     var body: some View {
         SurfaceCard(
@@ -15,40 +30,56 @@ struct RecipeListRow: View {
             showsShadow: false
         ) {
             HStack(alignment: .center, spacing: AppSpacing.sm) {
-                FoodImagePlaceholder(imageName: recipe.imageName, style: .thumbnail)
-                    .frame(width: 82, height: 82)
-                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous))
+                Button(action: onTap) {
+                    HStack(alignment: .center, spacing: AppSpacing.sm) {
+                        FoodImagePlaceholder(imageName: recipe.imageName, style: .thumbnail)
+                            .frame(width: 82, height: 82)
+                            .clipShape(RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous))
 
-                VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-                    Text(recipe.title)
-                        .font(AppTypography.cardTitle)
-                        .foregroundStyle(AppColors.primaryText)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
+                        VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                            Text(recipe.title)
+                                .font(AppTypography.cardTitle)
+                                .foregroundStyle(AppColors.primaryText)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
 
-                    Text(recipe.subtitle)
-                        .font(AppTypography.metadata)
-                        .foregroundStyle(AppColors.secondaryText)
-                        .lineLimit(2)
-                        .truncationMode(.tail)
+                            Text(recipe.subtitle)
+                                .font(AppTypography.metadata)
+                                .foregroundStyle(AppColors.secondaryText)
+                                .lineLimit(2)
+                                .truncationMode(.tail)
 
-                    metadataRow
-                        .padding(.top, AppSpacing.xxs)
+                            metadataRow
+                                .padding(.top, AppSpacing.xxs)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .contentShape(Rectangle())
                 }
+                .buttonStyle(.plain)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                IconCircleButton(
-                    systemName: isFavorite ? "heart.fill" : "heart",
-                    accessibilityLabel: isFavorite ? "Unsave \(recipe.title)" : "Save \(recipe.title)",
-                    size: 28,
-                    backgroundColor: AppColors.elevatedCardBackground,
-                    foregroundColor: isFavorite ? AppColors.error : AppColors.burntOrange,
-                    action: onFavoriteTap
-                )
+                VStack(spacing: AppSpacing.xxs) {
+                    IconCircleButton(
+                        systemName: isFavorite ? "heart.fill" : "heart",
+                        accessibilityLabel: isFavorite ? "Unsave \(recipe.title)" : "Save \(recipe.title)",
+                        size: 28,
+                        backgroundColor: AppColors.elevatedCardBackground,
+                        foregroundColor: isFavorite ? AppColors.error : AppColors.burntOrange,
+                        action: onFavoriteTap
+                    )
+
+                    if let communityLikesText {
+                        Text(communityLikesText)
+                            .font(AppTypography.metadata)
+                            .foregroundStyle(AppColors.secondaryText)
+                            .lineLimit(1)
+                            .allowsHitTesting(false)
+                    }
+                }
+                .frame(width: 36)
             }
         }
-        .contentShape(RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous))
-        .onTapGesture(perform: onTap)
     }
 
     private var metadataRow: some View {

@@ -4,33 +4,55 @@ struct RecipeCard: View {
     let recipe: Recipe
     let showsCreator: Bool
     let isFavorite: Bool
+    let action: () -> Void
     let favoriteAction: () -> Void
 
     init(
         recipe: Recipe,
         showsCreator: Bool = false,
         isFavorite: Bool = false,
+        action: @escaping () -> Void = {},
         favoriteAction: @escaping () -> Void = {}
     ) {
         self.recipe = recipe
         self.showsCreator = showsCreator
         self.isFavorite = isFavorite
+        self.action = action
         self.favoriteAction = favoriteAction
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
             ZStack(alignment: .topTrailing) {
-                FoodImagePlaceholder(imageName: recipe.imageName, style: .card)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 102)
-                    .clipped()
-                    .overlay(alignment: .bottomLeading) {
-                        if showsCreator, let creatorName = recipe.creatorName {
-                            creatorOverlay(creatorName)
-                                .padding(AppSpacing.xs)
+                Button(action: action) {
+                    VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                        FoodImagePlaceholder(imageName: recipe.imageName, style: .card)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 102)
+                            .clipped()
+                            .overlay(alignment: .bottomLeading) {
+                                if showsCreator, let creatorName = recipe.creatorName {
+                                    creatorOverlay(creatorName)
+                                        .padding(AppSpacing.xs)
+                                }
+                            }
+
+                        VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                            Text(recipe.title)
+                                .font(AppTypography.compactRecipeTitle)
+                                .foregroundStyle(AppColors.primaryText)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+
+                            metadataRow
                         }
+                        .padding(.horizontal, AppSpacing.xs)
+                        .padding(.bottom, AppSpacing.xs)
                     }
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
                 IconCircleButton(
                     systemName: isFavorite ? "heart.fill" : "heart",
@@ -42,18 +64,6 @@ struct RecipeCard: View {
                 )
                 .padding(5)
             }
-
-            VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-                Text(recipe.title)
-                    .font(AppTypography.smallTitle)
-                    .foregroundStyle(AppColors.primaryText)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
-
-                metadataRow
-            }
-            .padding(.horizontal, AppSpacing.xs)
-            .padding(.bottom, AppSpacing.xs)
         }
         .background(
             RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous)
@@ -68,7 +78,7 @@ struct RecipeCard: View {
     private var metadataRow: some View {
         HStack(spacing: AppSpacing.xxs) {
             Image(systemName: "clock")
-                .font(.system(size: 9, weight: .semibold))
+                .font(AppTypography.metadata)
 
             Text("\(recipe.cookingTimeText)  \(recipe.caloriesText)")
                 .font(AppTypography.metadata)

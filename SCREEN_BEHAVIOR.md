@@ -757,3 +757,56 @@ Do not implement:
 - backend sharing
 - recipe editing
 - subscriptions
+
+# Recipe Detail Flow Correction
+
+## Recipe Detail Bottom Action
+
+The Recipe Detail screen should not use `Start Cooking` as the primary bottom action at this stage.
+
+Use:
+
+- `View Ingredients`
+
+The full cooking mode is not implemented yet.
+
+`Start Cooking` should be reserved for a future cooking-mode flow after the user has reviewed ingredients and recipe steps.
+
+## Nutrition Placement
+
+Recipe nutrition summary should be integrated into the top info carousel near the recipe title.
+
+The top info carousel should include:
+
+- Total Time
+- Prep
+- Cook
+- Calories
+- Protein
+- Carbs
+- Fat
+- Servings
+- Difficulty
+
+Do not show a large separate nutrition section near the bottom of RecipeDetailView for now.
+
+Detailed nutrition or premium nutrition can become a later screen.
+
+## Ingredients Flow
+
+RecipeDetailView should show an ingredients preview and a `View Ingredients` action.
+
+Tapping `View Ingredients` opens RecipeIngredientsView using:
+
+- `Reference_Images/08_Recipe_ingredients_reference.png`
+
+RecipeIngredientsView is responsible for:
+
+- showing the full ingredient list
+- allowing ingredients to be selected/unselected
+- showing a servings control if supported
+- providing a bottom action: `Add Selected to Cart`
+
+For now, adding to cart is placeholder/local behavior only.
+
+Do not add cart persistence yet.

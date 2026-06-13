@@ -3,6 +3,8 @@ import SwiftUI
 struct ExploreCategoryOptionsView: View {
     let group: ExploreCategoryGroup
     let onSubcategorySelected: (ExploreSubcategory) -> Void
+    let onCartSelected: () -> Void
+    let onSettingsSelected: () -> Void
 
     @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
@@ -10,10 +12,14 @@ struct ExploreCategoryOptionsView: View {
 
     init(
         group: ExploreCategoryGroup,
-        onSubcategorySelected: @escaping (ExploreSubcategory) -> Void = { _ in }
+        onSubcategorySelected: @escaping (ExploreSubcategory) -> Void = { _ in },
+        onCartSelected: @escaping () -> Void = {},
+        onSettingsSelected: @escaping () -> Void = {}
     ) {
         self.group = group
         self.onSubcategorySelected = onSubcategorySelected
+        self.onCartSelected = onCartSelected
+        self.onSettingsSelected = onSettingsSelected
     }
 
     var body: some View {
@@ -29,8 +35,12 @@ struct ExploreCategoryOptionsView: View {
                     }
                 ],
                 trailingActions: [
-                    AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1),
-                    AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile")
+                    AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1) {
+                        onCartSelected()
+                    },
+                    AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile settings") {
+                        onSettingsSelected()
+                    }
                 ]
             )
         } content: {

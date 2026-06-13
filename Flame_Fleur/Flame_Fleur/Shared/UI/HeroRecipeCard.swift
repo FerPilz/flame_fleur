@@ -34,55 +34,68 @@ struct HeroRecipeCard: View {
                 let imageHeight = max(132, proxy.size.height - AppSpacing.xs)
                 let textWidth = max(116, proxy.size.width - imageWidth - AppSpacing.sm)
 
-                HStack(alignment: .center, spacing: AppSpacing.sm) {
-                    VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                        Text(recipe.title)
-                            .font(AppTypography.cardTitle)
-                            .foregroundStyle(AppColors.primaryText)
-                            .lineLimit(2)
-                            .fixedSize(horizontal: false, vertical: true)
+                ZStack(alignment: .topTrailing) {
+                    Button(action: action) {
+                        HStack(alignment: .center, spacing: AppSpacing.sm) {
+                            VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                                Text(recipe.title)
+                                    .font(AppTypography.heroTitle)
+                                    .foregroundStyle(AppColors.primaryText)
+                                    .lineLimit(2)
+                                    .fixedSize(horizontal: false, vertical: true)
 
-                        Text(recipe.subtitle)
-                            .font(AppTypography.metadata)
-                            .foregroundStyle(AppColors.secondaryText)
-                            .lineLimit(1)
+                                Text(recipe.subtitle)
+                                    .font(AppTypography.metadata)
+                                    .foregroundStyle(AppColors.secondaryText)
+                                    .lineLimit(1)
 
-                        metadataRow
-                            .padding(.top, 1)
+                                metadataRow
+                                    .padding(.top, 1)
 
-                        PrimaryButton(
-                            actionTitle,
-                            style: .recipe,
-                            isFullWidth: false,
-                            height: 32,
-                            font: AppTypography.smallButton,
-                            horizontalPadding: AppSpacing.sm,
-                            action: action
-                        )
-                        .padding(.top, AppSpacing.xs)
+                                ctaLabel
+                                    .padding(.top, AppSpacing.xs)
+                            }
+                            .frame(width: textWidth, alignment: .leading)
+
+                            FoodImagePlaceholder(imageName: recipe.imageName, style: .hero)
+                                .frame(width: imageWidth, height: imageHeight)
+                                .clipped()
+                        }
+                        .contentShape(Rectangle())
                     }
-                    .frame(width: textWidth, alignment: .leading)
+                    .buttonStyle(.plain)
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
-                    ZStack(alignment: .topTrailing) {
-                        FoodImagePlaceholder(imageName: recipe.imageName, style: .hero)
-                            .frame(width: imageWidth, height: imageHeight)
-                            .clipped()
-
-                        IconCircleButton(
-                            systemName: isFavorite ? "heart.fill" : "heart",
-                            accessibilityLabel: isFavorite ? "Unsave \(recipe.title)" : "Save \(recipe.title)",
-                            size: 28,
-                            backgroundColor: AppColors.elevatedCardBackground.opacity(0.92),
-                            foregroundColor: isFavorite ? AppColors.error : AppColors.darkOlive,
-                            action: favoriteAction
-                        )
-                        .padding(AppSpacing.xs)
-                    }
-                    .frame(maxHeight: .infinity)
+                    IconCircleButton(
+                        systemName: isFavorite ? "heart.fill" : "heart",
+                        accessibilityLabel: isFavorite ? "Unsave \(recipe.title)" : "Save \(recipe.title)",
+                        size: 28,
+                        backgroundColor: AppColors.elevatedCardBackground.opacity(0.92),
+                        foregroundColor: isFavorite ? AppColors.error : AppColors.darkOlive,
+                        action: favoriteAction
+                    )
+                    .padding(AppSpacing.xs)
                 }
             }
             .frame(height: 155)
         }
+    }
+
+    private var ctaLabel: some View {
+        HStack(spacing: AppSpacing.xxs) {
+            Text(actionTitle)
+                .font(AppTypography.smallButton)
+
+            Image(systemName: "chevron.right")
+                .font(.caption2.weight(.semibold))
+        }
+        .foregroundStyle(AppColors.elevatedCardBackground)
+        .padding(.horizontal, AppSpacing.sm)
+        .frame(height: 32)
+        .background(
+            Capsule(style: .continuous)
+                .fill(AppColors.burntOrange)
+        )
     }
 
     private var metadataRow: some View {
@@ -96,7 +109,7 @@ struct HeroRecipeCard: View {
     private func metadataItem(systemName: String, text: String) -> some View {
         HStack(spacing: 2) {
             Image(systemName: systemName)
-                .font(.system(size: 9, weight: .semibold))
+                .font(AppTypography.metadata)
 
             Text(text)
                 .font(AppTypography.metadata)

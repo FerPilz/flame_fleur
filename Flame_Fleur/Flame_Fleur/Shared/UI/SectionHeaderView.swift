@@ -4,23 +4,21 @@ struct SectionHeaderView: View {
     enum Style {
         case standard
         case compact
+        case explore
 
         var titleFont: Font {
             switch self {
             case .standard:
                 return AppTypography.sectionTitle
             case .compact:
-                return AppTypography.recipeTitle
+                return AppTypography.sectionTitle
+            case .explore:
+                return AppTypography.exploreSectionTitle
             }
         }
 
         var actionFont: Font {
-            switch self {
-            case .standard:
-                return AppTypography.caption
-            case .compact:
-                return AppTypography.recipeTitle
-            }
+            AppTypography.smallButton
         }
     }
 

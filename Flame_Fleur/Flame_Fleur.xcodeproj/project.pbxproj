@@ -29,9 +29,26 @@
 		AE3E36E22FCBA01100C0171C /* Flame_FleurUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Flame_FleurUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AE3E37012FCBA01200C0171C /* Exceptions for "Flame_Fleur" folder in "Flame_Fleur" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/GeneratedAssets/Categories/raw/bakery.png,
+				Resources/GeneratedAssets/Categories/raw/fish.png,
+				Resources/GeneratedAssets/Categories/raw/high_protein.png,
+				Resources/GeneratedAssets/Categories/raw/italian.png,
+				Resources/GeneratedAssets/Categories/raw/mexican.png,
+			);
+			target = AE3E36CA2FCBA00F00C0171C /* Flame_Fleur */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AE3E36CD2FCBA00F00C0171C /* Flame_Fleur */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AE3E37012FCBA01200C0171C /* Exceptions for "Flame_Fleur" folder in "Flame_Fleur" target */,
+			);
 			path = Flame_Fleur;
 			sourceTree = "<group>";
 		};

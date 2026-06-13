@@ -1,0 +1,37 @@
+[
+  {
+    "id": "italian",
+    "title": "Italian",
+    "group": "World Cuisine",
+    "filename": "italian.png",
+    "prompt_hint": "a beautifully plated Italian pasta dish with tomato sauce, fresh basil, parmesan, and elegant presentation"
+  },
+  {
+    "id": "mexican",
+    "title": "Mexican",
+    "group": "World Cuisine",
+    "filename": "mexican.png",
+    "prompt_hint": "a vibrant Mexican dish with tacos, fresh toppings, lime, cilantro, and colorful authentic presentation"
+  },
+  {
+    "id": "fish",
+    "title": "Fish",
+    "group": "Meat & Seafood",
+    "filename": "fish.png",
+    "prompt_hint": "a beautifully plated fish fillet with lemon, herbs, and seasonal vegetables, elegant and appetizing"
+  },
+  {
+    "id": "bakery",
+    "title": "Bakery",
+    "group": "Bakery",
+    "filename": "bakery.png",
+    "prompt_hint": "an elegant bakery arrangement with artisan pastries and fresh bread, warm, inviting, and beautifully styled"
+  },
+  {
+    "id": "high_protein",
+    "title": "High Protein",
+    "group": "High Protein",
+    "filename": "high_protein.png",
+    "prompt_hint": "a high-protein meal bowl with grilled chicken, quinoa, avocado, and fresh vegetables, clean and premium presentation"
+  }
+]

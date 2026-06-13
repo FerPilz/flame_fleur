@@ -8,8 +8,10 @@ struct HomeView: View {
         static let aiRecommend = "aiRecommend"
     }
 
+    @EnvironmentObject private var favoritesStore: FavoritesStore
+
+    @State private var navigationPath: [HomeRoute] = []
     @State private var selectedSegment = SectionID.featured
-    @State private var favoriteRecipeIDs: Set<Recipe.ID> = []
 
     private let recipeRepository = RecipeRepository.shared
 
@@ -37,37 +39,89 @@ struct HomeView: View {
     }
 
     var body: some View {
-        ScrollViewReader { proxy in
-            AppScreen(
-                contentSpacing: AppSpacing.sm,
-                headerTopPadding: AppSpacing.xs,
-                contentBottomPadding: AppSpacing.xxxl + AppSpacing.xxl
-            ) {
-                AppHeader(
-                    leadingActions: [
-                        AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Open menu")
-                    ],
-                    trailingActions: [
-                        AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1),
-                        AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile")
-                    ]
-                )
+        NavigationStack(path: $navigationPath) {
+            ScrollViewReader { proxy in
+                AppScreen(
+                    contentSpacing: AppSpacing.sm,
+                    headerTopPadding: AppSpacing.xs,
+                    contentBottomPadding: AppSpacing.xxxl + AppSpacing.xxl
+                ) {
+                    AppHeader(
+                        leadingActions: [
+                            AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Open menu") {
+                                navigationPath.append(.settings)
+                            }
+                        ],
+                        trailingActions: [
+                            AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1) {
+                                navigationPath.append(.cart)
+                            },
+                            AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile settings") {
+                                navigationPath.append(.settings)
+                            }
+                        ]
+                    )
 
-                TopSegmentSelector(options: topSegments, selection: $selectedSegment) { option in
-                    withAnimation(.easeInOut(duration: 0.24)) {
-                        proxy.scrollTo(option.id, anchor: .top)
+                    TopSegmentSelector(options: topSegments, selection: $selectedSegment) { option in
+                        withAnimation(.easeInOut(duration: 0.24)) {
+                            proxy.scrollTo(option.id, anchor: .top)
+                        }
+                    }
+                } content: {
+                    featuredSection
+                        .id(SectionID.featured)
+
+                    recipeSection(title: "Community", id: SectionID.community, recipes: communityRecipes, showsCreator: true)
+
+                    recipeSection(title: "Top Picks", id: SectionID.topPicks, recipes: topPickRecipes)
+
+                    recipeSection(title: "AI Recommend", id: SectionID.aiRecommend, recipes: aiRecommendRecipes)
+                        .padding(.top, AppSpacing.xs)
+                }
+                .navigationDestination(for: HomeRoute.self) { route in
+                    switch route {
+                    case .recipe(let recipeID):
+                        if recipeRepository.recipe(id: recipeID) != nil {
+                            RecipeDetailView(
+                                recipeID: recipeID,
+                                onBack: {
+                                    if !navigationPath.isEmpty {
+                                        navigationPath.removeLast()
+                                    }
+                                },
+                                onViewIngredients: {
+                                    navigationPath.append(.ingredients(recipeID))
+                                }
+                            )
+                        } else {
+                            EmptyView()
+                        }
+                    case .ingredients(let recipeID):
+                        if recipeRepository.recipe(id: recipeID) != nil {
+                            RecipeIngredientsView(
+                                recipeID: recipeID,
+                                onBack: {
+                                    if !navigationPath.isEmpty {
+                                        navigationPath.removeLast()
+                                    }
+                                }
+                            )
+                        } else {
+                            EmptyView()
+                        }
+                    case .cart:
+                        ShoppingCartView(
+                            onClose: {
+                                if !navigationPath.isEmpty {
+                                    navigationPath.removeLast()
+                                }
+                            }
+                        )
+                    case .settings:
+                        SettingsView()
                     }
                 }
-            } content: {
-                featuredSection
-                    .id(SectionID.featured)
-
-                recipeSection(title: "Community", id: SectionID.community, recipes: communityRecipes, showsCreator: true)
-
-                recipeSection(title: "Top Picks", id: SectionID.topPicks, recipes: topPickRecipes)
-
-                recipeSection(title: "AI Recommend", id: SectionID.aiRecommend, recipes: aiRecommendRecipes)
-                    .padding(.top, AppSpacing.xs)
+                .toolbar(.hidden, for: .navigationBar)
             }
         }
     }
@@ -84,6 +138,9 @@ struct HomeView: View {
                 HeroRecipeCard(
                     recipe: recipe,
                     isFavorite: isFavorite(recipe),
+                    action: {
+                        navigationPath.append(.recipe(recipe.id))
+                    },
                     favoriteAction: {
                         toggleFavorite(recipe)
                     }
@@ -103,6 +160,9 @@ struct HomeView: View {
                     recipe: recipe,
                     showsCreator: showsCreator,
                     isFavorite: isFavorite(recipe),
+                    action: {
+                        navigationPath.append(.recipe(recipe.id))
+                    },
                     favoriteAction: {
                         toggleFavorite(recipe)
                     }
@@ -124,18 +184,25 @@ struct HomeView: View {
     }
 
     private func isFavorite(_ recipe: Recipe) -> Bool {
-        favoriteRecipeIDs.contains(recipe.id)
+        favoritesStore.isFavorite(recipe.id)
     }
 
     private func toggleFavorite(_ recipe: Recipe) {
-        if favoriteRecipeIDs.contains(recipe.id) {
-            favoriteRecipeIDs.remove(recipe.id)
-        } else {
-            favoriteRecipeIDs.insert(recipe.id)
-        }
+        favoritesStore.toggleFavorite(recipe.id)
     }
+}
+
+private enum HomeRoute: Hashable {
+    case recipe(String)
+    case ingredients(String)
+    case cart
+    case settings
 }
 
 #Preview {
     HomeView()
+        .environmentObject(FavoritesStore.shared)
+        .environmentObject(ShoppingCartStore.shared)
+        .environmentObject(UserProfileStore.shared)
+        .environmentObject(AppSettingsStore.shared)
 }

@@ -13,3 +13,11 @@ DerivedData/
 # Playgrounds
 timeline.xctimeline
 playground.xcworkspace
+.env
+
+# Local backups and generated asset archives
+ProjectBackups/
+GeneratedAssets_Archive/
+*.xcuserstate
+*.backup
+*.backup-before-*

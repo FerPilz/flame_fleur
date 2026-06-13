@@ -1,5 +1,12 @@
 import SwiftUI
 
+enum AppTopActionMetrics {
+    static let buttonSize: CGFloat = 34
+    static let compactButtonSize: CGFloat = 32
+    static let actionGroupWidth: CGFloat = 76
+    static let minimumTopOffset: CGFloat = 44
+}
+
 struct IconCircleButton: View {
     let systemName: String
     let accessibilityLabel: String

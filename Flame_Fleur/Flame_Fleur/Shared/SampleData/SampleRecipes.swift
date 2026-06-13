@@ -40,7 +40,7 @@ enum SampleRecipes {
             servings: 2,
             difficulty: .easy,
             tags: ["easy", "quick", "highProtein"],
-            imageName: "salmon",
+            imageName: "ff_home_recipe_meat_seafood_fish_honey_garlic_salmon",
             ingredients: ["salmon", "lemon", "olive oil", "fresh herbs", "garlic"],
             instructions: ["Season the salmon.", "Cook until tender.", "Finish with herbs and lemon."]
         ),
@@ -97,7 +97,7 @@ enum SampleRecipes {
             servings: 2,
             difficulty: .easy,
             tags: ["easy", "quick"],
-            imageName: "pasta",
+            imageName: "ff_home_recipe_world_cuisine_italian_spicy_tomato_basil_pasta",
             ingredients: ["pasta", "olive oil", "garlic", "parmesan", "fresh herbs"],
             instructions: ["Boil the pasta.", "Make a quick sauce.", "Toss together and serve."]
         )

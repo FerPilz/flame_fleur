@@ -6,6 +6,7 @@ struct HorizontalCarousel<Item: Identifiable, Content: View>: View {
     let itemSpacing: CGFloat
     let cardWidth: CGFloat?
     let cardHeight: CGFloat
+    let edgePadding: CGFloat
     let content: (Item) -> Content
 
     init(
@@ -14,6 +15,7 @@ struct HorizontalCarousel<Item: Identifiable, Content: View>: View {
         itemSpacing: CGFloat = AppSpacing.carouselItemSpacing,
         cardWidth: CGFloat? = nil,
         cardHeight: CGFloat = 150,
+        edgePadding: CGFloat = 1,
         @ViewBuilder content: @escaping (Item) -> Content
     ) {
         self.items = items
@@ -21,6 +23,7 @@ struct HorizontalCarousel<Item: Identifiable, Content: View>: View {
         self.itemSpacing = itemSpacing
         self.cardWidth = cardWidth
         self.cardHeight = cardHeight
+        self.edgePadding = edgePadding
         self.content = content
     }
 
@@ -36,7 +39,7 @@ struct HorizontalCarousel<Item: Identifiable, Content: View>: View {
                     }
                 }
                 .padding(.vertical, 1)
-                .padding(.horizontal, 1)
+                .padding(.horizontal, edgePadding)
             }
             .scrollClipDisabled()
         }

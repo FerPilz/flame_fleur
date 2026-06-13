@@ -1,0 +1,548 @@
+[
+  {
+    "asset_name": "ff_subcat_world_cuisine_italian",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_world_cuisine_italian.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_world_cuisine_italian.png"
+  },
+  {
+    "asset_name": "ff_subcat_world_cuisine_mexican",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_world_cuisine_mexican.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_world_cuisine_mexican.png"
+  },
+  {
+    "asset_name": "ff_subcat_world_cuisine_korean",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_world_cuisine_korean.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_world_cuisine_korean.png"
+  },
+  {
+    "asset_name": "ff_subcat_world_cuisine_german",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_world_cuisine_german.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_world_cuisine_german.png"
+  },
+  {
+    "asset_name": "ff_subcat_world_cuisine_japanese",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_world_cuisine_japanese.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_world_cuisine_japanese.png"
+  },
+  {
+    "asset_name": "ff_subcat_world_cuisine_thai",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_world_cuisine_thai.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_world_cuisine_thai.png"
+  },
+  {
+    "asset_name": "ff_subcat_world_cuisine_indian",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_world_cuisine_indian.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_world_cuisine_indian.png"
+  },
+  {
+    "asset_name": "ff_subcat_world_cuisine_chinese",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_world_cuisine_chinese.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_world_cuisine_chinese.png"
+  },
+  {
+    "asset_name": "ff_subcat_world_cuisine_french",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_world_cuisine_french.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_world_cuisine_french.png"
+  },
+  {
+    "asset_name": "ff_subcat_world_cuisine_greek",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_world_cuisine_greek.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_world_cuisine_greek.png"
+  },
+  {
+    "asset_name": "ff_subcat_world_cuisine_spanish",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_world_cuisine_spanish.png",
+    "output_folder": "subcategories",
+    "status": "error",
+    "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/predict_requests_per_model, limit: 10, model: imagen-4.0-fast-generate\\nPlease retry in 54.251126104s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/predict_requests_per_model', 'quotaId': 'PredictRequestsPerMinutePerProjectPerModel', 'quotaDimensions': {'location': 'global', 'model': 'imagen-4.0-fast-generate'}, 'quotaValue': '10'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '54s'}]}}"
+  },
+  {
+    "asset_name": "ff_subcat_world_cuisine_middle_eastern",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_world_cuisine_middle_eastern.png",
+    "output_folder": "subcategories",
+    "status": "error",
+    "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/predict_requests_per_model, limit: 10, model: imagen-4.0-fast-generate\\nPlease retry in 52.102656254s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/predict_requests_per_model', 'quotaId': 'PredictRequestsPerMinutePerProjectPerModel', 'quotaDimensions': {'location': 'global', 'model': 'imagen-4.0-fast-generate'}, 'quotaValue': '10'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '52s'}]}}"
+  },
+  {
+    "asset_name": "ff_subcat_meat_seafood_fish",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_meat_seafood_fish.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_meat_seafood_fish.png"
+  },
+  {
+    "asset_name": "ff_subcat_meat_seafood_shrimp",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_meat_seafood_shrimp.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_meat_seafood_shrimp.png"
+  },
+  {
+    "asset_name": "ff_subcat_meat_seafood_salmon",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_meat_seafood_salmon.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_meat_seafood_salmon.png"
+  },
+  {
+    "asset_name": "ff_subcat_meat_seafood_tuna",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_meat_seafood_tuna.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_meat_seafood_tuna.png"
+  },
+  {
+    "asset_name": "ff_subcat_meat_seafood_beef",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_meat_seafood_beef.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_meat_seafood_beef.png"
+  },
+  {
+    "asset_name": "ff_subcat_meat_seafood_pork",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_meat_seafood_pork.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_meat_seafood_pork.png"
+  },
+  {
+    "asset_name": "ff_subcat_meat_seafood_lamb",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_meat_seafood_lamb.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_meat_seafood_lamb.png"
+  },
+  {
+    "asset_name": "ff_subcat_meat_seafood_turkey",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_meat_seafood_turkey.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_meat_seafood_turkey.png"
+  },
+  {
+    "asset_name": "ff_subcat_meat_seafood_shellfish",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_meat_seafood_shellfish.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_meat_seafood_shellfish.png"
+  },
+  {
+    "asset_name": "ff_subcat_vegetarian_tofu_tempeh",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_vegetarian_tofu_tempeh.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_vegetarian_tofu_tempeh.png"
+  },
+  {
+    "asset_name": "ff_subcat_vegetarian_beans_lentils",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_vegetarian_beans_lentils.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_vegetarian_beans_lentils.png"
+  },
+  {
+    "asset_name": "ff_subcat_vegetarian_mushrooms",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_vegetarian_mushrooms.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_vegetarian_mushrooms.png"
+  },
+  {
+    "asset_name": "ff_subcat_vegetarian_eggplant",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_vegetarian_eggplant.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_vegetarian_eggplant.png"
+  },
+  {
+    "asset_name": "ff_subcat_vegetarian_cauliflower",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_vegetarian_cauliflower.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_vegetarian_cauliflower.png"
+  },
+  {
+    "asset_name": "ff_subcat_vegetarian_chickpeas",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_vegetarian_chickpeas.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_vegetarian_chickpeas.png"
+  },
+  {
+    "asset_name": "ff_subcat_vegetarian_leafy_greens",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_vegetarian_leafy_greens.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_vegetarian_leafy_greens.png"
+  },
+  {
+    "asset_name": "ff_subcat_vegetarian_root_vegetables",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_vegetarian_root_vegetables.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_vegetarian_root_vegetables.png"
+  },
+  {
+    "asset_name": "ff_subcat_vegetarian_plant_based_bowls",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_vegetarian_plant_based_bowls.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_vegetarian_plant_based_bowls.png"
+  },
+  {
+    "asset_name": "ff_subcat_chicken_grilled_chicken",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_chicken_grilled_chicken.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_chicken_grilled_chicken.png"
+  },
+  {
+    "asset_name": "ff_subcat_chicken_roast_chicken",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_chicken_roast_chicken.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_chicken_roast_chicken.png"
+  },
+  {
+    "asset_name": "ff_subcat_chicken_chicken_bowls",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_chicken_chicken_bowls.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_chicken_chicken_bowls.png"
+  },
+  {
+    "asset_name": "ff_subcat_chicken_chicken_pasta",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_chicken_chicken_pasta.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_chicken_chicken_pasta.png"
+  },
+  {
+    "asset_name": "ff_subcat_chicken_chicken_soup",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_chicken_chicken_soup.png",
+    "output_folder": "subcategories",
+    "status": "error",
+    "error": "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/predict_requests_per_model, limit: 10, model: imagen-4.0-fast-generate\\nPlease retry in 56.262435162s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/predict_requests_per_model', 'quotaId': 'PredictRequestsPerMinutePerProjectPerModel', 'quotaDimensions': {'location': 'global', 'model': 'imagen-4.0-fast-generate'}, 'quotaValue': '10'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '56s'}]}}"
+  },
+  {
+    "asset_name": "ff_subcat_chicken_chicken_tacos",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_chicken_chicken_tacos.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_chicken_chicken_tacos.png"
+  },
+  {
+    "asset_name": "ff_subcat_chicken_chicken_curry",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_chicken_chicken_curry.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_chicken_chicken_curry.png"
+  },
+  {
+    "asset_name": "ff_subcat_chicken_chicken_salad",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_chicken_chicken_salad.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_chicken_chicken_salad.png"
+  },
+  {
+    "asset_name": "ff_subcat_chicken_chicken_skewers",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_chicken_chicken_skewers.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_chicken_chicken_skewers.png"
+  },
+  {
+    "asset_name": "ff_subcat_bakery_bread",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_bakery_bread.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_bakery_bread.png"
+  },
+  {
+    "asset_name": "ff_subcat_bakery_cakes",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_bakery_cakes.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_bakery_cakes.png"
+  },
+  {
+    "asset_name": "ff_subcat_bakery_pastries",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_bakery_pastries.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_bakery_pastries.png"
+  },
+  {
+    "asset_name": "ff_subcat_bakery_cookies",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_bakery_cookies.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_bakery_cookies.png"
+  },
+  {
+    "asset_name": "ff_subcat_bakery_muffins",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_bakery_muffins.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_bakery_muffins.png"
+  },
+  {
+    "asset_name": "ff_subcat_bakery_pies_tarts",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_bakery_pies_tarts.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_bakery_pies_tarts.png"
+  },
+  {
+    "asset_name": "ff_subcat_bakery_brownies",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_bakery_brownies.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_bakery_brownies.png"
+  },
+  {
+    "asset_name": "ff_subcat_bakery_breakfast_bakes",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_bakery_breakfast_bakes.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_bakery_breakfast_bakes.png"
+  },
+  {
+    "asset_name": "ff_subcat_bakery_savory_bakes",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_bakery_savory_bakes.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_bakery_savory_bakes.png"
+  },
+  {
+    "asset_name": "ff_subcat_high_protein_protein_bowls",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_high_protein_protein_bowls.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_high_protein_protein_bowls.png"
+  },
+  {
+    "asset_name": "ff_subcat_high_protein_lean_chicken",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_high_protein_lean_chicken.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_high_protein_lean_chicken.png"
+  },
+  {
+    "asset_name": "ff_subcat_high_protein_egg_based_meals",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_high_protein_egg_based_meals.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_high_protein_egg_based_meals.png"
+  },
+  {
+    "asset_name": "ff_subcat_high_protein_greek_yogurt",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_high_protein_greek_yogurt.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_high_protein_greek_yogurt.png"
+  },
+  {
+    "asset_name": "ff_subcat_high_protein_seafood_protein",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_high_protein_seafood_protein.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_high_protein_seafood_protein.png"
+  },
+  {
+    "asset_name": "ff_subcat_high_protein_legume_protein",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_high_protein_legume_protein.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_high_protein_legume_protein.png"
+  },
+  {
+    "asset_name": "ff_subcat_high_protein_post_workout_meals",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_high_protein_post_workout_meals.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_high_protein_post_workout_meals.png"
+  },
+  {
+    "asset_name": "ff_subcat_high_protein_low_carb_protein",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_high_protein_low_carb_protein.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_high_protein_low_carb_protein.png"
+  },
+  {
+    "asset_name": "ff_subcat_high_protein_high_protein_breakfast",
+    "asset_type": "subcategory",
+    "filename": "ff_subcat_high_protein_high_protein_breakfast.png",
+    "output_folder": "subcategories",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/subcategories/ff_subcat_high_protein_high_protein_breakfast.png"
+  },
+  {
+    "asset_name": "ff_home_recipe_world_cuisine_italian_spicy_tomato_basil_pasta",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/home_recipes/ff_home_recipe_world_cuisine_italian_spicy_tomato_basil_pasta.png"
+  },
+  {
+    "asset_name": "ff_home_recipe_meat_seafood_fish_honey_garlic_salmon",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/home_recipes/ff_home_recipe_meat_seafood_fish_honey_garlic_salmon.png"
+  },
+  {
+    "asset_name": "ff_home_recipe_vegetarian_mushrooms_creamy_mushroom_risotto",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/home_recipes/ff_home_recipe_vegetarian_mushrooms_creamy_mushroom_risotto.png"
+  },
+  {
+    "asset_name": "ff_home_recipe_high_protein_protein_bowls_grilled_chicken_quinoa_bowl",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/home_recipes/ff_home_recipe_high_protein_protein_bowls_grilled_chicken_quinoa_bowl.png"
+  },
+  {
+    "asset_name": "ff_home_recipe_bakery_brownies_fudgy_brownies",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/home_recipes/ff_home_recipe_bakery_brownies_fudgy_brownies.png"
+  },
+  {
+    "asset_name": "ff_home_recipe_world_cuisine_mexican_chicken_tacos",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/home_recipes/ff_home_recipe_world_cuisine_mexican_chicken_tacos.png"
+  },
+  {
+    "asset_name": "ff_home_recipe_vegetarian_plant_based_bowls_rainbow_veggie_bowl",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/home_recipes/ff_home_recipe_vegetarian_plant_based_bowls_rainbow_veggie_bowl.png"
+  },
+  {
+    "asset_name": "ff_home_recipe_high_protein_greek_yogurt_greek_yogurt_berry_bowl",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/home_recipes/ff_home_recipe_high_protein_greek_yogurt_greek_yogurt_berry_bowl.png"
+  },
+  {
+    "asset_name": "ff_home_recipe_meat_seafood_shrimp_garlic_lime_shrimp",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/home_recipes/ff_home_recipe_meat_seafood_shrimp_garlic_lime_shrimp.png"
+  },
+  {
+    "asset_name": "ff_home_recipe_chicken_chicken_salad_herb_chicken_salad",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/home_recipes/ff_home_recipe_chicken_chicken_salad_herb_chicken_salad.png"
+  },
+  {
+    "asset_name": "ff_home_recipe_bakery_muffins_blueberry_oat_muffins",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/home_recipes/ff_home_recipe_bakery_muffins_blueberry_oat_muffins.png"
+  },
+  {
+    "asset_name": "ff_home_recipe_world_cuisine_japanese_salmon_sushi_bowl",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/home_recipes/ff_home_recipe_world_cuisine_japanese_salmon_sushi_bowl.png"
+  },
+  {
+    "asset_name": "ff_planner_recipe_high_protein_protein_bowls_grilled_chicken_quinoa_bowl",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/planner_recipes/ff_planner_recipe_high_protein_protein_bowls_grilled_chicken_quinoa_bowl.png"
+  },
+  {
+    "asset_name": "ff_planner_recipe_world_cuisine_italian_spicy_tomato_basil_pasta",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/planner_recipes/ff_planner_recipe_world_cuisine_italian_spicy_tomato_basil_pasta.png"
+  },
+  {
+    "asset_name": "ff_planner_recipe_vegetarian_plant_based_bowls_rainbow_veggie_bowl",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/planner_recipes/ff_planner_recipe_vegetarian_plant_based_bowls_rainbow_veggie_bowl.png"
+  },
+  {
+    "asset_name": "ff_planner_recipe_meat_seafood_salmon_lemon_herb_salmon",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/planner_recipes/ff_planner_recipe_meat_seafood_salmon_lemon_herb_salmon.png"
+  },
+  {
+    "asset_name": "ff_planner_recipe_chicken_chicken_salad_herb_chicken_salad",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/planner_recipes/ff_planner_recipe_chicken_chicken_salad_herb_chicken_salad.png"
+  },
+  {
+    "asset_name": "ff_planner_recipe_high_protein_egg_based_meals_avocado_egg_breakfast",
+    "status": "skipped_existing",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Gemini/raw/planner_recipes/ff_planner_recipe_high_protein_egg_based_meals_avocado_egg_breakfast.png"
+  }
+]

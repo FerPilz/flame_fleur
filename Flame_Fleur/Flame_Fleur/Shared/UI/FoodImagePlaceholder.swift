@@ -1,4 +1,9 @@
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 enum FoodImageKind: String {
     case salmon
@@ -52,6 +57,7 @@ enum FoodImagePlaceholderStyle {
 }
 
 struct FoodImagePlaceholder: View {
+    let imageName: String?
     let kind: FoodImageKind
     let style: FoodImagePlaceholderStyle
 
@@ -59,6 +65,7 @@ struct FoodImagePlaceholder: View {
         kind: FoodImageKind = .salmon,
         style: FoodImagePlaceholderStyle = .card
     ) {
+        self.imageName = nil
         self.kind = kind
         self.style = style
     }
@@ -67,6 +74,7 @@ struct FoodImagePlaceholder: View {
         imageName: String?,
         style: FoodImagePlaceholderStyle = .card
     ) {
+        self.imageName = imageName
         self.kind = FoodImageKind(imageName: imageName)
         self.style = style
     }
@@ -97,7 +105,31 @@ struct FoodImagePlaceholder: View {
         }
     }
 
+    @ViewBuilder
     private var content: some View {
+        if let imageName = availableImageName {
+            GeometryReader { proxy in
+                Image(imageName)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: proxy.size.width, height: proxy.size.height)
+            }
+        } else {
+            placeholderContent
+        }
+    }
+
+    private var availableImageName: String? {
+        guard let imageName = imageName?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !imageName.isEmpty,
+              AssetImageAvailability.exists(named: imageName) else {
+            return nil
+        }
+
+        return imageName
+    }
+
+    private var placeholderContent: some View {
         GeometryReader { proxy in
             let size = min(proxy.size.width, proxy.size.height)
 
@@ -266,6 +298,18 @@ struct FoodImagePlaceholder: View {
         case .salad:
             return AppColors.basil
         }
+    }
+}
+
+private enum AssetImageAvailability {
+    static func exists(named imageName: String) -> Bool {
+        #if canImport(UIKit)
+        return UIImage(named: imageName) != nil
+        #elseif canImport(AppKit)
+        return NSImage(named: NSImage.Name(imageName)) != nil
+        #else
+        return false
+        #endif
     }
 }
 

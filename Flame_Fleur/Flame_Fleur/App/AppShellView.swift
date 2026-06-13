@@ -2,6 +2,13 @@ import SwiftUI
 
 struct AppShellView: View {
     @State private var selectedTab: AppTab = .home
+    @State private var previousTab: AppTab = .home
+    @State private var lastNonPlannerTab: AppTab = .home
+    @StateObject private var shoppingCartStore = ShoppingCartStore.shared
+    @StateObject private var mealPlannerStore = MealPlannerStore.shared
+    @StateObject private var userProfileStore = UserProfileStore.shared
+    @StateObject private var appSettingsStore = AppSettingsStore.shared
+    @StateObject private var favoritesStore = FavoritesStore.shared
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -17,19 +24,26 @@ struct AppShellView: View {
                 }
                 .tag(AppTab.explore)
 
-            PlannerView()
+            PlannerView {
+                selectedTab = lastNonPlannerTab
+            }
+                .toolbar(.hidden, for: .tabBar)
                 .tabItem {
                     Label("Planner", systemImage: "calendar")
                 }
                 .tag(AppTab.planner)
 
-            FavoritesView()
+            FavoritesView {
+                goBackFromMainTab(.favorites)
+            }
                 .tabItem {
                     Label("Favorites", systemImage: "heart")
                 }
                 .tag(AppTab.favorites)
 
-            ProfileView()
+            ProfileView {
+                goBackFromMainTab(.profile)
+            }
                 .tabItem {
                     Label("Profile", systemImage: "person.crop.circle")
                 }
@@ -38,10 +52,25 @@ struct AppShellView: View {
         .tint(AppColors.olive)
         .toolbarBackground(AppColors.surface, for: .tabBar)
         .toolbarBackground(.visible, for: .tabBar)
+        .environmentObject(shoppingCartStore)
+        .environmentObject(mealPlannerStore)
+        .environmentObject(userProfileStore)
+        .environmentObject(appSettingsStore)
+        .environmentObject(favoritesStore)
+        .onChange(of: selectedTab) { oldTab, newTab in
+            if newTab != .planner {
+                previousTab = oldTab == .planner ? lastNonPlannerTab : oldTab
+                lastNonPlannerTab = newTab
+            }
+        }
+    }
+
+    private func goBackFromMainTab(_ tab: AppTab) {
+        selectedTab = (previousTab == tab || previousTab == .planner) ? .home : previousTab
     }
 }
 
-private enum AppTab {
+private enum AppTab: Hashable {
     case home
     case explore
     case planner

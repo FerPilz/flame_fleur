@@ -8,7 +8,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-italian-1",
-    "imageName": "pasta",
+    "imageName": "ff_home_recipe_world_cuisine_italian_spicy_tomato_basil_pasta",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -26,7 +26,9 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [],
+    "sectionTags": [
+      "featured"
+    ],
     "servings": 2,
     "subcategoryID": "world-cuisine-italian",
     "subcategoryTitle": "Italian",
@@ -68,7 +70,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-italian-2",
-    "imageName": "pasta",
+    "imageName": "ff_home_recipe_vegetarian_mushrooms_creamy_mushroom_risotto",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -88,7 +90,9 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [],
+    "sectionTags": [
+      "topPicks"
+    ],
     "servings": 4,
     "subcategoryID": "world-cuisine-italian",
     "subcategoryTitle": "Italian",
@@ -1823,9 +1827,7 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [
-      "aiRecommended"
-    ],
+    "sectionTags": [],
     "servings": 2,
     "subcategoryID": "world-cuisine-thai",
     "subcategoryTitle": "Thai",
@@ -2185,9 +2187,7 @@
     ],
     "isCommunityRecipe": true,
     "isPremium": false,
-    "sectionTags": [
-      "aiRecommended"
-    ],
+    "sectionTags": [],
     "servings": 2,
     "subcategoryID": "world-cuisine-indian",
     "subcategoryTitle": "Indian",
@@ -3264,9 +3264,7 @@
     ],
     "isCommunityRecipe": true,
     "isPremium": false,
-    "sectionTags": [
-      "community"
-    ],
+    "sectionTags": [],
     "servings": 2,
     "subcategoryID": "world-cuisine-greek",
     "subcategoryTitle": "Greek",
@@ -4331,7 +4329,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-fish-1",
-    "imageName": "salmon",
+    "imageName": "ff_home_recipe_meat_seafood_fish_honey_garlic_salmon",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -4349,7 +4347,9 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [],
+    "sectionTags": [
+      "featured"
+    ],
     "servings": 2,
     "subcategoryID": "meat-seafood-fish",
     "subcategoryTitle": "Fish",
@@ -4471,9 +4471,7 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [
-      "topPicks"
-    ],
+    "sectionTags": [],
     "servings": 1,
     "subcategoryID": "meat-seafood-fish",
     "subcategoryTitle": "Fish",
@@ -5065,7 +5063,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-salmon-1",
-    "imageName": "salmon",
+    "imageName": "ff_home_recipe_meat_seafood_fish_honey_garlic_salmon",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -5083,9 +5081,7 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [
-      "featured"
-    ],
+    "sectionTags": [],
     "servings": 2,
     "subcategoryID": "meat-seafood-salmon",
     "subcategoryTitle": "Salmon",
@@ -5190,7 +5186,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-salmon-3",
-    "imageName": "salmon",
+    "imageName": "ff_home_recipe_meat_seafood_fish_honey_garlic_salmon",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -7983,9 +7979,7 @@
     ],
     "isCommunityRecipe": true,
     "isPremium": false,
-    "sectionTags": [
-      "community"
-    ],
+    "sectionTags": [],
     "servings": 2,
     "subcategoryID": "vegetarian-beans-lentils",
     "subcategoryTitle": "Beans & Lentils",
@@ -8334,7 +8328,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-mushrooms-1",
-    "imageName": "salad",
+    "imageName": "ff_home_recipe_vegetarian_mushrooms_creamy_mushroom_risotto",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -8352,9 +8346,7 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [
-      "topPicks"
-    ],
+    "sectionTags": [],
     "servings": 2,
     "subcategoryID": "vegetarian-mushrooms",
     "subcategoryTitle": "Mushrooms",
@@ -8720,9 +8712,7 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": true,
-    "sectionTags": [
-      "topPicks"
-    ],
+    "sectionTags": [],
     "servings": 2,
     "subcategoryID": "vegetarian-eggplant",
     "subcategoryTitle": "Eggplant",
@@ -9457,9 +9447,7 @@
     ],
     "isCommunityRecipe": true,
     "isPremium": false,
-    "sectionTags": [
-      "community"
-    ],
+    "sectionTags": [],
     "servings": 2,
     "subcategoryID": "vegetarian-chickpeas",
     "subcategoryTitle": "Chickpeas",
@@ -9523,9 +9511,7 @@
     ],
     "isCommunityRecipe": true,
     "isPremium": false,
-    "sectionTags": [
-      "community"
-    ],
+    "sectionTags": [],
     "servings": 4,
     "subcategoryID": "vegetarian-chickpeas",
     "subcategoryTitle": "Chickpeas",
@@ -9829,9 +9815,7 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [
-      "featured"
-    ],
+    "sectionTags": [],
     "servings": 2,
     "subcategoryID": "vegetarian-leafy-greens",
     "subcategoryTitle": "Leafy Greens",
@@ -10547,7 +10531,7 @@
     "creatorName": "@homechef.anna",
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-plant-based-bowls-1",
-    "imageName": "bowl",
+    "imageName": "ff_home_recipe_vegetarian_plant_based_bowls_rainbow_veggie_bowl",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -10630,9 +10614,7 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [
-      "topPicks"
-    ],
+    "sectionTags": [],
     "servings": 4,
     "subcategoryID": "vegetarian-plant-based-bowls",
     "subcategoryTitle": "Plant-Based Bowls",
@@ -11296,9 +11278,7 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [
-      "featured"
-    ],
+    "sectionTags": [],
     "servings": 2,
     "subcategoryID": "chicken-roast-chicken",
     "subcategoryTitle": "Roast Chicken",
@@ -12004,7 +11984,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-pasta-1",
-    "imageName": "pasta",
+    "imageName": "ff_home_recipe_world_cuisine_italian_spicy_tomato_basil_pasta",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -13098,9 +13078,7 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [
-      "topPicks"
-    ],
+    "sectionTags": [],
     "servings": 2,
     "subcategoryID": "chicken-chicken-curry",
     "subcategoryTitle": "Chicken Curry",
@@ -13160,9 +13138,7 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [
-      "aiRecommended"
-    ],
+    "sectionTags": [],
     "servings": 4,
     "subcategoryID": "chicken-chicken-curry",
     "subcategoryTitle": "Chicken Curry",
@@ -13502,7 +13478,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-salad-2",
-    "imageName": "salad",
+    "imageName": "ff_home_recipe_chicken_chicken_salad_herb_chicken_salad",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -16301,7 +16277,7 @@
     "creatorName": "@homechef.anna",
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-brownies-1",
-    "imageName": "dessert",
+    "imageName": "ff_home_recipe_bakery_brownies_fudgy_brownies",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -17017,7 +16993,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-savory-bakes-1",
-    "imageName": "pasta",
+    "imageName": "ff_home_recipe_world_cuisine_italian_spicy_tomato_basil_pasta",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -17375,7 +17351,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-protein-bowls-1",
-    "imageName": "salad",
+    "imageName": "ff_home_recipe_high_protein_protein_bowls_grilled_chicken_quinoa_bowl",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -17438,7 +17414,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-protein-bowls-2",
-    "imageName": "salad",
+    "imageName": "ff_home_recipe_high_protein_protein_bowls_grilled_chicken_quinoa_bowl",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -18138,9 +18114,7 @@
     ],
     "isCommunityRecipe": false,
     "isPremium": false,
-    "sectionTags": [
-      "aiRecommended"
-    ],
+    "sectionTags": [],
     "servings": 2,
     "subcategoryID": "high-protein-egg-based-meals",
     "subcategoryTitle": "Egg-Based Meals",

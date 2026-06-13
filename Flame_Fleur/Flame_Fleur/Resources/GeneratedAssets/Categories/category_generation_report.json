@@ -1,0 +1,37 @@
+[
+  {
+    "id": "italian",
+    "title": "Italian",
+    "filename": "italian.png",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Categories/raw/italian.png"
+  },
+  {
+    "id": "mexican",
+    "title": "Mexican",
+    "filename": "mexican.png",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Categories/raw/mexican.png"
+  },
+  {
+    "id": "fish",
+    "title": "Fish",
+    "filename": "fish.png",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Categories/raw/fish.png"
+  },
+  {
+    "id": "bakery",
+    "title": "Bakery",
+    "filename": "bakery.png",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Categories/raw/bakery.png"
+  },
+  {
+    "id": "high_protein",
+    "title": "High Protein",
+    "filename": "high_protein.png",
+    "status": "generated",
+    "path": "/Users/pilz/Desktop/Projects/flame_fleur/Flame_Fleur/Flame_Fleur/Resources/GeneratedAssets/Categories/raw/high_protein.png"
+  }
+]

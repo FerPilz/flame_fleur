@@ -10,7 +10,7 @@ struct CategoryCircleCard: View {
     init(
         title: String,
         imageName: String?,
-        diameter: CGFloat = 86,
+        diameter: CGFloat = 95,
         isSelected: Bool = false,
         action: @escaping () -> Void = {}
     ) {
@@ -23,7 +23,7 @@ struct CategoryCircleCard: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: AppSpacing.xs) {
+            VStack(spacing: AppSpacing.xxs) {
                 FoodImagePlaceholder(imageName: imageName, style: .circle)
                     .frame(width: diameter, height: diameter)
                     .overlay(
@@ -32,7 +32,7 @@ struct CategoryCircleCard: View {
                     )
 
                 Text(title)
-                    .font(AppTypography.tabLabel)
+                    .font(AppTypography.categoryCircleLabel)
                     .foregroundStyle(isSelected ? AppColors.burntOrange : AppColors.primaryText)
                     .lineLimit(1)
                     .minimumScaleFactor(0.78)

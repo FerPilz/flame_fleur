@@ -64,14 +64,14 @@ struct AppHeader: View {
                     systemName: action.systemName,
                     accessibilityLabel: action.accessibilityLabel,
                     badgeValue: action.badgeValue,
-                    size: 30,
-                    backgroundColor: AppColors.appBackground,
+                    size: AppTopActionMetrics.buttonSize,
+                    backgroundColor: AppColors.elevatedCardBackground,
                     foregroundColor: AppColors.darkOlive,
                     action: action.action
                 )
             }
         }
-        .frame(width: 68, alignment: isLeading ? .leading : .trailing)
+        .frame(width: AppTopActionMetrics.actionGroupWidth, alignment: isLeading ? .leading : .trailing)
     }
 }
 
