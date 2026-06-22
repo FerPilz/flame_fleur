@@ -219,35 +219,25 @@ struct PlannerView: View {
     }
 
     private func addPlanToCart() {
-        let cartItems = mealPlannerStore.mealsInSelectedWeek.flatMap { meal -> [ShoppingCartItem] in
+        var addedItemCount = 0
+
+        for meal in mealPlannerStore.mealsInSelectedWeek {
             guard let recipeID = meal.recipeID,
                   let recipe = recipeRepository.recipe(id: recipeID) else {
-                return []
+                continue
             }
 
-            return recipe.ingredients.map { ingredient in
-                ShoppingCartItem(
-                    name: ingredient,
-                    quantity: 1,
-                    unit: "",
-                    category: shoppingCategory(for: ingredient),
-                    price: estimatedIngredientPrice(for: ingredient),
-                    storeName: ShoppingStoreOption.localMarket.displayName,
-                    imageName: recipe.imageName,
-                    sourceRecipeID: recipe.id,
-                    sourceRecipeTitle: recipe.title
-                )
-            }
+            shoppingCartStore.addRecipeIngredients(recipe.structuredIngredients, from: recipe)
+            addedItemCount += recipe.structuredIngredients.count
         }
 
-        guard !cartItems.isEmpty else {
+        guard addedItemCount > 0 else {
             showToast("No recipe ingredients to add")
             return
         }
 
-        shoppingCartStore.addItems(cartItems)
         didTapAddPlanToCart = true
-        showToast("Plan added to cart (\(cartItems.count) items)")
+        showToast("Plan added to cart (\(addedItemCount) items)")
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
             didTapAddPlanToCart = false
@@ -301,50 +291,6 @@ struct PlannerView: View {
         }
     }
 
-    private func shoppingCategory(for ingredient: String) -> ShoppingCartCategory {
-        let value = ingredient.lowercased()
-
-        if value.contains("salmon") || value.contains("chicken") || value.contains("beef") || value.contains("turkey") || value.contains("fish") {
-            return .protein
-        }
-
-        if value.contains("yogurt") || value.contains("milk") || value.contains("cheese") || value.contains("parmesan") {
-            return .dairy
-        }
-
-        if value.contains("lemon") || value.contains("tomato") || value.contains("carrot") || value.contains("garlic") || value.contains("herb") || value.contains("ginger") {
-            return .produce
-        }
-
-        if value.contains("bread") || value.contains("flour") || value.contains("pasta") {
-            return .bakery
-        }
-
-        if value.contains("stock") || value.contains("oil") || value.contains("lentil") {
-            return .pantry
-        }
-
-        return .other
-    }
-
-    private func estimatedIngredientPrice(for ingredient: String) -> Double {
-        switch shoppingCategory(for: ingredient) {
-        case .produce:
-            return 1.49
-        case .dairy:
-            return 3.49
-        case .protein:
-            return 7.99
-        case .pantry:
-            return 2.49
-        case .frozen:
-            return 4.49
-        case .bakery:
-            return 3.29
-        case .other:
-            return 2.99
-        }
-    }
 }
 
 private struct PlannerSlotSelection: Identifiable {

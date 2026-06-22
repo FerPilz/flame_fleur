@@ -5,6 +5,7 @@ struct RecipeIngredientsView: View {
     let onBack: (() -> Void)?
 
     @EnvironmentObject private var favoritesStore: FavoritesStore
+    @EnvironmentObject private var cartStore: ShoppingCartStore
     @Environment(\.dismiss) private var dismiss
     @State private var servings: Int
     @State private var selectedIngredientIndexes: Set<Int>
@@ -18,7 +19,7 @@ struct RecipeIngredientsView: View {
 
         let recipe = RecipeRepository.shared.recipe(id: recipeID)
         _servings = State(initialValue: max(recipe?.servings ?? 1, 1))
-        _selectedIngredientIndexes = State(initialValue: Set(recipe?.ingredients.indices ?? 0..<0))
+        _selectedIngredientIndexes = State(initialValue: Set(recipe?.structuredIngredients.indices ?? 0..<0))
     }
 
     var body: some View {
@@ -47,6 +48,7 @@ struct RecipeIngredientsView: View {
                     shareText: shareText(for: recipe),
                     showsBackButton: false,
                     onCartTap: nil,
+                    cartBadgeValue: nil,
                     onBack: { goBack() },
                     onFavoriteTap: { favoritesStore.toggleFavorite(recipe.id) }
                 )
@@ -195,11 +197,9 @@ struct RecipeIngredientsView: View {
 
     private func checklist(_ recipe: Recipe) -> some View {
         VStack(spacing: AppSpacing.xs) {
-            ForEach(Array(recipe.ingredients.enumerated()), id: \.offset) { index, ingredient in
+            ForEach(Array(recipe.structuredIngredients.enumerated()), id: \.offset) { index, ingredient in
                 IngredientChecklistRow(
                     ingredient: ingredient,
-                    amountText: amountText(for: index, servings: servings),
-                    unitText: unitText(for: index),
                     isSelected: selectedIngredientIndexes.contains(index)
                 ) {
                     toggleIngredient(at: index)
@@ -219,8 +219,21 @@ struct RecipeIngredientsView: View {
             }
 
             PrimaryButton("Add Selected to Cart", systemImage: "cart.badge.plus", style: .recipe, height: 50) {
+                let selectedIngredients = recipe.structuredIngredients.enumerated().compactMap { index, ingredient in
+                    selectedIngredientIndexes.contains(index) ? ingredient : nil
+                }
+
+                guard !selectedIngredients.isEmpty else {
+                    withAnimation(.easeInOut) {
+                        addSelectedMessage = "Select ingredients to add."
+                    }
+                    return
+                }
+
+                cartStore.addRecipeIngredients(selectedIngredients, from: recipe)
+
                 withAnimation(.easeInOut) {
-                    addSelectedMessage = "\(selectedIngredientIndexes.count) ingredients ready for the cart."
+                    addSelectedMessage = "\(selectedIngredients.count) ingredients added to the cart."
                 }
             }
         }
@@ -295,12 +308,12 @@ struct RecipeIngredientsView: View {
         if isAllSelected(recipe) {
             selectedIngredientIndexes.removeAll()
         } else {
-            selectedIngredientIndexes = Set(recipe.ingredients.indices)
+            selectedIngredientIndexes = Set(recipe.structuredIngredients.indices)
         }
     }
 
     private func isAllSelected(_ recipe: Recipe) -> Bool {
-        selectedIngredientIndexes.count == recipe.ingredients.count
+        selectedIngredientIndexes.count == recipe.structuredIngredients.count
     }
 
     private func resolvedHeroHeight(for screenHeight: CGFloat) -> CGFloat {
@@ -314,21 +327,6 @@ struct RecipeIngredientsView: View {
         "Check out this recipe: \(recipe.title) in Flame & Fleur. \(recipe.totalTimeText) total, \(recipe.servingsText)."
     }
 
-    private func amountText(for index: Int, servings: Int) -> String {
-        let baseAmounts = ["1", "2", "3", "1/2", "1", "1/4", "2", "1"]
-        let amount = baseAmounts[index % baseAmounts.count]
-
-        guard let wholeAmount = Int(amount) else {
-            return amount
-        }
-
-        return "\(wholeAmount * max(servings, 1))"
-    }
-
-    private func unitText(for index: Int) -> String {
-        let units = ["cup", "tbsp", "cloves", "cup", "tsp", "cup", "oz", "pinch"]
-        return units[index % units.count]
-    }
 }
 
 private enum RecipeIngredientsLayout {
@@ -341,4 +339,5 @@ private enum RecipeIngredientsLayout {
 #Preview {
     RecipeIngredientsView(recipeID: RecipeRepository.shared.allRecipes[0].id)
         .environmentObject(FavoritesStore.shared)
+        .environmentObject(ShoppingCartStore.shared)
 }

@@ -1,38 +1,33 @@
 import SwiftUI
 
 struct IngredientChecklistRow: View {
-    let ingredient: String
-    let amountText: String
-    let unitText: String
+    let ingredient: RecipeIngredient
     let isSelected: Bool
     let onTap: () -> Void
 
     var body: some View {
         Button(action: onTap) {
-            HStack(spacing: AppSpacing.sm) {
+            HStack(alignment: .top, spacing: AppSpacing.sm) {
                 Image(systemName: isSelected ? "checkmark.square.fill" : "square")
                     .font(AppTypography.bodyEmphasis)
                     .foregroundStyle(isSelected ? AppColors.olive : AppColors.tertiaryText)
                     .frame(width: AppSpacing.lg)
+                    .padding(.top, 1)
 
-                Text(amountText)
-                    .font(AppTypography.metadata)
-                    .foregroundStyle(AppColors.secondaryText)
-                    .frame(width: 36, alignment: .leading)
-                    .lineLimit(1)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(ingredient.displayLine)
+                        .font(AppTypography.callout)
+                        .foregroundStyle(AppColors.primaryText)
+                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
 
-                Text(unitText)
-                    .font(AppTypography.metadata)
-                    .foregroundStyle(AppColors.tertiaryText)
-                    .frame(width: 48, alignment: .leading)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
-
-                Text(ingredient.capitalized)
-                    .font(AppTypography.callout)
-                    .foregroundStyle(AppColors.primaryText)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
+                    if !ingredient.category.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        Text(ingredient.category)
+                            .font(AppTypography.metadata)
+                            .foregroundStyle(AppColors.secondaryText)
+                            .lineLimit(1)
+                    }
+                }
 
                 Spacer(minLength: AppSpacing.xs)
             }
@@ -53,9 +48,13 @@ struct IngredientChecklistRow: View {
 
 #Preview {
     IngredientChecklistRow(
-        ingredient: "Fresh basil",
-        amountText: "1/2",
-        unitText: "cup",
+        ingredient: RecipeIngredient(
+            name: "Fresh basil",
+            quantity: 1,
+            unit: "bunch",
+            category: "Produce",
+            displayQuantity: "1 bunch"
+        ),
         isSelected: true,
         onTap: {}
     )

@@ -6,6 +6,7 @@ struct RecipeHeroHeader: View {
     let shareText: String
     let showsBackButton: Bool
     let onCartTap: (() -> Void)?
+    let cartBadgeValue: Int?
     let onBack: () -> Void
     let onFavoriteTap: () -> Void
 
@@ -52,7 +53,7 @@ struct RecipeHeroHeader: View {
 
                     if let onCartTap {
                         Button(action: onCartTap) {
-                            RecipeHeroActionIcon(systemName: "cart")
+                            RecipeHeroActionIcon(systemName: cartBadgeValue == nil ? "cart" : "cart.fill")
                         }
                         .buttonStyle(.plain)
                         .accessibilityLabel(Text("Open shopping cart"))
@@ -83,14 +84,13 @@ struct RecipeHeroHeader: View {
                 .scaleEffect(1.05)
 
             FoodImagePlaceholder(imageName: recipe.imageName, style: .hero)
-                .frame(width: proxy.size.width * 0.92, height: proxy.size.height * 0.72)
+                .frame(width: proxy.size.width, height: proxy.size.height)
                 .clipShape(RoundedRectangle(cornerRadius: AppRadius.hero, style: .continuous))
                 .overlay(
                     RoundedRectangle(cornerRadius: AppRadius.hero, style: .continuous)
                         .stroke(AppColors.elevatedCardBackground.opacity(0.28), lineWidth: 1)
                 )
-                .offset(y: proxy.size.height * 0.13)
-                .opacity(0.88)
+                .opacity(0.92)
 
             LinearGradient(
                 colors: [
@@ -142,6 +142,7 @@ private struct RecipeHeroActionIcon: View {
         shareText: "Check out this recipe in Flame & Fleur.",
         showsBackButton: true,
         onCartTap: {},
+        cartBadgeValue: 2,
         onBack: {},
         onFavoriteTap: {}
     )

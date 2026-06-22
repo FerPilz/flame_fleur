@@ -1,0 +1,1514 @@
+[
+  {
+    "id": "ingredient_almond_flour",
+    "displayName": "Almond Flour",
+    "normalizedName": "almond flour",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.3,
+    "imageName": "ingredient_almond_flour"
+  },
+  {
+    "id": "ingredient_almonds",
+    "displayName": "Almonds",
+    "normalizedName": "almonds",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.65,
+    "imageName": "ingredient_almonds"
+  },
+  {
+    "id": "ingredient_apples",
+    "displayName": "Apples",
+    "normalizedName": "apples",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 3.76,
+    "imageName": "ingredient_apples"
+  },
+  {
+    "id": "ingredient_arborio_rice",
+    "displayName": "Arborio Rice",
+    "normalizedName": "arborio rice",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.79,
+    "imageName": "ingredient_arborio_rice"
+  },
+  {
+    "id": "ingredient_asparagus",
+    "displayName": "Asparagus",
+    "normalizedName": "asparagus",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.65,
+    "imageName": "ingredient_asparagus"
+  },
+  {
+    "id": "ingredient_avocado",
+    "displayName": "Avocado",
+    "normalizedName": "avocado",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.25,
+    "imageName": "ingredient_avocado"
+  },
+  {
+    "id": "ingredient_baby_potatoes",
+    "displayName": "Baby Potatoes",
+    "normalizedName": "baby potatoes",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.18,
+    "imageName": "ingredient_baby_potatoes"
+  },
+  {
+    "id": "ingredient_baby_spinach",
+    "displayName": "Baby Spinach",
+    "normalizedName": "baby spinach",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.54,
+    "imageName": "ingredient_baby_spinach"
+  },
+  {
+    "id": "ingredient_baking_powder",
+    "displayName": "Baking Powder",
+    "normalizedName": "baking powder",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.49,
+    "imageName": "ingredient_baking_powder"
+  },
+  {
+    "id": "ingredient_bananas",
+    "displayName": "Bananas",
+    "normalizedName": "bananas",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.03,
+    "imageName": "ingredient_bananas"
+  },
+  {
+    "id": "ingredient_basil",
+    "displayName": "Basil",
+    "normalizedName": "basil",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.08,
+    "imageName": "ingredient_basil"
+  },
+  {
+    "id": "ingredient_beans",
+    "displayName": "Beans",
+    "normalizedName": "beans",
+    "category": "Pantry",
+    "defaultUnit": "can",
+    "estimatedPrice": 4.06,
+    "imageName": "ingredient_beans"
+  },
+  {
+    "id": "ingredient_bell_peppers",
+    "displayName": "Bell Peppers",
+    "normalizedName": "bell peppers",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.72,
+    "imageName": "ingredient_bell_peppers"
+  },
+  {
+    "id": "ingredient_berries",
+    "displayName": "Berries",
+    "normalizedName": "berries",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.71,
+    "imageName": "ingredient_berries"
+  },
+  {
+    "id": "ingredient_black_beans",
+    "displayName": "Black Beans",
+    "normalizedName": "black beans",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.91,
+    "imageName": "ingredient_black_beans"
+  },
+  {
+    "id": "ingredient_black_pepper",
+    "displayName": "Black Pepper",
+    "normalizedName": "black pepper",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 4.17,
+    "imageName": "ingredient_black_pepper"
+  },
+  {
+    "id": "ingredient_bread",
+    "displayName": "Bread",
+    "normalizedName": "bread",
+    "category": "Bakery",
+    "defaultUnit": "loaf",
+    "estimatedPrice": 4.82,
+    "imageName": "ingredient_bread"
+  },
+  {
+    "id": "ingredient_breadcrumbs",
+    "displayName": "Breadcrumbs",
+    "normalizedName": "breadcrumbs",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.19,
+    "imageName": "ingredient_breadcrumbs"
+  },
+  {
+    "id": "ingredient_broccoli",
+    "displayName": "Broccoli",
+    "normalizedName": "broccoli",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.08,
+    "imageName": "ingredient_broccoli"
+  },
+  {
+    "id": "ingredient_brown_lentils",
+    "displayName": "Brown Lentils",
+    "normalizedName": "brown lentils",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.18,
+    "imageName": "ingredient_brown_lentils"
+  },
+  {
+    "id": "ingredient_brown_rice",
+    "displayName": "Brown Rice",
+    "normalizedName": "brown rice",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.49,
+    "imageName": "ingredient_brown_rice"
+  },
+  {
+    "id": "ingredient_brown_sugar",
+    "displayName": "Brown Sugar",
+    "normalizedName": "brown sugar",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.2,
+    "imageName": "ingredient_brown_sugar"
+  },
+  {
+    "id": "ingredient_butter",
+    "displayName": "Butter",
+    "normalizedName": "butter",
+    "category": "Dairy",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 4.1,
+    "imageName": "ingredient_butter"
+  },
+  {
+    "id": "ingredient_cabbage",
+    "displayName": "Cabbage",
+    "normalizedName": "cabbage",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.63,
+    "imageName": "ingredient_cabbage"
+  },
+  {
+    "id": "ingredient_cannellini_beans",
+    "displayName": "Cannellini Beans",
+    "normalizedName": "cannellini beans",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.21,
+    "imageName": "ingredient_cannellini_beans"
+  },
+  {
+    "id": "ingredient_caraway_seeds",
+    "displayName": "Caraway Seeds",
+    "normalizedName": "caraway seeds",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 4.08,
+    "imageName": "ingredient_caraway_seeds"
+  },
+  {
+    "id": "ingredient_carrots",
+    "displayName": "Carrots",
+    "normalizedName": "carrots",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 3.56,
+    "imageName": "ingredient_carrots"
+  },
+  {
+    "id": "ingredient_cauliflower",
+    "displayName": "Cauliflower",
+    "normalizedName": "cauliflower",
+    "category": "Produce",
+    "defaultUnit": "head",
+    "estimatedPrice": 4.01,
+    "imageName": "ingredient_cauliflower"
+  },
+  {
+    "id": "ingredient_celery",
+    "displayName": "Celery",
+    "normalizedName": "celery",
+    "category": "Produce",
+    "defaultUnit": "stalks",
+    "estimatedPrice": 3.54,
+    "imageName": "ingredient_celery"
+  },
+  {
+    "id": "ingredient_cheddar",
+    "displayName": "Cheddar",
+    "normalizedName": "cheddar",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.37,
+    "imageName": "ingredient_cheddar"
+  },
+  {
+    "id": "ingredient_cherry_tomatoes",
+    "displayName": "Cherry Tomatoes",
+    "normalizedName": "cherry tomatoes",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.78,
+    "imageName": "ingredient_cherry_tomatoes"
+  },
+  {
+    "id": "ingredient_chicken_breast",
+    "displayName": "Chicken Breast",
+    "normalizedName": "chicken breast",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.36,
+    "imageName": "ingredient_chicken_breast"
+  },
+  {
+    "id": "ingredient_chicken_thighs",
+    "displayName": "Chicken Thighs",
+    "normalizedName": "chicken thighs",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.7,
+    "imageName": "ingredient_chicken_thighs"
+  },
+  {
+    "id": "ingredient_chickpeas",
+    "displayName": "Chickpeas",
+    "normalizedName": "chickpeas",
+    "category": "Pantry",
+    "defaultUnit": "can",
+    "estimatedPrice": 3.92,
+    "imageName": "ingredient_chickpeas"
+  },
+  {
+    "id": "ingredient_chili_powder",
+    "displayName": "Chili Powder",
+    "normalizedName": "chili powder",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.34,
+    "imageName": "ingredient_chili_powder"
+  },
+  {
+    "id": "ingredient_chocolate_chips",
+    "displayName": "Chocolate Chips",
+    "normalizedName": "chocolate chips",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.68,
+    "imageName": "ingredient_chocolate_chips"
+  },
+  {
+    "id": "ingredient_cilantro",
+    "displayName": "Cilantro",
+    "normalizedName": "cilantro",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.1,
+    "imageName": "ingredient_cilantro"
+  },
+  {
+    "id": "ingredient_cinnamon",
+    "displayName": "Cinnamon",
+    "normalizedName": "cinnamon",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.72,
+    "imageName": "ingredient_cinnamon"
+  },
+  {
+    "id": "ingredient_cocoa_powder",
+    "displayName": "Cocoa Powder",
+    "normalizedName": "cocoa powder",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.18,
+    "imageName": "ingredient_cocoa_powder"
+  },
+  {
+    "id": "ingredient_coconut_milk",
+    "displayName": "Coconut Milk",
+    "normalizedName": "coconut milk",
+    "category": "Pantry",
+    "defaultUnit": "can",
+    "estimatedPrice": 3.76,
+    "imageName": "ingredient_coconut_milk"
+  },
+  {
+    "id": "ingredient_cod",
+    "displayName": "Cod",
+    "normalizedName": "cod",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 8.81,
+    "imageName": "ingredient_cod"
+  },
+  {
+    "id": "ingredient_collard_greens",
+    "displayName": "Collard Greens",
+    "normalizedName": "collard greens",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.26,
+    "imageName": "ingredient_collard_greens"
+  },
+  {
+    "id": "ingredient_coriander",
+    "displayName": "Coriander",
+    "normalizedName": "coriander",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.6,
+    "imageName": "ingredient_coriander"
+  },
+  {
+    "id": "ingredient_corn_tortillas",
+    "displayName": "Corn Tortillas",
+    "normalizedName": "corn tortillas",
+    "category": "Bakery",
+    "defaultUnit": "each",
+    "estimatedPrice": 5.03,
+    "imageName": "ingredient_corn_tortillas"
+  },
+  {
+    "id": "ingredient_cream_cheese",
+    "displayName": "Cream Cheese",
+    "normalizedName": "cream cheese",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.8,
+    "imageName": "ingredient_cream_cheese"
+  },
+  {
+    "id": "ingredient_cremini_mushrooms",
+    "displayName": "Cremini Mushrooms",
+    "normalizedName": "cremini mushrooms",
+    "category": "Produce",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.66,
+    "imageName": "ingredient_cremini_mushrooms"
+  },
+  {
+    "id": "ingredient_crushed_crackers",
+    "displayName": "Crushed Crackers",
+    "normalizedName": "crushed crackers",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.09,
+    "imageName": "ingredient_crushed_crackers"
+  },
+  {
+    "id": "ingredient_cucumber",
+    "displayName": "Cucumber",
+    "normalizedName": "cucumber",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.19,
+    "imageName": "ingredient_cucumber"
+  },
+  {
+    "id": "ingredient_cumin",
+    "displayName": "Cumin",
+    "normalizedName": "cumin",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.43,
+    "imageName": "ingredient_cumin"
+  },
+  {
+    "id": "ingredient_curry_paste",
+    "displayName": "Curry Paste",
+    "normalizedName": "curry paste",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.99,
+    "imageName": "ingredient_curry_paste"
+  },
+  {
+    "id": "ingredient_dark_chocolate",
+    "displayName": "Dark Chocolate",
+    "normalizedName": "dark chocolate",
+    "category": "Pantry",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.34,
+    "imageName": "ingredient_dark_chocolate"
+  },
+  {
+    "id": "ingredient_dijon_mustard",
+    "displayName": "Dijon Mustard",
+    "normalizedName": "dijon mustard",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.0,
+    "imageName": "ingredient_dijon_mustard"
+  },
+  {
+    "id": "ingredient_dill",
+    "displayName": "Dill",
+    "normalizedName": "dill",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.36,
+    "imageName": "ingredient_dill"
+  },
+  {
+    "id": "ingredient_egg",
+    "displayName": "Egg",
+    "normalizedName": "egg",
+    "category": "Protein",
+    "defaultUnit": "each",
+    "estimatedPrice": 8.64,
+    "imageName": "ingredient_egg"
+  },
+  {
+    "id": "ingredient_egg_whites",
+    "displayName": "Egg Whites",
+    "normalizedName": "egg whites",
+    "category": "Protein",
+    "defaultUnit": "each",
+    "estimatedPrice": 8.85,
+    "imageName": "ingredient_egg_whites"
+  },
+  {
+    "id": "ingredient_eggplant",
+    "displayName": "Eggplant",
+    "normalizedName": "eggplant",
+    "category": "Produce",
+    "defaultUnit": "large",
+    "estimatedPrice": 3.56,
+    "imageName": "ingredient_eggplant"
+  },
+  {
+    "id": "ingredient_eggs",
+    "displayName": "Eggs",
+    "normalizedName": "eggs",
+    "category": "Protein",
+    "defaultUnit": "each",
+    "estimatedPrice": 8.75,
+    "imageName": "ingredient_eggs"
+  },
+  {
+    "id": "ingredient_espresso_powder",
+    "displayName": "Espresso Powder",
+    "normalizedName": "espresso powder",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.25,
+    "imageName": "ingredient_espresso_powder"
+  },
+  {
+    "id": "ingredient_farro",
+    "displayName": "Farro",
+    "normalizedName": "farro",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.15,
+    "imageName": "ingredient_farro"
+  },
+  {
+    "id": "ingredient_feta",
+    "displayName": "Feta",
+    "normalizedName": "feta",
+    "category": "Dairy",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.67,
+    "imageName": "ingredient_feta"
+  },
+  {
+    "id": "ingredient_fettuccine",
+    "displayName": "Fettuccine",
+    "normalizedName": "fettuccine",
+    "category": "Pantry",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.68,
+    "imageName": "ingredient_fettuccine"
+  },
+  {
+    "id": "ingredient_flank_steak",
+    "displayName": "Flank Steak",
+    "normalizedName": "flank steak",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.06,
+    "imageName": "ingredient_flank_steak"
+  },
+  {
+    "id": "ingredient_flour",
+    "displayName": "Flour",
+    "normalizedName": "flour",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.6,
+    "imageName": "ingredient_flour"
+  },
+  {
+    "id": "ingredient_garlic",
+    "displayName": "Garlic",
+    "normalizedName": "garlic",
+    "category": "Produce",
+    "defaultUnit": "cloves",
+    "estimatedPrice": 4.48,
+    "imageName": "ingredient_garlic"
+  },
+  {
+    "id": "ingredient_ginger",
+    "displayName": "Ginger",
+    "normalizedName": "ginger",
+    "category": "Produce",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.67,
+    "imageName": "ingredient_ginger"
+  },
+  {
+    "id": "ingredient_gochujang",
+    "displayName": "Gochujang",
+    "normalizedName": "gochujang",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.29,
+    "imageName": "ingredient_gochujang"
+  },
+  {
+    "id": "ingredient_greek_yogurt",
+    "displayName": "Greek Yogurt",
+    "normalizedName": "greek yogurt",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.31,
+    "imageName": "ingredient_greek_yogurt"
+  },
+  {
+    "id": "ingredient_green_beans",
+    "displayName": "Green Beans",
+    "normalizedName": "green beans",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.55,
+    "imageName": "ingredient_green_beans"
+  },
+  {
+    "id": "ingredient_green_lentils",
+    "displayName": "Green Lentils",
+    "normalizedName": "green lentils",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.63,
+    "imageName": "ingredient_green_lentils"
+  },
+  {
+    "id": "ingredient_ground_beef",
+    "displayName": "Ground Beef",
+    "normalizedName": "ground beef",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 8.67,
+    "imageName": "ingredient_ground_beef"
+  },
+  {
+    "id": "ingredient_ground_lamb",
+    "displayName": "Ground Lamb",
+    "normalizedName": "ground lamb",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.17,
+    "imageName": "ingredient_ground_lamb"
+  },
+  {
+    "id": "ingredient_ground_pork",
+    "displayName": "Ground Pork",
+    "normalizedName": "ground pork",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 8.79,
+    "imageName": "ingredient_ground_pork"
+  },
+  {
+    "id": "ingredient_ground_turkey",
+    "displayName": "Ground Turkey",
+    "normalizedName": "ground turkey",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.28,
+    "imageName": "ingredient_ground_turkey"
+  },
+  {
+    "id": "ingredient_haddock",
+    "displayName": "Haddock",
+    "normalizedName": "haddock",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.35,
+    "imageName": "ingredient_haddock"
+  },
+  {
+    "id": "ingredient_harissa",
+    "displayName": "Harissa",
+    "normalizedName": "harissa",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.53,
+    "imageName": "ingredient_harissa"
+  },
+  {
+    "id": "ingredient_heavy_cream",
+    "displayName": "Heavy Cream",
+    "normalizedName": "heavy cream",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.08,
+    "imageName": "ingredient_heavy_cream"
+  },
+  {
+    "id": "ingredient_herbs",
+    "displayName": "Herbs",
+    "normalizedName": "herbs",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.72,
+    "imageName": "ingredient_herbs"
+  },
+  {
+    "id": "ingredient_honey",
+    "displayName": "Honey",
+    "normalizedName": "honey",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.58,
+    "imageName": "ingredient_honey"
+  },
+  {
+    "id": "ingredient_jasmine_rice",
+    "displayName": "Jasmine Rice",
+    "normalizedName": "jasmine rice",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.82,
+    "imageName": "ingredient_jasmine_rice"
+  },
+  {
+    "id": "ingredient_kale",
+    "displayName": "Kale",
+    "normalizedName": "kale",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.28,
+    "imageName": "ingredient_kale"
+  },
+  {
+    "id": "ingredient_lamb_chops",
+    "displayName": "Lamb Chops",
+    "normalizedName": "lamb chops",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 8.55,
+    "imageName": "ingredient_lamb_chops"
+  },
+  {
+    "id": "ingredient_lemon",
+    "displayName": "Lemon",
+    "normalizedName": "lemon",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.08,
+    "imageName": "ingredient_lemon"
+  },
+  {
+    "id": "ingredient_lentils",
+    "displayName": "Lentils",
+    "normalizedName": "lentils",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.06,
+    "imageName": "ingredient_lentils"
+  },
+  {
+    "id": "ingredient_lime",
+    "displayName": "Lime",
+    "normalizedName": "lime",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.07,
+    "imageName": "ingredient_lime"
+  },
+  {
+    "id": "ingredient_linguine",
+    "displayName": "Linguine",
+    "normalizedName": "linguine",
+    "category": "Pantry",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.01,
+    "imageName": "ingredient_linguine"
+  },
+  {
+    "id": "ingredient_maple_syrup",
+    "displayName": "Maple Syrup",
+    "normalizedName": "maple syrup",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 4.18,
+    "imageName": "ingredient_maple_syrup"
+  },
+  {
+    "id": "ingredient_milk",
+    "displayName": "Milk",
+    "normalizedName": "milk",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.14,
+    "imageName": "ingredient_milk"
+  },
+  {
+    "id": "ingredient_mint",
+    "displayName": "Mint",
+    "normalizedName": "mint",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.39,
+    "imageName": "ingredient_mint"
+  },
+  {
+    "id": "ingredient_miso",
+    "displayName": "Miso",
+    "normalizedName": "miso",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 4.02,
+    "imageName": "ingredient_miso"
+  },
+  {
+    "id": "ingredient_mixed_berries",
+    "displayName": "Mixed Berries",
+    "normalizedName": "mixed berries",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.68,
+    "imageName": "ingredient_mixed_berries"
+  },
+  {
+    "id": "ingredient_mixed_greens",
+    "displayName": "Mixed Greens",
+    "normalizedName": "mixed greens",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.28,
+    "imageName": "ingredient_mixed_greens"
+  },
+  {
+    "id": "ingredient_mixed_mushrooms",
+    "displayName": "Mixed Mushrooms",
+    "normalizedName": "mixed mushrooms",
+    "category": "Produce",
+    "defaultUnit": "oz",
+    "estimatedPrice": 4.51,
+    "imageName": "ingredient_mixed_mushrooms"
+  },
+  {
+    "id": "ingredient_mozzarella",
+    "displayName": "Mozzarella",
+    "normalizedName": "mozzarella",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.47,
+    "imageName": "ingredient_mozzarella"
+  },
+  {
+    "id": "ingredient_mushrooms",
+    "displayName": "Mushrooms",
+    "normalizedName": "mushrooms",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.71,
+    "imageName": "ingredient_mushrooms"
+  },
+  {
+    "id": "ingredient_nuts",
+    "displayName": "Nuts",
+    "normalizedName": "nuts",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.05,
+    "imageName": "ingredient_nuts"
+  },
+  {
+    "id": "ingredient_oats",
+    "displayName": "Oats",
+    "normalizedName": "oats",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.57,
+    "imageName": "ingredient_oats"
+  },
+  {
+    "id": "ingredient_olive_oil",
+    "displayName": "Olive Oil",
+    "normalizedName": "olive oil",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.48,
+    "imageName": "ingredient_olive_oil"
+  },
+  {
+    "id": "ingredient_onion",
+    "displayName": "Onion",
+    "normalizedName": "onion",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.35,
+    "imageName": "ingredient_onion"
+  },
+  {
+    "id": "ingredient_orange",
+    "displayName": "Orange",
+    "normalizedName": "orange",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.22,
+    "imageName": "ingredient_orange"
+  },
+  {
+    "id": "ingredient_oregano",
+    "displayName": "Oregano",
+    "normalizedName": "oregano",
+    "category": "Produce",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 4.02,
+    "imageName": "ingredient_oregano"
+  },
+  {
+    "id": "ingredient_orzo",
+    "displayName": "Orzo",
+    "normalizedName": "orzo",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.39,
+    "imageName": "ingredient_orzo"
+  },
+  {
+    "id": "ingredient_panko",
+    "displayName": "Panko",
+    "normalizedName": "panko",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.05,
+    "imageName": "ingredient_panko"
+  },
+  {
+    "id": "ingredient_pappardelle",
+    "displayName": "Pappardelle",
+    "normalizedName": "pappardelle",
+    "category": "Pantry",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.64,
+    "imageName": "ingredient_pappardelle"
+  },
+  {
+    "id": "ingredient_paprika",
+    "displayName": "Paprika",
+    "normalizedName": "paprika",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.97,
+    "imageName": "ingredient_paprika"
+  },
+  {
+    "id": "ingredient_parmesan",
+    "displayName": "Parmesan",
+    "normalizedName": "parmesan",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.49,
+    "imageName": "ingredient_parmesan"
+  },
+  {
+    "id": "ingredient_parsley",
+    "displayName": "Parsley",
+    "normalizedName": "parsley",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.39,
+    "imageName": "ingredient_parsley"
+  },
+  {
+    "id": "ingredient_parsnips",
+    "displayName": "Parsnips",
+    "normalizedName": "parsnips",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.14,
+    "imageName": "ingredient_parsnips"
+  },
+  {
+    "id": "ingredient_pasta",
+    "displayName": "Pasta",
+    "normalizedName": "pasta",
+    "category": "Pantry",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.63,
+    "imageName": "ingredient_pasta"
+  },
+  {
+    "id": "ingredient_peanut_butter",
+    "displayName": "Peanut Butter",
+    "normalizedName": "peanut butter",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.25,
+    "imageName": "ingredient_peanut_butter"
+  },
+  {
+    "id": "ingredient_peanuts",
+    "displayName": "Peanuts",
+    "normalizedName": "peanuts",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.31,
+    "imageName": "ingredient_peanuts"
+  },
+  {
+    "id": "ingredient_pear",
+    "displayName": "Pear",
+    "normalizedName": "pear",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 3.89,
+    "imageName": "ingredient_pear"
+  },
+  {
+    "id": "ingredient_pears",
+    "displayName": "Pears",
+    "normalizedName": "pears",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.75,
+    "imageName": "ingredient_pears"
+  },
+  {
+    "id": "ingredient_pie_dough",
+    "displayName": "Pie Dough",
+    "normalizedName": "pie dough",
+    "category": "Bakery",
+    "defaultUnit": "sheet",
+    "estimatedPrice": 4.9,
+    "imageName": "ingredient_pie_dough"
+  },
+  {
+    "id": "ingredient_pine_nuts",
+    "displayName": "Pine Nuts",
+    "normalizedName": "pine nuts",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.69,
+    "imageName": "ingredient_pine_nuts"
+  },
+  {
+    "id": "ingredient_pistachios",
+    "displayName": "Pistachios",
+    "normalizedName": "pistachios",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.4,
+    "imageName": "ingredient_pistachios"
+  },
+  {
+    "id": "ingredient_pork_chops",
+    "displayName": "Pork Chops",
+    "normalizedName": "pork chops",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.71,
+    "imageName": "ingredient_pork_chops"
+  },
+  {
+    "id": "ingredient_pork_tenderloin",
+    "displayName": "Pork Tenderloin",
+    "normalizedName": "pork tenderloin",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 8.74,
+    "imageName": "ingredient_pork_tenderloin"
+  },
+  {
+    "id": "ingredient_portobello_mushrooms",
+    "displayName": "Portobello Mushrooms",
+    "normalizedName": "portobello mushrooms",
+    "category": "Produce",
+    "defaultUnit": "oz",
+    "estimatedPrice": 4.39,
+    "imageName": "ingredient_portobello_mushrooms"
+  },
+  {
+    "id": "ingredient_potato_gnocchi",
+    "displayName": "Potato Gnocchi",
+    "normalizedName": "potato gnocchi",
+    "category": "Pantry",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.12,
+    "imageName": "ingredient_potato_gnocchi"
+  },
+  {
+    "id": "ingredient_potatoes",
+    "displayName": "Potatoes",
+    "normalizedName": "potatoes",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.4,
+    "imageName": "ingredient_potatoes"
+  },
+  {
+    "id": "ingredient_puff_pastry",
+    "displayName": "Puff Pastry",
+    "normalizedName": "puff pastry",
+    "category": "Bakery",
+    "defaultUnit": "sheet",
+    "estimatedPrice": 5.31,
+    "imageName": "ingredient_puff_pastry"
+  },
+  {
+    "id": "ingredient_quinoa",
+    "displayName": "Quinoa",
+    "normalizedName": "quinoa",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.88,
+    "imageName": "ingredient_quinoa"
+  },
+  {
+    "id": "ingredient_red_onion",
+    "displayName": "Red Onion",
+    "normalizedName": "red onion",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 3.95,
+    "imageName": "ingredient_red_onion"
+  },
+  {
+    "id": "ingredient_red_wine_vinegar",
+    "displayName": "Red Wine Vinegar",
+    "normalizedName": "red wine vinegar",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.28,
+    "imageName": "ingredient_red_wine_vinegar"
+  },
+  {
+    "id": "ingredient_rice",
+    "displayName": "Rice",
+    "normalizedName": "rice",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.61,
+    "imageName": "ingredient_rice"
+  },
+  {
+    "id": "ingredient_ricotta",
+    "displayName": "Ricotta",
+    "normalizedName": "ricotta",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.46,
+    "imageName": "ingredient_ricotta"
+  },
+  {
+    "id": "ingredient_romaine_lettuce",
+    "displayName": "Romaine Lettuce",
+    "normalizedName": "romaine lettuce",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.1,
+    "imageName": "ingredient_romaine_lettuce"
+  },
+  {
+    "id": "ingredient_rosemary",
+    "displayName": "Rosemary",
+    "normalizedName": "rosemary",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.7,
+    "imageName": "ingredient_rosemary"
+  },
+  {
+    "id": "ingredient_rye_bread",
+    "displayName": "Rye Bread",
+    "normalizedName": "rye bread",
+    "category": "Bakery",
+    "defaultUnit": "slices",
+    "estimatedPrice": 5.11,
+    "imageName": "ingredient_rye_bread"
+  },
+  {
+    "id": "ingredient_saffron",
+    "displayName": "Saffron",
+    "normalizedName": "saffron",
+    "category": "Pantry",
+    "defaultUnit": "pinch",
+    "estimatedPrice": 3.81,
+    "imageName": "ingredient_saffron"
+  },
+  {
+    "id": "ingredient_salmon",
+    "displayName": "Salmon",
+    "normalizedName": "salmon",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.5,
+    "imageName": "ingredient_salmon"
+  },
+  {
+    "id": "ingredient_salt",
+    "displayName": "Salt",
+    "normalizedName": "salt",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.91,
+    "imageName": "ingredient_salt"
+  },
+  {
+    "id": "ingredient_scallions",
+    "displayName": "Scallions",
+    "normalizedName": "scallions",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.08,
+    "imageName": "ingredient_scallions"
+  },
+  {
+    "id": "ingredient_seeds",
+    "displayName": "Seeds",
+    "normalizedName": "seeds",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.39,
+    "imageName": "ingredient_seeds"
+  },
+  {
+    "id": "ingredient_sesame_oil",
+    "displayName": "Sesame Oil",
+    "normalizedName": "sesame oil",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.44,
+    "imageName": "ingredient_sesame_oil"
+  },
+  {
+    "id": "ingredient_sesame_seeds",
+    "displayName": "Sesame Seeds",
+    "normalizedName": "sesame seeds",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.51,
+    "imageName": "ingredient_sesame_seeds"
+  },
+  {
+    "id": "ingredient_shallot",
+    "displayName": "Shallot",
+    "normalizedName": "shallot",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.56,
+    "imageName": "ingredient_shallot"
+  },
+  {
+    "id": "ingredient_shredded_cabbage",
+    "displayName": "Shredded Cabbage",
+    "normalizedName": "shredded cabbage",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.53,
+    "imageName": "ingredient_shredded_cabbage"
+  },
+  {
+    "id": "ingredient_shredded_chicken",
+    "displayName": "Shredded Chicken",
+    "normalizedName": "shredded chicken",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.27,
+    "imageName": "ingredient_shredded_chicken"
+  },
+  {
+    "id": "ingredient_shrimp",
+    "displayName": "Shrimp",
+    "normalizedName": "shrimp",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 8.85,
+    "imageName": "ingredient_shrimp"
+  },
+  {
+    "id": "ingredient_sirloin_steak",
+    "displayName": "Sirloin Steak",
+    "normalizedName": "sirloin steak",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 8.78,
+    "imageName": "ingredient_sirloin_steak"
+  },
+  {
+    "id": "ingredient_smoked_paprika",
+    "displayName": "Smoked Paprika",
+    "normalizedName": "smoked paprika",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.47,
+    "imageName": "ingredient_smoked_paprika"
+  },
+  {
+    "id": "ingredient_sour_cream",
+    "displayName": "Sour Cream",
+    "normalizedName": "sour cream",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.08,
+    "imageName": "ingredient_sour_cream"
+  },
+  {
+    "id": "ingredient_sourdough_bread",
+    "displayName": "Sourdough Bread",
+    "normalizedName": "sourdough bread",
+    "category": "Bakery",
+    "defaultUnit": "slices",
+    "estimatedPrice": 5.25,
+    "imageName": "ingredient_sourdough_bread"
+  },
+  {
+    "id": "ingredient_soy_sauce",
+    "displayName": "Soy Sauce",
+    "normalizedName": "soy sauce",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.86,
+    "imageName": "ingredient_soy_sauce"
+  },
+  {
+    "id": "ingredient_spaghetti",
+    "displayName": "Spaghetti",
+    "normalizedName": "spaghetti",
+    "category": "Pantry",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.83,
+    "imageName": "ingredient_spaghetti"
+  },
+  {
+    "id": "ingredient_spinach",
+    "displayName": "Spinach",
+    "normalizedName": "spinach",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.35,
+    "imageName": "ingredient_spinach"
+  },
+  {
+    "id": "ingredient_stock",
+    "displayName": "Stock",
+    "normalizedName": "stock",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.18,
+    "imageName": "ingredient_stock"
+  },
+  {
+    "id": "ingredient_sugar",
+    "displayName": "Sugar",
+    "normalizedName": "sugar",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.25,
+    "imageName": "ingredient_sugar"
+  },
+  {
+    "id": "ingredient_sweet_potatoes",
+    "displayName": "Sweet Potatoes",
+    "normalizedName": "sweet potatoes",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.65,
+    "imageName": "ingredient_sweet_potatoes"
+  },
+  {
+    "id": "ingredient_tahini",
+    "displayName": "Tahini",
+    "normalizedName": "tahini",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.81,
+    "imageName": "ingredient_tahini"
+  },
+  {
+    "id": "ingredient_tempeh",
+    "displayName": "Tempeh",
+    "normalizedName": "tempeh",
+    "category": "Protein",
+    "defaultUnit": "oz",
+    "estimatedPrice": 9.65,
+    "imageName": "ingredient_tempeh"
+  },
+  {
+    "id": "ingredient_thai_curry_paste",
+    "displayName": "Thai Curry Paste",
+    "normalizedName": "thai curry paste",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.11,
+    "imageName": "ingredient_thai_curry_paste"
+  },
+  {
+    "id": "ingredient_thyme",
+    "displayName": "Thyme",
+    "normalizedName": "thyme",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.56,
+    "imageName": "ingredient_thyme"
+  },
+  {
+    "id": "ingredient_tilapia",
+    "displayName": "Tilapia",
+    "normalizedName": "tilapia",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.36,
+    "imageName": "ingredient_tilapia"
+  },
+  {
+    "id": "ingredient_tofu",
+    "displayName": "Tofu",
+    "normalizedName": "tofu",
+    "category": "Protein",
+    "defaultUnit": "oz",
+    "estimatedPrice": 9.05,
+    "imageName": "ingredient_tofu"
+  },
+  {
+    "id": "ingredient_tomatoes",
+    "displayName": "Tomatoes",
+    "normalizedName": "tomatoes",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.35,
+    "imageName": "ingredient_tomatoes"
+  },
+  {
+    "id": "ingredient_tortillas",
+    "displayName": "Tortillas",
+    "normalizedName": "tortillas",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 3.6,
+    "imageName": "ingredient_tortillas"
+  },
+  {
+    "id": "ingredient_tuna",
+    "displayName": "Tuna",
+    "normalizedName": "tuna",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 8.54,
+    "imageName": "ingredient_tuna"
+  },
+  {
+    "id": "ingredient_turkey_breast",
+    "displayName": "Turkey Breast",
+    "normalizedName": "turkey breast",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 8.84,
+    "imageName": "ingredient_turkey_breast"
+  },
+  {
+    "id": "ingredient_turkey_cutlets",
+    "displayName": "Turkey Cutlets",
+    "normalizedName": "turkey cutlets",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.26,
+    "imageName": "ingredient_turkey_cutlets"
+  },
+  {
+    "id": "ingredient_turmeric",
+    "displayName": "Turmeric",
+    "normalizedName": "turmeric",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 4.07,
+    "imageName": "ingredient_turmeric"
+  },
+  {
+    "id": "ingredient_vanilla_extract",
+    "displayName": "Vanilla Extract",
+    "normalizedName": "vanilla extract",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.19,
+    "imageName": "ingredient_vanilla_extract"
+  },
+  {
+    "id": "ingredient_warm_water",
+    "displayName": "Warm Water",
+    "normalizedName": "warm water",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 2.99,
+    "imageName": "ingredient_warm_water"
+  },
+  {
+    "id": "ingredient_white_fish_fillets",
+    "displayName": "White Fish Fillets",
+    "normalizedName": "white fish fillets",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.53,
+    "imageName": "ingredient_white_fish_fillets"
+  },
+  {
+    "id": "ingredient_whole_grain_bread",
+    "displayName": "Whole Grain Bread",
+    "normalizedName": "whole grain bread",
+    "category": "Bakery",
+    "defaultUnit": "slices",
+    "estimatedPrice": 4.99,
+    "imageName": "ingredient_whole_grain_bread"
+  },
+  {
+    "id": "ingredient_yeast",
+    "displayName": "Yeast",
+    "normalizedName": "yeast",
+    "category": "Pantry",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.97,
+    "imageName": "ingredient_yeast"
+  },
+  {
+    "id": "ingredient_zucchini",
+    "displayName": "Zucchini",
+    "normalizedName": "zucchini",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.65,
+    "imageName": "ingredient_zucchini"
+  }
+]

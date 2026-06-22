@@ -1,0 +1,552 @@
+# Recipe Enrichment Full Report
+
+Validation passed: yes
+Recipes enriched: 342
+Unique recipe ingredients: 168
+Unique shopping ingredients: 168
+
+## Top ingredient categories
+- Produce: 2069
+- Pantry: 1005
+- Protein: 196
+- Dairy: 177
+- Bakery: 61
+
+## Recipe IDs
+- recipe-seed-world-cuisine-italian-1
+- recipe-seed-world-cuisine-italian-2
+- recipe-seed-world-cuisine-italian-3
+- recipe-seed-world-cuisine-italian-4
+- recipe-seed-world-cuisine-italian-5
+- recipe-seed-world-cuisine-italian-6
+- recipe-seed-world-cuisine-mexican-1
+- recipe-seed-world-cuisine-mexican-2
+- recipe-seed-world-cuisine-mexican-3
+- recipe-seed-world-cuisine-mexican-4
+- recipe-seed-world-cuisine-mexican-5
+- recipe-seed-world-cuisine-mexican-6
+- recipe-seed-world-cuisine-korean-1
+- recipe-seed-world-cuisine-korean-2
+- recipe-seed-world-cuisine-korean-3
+- recipe-seed-world-cuisine-korean-4
+- recipe-seed-world-cuisine-korean-5
+- recipe-seed-world-cuisine-korean-6
+- recipe-seed-world-cuisine-german-1
+- recipe-seed-world-cuisine-german-2
+- recipe-seed-world-cuisine-german-3
+- recipe-seed-world-cuisine-german-4
+- recipe-seed-world-cuisine-german-5
+- recipe-seed-world-cuisine-german-6
+- recipe-seed-world-cuisine-japanese-1
+- recipe-seed-world-cuisine-japanese-2
+- recipe-seed-world-cuisine-japanese-3
+- recipe-seed-world-cuisine-japanese-4
+- recipe-seed-world-cuisine-japanese-5
+- recipe-seed-world-cuisine-japanese-6
+- recipe-seed-world-cuisine-thai-1
+- recipe-seed-world-cuisine-thai-2
+- recipe-seed-world-cuisine-thai-3
+- recipe-seed-world-cuisine-thai-4
+- recipe-seed-world-cuisine-thai-5
+- recipe-seed-world-cuisine-thai-6
+- recipe-seed-world-cuisine-indian-1
+- recipe-seed-world-cuisine-indian-2
+- recipe-seed-world-cuisine-indian-3
+- recipe-seed-world-cuisine-indian-4
+- recipe-seed-world-cuisine-indian-5
+- recipe-seed-world-cuisine-indian-6
+- recipe-seed-world-cuisine-chinese-1
+- recipe-seed-world-cuisine-chinese-2
+- recipe-seed-world-cuisine-chinese-3
+- recipe-seed-world-cuisine-chinese-4
+- recipe-seed-world-cuisine-chinese-5
+- recipe-seed-world-cuisine-chinese-6
+- recipe-seed-world-cuisine-french-1
+- recipe-seed-world-cuisine-french-2
+- recipe-seed-world-cuisine-french-3
+- recipe-seed-world-cuisine-french-4
+- recipe-seed-world-cuisine-french-5
+- recipe-seed-world-cuisine-french-6
+- recipe-seed-world-cuisine-greek-1
+- recipe-seed-world-cuisine-greek-2
+- recipe-seed-world-cuisine-greek-3
+- recipe-seed-world-cuisine-greek-4
+- recipe-seed-world-cuisine-greek-5
+- recipe-seed-world-cuisine-greek-6
+- recipe-seed-world-cuisine-spanish-1
+- recipe-seed-world-cuisine-spanish-2
+- recipe-seed-world-cuisine-spanish-3
+- recipe-seed-world-cuisine-spanish-4
+- recipe-seed-world-cuisine-spanish-5
+- recipe-seed-world-cuisine-spanish-6
+- recipe-seed-world-cuisine-middle-eastern-1
+- recipe-seed-world-cuisine-middle-eastern-2
+- recipe-seed-world-cuisine-middle-eastern-3
+- recipe-seed-world-cuisine-middle-eastern-4
+- recipe-seed-world-cuisine-middle-eastern-5
+- recipe-seed-world-cuisine-middle-eastern-6
+- recipe-seed-meat-seafood-fish-1
+- recipe-seed-meat-seafood-fish-2
+- recipe-seed-meat-seafood-fish-3
+- recipe-seed-meat-seafood-fish-4
+- recipe-seed-meat-seafood-fish-5
+- recipe-seed-meat-seafood-fish-6
+- recipe-seed-meat-seafood-shrimp-1
+- recipe-seed-meat-seafood-shrimp-2
+- recipe-seed-meat-seafood-shrimp-3
+- recipe-seed-meat-seafood-shrimp-4
+- recipe-seed-meat-seafood-shrimp-5
+- recipe-seed-meat-seafood-shrimp-6
+- recipe-seed-meat-seafood-salmon-1
+- recipe-seed-meat-seafood-salmon-2
+- recipe-seed-meat-seafood-salmon-3
+- recipe-seed-meat-seafood-salmon-4
+- recipe-seed-meat-seafood-salmon-5
+- recipe-seed-meat-seafood-salmon-6
+- recipe-seed-meat-seafood-tuna-1
+- recipe-seed-meat-seafood-tuna-2
+- recipe-seed-meat-seafood-tuna-3
+- recipe-seed-meat-seafood-tuna-4
+- recipe-seed-meat-seafood-tuna-5
+- recipe-seed-meat-seafood-tuna-6
+- recipe-seed-meat-seafood-beef-1
+- recipe-seed-meat-seafood-beef-2
+- recipe-seed-meat-seafood-beef-3
+- recipe-seed-meat-seafood-beef-4
+- recipe-seed-meat-seafood-beef-5
+- recipe-seed-meat-seafood-beef-6
+- recipe-seed-meat-seafood-pork-1
+- recipe-seed-meat-seafood-pork-2
+- recipe-seed-meat-seafood-pork-3
+- recipe-seed-meat-seafood-pork-4
+- recipe-seed-meat-seafood-pork-5
+- recipe-seed-meat-seafood-pork-6
+- recipe-seed-meat-seafood-lamb-1
+- recipe-seed-meat-seafood-lamb-2
+- recipe-seed-meat-seafood-lamb-3
+- recipe-seed-meat-seafood-lamb-4
+- recipe-seed-meat-seafood-lamb-5
+- recipe-seed-meat-seafood-lamb-6
+- recipe-seed-meat-seafood-turkey-1
+- recipe-seed-meat-seafood-turkey-2
+- recipe-seed-meat-seafood-turkey-3
+- recipe-seed-meat-seafood-turkey-4
+- recipe-seed-meat-seafood-turkey-5
+- recipe-seed-meat-seafood-turkey-6
+- recipe-seed-meat-seafood-shellfish-1
+- recipe-seed-meat-seafood-shellfish-2
+- recipe-seed-meat-seafood-shellfish-3
+- recipe-seed-meat-seafood-shellfish-4
+- recipe-seed-meat-seafood-shellfish-5
+- recipe-seed-meat-seafood-shellfish-6
+- recipe-seed-vegetarian-tofu-tempeh-1
+- recipe-seed-vegetarian-tofu-tempeh-2
+- recipe-seed-vegetarian-tofu-tempeh-3
+- recipe-seed-vegetarian-tofu-tempeh-4
+- recipe-seed-vegetarian-tofu-tempeh-5
+- recipe-seed-vegetarian-tofu-tempeh-6
+- recipe-seed-vegetarian-beans-lentils-1
+- recipe-seed-vegetarian-beans-lentils-2
+- recipe-seed-vegetarian-beans-lentils-3
+- recipe-seed-vegetarian-beans-lentils-4
+- recipe-seed-vegetarian-beans-lentils-5
+- recipe-seed-vegetarian-beans-lentils-6
+- recipe-seed-vegetarian-mushrooms-1
+- recipe-seed-vegetarian-mushrooms-2
+- recipe-seed-vegetarian-mushrooms-3
+- recipe-seed-vegetarian-mushrooms-4
+- recipe-seed-vegetarian-mushrooms-5
+- recipe-seed-vegetarian-mushrooms-6
+- recipe-seed-vegetarian-eggplant-1
+- recipe-seed-vegetarian-eggplant-2
+- recipe-seed-vegetarian-eggplant-3
+- recipe-seed-vegetarian-eggplant-4
+- recipe-seed-vegetarian-eggplant-5
+- recipe-seed-vegetarian-eggplant-6
+- recipe-seed-vegetarian-cauliflower-1
+- recipe-seed-vegetarian-cauliflower-2
+- recipe-seed-vegetarian-cauliflower-3
+- recipe-seed-vegetarian-cauliflower-4
+- recipe-seed-vegetarian-cauliflower-5
+- recipe-seed-vegetarian-cauliflower-6
+- recipe-seed-vegetarian-chickpeas-1
+- recipe-seed-vegetarian-chickpeas-2
+- recipe-seed-vegetarian-chickpeas-3
+- recipe-seed-vegetarian-chickpeas-4
+- recipe-seed-vegetarian-chickpeas-5
+- recipe-seed-vegetarian-chickpeas-6
+- recipe-seed-vegetarian-leafy-greens-1
+- recipe-seed-vegetarian-leafy-greens-2
+- recipe-seed-vegetarian-leafy-greens-3
+- recipe-seed-vegetarian-leafy-greens-4
+- recipe-seed-vegetarian-leafy-greens-5
+- recipe-seed-vegetarian-leafy-greens-6
+- recipe-seed-vegetarian-root-vegetables-1
+- recipe-seed-vegetarian-root-vegetables-2
+- recipe-seed-vegetarian-root-vegetables-3
+- recipe-seed-vegetarian-root-vegetables-4
+- recipe-seed-vegetarian-root-vegetables-5
+- recipe-seed-vegetarian-root-vegetables-6
+- recipe-seed-vegetarian-plant-based-bowls-1
+- recipe-seed-vegetarian-plant-based-bowls-2
+- recipe-seed-vegetarian-plant-based-bowls-3
+- recipe-seed-vegetarian-plant-based-bowls-4
+- recipe-seed-vegetarian-plant-based-bowls-5
+- recipe-seed-vegetarian-plant-based-bowls-6
+- recipe-seed-chicken-grilled-chicken-1
+- recipe-seed-chicken-grilled-chicken-2
+- recipe-seed-chicken-grilled-chicken-3
+- recipe-seed-chicken-grilled-chicken-4
+- recipe-seed-chicken-grilled-chicken-5
+- recipe-seed-chicken-grilled-chicken-6
+- recipe-seed-chicken-roast-chicken-1
+- recipe-seed-chicken-roast-chicken-2
+- recipe-seed-chicken-roast-chicken-3
+- recipe-seed-chicken-roast-chicken-4
+- recipe-seed-chicken-roast-chicken-5
+- recipe-seed-chicken-roast-chicken-6
+- recipe-seed-chicken-chicken-bowls-1
+- recipe-seed-chicken-chicken-bowls-2
+- recipe-seed-chicken-chicken-bowls-3
+- recipe-seed-chicken-chicken-bowls-4
+- recipe-seed-chicken-chicken-bowls-5
+- recipe-seed-chicken-chicken-bowls-6
+- recipe-seed-chicken-chicken-pasta-1
+- recipe-seed-chicken-chicken-pasta-2
+- recipe-seed-chicken-chicken-pasta-3
+- recipe-seed-chicken-chicken-pasta-4
+- recipe-seed-chicken-chicken-pasta-5
+- recipe-seed-chicken-chicken-pasta-6
+- recipe-seed-chicken-chicken-soup-1
+- recipe-seed-chicken-chicken-soup-2
+- recipe-seed-chicken-chicken-soup-3
+- recipe-seed-chicken-chicken-soup-4
+- recipe-seed-chicken-chicken-soup-5
+- recipe-seed-chicken-chicken-soup-6
+- recipe-seed-chicken-chicken-tacos-1
+- recipe-seed-chicken-chicken-tacos-2
+- recipe-seed-chicken-chicken-tacos-3
+- recipe-seed-chicken-chicken-tacos-4
+- recipe-seed-chicken-chicken-tacos-5
+- recipe-seed-chicken-chicken-tacos-6
+- recipe-seed-chicken-chicken-curry-1
+- recipe-seed-chicken-chicken-curry-2
+- recipe-seed-chicken-chicken-curry-3
+- recipe-seed-chicken-chicken-curry-4
+- recipe-seed-chicken-chicken-curry-5
+- recipe-seed-chicken-chicken-curry-6
+- recipe-seed-chicken-chicken-salad-1
+- recipe-seed-chicken-chicken-salad-2
+- recipe-seed-chicken-chicken-salad-3
+- recipe-seed-chicken-chicken-salad-4
+- recipe-seed-chicken-chicken-salad-5
+- recipe-seed-chicken-chicken-salad-6
+- recipe-seed-chicken-chicken-skewers-1
+- recipe-seed-chicken-chicken-skewers-2
+- recipe-seed-chicken-chicken-skewers-3
+- recipe-seed-chicken-chicken-skewers-4
+- recipe-seed-chicken-chicken-skewers-5
+- recipe-seed-chicken-chicken-skewers-6
+- recipe-seed-bakery-bread-1
+- recipe-seed-bakery-bread-2
+- recipe-seed-bakery-bread-3
+- recipe-seed-bakery-bread-4
+- recipe-seed-bakery-bread-5
+- recipe-seed-bakery-bread-6
+- recipe-seed-bakery-cakes-1
+- recipe-seed-bakery-cakes-2
+- recipe-seed-bakery-cakes-3
+- recipe-seed-bakery-cakes-4
+- recipe-seed-bakery-cakes-5
+- recipe-seed-bakery-cakes-6
+- recipe-seed-bakery-pastries-1
+- recipe-seed-bakery-pastries-2
+- recipe-seed-bakery-pastries-3
+- recipe-seed-bakery-pastries-4
+- recipe-seed-bakery-pastries-5
+- recipe-seed-bakery-pastries-6
+- recipe-seed-bakery-cookies-1
+- recipe-seed-bakery-cookies-2
+- recipe-seed-bakery-cookies-3
+- recipe-seed-bakery-cookies-4
+- recipe-seed-bakery-cookies-5
+- recipe-seed-bakery-cookies-6
+- recipe-seed-bakery-muffins-1
+- recipe-seed-bakery-muffins-2
+- recipe-seed-bakery-muffins-3
+- recipe-seed-bakery-muffins-4
+- recipe-seed-bakery-muffins-5
+- recipe-seed-bakery-muffins-6
+- recipe-seed-bakery-pies-tarts-1
+- recipe-seed-bakery-pies-tarts-2
+- recipe-seed-bakery-pies-tarts-3
+- recipe-seed-bakery-pies-tarts-4
+- recipe-seed-bakery-pies-tarts-5
+- recipe-seed-bakery-pies-tarts-6
+- recipe-seed-bakery-brownies-1
+- recipe-seed-bakery-brownies-2
+- recipe-seed-bakery-brownies-3
+- recipe-seed-bakery-brownies-4
+- recipe-seed-bakery-brownies-5
+- recipe-seed-bakery-brownies-6
+- recipe-seed-bakery-breakfast-bakes-1
+- recipe-seed-bakery-breakfast-bakes-2
+- recipe-seed-bakery-breakfast-bakes-3
+- recipe-seed-bakery-breakfast-bakes-4
+- recipe-seed-bakery-breakfast-bakes-5
+- recipe-seed-bakery-breakfast-bakes-6
+- recipe-seed-bakery-savory-bakes-1
+- recipe-seed-bakery-savory-bakes-2
+- recipe-seed-bakery-savory-bakes-3
+- recipe-seed-bakery-savory-bakes-4
+- recipe-seed-bakery-savory-bakes-5
+- recipe-seed-bakery-savory-bakes-6
+- recipe-seed-high-protein-protein-bowls-1
+- recipe-seed-high-protein-protein-bowls-2
+- recipe-seed-high-protein-protein-bowls-3
+- recipe-seed-high-protein-protein-bowls-4
+- recipe-seed-high-protein-protein-bowls-5
+- recipe-seed-high-protein-protein-bowls-6
+- recipe-seed-high-protein-lean-chicken-1
+- recipe-seed-high-protein-lean-chicken-2
+- recipe-seed-high-protein-lean-chicken-3
+- recipe-seed-high-protein-lean-chicken-4
+- recipe-seed-high-protein-lean-chicken-5
+- recipe-seed-high-protein-lean-chicken-6
+- recipe-seed-high-protein-egg-based-meals-1
+- recipe-seed-high-protein-egg-based-meals-2
+- recipe-seed-high-protein-egg-based-meals-3
+- recipe-seed-high-protein-egg-based-meals-4
+- recipe-seed-high-protein-egg-based-meals-5
+- recipe-seed-high-protein-egg-based-meals-6
+- recipe-seed-high-protein-greek-yogurt-1
+- recipe-seed-high-protein-greek-yogurt-2
+- recipe-seed-high-protein-greek-yogurt-3
+- recipe-seed-high-protein-greek-yogurt-4
+- recipe-seed-high-protein-greek-yogurt-5
+- recipe-seed-high-protein-greek-yogurt-6
+- recipe-seed-high-protein-seafood-protein-1
+- recipe-seed-high-protein-seafood-protein-2
+- recipe-seed-high-protein-seafood-protein-3
+- recipe-seed-high-protein-seafood-protein-4
+- recipe-seed-high-protein-seafood-protein-5
+- recipe-seed-high-protein-seafood-protein-6
+- recipe-seed-high-protein-legume-protein-1
+- recipe-seed-high-protein-legume-protein-2
+- recipe-seed-high-protein-legume-protein-3
+- recipe-seed-high-protein-legume-protein-4
+- recipe-seed-high-protein-legume-protein-5
+- recipe-seed-high-protein-legume-protein-6
+- recipe-seed-high-protein-post-workout-meals-1
+- recipe-seed-high-protein-post-workout-meals-2
+- recipe-seed-high-protein-post-workout-meals-3
+- recipe-seed-high-protein-post-workout-meals-4
+- recipe-seed-high-protein-post-workout-meals-5
+- recipe-seed-high-protein-post-workout-meals-6
+- recipe-seed-high-protein-low-carb-protein-1
+- recipe-seed-high-protein-low-carb-protein-2
+- recipe-seed-high-protein-low-carb-protein-3
+- recipe-seed-high-protein-low-carb-protein-4
+- recipe-seed-high-protein-low-carb-protein-5
+- recipe-seed-high-protein-low-carb-protein-6
+- recipe-seed-high-protein-high-protein-breakfast-1
+- recipe-seed-high-protein-high-protein-breakfast-2
+- recipe-seed-high-protein-high-protein-breakfast-3
+- recipe-seed-high-protein-high-protein-breakfast-4
+- recipe-seed-high-protein-high-protein-breakfast-5
+- recipe-seed-high-protein-high-protein-breakfast-6
+
+## Examples
+- recipe-seed-world-cuisine-italian-1 | Spicy Tomato Basil Pasta | servings 4 | 9 ingredients | 4 steps | 560 cal/serving
+- recipe-seed-world-cuisine-italian-2 | Creamy Mushroom Risotto | servings 4 | 10 ingredients | 4 steps | 500 cal/serving
+- recipe-seed-world-cuisine-italian-3 | Tuscan White Bean Soup | servings 4 | 12 ingredients | 4 steps | 390 cal/serving
+- recipe-seed-world-cuisine-italian-4 | Lemon Ricotta Gnocchi | servings 4 | 12 ingredients | 4 steps | 520 cal/serving
+- recipe-seed-world-cuisine-italian-5 | Eggplant Parmesan Bake | servings 4 | 8 ingredients | 4 steps | 560 cal/serving
+- recipe-seed-world-cuisine-italian-6 | Garlic Shrimp Linguine | servings 4 | 9 ingredients | 4 steps | 620 cal/serving
+- recipe-seed-world-cuisine-mexican-1 | Charred Corn Tacos | servings 4 | 11 ingredients | 4 steps | 490 cal/serving
+- recipe-seed-world-cuisine-mexican-2 | Chicken Tinga Bowls | servings 4 | 11 ingredients | 4 steps | 600 cal/serving
+- recipe-seed-world-cuisine-mexican-3 | Roasted Poblano Enchiladas | servings 4 | 11 ingredients | 4 steps | 490 cal/serving
+- recipe-seed-world-cuisine-mexican-4 | Citrus Shrimp Tostadas | servings 4 | 11 ingredients | 4 steps | 550 cal/serving
+
+## Shopping ingredients
+- Almond Flour (`almond flour`) [Pantry]
+- Almonds (`almonds`) [Pantry]
+- Apples (`apples`) [Produce]
+- Arborio Rice (`arborio rice`) [Pantry]
+- Asparagus (`asparagus`) [Produce]
+- Avocado (`avocado`) [Produce]
+- Baby Potatoes (`baby potatoes`) [Produce]
+- Baby Spinach (`baby spinach`) [Produce]
+- Baking Powder (`baking powder`) [Pantry]
+- Bananas (`bananas`) [Produce]
+- Basil (`basil`) [Produce]
+- Beans (`beans`) [Pantry]
+- Bell Peppers (`bell peppers`) [Produce]
+- Berries (`berries`) [Produce]
+- Black Beans (`black beans`) [Pantry]
+- Black Pepper (`black pepper`) [Pantry]
+- Bread (`bread`) [Bakery]
+- Breadcrumbs (`breadcrumbs`) [Pantry]
+- Broccoli (`broccoli`) [Produce]
+- Brown Lentils (`brown lentils`) [Pantry]
+- Brown Rice (`brown rice`) [Pantry]
+- Brown Sugar (`brown sugar`) [Pantry]
+- Butter (`butter`) [Dairy]
+- Cabbage (`cabbage`) [Produce]
+- Cannellini Beans (`cannellini beans`) [Pantry]
+- Caraway Seeds (`caraway seeds`) [Pantry]
+- Carrots (`carrots`) [Produce]
+- Cauliflower (`cauliflower`) [Produce]
+- Celery (`celery`) [Produce]
+- Cheddar (`cheddar`) [Dairy]
+- Cherry Tomatoes (`cherry tomatoes`) [Produce]
+- Chicken Breast (`chicken breast`) [Protein]
+- Chicken Thighs (`chicken thighs`) [Protein]
+- Chickpeas (`chickpeas`) [Pantry]
+- Chili Powder (`chili powder`) [Pantry]
+- Chocolate Chips (`chocolate chips`) [Pantry]
+- Cilantro (`cilantro`) [Produce]
+- Cinnamon (`cinnamon`) [Pantry]
+- Cocoa Powder (`cocoa powder`) [Pantry]
+- Coconut Milk (`coconut milk`) [Pantry]
+- Cod (`cod`) [Protein]
+- Collard Greens (`collard greens`) [Produce]
+- Coriander (`coriander`) [Pantry]
+- Corn Tortillas (`corn tortillas`) [Bakery]
+- Cream Cheese (`cream cheese`) [Dairy]
+- Cremini Mushrooms (`cremini mushrooms`) [Produce]
+- Crushed Crackers (`crushed crackers`) [Pantry]
+- Cucumber (`cucumber`) [Produce]
+- Cumin (`cumin`) [Pantry]
+- Curry Paste (`curry paste`) [Pantry]
+- Dark Chocolate (`dark chocolate`) [Pantry]
+- Dijon Mustard (`dijon mustard`) [Pantry]
+- Dill (`dill`) [Produce]
+- Egg (`egg`) [Protein]
+- Egg Whites (`egg whites`) [Protein]
+- Eggplant (`eggplant`) [Produce]
+- Eggs (`eggs`) [Protein]
+- Espresso Powder (`espresso powder`) [Pantry]
+- Farro (`farro`) [Pantry]
+- Feta (`feta`) [Dairy]
+- Fettuccine (`fettuccine`) [Pantry]
+- Flank Steak (`flank steak`) [Protein]
+- Flour (`flour`) [Pantry]
+- Garlic (`garlic`) [Produce]
+- Ginger (`ginger`) [Produce]
+- Gochujang (`gochujang`) [Pantry]
+- Greek Yogurt (`greek yogurt`) [Dairy]
+- Green Beans (`green beans`) [Produce]
+- Green Lentils (`green lentils`) [Pantry]
+- Ground Beef (`ground beef`) [Protein]
+- Ground Lamb (`ground lamb`) [Protein]
+- Ground Pork (`ground pork`) [Protein]
+- Ground Turkey (`ground turkey`) [Protein]
+- Haddock (`haddock`) [Protein]
+- Harissa (`harissa`) [Pantry]
+- Heavy Cream (`heavy cream`) [Dairy]
+- Herbs (`herbs`) [Produce]
+- Honey (`honey`) [Pantry]
+- Jasmine Rice (`jasmine rice`) [Pantry]
+- Kale (`kale`) [Produce]
+- Lamb Chops (`lamb chops`) [Protein]
+- Lemon (`lemon`) [Produce]
+- Lentils (`lentils`) [Pantry]
+- Lime (`lime`) [Produce]
+- Linguine (`linguine`) [Pantry]
+- Maple Syrup (`maple syrup`) [Pantry]
+- Milk (`milk`) [Dairy]
+- Mint (`mint`) [Produce]
+- Miso (`miso`) [Pantry]
+- Mixed Berries (`mixed berries`) [Produce]
+- Mixed Greens (`mixed greens`) [Produce]
+- Mixed Mushrooms (`mixed mushrooms`) [Produce]
+- Mozzarella (`mozzarella`) [Dairy]
+- Mushrooms (`mushrooms`) [Produce]
+- Nuts (`nuts`) [Pantry]
+- Oats (`oats`) [Pantry]
+- Olive Oil (`olive oil`) [Pantry]
+- Onion (`onion`) [Produce]
+- Orange (`orange`) [Produce]
+- Oregano (`oregano`) [Produce]
+- Orzo (`orzo`) [Pantry]
+- Panko (`panko`) [Pantry]
+- Pappardelle (`pappardelle`) [Pantry]
+- Paprika (`paprika`) [Pantry]
+- Parmesan (`parmesan`) [Dairy]
+- Parsley (`parsley`) [Produce]
+- Parsnips (`parsnips`) [Produce]
+- Pasta (`pasta`) [Pantry]
+- Peanut Butter (`peanut butter`) [Pantry]
+- Peanuts (`peanuts`) [Pantry]
+- Pear (`pear`) [Produce]
+- Pears (`pears`) [Produce]
+- Pie Dough (`pie dough`) [Bakery]
+- Pine Nuts (`pine nuts`) [Pantry]
+- Pistachios (`pistachios`) [Pantry]
+- Pork Chops (`pork chops`) [Protein]
+- Pork Tenderloin (`pork tenderloin`) [Protein]
+- Portobello Mushrooms (`portobello mushrooms`) [Produce]
+- Potato Gnocchi (`potato gnocchi`) [Pantry]
+- Potatoes (`potatoes`) [Produce]
+- Puff Pastry (`puff pastry`) [Bakery]
+- Quinoa (`quinoa`) [Pantry]
+- Red Onion (`red onion`) [Produce]
+- Red Wine Vinegar (`red wine vinegar`) [Pantry]
+- Rice (`rice`) [Pantry]
+- Ricotta (`ricotta`) [Dairy]
+- Romaine Lettuce (`romaine lettuce`) [Produce]
+- Rosemary (`rosemary`) [Produce]
+- Rye Bread (`rye bread`) [Bakery]
+- Saffron (`saffron`) [Pantry]
+- Salmon (`salmon`) [Protein]
+- Salt (`salt`) [Pantry]
+- Scallions (`scallions`) [Produce]
+- Seeds (`seeds`) [Pantry]
+- Sesame Oil (`sesame oil`) [Pantry]
+- Sesame Seeds (`sesame seeds`) [Pantry]
+- Shallot (`shallot`) [Produce]
+- Shredded Cabbage (`shredded cabbage`) [Produce]
+- Shredded Chicken (`shredded chicken`) [Protein]
+- Shrimp (`shrimp`) [Protein]
+- Sirloin Steak (`sirloin steak`) [Protein]
+- Smoked Paprika (`smoked paprika`) [Pantry]
+- Sour Cream (`sour cream`) [Dairy]
+- Sourdough Bread (`sourdough bread`) [Bakery]
+- Soy Sauce (`soy sauce`) [Pantry]
+- Spaghetti (`spaghetti`) [Pantry]
+- Spinach (`spinach`) [Produce]
+- Stock (`stock`) [Pantry]
+- Sugar (`sugar`) [Pantry]
+- Sweet Potatoes (`sweet potatoes`) [Produce]
+- Tahini (`tahini`) [Pantry]
+- Tempeh (`tempeh`) [Protein]
+- Thai Curry Paste (`thai curry paste`) [Pantry]
+- Thyme (`thyme`) [Produce]
+- Tilapia (`tilapia`) [Protein]
+- Tofu (`tofu`) [Protein]
+- Tomatoes (`tomatoes`) [Produce]
+- Tortillas (`tortillas`) [Produce]
+- Tuna (`tuna`) [Protein]
+- Turkey Breast (`turkey breast`) [Protein]
+- Turkey Cutlets (`turkey cutlets`) [Protein]
+- Turmeric (`turmeric`) [Pantry]
+- Vanilla Extract (`vanilla extract`) [Pantry]
+- Warm Water (`warm water`) [Pantry]
+- White Fish Fillets (`white fish fillets`) [Protein]
+- Whole Grain Bread (`whole grain bread`) [Bakery]
+- Yeast (`yeast`) [Pantry]
+- Zucchini (`zucchini`) [Produce]
+
+## Missing ingredients
+- None
+
+## Next steps
+- Review the full enriched schema against the current Swift Recipe model.
+- Plan the Swift model migration for structured ingredients and displayQuantity support.
+- Promote the full enriched JSON into the app only after the model update is in place.
+
+## Schema compatibility concerns
+- Current Swift `Recipe.ingredients` is `[String]`, but the full output uses structured ingredient objects with displayQuantity.
+- Current Swift `Recipe` stores `prepTimeMinutes`, `cookingTimeMinutes`, `totalTimeMinutes`, `calories`, and `nutrition`; the enriched output also carries `prepMinutes`, `cookMinutes`, `totalMinutes`, `caloriesPerServing`, and `nutritionPerServing`.
+- Current shopping item model has no `normalizedName` field; the catalog output depends on it for deduplication and matching.

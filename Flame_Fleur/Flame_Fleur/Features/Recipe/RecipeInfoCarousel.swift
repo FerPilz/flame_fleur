@@ -43,14 +43,10 @@ struct RecipeInfoCarousel: View {
 
     private var metrics: [RecipeInfoMetric] {
         [
-            RecipeInfoMetric(title: "Total Time", value: recipe.totalTimeText, systemImage: "timer"),
-            RecipeInfoMetric(title: "Prep", value: recipe.prepTimeText, systemImage: "leaf"),
-            RecipeInfoMetric(title: "Cook", value: recipe.cookingTimeText, systemImage: "flame"),
-            RecipeInfoMetric(title: "Calories", value: recipe.caloriesText, systemImage: "chart.bar"),
-            RecipeInfoMetric(title: "Protein", value: "\(recipe.nutrition.proteinGrams) g", systemImage: "fork.knife"),
-            RecipeInfoMetric(title: "Carbs", value: "\(recipe.nutrition.carbsGrams) g", systemImage: "chart.pie"),
-            RecipeInfoMetric(title: "Fat", value: "\(recipe.nutrition.fatGrams) g", systemImage: "drop"),
-            RecipeInfoMetric(title: "Servings", value: recipe.servingsText, systemImage: "person.2"),
+            RecipeInfoMetric(title: "Prep", value: "\(recipe.prepMinutes) min", systemImage: "leaf"),
+            RecipeInfoMetric(title: "Cook", value: "\(recipe.cookMinutes) min", systemImage: "flame"),
+            RecipeInfoMetric(title: "Total", value: "\(recipe.totalMinutes) min", systemImage: "timer"),
+            RecipeInfoMetric(title: "Serves", value: recipe.servingsText, systemImage: "person.2"),
             RecipeInfoMetric(title: "Difficulty", value: recipe.difficulty.title, systemImage: "gauge.with.dots.needle.33percent")
         ]
     }

@@ -6,44 +6,35 @@ struct ShoppingCartView: View {
     @EnvironmentObject private var cartStore: ShoppingCartStore
 
     @State private var isAddItemSheetPresented = false
+    @State private var isSaveCartSheetPresented = false
+    @State private var isSavedCartsSheetPresented = false
+    @State private var isDeleteSelectedAlertPresented = false
     @State private var collapsedCategories: Set<ShoppingCartCategory> = []
     @State private var didSaveCart = false
+    @State private var draftCartName = "Weekly groceries"
 
     init(onClose: (() -> Void)? = nil) {
         self.onClose = onClose
     }
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            AppColors.appBackground.ignoresSafeArea()
-
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                    header
-                    addItemRow
-                    ShoppingCartSummaryCard(
-                        totalEstimatedCost: cartStore.totalEstimatedCost,
-                        totalItemCount: cartStore.totalItemCount,
-                        categoryCount: cartStore.categoryCount
-                    )
-                    FoodAnalyticsCard(onUpgrade: placeholderUpgrade)
-
-                    if cartStore.items.isEmpty {
-                        emptyCartState
-                    } else {
-                        cartSections
-                    }
-                }
-                .padding(.horizontal, AppSpacing.screenHorizontal)
-                .padding(.top, AppSpacing.xs)
-                .padding(.bottom, AppSpacing.xxxl + AppSpacing.lg)
+        AppScreen(
+            contentSpacing: AppSpacing.sm,
+            headerTopPadding: AppSpacing.xxs,
+            contentBottomPadding: AppSpacing.xxxl + AppSpacing.lg
+        ) {
+            fixedHeader
+        } content: {
+            if cartStore.items.isEmpty {
+                emptyCartState
+            } else {
+                FoodAnalyticsCard(onUpgrade: placeholderUpgrade)
+                cartSections
             }
-
+        }
+        .safeAreaInset(edge: .bottom) {
             bottomActionBar
         }
-        .navigationTitle("")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar(.hidden, for: .navigationBar)
         .sheet(isPresented: $isAddItemSheetPresented) {
             AddShoppingItemSheet()
                 .environmentObject(cartStore)
@@ -51,55 +42,99 @@ struct ShoppingCartView: View {
                 .presentationDragIndicator(.visible)
                 .presentationCornerRadius(AppRadius.hero)
         }
+        .sheet(isPresented: $isSaveCartSheetPresented) {
+            saveCartSheet
+                .presentationDetents([.height(250)])
+                .presentationDragIndicator(.visible)
+                .presentationCornerRadius(AppRadius.hero)
+        }
+        .sheet(isPresented: $isSavedCartsSheetPresented) {
+            savedCartsSheet
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+                .presentationCornerRadius(AppRadius.hero)
+        }
+        .alert("Remove selected items?", isPresented: $isDeleteSelectedAlertPresented) {
+            Button("Cancel", role: .cancel) {}
+            Button("Remove", role: .destructive) {
+                cartStore.removeSelectedItems()
+            }
+        } message: {
+            Text("This removes all selected ingredients from the cart.")
+        }
     }
 
-    private var header: some View {
-        HStack(alignment: .center, spacing: AppSpacing.md) {
-            if let onClose {
-                IconCircleButton(
-                    systemName: "chevron.left",
-                    accessibilityLabel: "Close shopping cart",
-                    size: AppTopActionMetrics.buttonSize,
-                    backgroundColor: AppColors.elevatedCardBackground,
-                    foregroundColor: AppColors.darkOlive,
-                    action: onClose
-                )
-            }
+    private var fixedHeader: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.xs) {
+            HStack(alignment: .center, spacing: AppSpacing.sm) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Flame & Fleur")
+                        .font(.system(size: 21, weight: .medium, design: .serif))
+                        .foregroundStyle(AppColors.olive)
+                        .lineLimit(1)
 
-            VStack(alignment: .leading, spacing: 1) {
-                Text("Flame & Fleur")
-                    .font(AppTypography.sectionTitle)
-                    .foregroundStyle(AppColors.olive)
-                    .lineLimit(1)
-
-                Text("Shopping Cart")
-                    .font(AppTypography.heroTitle)
-                    .foregroundStyle(AppColors.olive)
-                    .lineLimit(1)
-
-                Text("This week's ingredients")
-                    .font(AppTypography.metadata)
-                    .foregroundStyle(AppColors.secondaryText)
-                    .lineLimit(1)
-            }
-
-            Spacer(minLength: AppSpacing.sm)
-
-            ShareLink(item: cartStore.cartSummaryText) {
-                VStack(spacing: AppSpacing.xxs) {
-                    Image(systemName: "square.and.arrow.up")
-                        .font(AppTypography.caption)
-                        .frame(width: 32, height: 32)
-                        .background(Circle().fill(AppColors.elevatedCardBackground))
-                        .overlay(Circle().stroke(AppColors.warmBorder, lineWidth: 1))
-
-                    Text("Share")
-                        .font(AppTypography.metadata)
+                    Text("Shopping Cart")
+                        .font(.system(size: 24, weight: .bold, design: .default))
+                        .foregroundStyle(AppColors.primaryText)
+                        .lineLimit(1)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityAddTraits(.isHeader)
                 }
-                .foregroundStyle(AppColors.olive)
+
+                Spacer(minLength: AppSpacing.xs)
+
+                HStack(spacing: AppSpacing.xs) {
+                    savedCartsButton
+                    shareButton
+                }
             }
-            .buttonStyle(.plain)
+
+            VStack(spacing: AppSpacing.sm) {
+                addItemRow
+                ShoppingCartSummaryCard(
+                    totalEstimatedCost: cartStore.totalEstimatedCost,
+                    totalItemCount: cartStore.totalItemCount,
+                    categoryCount: cartStore.categoryCount
+                )
+
+                if cartStore.hasSelectedItems {
+                    deleteSelectedButton
+                }
+            }
         }
+    }
+
+    private var savedCartsButton: some View {
+        IconCircleButton(
+            systemName: "tray.full",
+            accessibilityLabel: "Saved carts",
+            size: AppTopActionMetrics.compactButtonSize,
+            backgroundColor: AppColors.elevatedCardBackground,
+            foregroundColor: AppColors.darkOlive
+        ) {
+            isSavedCartsSheetPresented = true
+        }
+    }
+
+    private var shareButton: some View {
+        ShareLink(item: cartStore.cartSummaryText) {
+            ZStack {
+                Circle()
+                    .fill(AppColors.elevatedCardBackground)
+                    .overlay(
+                        Circle()
+                            .stroke(AppColors.warmBorder.opacity(0.78), lineWidth: 1)
+                    )
+                    .frame(width: AppTopActionMetrics.compactButtonSize, height: AppTopActionMetrics.compactButtonSize)
+
+                Image(systemName: "square.and.arrow.up")
+                    .font(.system(size: AppTopActionMetrics.compactButtonSize * 0.42, weight: .medium))
+                    .foregroundStyle(AppColors.darkOlive)
+                    .frame(width: AppTopActionMetrics.compactButtonSize, height: AppTopActionMetrics.compactButtonSize)
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text("Share cart"))
     }
 
     private var addItemRow: some View {
@@ -141,6 +176,33 @@ struct ShoppingCartView: View {
         .buttonStyle(.plain)
     }
 
+    private var deleteSelectedButton: some View {
+        Button {
+            isDeleteSelectedAlertPresented = true
+        } label: {
+            HStack(spacing: AppSpacing.xxs) {
+                Image(systemName: "trash")
+                    .font(AppTypography.caption)
+
+                Text("Delete selected (\(cartStore.selectedItemCount))")
+                    .font(AppTypography.smallButton)
+                    .lineLimit(1)
+            }
+            .foregroundStyle(AppColors.burntOrange)
+            .frame(maxWidth: .infinity)
+            .frame(height: 34)
+            .background(
+                Capsule(style: .continuous)
+                    .fill(AppColors.softOrange.opacity(0.55))
+            )
+            .overlay(
+                Capsule(style: .continuous)
+                    .stroke(AppColors.warmBorder, lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+    }
+
     private var cartSections: some View {
         VStack(spacing: AppSpacing.sm) {
             ForEach(cartStore.populatedCategories) { category in
@@ -149,7 +211,9 @@ struct ShoppingCartView: View {
                     items: cartStore.items(for: category),
                     isCollapsed: collapsedCategories.contains(category),
                     onToggleCollapsed: { toggleSection(category) },
-                    onToggleChecked: { item in cartStore.toggleChecked(for: item.id) },
+                    onToggleSelection: { item in
+                        cartStore.toggleChecked(for: item.id)
+                    },
                     onIncrement: { item in cartStore.incrementQuantity(for: item.id) },
                     onDecrement: { item in cartStore.decrementQuantity(for: item.id) },
                     onUpdateStore: { item, store in
@@ -197,23 +261,6 @@ struct ShoppingCartView: View {
 
             Spacer(minLength: AppSpacing.xs)
 
-            Button(action: placeholderViewDetails) {
-                HStack(spacing: AppSpacing.xxs) {
-                    Image(systemName: "list.bullet")
-                        .font(AppTypography.metadata)
-
-                    Text("View details")
-                        .font(AppTypography.smallButton)
-                        .lineLimit(1)
-                }
-                .foregroundStyle(AppColors.olive)
-                .padding(.horizontal, AppSpacing.sm)
-                .frame(height: 36)
-                .background(Capsule(style: .continuous).fill(AppColors.elevatedCardBackground))
-                .overlay(Capsule(style: .continuous).stroke(AppColors.warmBorder, lineWidth: 1))
-            }
-            .buttonStyle(.plain)
-
             PrimaryButton(
                 didSaveCart ? "Saved" : "Save Cart",
                 systemImage: didSaveCart ? "checkmark" : "chevron.right",
@@ -221,7 +268,7 @@ struct ShoppingCartView: View {
                 isFullWidth: false,
                 height: 40,
                 horizontalPadding: AppSpacing.md,
-                action: saveCart
+                action: { isSaveCartSheetPresented = true }
             )
         }
         .padding(AppSpacing.xs)
@@ -238,6 +285,163 @@ struct ShoppingCartView: View {
         .background(AppColors.appBackground.opacity(0.96))
     }
 
+    private var saveCartSheet: some View {
+        NavigationStack {
+            ZStack {
+                AppColors.appBackground.ignoresSafeArea()
+
+                VStack(alignment: .leading, spacing: AppSpacing.md) {
+                    Text("Save Cart")
+                        .font(AppTypography.heroTitle)
+                        .foregroundStyle(AppColors.primaryText)
+
+                    Text("Name this shopping list so you can return to it later.")
+                        .font(AppTypography.callout)
+                        .foregroundStyle(AppColors.secondaryText)
+
+                    VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                        TextField("Cart name", text: $draftCartName)
+                            .font(AppTypography.body)
+                            .padding(.horizontal, AppSpacing.sm)
+                            .frame(height: 44)
+                            .background(
+                                RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous)
+                                    .fill(AppColors.elevatedCardBackground)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous)
+                                    .stroke(AppColors.warmBorder, lineWidth: 1)
+                            )
+
+                        Text("Example: Weekly groceries")
+                            .font(AppTypography.metadata)
+                            .foregroundStyle(AppColors.tertiaryText)
+                    }
+
+                    Spacer(minLength: 0)
+                }
+                .padding(.horizontal, AppSpacing.screenHorizontal)
+                .padding(.top, AppSpacing.lg)
+                .padding(.bottom, AppSpacing.md)
+            }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", role: .cancel) {
+                        draftCartName = "Weekly groceries"
+                        isSaveCartSheetPresented = false
+                    }
+                }
+
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        _ = cartStore.saveCurrentCart(named: draftCartName)
+                        draftCartName = "Weekly groceries"
+                        isSaveCartSheetPresented = false
+                        didSaveCart = true
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                            if didSaveCart {
+                                didSaveCart = false
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private var savedCartsSheet: some View {
+        NavigationStack {
+            ZStack {
+                AppColors.appBackground.ignoresSafeArea()
+
+                if cartStore.savedCarts.isEmpty {
+                    emptySavedCartsState
+                } else {
+                    ScrollView(showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                            ForEach(cartStore.savedCarts) { savedCart in
+                                Button {
+                                    cartStore.restoreCart(savedCart)
+                                    isSavedCartsSheetPresented = false
+                                } label: {
+                                    savedCartRow(savedCart)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                        .padding(.horizontal, AppSpacing.screenHorizontal)
+                        .padding(.top, AppSpacing.sm)
+                        .padding(.bottom, AppSpacing.lg)
+                    }
+                }
+            }
+            .navigationTitle("Saved Carts")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Close") {
+                        isSavedCartsSheetPresented = false
+                    }
+                }
+            }
+        }
+    }
+
+    private var emptySavedCartsState: some View {
+        SurfaceCard(
+            backgroundColor: AppColors.elevatedCardBackground,
+            cornerRadius: AppRadius.extraLarge,
+            contentPadding: AppSpacing.xl
+        ) {
+            VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                Text("No saved carts yet.")
+                    .font(AppTypography.sectionTitle)
+                    .foregroundStyle(AppColors.primaryText)
+
+                Text("Save your current list to access it here later.")
+                    .font(AppTypography.callout)
+                    .foregroundStyle(AppColors.secondaryText)
+            }
+        }
+        .padding(.horizontal, AppSpacing.screenHorizontal)
+        .padding(.top, AppSpacing.lg)
+    }
+
+    private func savedCartRow(_ savedCart: SavedShoppingCart) -> some View {
+        SurfaceCard(
+            backgroundColor: AppColors.elevatedCardBackground,
+            cornerRadius: AppRadius.large,
+            contentPadding: AppSpacing.sm
+        ) {
+            HStack(alignment: .top, spacing: AppSpacing.sm) {
+                VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                    Text(savedCart.name)
+                        .font(AppTypography.bodyEmphasis)
+                        .foregroundStyle(AppColors.primaryText)
+                        .lineLimit(1)
+
+                    Text(savedCart.savedAt.formatted(date: .abbreviated, time: .shortened))
+                        .font(AppTypography.metadata)
+                        .foregroundStyle(AppColors.secondaryText)
+                        .lineLimit(1)
+                }
+
+                Spacer(minLength: AppSpacing.sm)
+
+                VStack(alignment: .trailing, spacing: AppSpacing.xxs) {
+                    Text(ShoppingCartStore.currencyString(savedCart.estimatedTotal))
+                        .font(AppTypography.bodyEmphasis)
+                        .foregroundStyle(AppColors.olive)
+
+                    Text("\(savedCart.itemCount) items")
+                        .font(AppTypography.metadata)
+                        .foregroundStyle(AppColors.secondaryText)
+                }
+            }
+        }
+    }
+
     private func toggleSection(_ category: ShoppingCartCategory) {
         if collapsedCategories.contains(category) {
             collapsedCategories.remove(category)
@@ -246,21 +450,11 @@ struct ShoppingCartView: View {
         }
     }
 
-    private func placeholderViewDetails() {}
-
     private func placeholderUpgrade() {}
-
-    private func saveCart() {
-        didSaveCart = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
-            didSaveCart = false
-        }
-    }
 }
 
 #Preview {
-    NavigationStack {
-        ShoppingCartView()
-            .environmentObject(ShoppingCartStore(items: SampleShoppingCartItems.currentWeek))
-    }
+    ShoppingCartView()
+        .environmentObject(ShoppingCartStore.shared)
+        .environmentObject(AppSettingsStore.shared)
 }

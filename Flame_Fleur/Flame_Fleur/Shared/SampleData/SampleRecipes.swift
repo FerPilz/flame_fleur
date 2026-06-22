@@ -11,7 +11,9 @@ enum SampleRecipes {
 
     private static func loadSeedRecipes(bundle: Bundle = .main) -> [Recipe] {
         let candidateURLs = [
+            bundle.url(forResource: "recipes.seed.enriched.full", withExtension: "json"),
             bundle.url(forResource: "recipes.seed", withExtension: "json"),
+            bundle.url(forResource: "recipes.seed.enriched.full", withExtension: "json", subdirectory: "Resources"),
             bundle.url(forResource: "recipes.seed", withExtension: "json", subdirectory: "Resources")
         ]
 

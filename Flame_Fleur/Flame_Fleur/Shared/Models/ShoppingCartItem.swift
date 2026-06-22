@@ -5,6 +5,7 @@ struct ShoppingCartItem: Identifiable, Hashable, Codable {
     var name: String
     var quantity: Int
     var unit: String
+    var displayQuantity: String?
     var category: ShoppingCartCategory
     var price: Double
     var storeName: String
@@ -19,6 +20,7 @@ struct ShoppingCartItem: Identifiable, Hashable, Codable {
         name: String,
         quantity: Int = 1,
         unit: String,
+        displayQuantity: String? = nil,
         category: ShoppingCartCategory,
         price: Double,
         storeName: String = ShoppingStoreOption.localMarket.displayName,
@@ -32,6 +34,7 @@ struct ShoppingCartItem: Identifiable, Hashable, Codable {
         self.name = name
         self.quantity = max(1, quantity)
         self.unit = unit
+        self.displayQuantity = displayQuantity
         self.category = category
         self.price = price
         self.storeName = storeName
@@ -47,6 +50,20 @@ struct ShoppingCartItem: Identifiable, Hashable, Codable {
     }
 
     var quantityText: String {
-        unit.isEmpty ? "\(quantity)" : "\(quantity) \(unit)"
+        if let displayQuantity = displayQuantity?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !displayQuantity.isEmpty {
+            return displayQuantity
+        }
+
+        return unit.isEmpty ? "\(quantity)" : "\(quantity) \(unit)"
+    }
+
+    var normalizedName: String {
+        name
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .lowercased()
+            .replacingOccurrences(of: #"[^\p{L}\p{N}]+"#, with: " ", options: .regularExpression)
+            .replacingOccurrences(of: #"\s+"#, with: " ", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }

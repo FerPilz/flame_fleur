@@ -1,0 +1,1448 @@
+[
+  {
+    "calories": 540,
+    "category": "italian",
+    "categoryGroupID": "world-cuisine",
+    "cookingTimeMinutes": 25,
+    "creatorAvatarName": null,
+    "creatorName": null,
+    "difficulty": "moderate",
+    "id": "recipe-seed-world-cuisine-italian-1",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_1",
+    "ingredients": [
+      {
+        "name": "Spaghetti",
+        "quantity": 8,
+        "unit": "oz",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Cherry Tomatoes",
+        "quantity": 2,
+        "unit": "cups",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Tomato Paste",
+        "quantity": 2,
+        "unit": "tbsp",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Garlic",
+        "quantity": 4,
+        "unit": "cloves",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Fresh Basil",
+        "quantity": 1,
+        "unit": "cup",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Olive Oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Parmesan",
+        "quantity": 0.5,
+        "unit": "cup",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Crushed Red Pepper Flakes",
+        "quantity": 1,
+        "unit": "tsp",
+        "category": "Pantry",
+        "notes": ""
+      }
+    ],
+    "instructions": [
+      "Bring a large pot of salted water to a boil and cook the spaghetti until just al dente.",
+      "Warm the olive oil in a wide skillet and cook the garlic until fragrant.",
+      "Add the tomatoes and tomato paste, then cook until the tomatoes start to burst and thicken.",
+      "Toss in the pasta, basil, and a splash of pasta water until glossy and coated.",
+      "Finish with parmesan, red pepper flakes, and a final drizzle of olive oil before serving."
+    ],
+    "isCommunityRecipe": false,
+    "isPremium": false,
+    "sectionTags": [
+      "featured"
+    ],
+    "servings": 2,
+    "subcategoryID": "world-cuisine-italian",
+    "subcategoryTitle": "Italian",
+    "subtitle": "Cozy flavor for weeknight cooking",
+    "tags": [
+      "italian",
+      "pasta",
+      "weeknight",
+      "comfortFood",
+      "quickDinner"
+    ],
+    "title": "Spicy Tomato Basil Pasta",
+    "description": "A bright tomato pasta with basil, garlic, and a little heat for a simple weeknight dinner.",
+    "prepTimeMinutes": 15,
+    "totalTimeMinutes": 40,
+    "nutrition": {
+      "calories": 540,
+      "proteinGrams": 18,
+      "carbsGrams": 68,
+      "fatGrams": 22,
+      "fiberGrams": 7,
+      "sugarGrams": 10,
+      "sodiumMilligrams": 760
+    },
+    "equipment": [
+      "Large skillet",
+      "Chef knife",
+      "Cutting board",
+      "Measuring spoons"
+    ],
+    "tips": [
+      "Toast spices or aromatics gently before adding liquids for a deeper base.",
+      "Finish with fresh herbs, citrus, or a small drizzle of olive oil for lift.",
+      "Taste once before serving and adjust salt gradually."
+    ],
+    "subcategory": "Italian",
+    "prepMinutes": 15,
+    "cookMinutes": 25,
+    "totalMinutes": 40,
+    "caloriesPerServing": 540,
+    "nutritionPerServing": {
+      "calories": 540,
+      "proteinGrams": 18,
+      "carbsGrams": 68,
+      "fatGrams": 22,
+      "fiberGrams": 7,
+      "sugarGrams": 10,
+      "sodiumMilligrams": 760
+    }
+  },
+  {
+    "calories": 470,
+    "category": "italian",
+    "categoryGroupID": "world-cuisine",
+    "cookingTimeMinutes": 35,
+    "creatorAvatarName": null,
+    "creatorName": null,
+    "difficulty": "moderate",
+    "id": "recipe-seed-world-cuisine-italian-2",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_2",
+    "ingredients": [
+      {
+        "name": "Arborio Rice",
+        "quantity": 1.5,
+        "unit": "cups",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Cremini Mushrooms",
+        "quantity": 12,
+        "unit": "oz",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Shallot",
+        "quantity": 1,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Garlic",
+        "quantity": 3,
+        "unit": "cloves",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Vegetable Stock",
+        "quantity": 5,
+        "unit": "cups",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Dry White Wine",
+        "quantity": 0.5,
+        "unit": "cup",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Parmesan",
+        "quantity": 0.75,
+        "unit": "cup",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Butter",
+        "quantity": 2,
+        "unit": "tbsp",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Olive Oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Fresh Thyme",
+        "quantity": 2,
+        "unit": "tsp",
+        "category": "Produce",
+        "notes": ""
+      }
+    ],
+    "instructions": [
+      "Warm the stock in a separate pot and keep it at a gentle simmer.",
+      "Sauté the mushrooms, shallot, and garlic in olive oil until browned and fragrant.",
+      "Stir in the rice, toast briefly, then add the white wine and let it cook off.",
+      "Add the warm stock a ladle at a time, stirring until each addition is absorbed.",
+      "Finish with butter, parmesan, and thyme for a creamy texture.",
+      "Serve immediately while the risotto is loose and glossy."
+    ],
+    "isCommunityRecipe": false,
+    "isPremium": false,
+    "sectionTags": [
+      "topPicks"
+    ],
+    "servings": 4,
+    "subcategoryID": "world-cuisine-italian",
+    "subcategoryTitle": "Italian",
+    "subtitle": "Fresh, satisfying and calm",
+    "tags": [
+      "italian",
+      "risotto",
+      "mushrooms",
+      "comfortFood",
+      "vegetarian"
+    ],
+    "title": "Creamy Mushroom Risotto",
+    "description": "Creamy risotto with earthy mushrooms, white wine, and parmesan for a cozy polished dinner.",
+    "prepTimeMinutes": 20,
+    "totalTimeMinutes": 55,
+    "nutrition": {
+      "calories": 470,
+      "proteinGrams": 14,
+      "carbsGrams": 58,
+      "fatGrams": 18,
+      "fiberGrams": 4,
+      "sugarGrams": 5,
+      "sodiumMilligrams": 650
+    },
+    "equipment": [
+      "Large skillet",
+      "Chef knife",
+      "Cutting board",
+      "Measuring spoons"
+    ],
+    "tips": [
+      "Toast spices or aromatics gently before adding liquids for a deeper base.",
+      "Finish with fresh herbs, citrus, or a small drizzle of olive oil for lift.",
+      "Taste once before serving and adjust salt gradually."
+    ],
+    "subcategory": "Italian",
+    "prepMinutes": 20,
+    "cookMinutes": 35,
+    "totalMinutes": 55,
+    "caloriesPerServing": 470,
+    "nutritionPerServing": {
+      "calories": 470,
+      "proteinGrams": 14,
+      "carbsGrams": 58,
+      "fatGrams": 18,
+      "fiberGrams": 4,
+      "sugarGrams": 5,
+      "sodiumMilligrams": 650
+    }
+  },
+  {
+    "calories": 390,
+    "category": "italian",
+    "categoryGroupID": "world-cuisine",
+    "cookingTimeMinutes": 35,
+    "creatorAvatarName": null,
+    "creatorName": null,
+    "difficulty": "easy",
+    "id": "recipe-seed-world-cuisine-italian-3",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_3",
+    "ingredients": [
+      {
+        "name": "Cannellini Beans",
+        "quantity": 2,
+        "unit": "cans",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Carrots",
+        "quantity": 2,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Celery",
+        "quantity": 2,
+        "unit": "stalks",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Onion",
+        "quantity": 1,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Garlic",
+        "quantity": 4,
+        "unit": "cloves",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Tomato Paste",
+        "quantity": 2,
+        "unit": "tbsp",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Vegetable Stock",
+        "quantity": 5,
+        "unit": "cups",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Kale",
+        "quantity": 3,
+        "unit": "cups",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Rosemary",
+        "quantity": 1,
+        "unit": "tbsp",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Olive Oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Parmesan Rind",
+        "quantity": 1,
+        "unit": "each",
+        "category": "Dairy",
+        "notes": "Optional for extra depth"
+      }
+    ],
+    "instructions": [
+      "Sweat the onion, carrots, and celery in olive oil until softened.",
+      "Add garlic, tomato paste, and rosemary, cooking until fragrant.",
+      "Stir in the beans and vegetable stock, then simmer until the broth tastes rounded.",
+      "Fold in the kale and cook just until tender.",
+      "Season with salt and pepper, then finish with a parmesan garnish if desired."
+    ],
+    "isCommunityRecipe": false,
+    "isPremium": false,
+    "sectionTags": [],
+    "servings": 4,
+    "subcategoryID": "world-cuisine-italian",
+    "subcategoryTitle": "Italian",
+    "subtitle": "Warm, bright and balanced",
+    "tags": [
+      "italian",
+      "soup",
+      "beans",
+      "cozy",
+      "vegetarian"
+    ],
+    "title": "Tuscan White Bean Soup",
+    "description": "A rustic soup of tender beans, vegetables, and herbs with a rich tomato broth.",
+    "prepTimeMinutes": 15,
+    "totalTimeMinutes": 50,
+    "nutrition": {
+      "calories": 390,
+      "proteinGrams": 16,
+      "carbsGrams": 52,
+      "fatGrams": 13,
+      "fiberGrams": 11,
+      "sugarGrams": 8,
+      "sodiumMilligrams": 710
+    },
+    "equipment": [
+      "Large skillet",
+      "Chef knife",
+      "Cutting board",
+      "Measuring spoons"
+    ],
+    "tips": [
+      "Toast spices or aromatics gently before adding liquids for a deeper base.",
+      "Finish with fresh herbs, citrus, or a small drizzle of olive oil for lift.",
+      "Taste once before serving and adjust salt gradually."
+    ],
+    "subcategory": "Italian",
+    "prepMinutes": 15,
+    "cookMinutes": 35,
+    "totalMinutes": 50,
+    "caloriesPerServing": 390,
+    "nutritionPerServing": {
+      "calories": 390,
+      "proteinGrams": 16,
+      "carbsGrams": 52,
+      "fatGrams": 13,
+      "fiberGrams": 11,
+      "sugarGrams": 8,
+      "sodiumMilligrams": 710
+    }
+  },
+  {
+    "calories": 510,
+    "category": "italian",
+    "categoryGroupID": "world-cuisine",
+    "cookingTimeMinutes": 15,
+    "creatorAvatarName": null,
+    "creatorName": null,
+    "difficulty": "moderate",
+    "id": "recipe-seed-world-cuisine-italian-4",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_4",
+    "ingredients": [
+      {
+        "name": "Potato Gnocchi",
+        "quantity": 20,
+        "unit": "oz",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Ricotta",
+        "quantity": 1,
+        "unit": "cup",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Lemon",
+        "quantity": 1,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Spinach",
+        "quantity": 4,
+        "unit": "cups",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Butter",
+        "quantity": 3,
+        "unit": "tbsp",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Parmesan",
+        "quantity": 0.5,
+        "unit": "cup",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Garlic",
+        "quantity": 2,
+        "unit": "cloves",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Fresh Sage",
+        "quantity": 1,
+        "unit": "tbsp",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Olive Oil",
+        "quantity": 1,
+        "unit": "tbsp",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Black Pepper",
+        "quantity": 1,
+        "unit": "tsp",
+        "category": "Pantry",
+        "notes": ""
+      }
+    ],
+    "instructions": [
+      "Boil the gnocchi until they float, then drain and reserve a little cooking water.",
+      "Melt butter with olive oil, garlic, and sage until aromatic.",
+      "Add the spinach and let it wilt into the pan.",
+      "Fold in ricotta, lemon zest, parmesan, and a splash of pasta water to make a light sauce.",
+      "Toss the gnocchi through the sauce and finish with black pepper."
+    ],
+    "isCommunityRecipe": false,
+    "isPremium": false,
+    "sectionTags": [],
+    "servings": 4,
+    "subcategoryID": "world-cuisine-italian",
+    "subcategoryTitle": "Italian",
+    "subtitle": "Cozy flavor for weeknight cooking",
+    "tags": [
+      "italian",
+      "gnocchi",
+      "lemon",
+      "ricotta",
+      "quickDinner"
+    ],
+    "title": "Lemon Ricotta Gnocchi",
+    "description": "Light gnocchi with ricotta, lemon, and tender spinach in a silky butter sauce.",
+    "prepTimeMinutes": 20,
+    "totalTimeMinutes": 35,
+    "nutrition": {
+      "calories": 510,
+      "proteinGrams": 17,
+      "carbsGrams": 60,
+      "fatGrams": 20,
+      "fiberGrams": 4,
+      "sugarGrams": 6,
+      "sodiumMilligrams": 640
+    },
+    "equipment": [
+      "Large skillet",
+      "Chef knife",
+      "Cutting board",
+      "Measuring spoons"
+    ],
+    "tips": [
+      "Toast spices or aromatics gently before adding liquids for a deeper base.",
+      "Finish with fresh herbs, citrus, or a small drizzle of olive oil for lift.",
+      "Taste once before serving and adjust salt gradually."
+    ],
+    "subcategory": "Italian",
+    "prepMinutes": 20,
+    "cookMinutes": 15,
+    "totalMinutes": 35,
+    "caloriesPerServing": 510,
+    "nutritionPerServing": {
+      "calories": 510,
+      "proteinGrams": 17,
+      "carbsGrams": 60,
+      "fatGrams": 20,
+      "fiberGrams": 4,
+      "sugarGrams": 6,
+      "sodiumMilligrams": 640
+    }
+  },
+  {
+    "calories": 590,
+    "category": "italian",
+    "categoryGroupID": "world-cuisine",
+    "cookingTimeMinutes": 40,
+    "creatorAvatarName": null,
+    "creatorName": null,
+    "difficulty": "moderate",
+    "id": "recipe-seed-world-cuisine-italian-5",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_5",
+    "ingredients": [
+      {
+        "name": "Eggplant",
+        "quantity": 2,
+        "unit": "large",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Marinara Sauce",
+        "quantity": 3,
+        "unit": "cups",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Mozzarella",
+        "quantity": 12,
+        "unit": "oz",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Parmesan",
+        "quantity": 1,
+        "unit": "cup",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Breadcrumbs",
+        "quantity": 1,
+        "unit": "cup",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Garlic",
+        "quantity": 3,
+        "unit": "cloves",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Basil",
+        "quantity": 1,
+        "unit": "cup",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Olive Oil",
+        "quantity": 3,
+        "unit": "tbsp",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Egg",
+        "quantity": 1,
+        "unit": "each",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Flour",
+        "quantity": 0.5,
+        "unit": "cup",
+        "category": "Pantry",
+        "notes": ""
+      }
+    ],
+    "instructions": [
+      "Slice and salt the eggplant, then pat it dry after the moisture draws out.",
+      "Dredge the slices lightly in flour and egg, then brown them in olive oil.",
+      "Layer eggplant with marinara, mozzarella, parmesan, garlic, and basil.",
+      "Top with breadcrumbs for a crisp finish and bake until bubbling.",
+      "Rest the bake for a few minutes before slicing into neat portions."
+    ],
+    "isCommunityRecipe": false,
+    "isPremium": false,
+    "sectionTags": [],
+    "servings": 4,
+    "subcategoryID": "world-cuisine-italian",
+    "subcategoryTitle": "Italian",
+    "subtitle": "Fresh, satisfying and calm",
+    "tags": [
+      "italian",
+      "eggplant",
+      "baked",
+      "cheesy",
+      "comfortFood"
+    ],
+    "title": "Eggplant Parmesan Bake",
+    "description": "Layers of roasted eggplant, marinara, and melted cheese baked until bubbling and golden.",
+    "prepTimeMinutes": 25,
+    "totalTimeMinutes": 65,
+    "nutrition": {
+      "calories": 590,
+      "proteinGrams": 24,
+      "carbsGrams": 46,
+      "fatGrams": 34,
+      "fiberGrams": 8,
+      "sugarGrams": 10,
+      "sodiumMilligrams": 830
+    },
+    "equipment": [
+      "Large skillet",
+      "Chef knife",
+      "Cutting board",
+      "Measuring spoons"
+    ],
+    "tips": [
+      "Toast spices or aromatics gently before adding liquids for a deeper base.",
+      "Finish with fresh herbs, citrus, or a small drizzle of olive oil for lift.",
+      "Taste once before serving and adjust salt gradually."
+    ],
+    "subcategory": "Italian",
+    "prepMinutes": 25,
+    "cookMinutes": 40,
+    "totalMinutes": 65,
+    "caloriesPerServing": 590,
+    "nutritionPerServing": {
+      "calories": 590,
+      "proteinGrams": 24,
+      "carbsGrams": 46,
+      "fatGrams": 34,
+      "fiberGrams": 8,
+      "sugarGrams": 10,
+      "sodiumMilligrams": 830
+    }
+  },
+  {
+    "calories": 520,
+    "category": "italian",
+    "categoryGroupID": "world-cuisine",
+    "cookingTimeMinutes": 20,
+    "creatorAvatarName": null,
+    "creatorName": null,
+    "difficulty": "easy",
+    "id": "recipe-seed-world-cuisine-italian-6",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_6",
+    "ingredients": [
+      {
+        "name": "Linguine",
+        "quantity": 12,
+        "unit": "oz",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Shrimp",
+        "quantity": 1.25,
+        "unit": "lb",
+        "category": "Protein",
+        "notes": ""
+      },
+      {
+        "name": "Garlic",
+        "quantity": 5,
+        "unit": "cloves",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Lemon",
+        "quantity": 1,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Butter",
+        "quantity": 3,
+        "unit": "tbsp",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Olive Oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Parsley",
+        "quantity": 1,
+        "unit": "cup",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Crushed Red Pepper Flakes",
+        "quantity": 1,
+        "unit": "tsp",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "White Wine",
+        "quantity": 0.5,
+        "unit": "cup",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Parmesan",
+        "quantity": 0.3333333333333333,
+        "unit": "cup",
+        "category": "Dairy",
+        "notes": ""
+      }
+    ],
+    "instructions": [
+      "Cook the linguine in salted water until al dente and reserve some pasta water.",
+      "Sauté the shrimp in olive oil until just pink, then set aside.",
+      "Cook the garlic and red pepper flakes in butter until fragrant.",
+      "Deglaze with white wine, then add lemon juice and a bit of pasta water.",
+      "Return the shrimp and pasta to the skillet, toss with parsley, and finish with parmesan."
+    ],
+    "isCommunityRecipe": false,
+    "isPremium": false,
+    "sectionTags": [],
+    "servings": 4,
+    "subcategoryID": "world-cuisine-italian",
+    "subcategoryTitle": "Italian",
+    "subtitle": "Warm, bright and balanced",
+    "tags": [
+      "italian",
+      "shrimp",
+      "linguine",
+      "seafood",
+      "quickDinner"
+    ],
+    "title": "Garlic Shrimp Linguine",
+    "description": "Garlic shrimp and linguine tossed in lemon butter with parsley and a whisper of chili.",
+    "prepTimeMinutes": 15,
+    "totalTimeMinutes": 35,
+    "nutrition": {
+      "calories": 520,
+      "proteinGrams": 28,
+      "carbsGrams": 57,
+      "fatGrams": 20,
+      "fiberGrams": 3,
+      "sugarGrams": 4,
+      "sodiumMilligrams": 780
+    },
+    "equipment": [
+      "Large skillet",
+      "Chef knife",
+      "Cutting board",
+      "Measuring spoons"
+    ],
+    "tips": [
+      "Toast spices or aromatics gently before adding liquids for a deeper base.",
+      "Finish with fresh herbs, citrus, or a small drizzle of olive oil for lift.",
+      "Taste once before serving and adjust salt gradually."
+    ],
+    "subcategory": "Italian",
+    "prepMinutes": 15,
+    "cookMinutes": 20,
+    "totalMinutes": 35,
+    "caloriesPerServing": 520,
+    "nutritionPerServing": {
+      "calories": 520,
+      "proteinGrams": 28,
+      "carbsGrams": 57,
+      "fatGrams": 20,
+      "fiberGrams": 3,
+      "sugarGrams": 4,
+      "sodiumMilligrams": 780
+    }
+  },
+  {
+    "calories": 440,
+    "category": "mexican",
+    "categoryGroupID": "world-cuisine",
+    "cookingTimeMinutes": 20,
+    "creatorAvatarName": null,
+    "creatorName": null,
+    "difficulty": "moderate",
+    "id": "recipe-seed-world-cuisine-mexican-1",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_1",
+    "ingredients": [
+      {
+        "name": "Corn Tortillas",
+        "quantity": 12,
+        "unit": "each",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Corn Kernels",
+        "quantity": 3,
+        "unit": "cups",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Black Beans",
+        "quantity": 2,
+        "unit": "cups",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Avocado",
+        "quantity": 2,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Lime",
+        "quantity": 2,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Cabbage",
+        "quantity": 3,
+        "unit": "cups",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Red Onion",
+        "quantity": 0.5,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Cilantro",
+        "quantity": 1,
+        "unit": "cup",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Cotija",
+        "quantity": 0.75,
+        "unit": "cup",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Sour Cream",
+        "quantity": 0.5,
+        "unit": "cup",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Chili Powder",
+        "quantity": 2,
+        "unit": "tsp",
+        "category": "Pantry",
+        "notes": ""
+      }
+    ],
+    "instructions": [
+      "Char the corn in a hot skillet until lightly browned.",
+      "Warm the black beans with chili powder and a pinch of salt.",
+      "Toss the cabbage with lime juice, cilantro, and thinly sliced red onion.",
+      "Warm the tortillas, then fill them with beans, corn, avocado, and cabbage slaw.",
+      "Finish with cotija, sour cream, and a squeeze of fresh lime."
+    ],
+    "isCommunityRecipe": false,
+    "isPremium": false,
+    "sectionTags": [],
+    "servings": 4,
+    "subcategoryID": "world-cuisine-mexican",
+    "subcategoryTitle": "Mexican",
+    "subtitle": "Cozy flavor for weeknight cooking",
+    "tags": [
+      "mexican",
+      "tacos",
+      "corn",
+      "weeknight",
+      "vegetarian"
+    ],
+    "title": "Charred Corn Tacos",
+    "description": "Smoky charred corn tacos with lime, cabbage, black beans, and a cool creamy finish.",
+    "prepTimeMinutes": 20,
+    "totalTimeMinutes": 40,
+    "nutrition": {
+      "calories": 440,
+      "proteinGrams": 15,
+      "carbsGrams": 54,
+      "fatGrams": 18,
+      "fiberGrams": 10,
+      "sugarGrams": 7,
+      "sodiumMilligrams": 690
+    },
+    "equipment": [
+      "Large skillet",
+      "Chef knife",
+      "Cutting board",
+      "Measuring spoons"
+    ],
+    "tips": [
+      "Toast spices or aromatics gently before adding liquids for a deeper base.",
+      "Finish with fresh herbs, citrus, or a small drizzle of olive oil for lift.",
+      "Taste once before serving and adjust salt gradually."
+    ],
+    "subcategory": "Mexican",
+    "prepMinutes": 20,
+    "cookMinutes": 20,
+    "totalMinutes": 40,
+    "caloriesPerServing": 440,
+    "nutritionPerServing": {
+      "calories": 440,
+      "proteinGrams": 15,
+      "carbsGrams": 54,
+      "fatGrams": 18,
+      "fiberGrams": 10,
+      "sugarGrams": 7,
+      "sodiumMilligrams": 690
+    }
+  },
+  {
+    "calories": 560,
+    "category": "mexican",
+    "categoryGroupID": "world-cuisine",
+    "cookingTimeMinutes": 30,
+    "creatorAvatarName": null,
+    "creatorName": null,
+    "difficulty": "moderate",
+    "id": "recipe-seed-world-cuisine-mexican-2",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_2",
+    "ingredients": [
+      {
+        "name": "Chicken Thighs",
+        "quantity": 1.5,
+        "unit": "lb",
+        "category": "Protein",
+        "notes": ""
+      },
+      {
+        "name": "White Rice",
+        "quantity": 1.5,
+        "unit": "cups",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Black Beans",
+        "quantity": 2,
+        "unit": "cups",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Tomatoes",
+        "quantity": 4,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Chipotle In Adobo",
+        "quantity": 2,
+        "unit": "tbsp",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Avocado",
+        "quantity": 2,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Lime",
+        "quantity": 2,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Lettuce",
+        "quantity": 3,
+        "unit": "cups",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Cilantro",
+        "quantity": 1,
+        "unit": "cup",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Onion",
+        "quantity": 1,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Cumin",
+        "quantity": 2,
+        "unit": "tsp",
+        "category": "Pantry",
+        "notes": ""
+      }
+    ],
+    "instructions": [
+      "Simmer the chicken with tomatoes, onion, cumin, and chipotle until tender and shreddable.",
+      "Cook the rice until fluffy and season it lightly with salt and lime.",
+      "Warm the black beans with a splash of cooking liquid or water.",
+      "Build bowls with rice, beans, tinga chicken, lettuce, avocado, and cilantro.",
+      "Finish with lime juice and a spoonful of the smoky sauce."
+    ],
+    "isCommunityRecipe": false,
+    "isPremium": false,
+    "sectionTags": [],
+    "servings": 4,
+    "subcategoryID": "world-cuisine-mexican",
+    "subcategoryTitle": "Mexican",
+    "subtitle": "Fresh, satisfying and calm",
+    "tags": [
+      "mexican",
+      "bowls",
+      "chicken",
+      "smoky",
+      "highProtein"
+    ],
+    "title": "Chicken Tinga Bowls",
+    "description": "Chicken tinga bowls with smoky tomato sauce, rice, beans, avocado, and bright toppings.",
+    "prepTimeMinutes": 20,
+    "totalTimeMinutes": 50,
+    "nutrition": {
+      "calories": 560,
+      "proteinGrams": 31,
+      "carbsGrams": 56,
+      "fatGrams": 23,
+      "fiberGrams": 9,
+      "sugarGrams": 7,
+      "sodiumMilligrams": 840
+    },
+    "equipment": [
+      "Large skillet",
+      "Chef knife",
+      "Cutting board",
+      "Measuring spoons"
+    ],
+    "tips": [
+      "Toast spices or aromatics gently before adding liquids for a deeper base.",
+      "Finish with fresh herbs, citrus, or a small drizzle of olive oil for lift.",
+      "Taste once before serving and adjust salt gradually."
+    ],
+    "subcategory": "Mexican",
+    "prepMinutes": 20,
+    "cookMinutes": 30,
+    "totalMinutes": 50,
+    "caloriesPerServing": 560,
+    "nutritionPerServing": {
+      "calories": 560,
+      "proteinGrams": 31,
+      "carbsGrams": 56,
+      "fatGrams": 23,
+      "fiberGrams": 9,
+      "sugarGrams": 7,
+      "sodiumMilligrams": 840
+    }
+  },
+  {
+    "calories": 610,
+    "category": "mexican",
+    "categoryGroupID": "world-cuisine",
+    "cookingTimeMinutes": 35,
+    "creatorAvatarName": null,
+    "creatorName": null,
+    "difficulty": "easy",
+    "id": "recipe-seed-world-cuisine-mexican-3",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_3",
+    "ingredients": [
+      {
+        "name": "Poblano Peppers",
+        "quantity": 4,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Corn Tortillas",
+        "quantity": 12,
+        "unit": "each",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Shredded Chicken",
+        "quantity": 3,
+        "unit": "cups",
+        "category": "Protein",
+        "notes": ""
+      },
+      {
+        "name": "Monterey Jack",
+        "quantity": 2,
+        "unit": "cups",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Tomatillo Salsa",
+        "quantity": 2.5,
+        "unit": "cups",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Onion",
+        "quantity": 1,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Garlic",
+        "quantity": 3,
+        "unit": "cloves",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Cilantro",
+        "quantity": 1,
+        "unit": "cup",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Mexican Crema",
+        "quantity": 0.5,
+        "unit": "cup",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Cumin",
+        "quantity": 1.5,
+        "unit": "tsp",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Olive Oil",
+        "quantity": 2,
+        "unit": "tbsp",
+        "category": "Pantry",
+        "notes": ""
+      }
+    ],
+    "instructions": [
+      "Roast the poblanos until blistered, then peel and slice them.",
+      "Sauté onion and garlic, then mix with shredded chicken, cumin, and a little salsa.",
+      "Fill the tortillas with chicken and poblano strips, then roll into enchiladas.",
+      "Arrange in a baking dish, spoon over tomatillo salsa, and top with cheese.",
+      "Bake until bubbling, then finish with cilantro and crema."
+    ],
+    "isCommunityRecipe": false,
+    "isPremium": false,
+    "sectionTags": [],
+    "servings": 6,
+    "subcategoryID": "world-cuisine-mexican",
+    "subcategoryTitle": "Mexican",
+    "subtitle": "Warm, bright and balanced",
+    "tags": [
+      "mexican",
+      "enchiladas",
+      "poblano",
+      "baked",
+      "comfortFood"
+    ],
+    "title": "Roasted Poblano Enchiladas",
+    "description": "Roasted poblano enchiladas with a green salsa, melty cheese, and a satisfying baked finish.",
+    "prepTimeMinutes": 25,
+    "totalTimeMinutes": 60,
+    "nutrition": {
+      "calories": 610,
+      "proteinGrams": 26,
+      "carbsGrams": 54,
+      "fatGrams": 32,
+      "fiberGrams": 8,
+      "sugarGrams": 6,
+      "sodiumMilligrams": 920
+    },
+    "equipment": [
+      "Large skillet",
+      "Chef knife",
+      "Cutting board",
+      "Measuring spoons"
+    ],
+    "tips": [
+      "Toast spices or aromatics gently before adding liquids for a deeper base.",
+      "Finish with fresh herbs, citrus, or a small drizzle of olive oil for lift.",
+      "Taste once before serving and adjust salt gradually."
+    ],
+    "subcategory": "Mexican",
+    "prepMinutes": 25,
+    "cookMinutes": 35,
+    "totalMinutes": 60,
+    "caloriesPerServing": 610,
+    "nutritionPerServing": {
+      "calories": 610,
+      "proteinGrams": 26,
+      "carbsGrams": 54,
+      "fatGrams": 32,
+      "fiberGrams": 8,
+      "sugarGrams": 6,
+      "sodiumMilligrams": 920
+    }
+  },
+  {
+    "calories": 470,
+    "category": "mexican",
+    "categoryGroupID": "world-cuisine",
+    "cookingTimeMinutes": 15,
+    "creatorAvatarName": null,
+    "creatorName": null,
+    "difficulty": "moderate",
+    "id": "recipe-seed-world-cuisine-mexican-4",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_4",
+    "ingredients": [
+      {
+        "name": "Shrimp",
+        "quantity": 1.25,
+        "unit": "lb",
+        "category": "Protein",
+        "notes": ""
+      },
+      {
+        "name": "Tostada Shells",
+        "quantity": 8,
+        "unit": "each",
+        "category": "Pantry",
+        "notes": ""
+      },
+      {
+        "name": "Orange",
+        "quantity": 1,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Lime",
+        "quantity": 2,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Cabbage",
+        "quantity": 3,
+        "unit": "cups",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Avocado",
+        "quantity": 2,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Cilantro",
+        "quantity": 1,
+        "unit": "cup",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Jalapeño",
+        "quantity": 1,
+        "unit": "each",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Sour Cream",
+        "quantity": 0.5,
+        "unit": "cup",
+        "category": "Dairy",
+        "notes": ""
+      },
+      {
+        "name": "Radish",
+        "quantity": 1,
+        "unit": "bunch",
+        "category": "Produce",
+        "notes": ""
+      },
+      {
+        "name": "Garlic",
+        "quantity": 2,
+        "unit": "cloves",
+        "category": "Produce",
+        "notes": ""
+      }
+    ],
+    "instructions": [
+      "Season the shrimp with garlic, citrus zest, and a pinch of salt, then cook until pink.",
+      "Toss the cabbage with lime, orange juice, and thinly sliced jalapeño.",
+      "Spread a little sour cream on each tostada shell.",
+      "Layer with cabbage, shrimp, avocado, cilantro, and radish.",
+      "Serve immediately so the shells stay crisp."
+    ],
+    "isCommunityRecipe": false,
+    "isPremium": false,
+    "sectionTags": [],
+    "servings": 4,
+    "subcategoryID": "world-cuisine-mexican",
+    "subcategoryTitle": "Mexican",
+    "subtitle": "Cozy flavor for weeknight cooking",
+    "tags": [
+      "mexican",
+      "shrimp",
+      "tostadas",
+      "citrus",
+      "seafood"
+    ],
+    "title": "Citrus Shrimp Tostadas",
+    "description": "Citrus shrimp tostadas with crisp cabbage, creamy avocado, and a lively salsa finish.",
+    "prepTimeMinutes": 20,
+    "totalTimeMinutes": 35,
+    "nutrition": {
+      "calories": 470,
+      "proteinGrams": 24,
+      "carbsGrams": 43,
+      "fatGrams": 20,
+      "fiberGrams": 7,
+      "sugarGrams": 6,
+      "sodiumMilligrams": 760
+    },
+    "equipment": [
+      "Large skillet",
+      "Chef knife",
+      "Cutting board",
+      "Measuring spoons"
+    ],
+    "tips": [
+      "Toast spices or aromatics gently before adding liquids for a deeper base.",
+      "Finish with fresh herbs, citrus, or a small drizzle of olive oil for lift.",
+      "Taste once before serving and adjust salt gradually."
+    ],
+    "subcategory": "Mexican",
+    "prepMinutes": 20,
+    "cookMinutes": 15,
+    "totalMinutes": 35,
+    "caloriesPerServing": 470,
+    "nutritionPerServing": {
+      "calories": 470,
+      "proteinGrams": 24,
+      "carbsGrams": 43,
+      "fatGrams": 20,
+      "fiberGrams": 7,
+      "sugarGrams": 6,
+      "sodiumMilligrams": 760
+    }
+  }
+]

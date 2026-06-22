@@ -1,0 +1,356 @@
+{
+  "validationPassed": true,
+  "recipeCount": 342,
+  "duplicateRecipeIDs": [],
+  "recipeTitlesMissing": [],
+  "recipesWithoutCategory": [],
+  "recipesWithoutSubcategoryID": [],
+  "recipesWithEmptyTags": [],
+  "suspiciousGenericIngredients": [],
+  "suspiciousIngredientExamples": [],
+  "suspiciousInstructionExamples": [],
+  "tagCounts": [
+    [
+      "bowl",
+      143
+    ],
+    [
+      "familyFriendly",
+      114
+    ],
+    [
+      "easy",
+      114
+    ],
+    [
+      "quick",
+      96
+    ],
+    [
+      "highProtein",
+      84
+    ],
+    [
+      "worldcuisine",
+      72
+    ],
+    [
+      "vegetarian",
+      60
+    ],
+    [
+      "meatseafood",
+      54
+    ],
+    [
+      "seafood",
+      54
+    ],
+    [
+      "chicken",
+      54
+    ],
+    [
+      "bakery",
+      54
+    ],
+    [
+      "baking",
+      54
+    ],
+    [
+      "highprotein",
+      54
+    ],
+    [
+      "salad",
+      23
+    ],
+    [
+      "pasta",
+      18
+    ],
+    [
+      "tacos",
+      18
+    ],
+    [
+      "lowCarb",
+      18
+    ],
+    [
+      "community",
+      15
+    ],
+    [
+      "soup",
+      14
+    ],
+    [
+      "bread",
+      12
+    ],
+    [
+      "plate",
+      11
+    ],
+    [
+      "premium",
+      11
+    ],
+    [
+      "skillet",
+      10
+    ],
+    [
+      "pies_tarts",
+      10
+    ],
+    [
+      "cakes",
+      9
+    ],
+    [
+      "toast",
+      8
+    ],
+    [
+      "stew",
+      8
+    ],
+    [
+      "roast",
+      7
+    ],
+    [
+      "curry",
+      7
+    ],
+    [
+      "skewers",
+      7
+    ],
+    [
+      "italian",
+      6
+    ],
+    [
+      "bake",
+      6
+    ],
+    [
+      "mexican",
+      6
+    ],
+    [
+      "korean",
+      6
+    ],
+    [
+      "german",
+      6
+    ],
+    [
+      "japanese",
+      6
+    ],
+    [
+      "thai",
+      6
+    ],
+    [
+      "indian",
+      6
+    ],
+    [
+      "chinese",
+      6
+    ],
+    [
+      "french",
+      6
+    ],
+    [
+      "greek",
+      6
+    ],
+    [
+      "spanish",
+      6
+    ],
+    [
+      "middleeastern",
+      6
+    ],
+    [
+      "muffins",
+      6
+    ],
+    [
+      "brownies",
+      6
+    ],
+    [
+      "cookies",
+      5
+    ],
+    [
+      "risotto",
+      3
+    ],
+    [
+      "pastries",
+      3
+    ],
+    [
+      "stir_fry",
+      2
+    ],
+    [
+      "wrap",
+      2
+    ],
+    [
+      "egg",
+      2
+    ],
+    [
+      "quickDinner",
+      1
+    ],
+    [
+      "breakfast_bakes",
+      1
+    ],
+    [
+      "high_protein",
+      1
+    ]
+  ],
+  "warnings": [],
+  "errors": [],
+  "examples": [
+    {
+      "id": "recipe-seed-world-cuisine-italian-1",
+      "title": "Spicy Tomato Basil Pasta",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 25,
+      "totalMinutes": 40,
+      "ingredientCount": 9,
+      "instructionCount": 4,
+      "caloriesPerServing": 560
+    },
+    {
+      "id": "recipe-seed-world-cuisine-italian-2",
+      "title": "Creamy Mushroom Risotto",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 35,
+      "totalMinutes": 55,
+      "ingredientCount": 10,
+      "instructionCount": 4,
+      "caloriesPerServing": 500
+    },
+    {
+      "id": "recipe-seed-world-cuisine-italian-3",
+      "title": "Tuscan White Bean Soup",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 35,
+      "totalMinutes": 50,
+      "ingredientCount": 12,
+      "instructionCount": 4,
+      "caloriesPerServing": 390
+    },
+    {
+      "id": "recipe-seed-world-cuisine-italian-4",
+      "title": "Lemon Ricotta Gnocchi",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 20,
+      "totalMinutes": 40,
+      "ingredientCount": 12,
+      "instructionCount": 4,
+      "caloriesPerServing": 520
+    },
+    {
+      "id": "recipe-seed-world-cuisine-italian-5",
+      "title": "Eggplant Parmesan Bake",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 30,
+      "totalMinutes": 55,
+      "ingredientCount": 8,
+      "instructionCount": 4,
+      "caloriesPerServing": 560
+    },
+    {
+      "id": "recipe-seed-world-cuisine-italian-6",
+      "title": "Garlic Shrimp Linguine",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 25,
+      "totalMinutes": 40,
+      "ingredientCount": 9,
+      "instructionCount": 4,
+      "caloriesPerServing": 620
+    },
+    {
+      "id": "recipe-seed-world-cuisine-mexican-1",
+      "title": "Charred Corn Tacos",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 20,
+      "totalMinutes": 40,
+      "ingredientCount": 11,
+      "instructionCount": 4,
+      "caloriesPerServing": 490
+    },
+    {
+      "id": "recipe-seed-world-cuisine-mexican-2",
+      "title": "Chicken Tinga Bowls",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 20,
+      "totalMinutes": 40,
+      "ingredientCount": 11,
+      "instructionCount": 4,
+      "caloriesPerServing": 600
+    },
+    {
+      "id": "recipe-seed-world-cuisine-mexican-3",
+      "title": "Roasted Poblano Enchiladas",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 20,
+      "totalMinutes": 40,
+      "ingredientCount": 11,
+      "instructionCount": 4,
+      "caloriesPerServing": 490
+    },
+    {
+      "id": "recipe-seed-world-cuisine-mexican-4",
+      "title": "Citrus Shrimp Tostadas",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 20,
+      "totalMinutes": 40,
+      "ingredientCount": 11,
+      "instructionCount": 4,
+      "caloriesPerServing": 550
+    }
+  ],
+  "nutritionLabelDetectedInSource": true,
+  "sourcePaths": {
+    "recipesSeed": "Flame_Fleur/Flame_Fleur/Resources/recipes.seed.enriched.full.json",
+    "oldSeed": "Flame_Fleur/Flame_Fleur/Resources/recipes.seed.json",
+    "recipeDetail": "Flame_Fleur/Flame_Fleur/Features/Recipe/RecipeDetailView.swift"
+  },
+  "summary": {
+    "ingredientsMinPerRecipe": 6,
+    "ingredientsMaxPerRecipe": 12,
+    "instructionsMinPerRecipe": 4,
+    "instructionsMaxPerRecipe": 4
+  }
+}

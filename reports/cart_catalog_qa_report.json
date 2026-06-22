@@ -1,0 +1,135 @@
+{
+  "validationPassed": true,
+  "catalogCount": 168,
+  "recipeIngredientCount": 3508,
+  "uniqueRecipeIngredientCount": 168,
+  "uniqueCatalogNormalizedCount": 168,
+  "duplicateCatalogIDs": [],
+  "duplicateCatalogNormalizedNames": [],
+  "missingCatalogFields": {},
+  "recipeIngredientsMissingFromCatalog": [],
+  "missingIngredientCount": 0,
+  "catalogCategoryCounts": [
+    [
+      "Pantry",
+      70
+    ],
+    [
+      "Produce",
+      54
+    ],
+    [
+      "Protein",
+      26
+    ],
+    [
+      "Dairy",
+      11
+    ],
+    [
+      "Bakery",
+      7
+    ]
+  ],
+  "warnings": [],
+  "errors": [],
+  "examples": {
+    "firstCatalogItems": [
+      {
+        "id": "ingredient_almond_flour",
+        "displayName": "Almond Flour",
+        "normalizedName": "almond flour",
+        "category": "Pantry",
+        "defaultUnit": "cup",
+        "estimatedPrice": 3.3,
+        "imageName": "ingredient_almond_flour"
+      },
+      {
+        "id": "ingredient_almonds",
+        "displayName": "Almonds",
+        "normalizedName": "almonds",
+        "category": "Pantry",
+        "defaultUnit": "tbsp",
+        "estimatedPrice": 3.65,
+        "imageName": "ingredient_almonds"
+      },
+      {
+        "id": "ingredient_apples",
+        "displayName": "Apples",
+        "normalizedName": "apples",
+        "category": "Produce",
+        "defaultUnit": "each",
+        "estimatedPrice": 3.76,
+        "imageName": "ingredient_apples"
+      },
+      {
+        "id": "ingredient_arborio_rice",
+        "displayName": "Arborio Rice",
+        "normalizedName": "arborio rice",
+        "category": "Pantry",
+        "defaultUnit": "cups",
+        "estimatedPrice": 3.79,
+        "imageName": "ingredient_arborio_rice"
+      },
+      {
+        "id": "ingredient_asparagus",
+        "displayName": "Asparagus",
+        "normalizedName": "asparagus",
+        "category": "Produce",
+        "defaultUnit": "cups",
+        "estimatedPrice": 3.65,
+        "imageName": "ingredient_asparagus"
+      },
+      {
+        "id": "ingredient_avocado",
+        "displayName": "Avocado",
+        "normalizedName": "avocado",
+        "category": "Produce",
+        "defaultUnit": "each",
+        "estimatedPrice": 4.25,
+        "imageName": "ingredient_avocado"
+      },
+      {
+        "id": "ingredient_baby_potatoes",
+        "displayName": "Baby Potatoes",
+        "normalizedName": "baby potatoes",
+        "category": "Produce",
+        "defaultUnit": "cups",
+        "estimatedPrice": 4.18,
+        "imageName": "ingredient_baby_potatoes"
+      },
+      {
+        "id": "ingredient_baby_spinach",
+        "displayName": "Baby Spinach",
+        "normalizedName": "baby spinach",
+        "category": "Produce",
+        "defaultUnit": "cups",
+        "estimatedPrice": 3.54,
+        "imageName": "ingredient_baby_spinach"
+      },
+      {
+        "id": "ingredient_baking_powder",
+        "displayName": "Baking Powder",
+        "normalizedName": "baking powder",
+        "category": "Pantry",
+        "defaultUnit": "tsp",
+        "estimatedPrice": 3.49,
+        "imageName": "ingredient_baking_powder"
+      },
+      {
+        "id": "ingredient_bananas",
+        "displayName": "Bananas",
+        "normalizedName": "bananas",
+        "category": "Produce",
+        "defaultUnit": "cups",
+        "estimatedPrice": 4.03,
+        "imageName": "ingredient_bananas"
+      }
+    ],
+    "firstMissingIngredients": []
+  },
+  "sourcePaths": {
+    "recipesSeed": "Flame_Fleur/Flame_Fleur/Resources/recipes.seed.enriched.full.json",
+    "shoppingCatalog": "Flame_Fleur/Flame_Fleur/Resources/shopping_ingredients.seed.full.json"
+  }
+}

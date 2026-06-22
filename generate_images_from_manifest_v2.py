@@ -11,7 +11,7 @@ ROOT = Path("Flame_Fleur/Flame_Fleur")
 MANIFEST_PATH = ROOT / "Resources/GeneratedAssets/Gemini/image_generation_manifest_v2.json"
 RAW_ROOT = ROOT / "Resources/GeneratedAssets/Gemini/raw/v2"
 
-MODEL = "imagen-4.0-generate-001"
+MODEL = "imagen-4.0-fast-generate-001"
 
 def get_client() -> genai.Client:
     api_key = os.environ.get("GEMINI_API_KEY")

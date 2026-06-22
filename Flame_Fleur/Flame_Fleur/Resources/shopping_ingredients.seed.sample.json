@@ -1,0 +1,587 @@
+[
+  {
+    "id": "ingredient_arborio_rice",
+    "displayName": "Arborio Rice",
+    "normalizedName": "arborio rice",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.79,
+    "imageName": "ingredient_arborio_rice"
+  },
+  {
+    "id": "ingredient_avocado",
+    "displayName": "Avocado",
+    "normalizedName": "avocado",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.25,
+    "imageName": "ingredient_avocado"
+  },
+  {
+    "id": "ingredient_basil",
+    "displayName": "Basil",
+    "normalizedName": "basil",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.08,
+    "imageName": "ingredient_basil"
+  },
+  {
+    "id": "ingredient_black_beans",
+    "displayName": "Black Beans",
+    "normalizedName": "black beans",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.91,
+    "imageName": "ingredient_black_beans"
+  },
+  {
+    "id": "ingredient_black_pepper",
+    "displayName": "Black Pepper",
+    "normalizedName": "black pepper",
+    "category": "Produce",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 4.67,
+    "imageName": "ingredient_black_pepper"
+  },
+  {
+    "id": "ingredient_breadcrumbs",
+    "displayName": "Breadcrumbs",
+    "normalizedName": "breadcrumbs",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.19,
+    "imageName": "ingredient_breadcrumbs"
+  },
+  {
+    "id": "ingredient_butter",
+    "displayName": "Butter",
+    "normalizedName": "butter",
+    "category": "Dairy",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 4.1,
+    "imageName": "ingredient_butter"
+  },
+  {
+    "id": "ingredient_cabbage",
+    "displayName": "Cabbage",
+    "normalizedName": "cabbage",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.63,
+    "imageName": "ingredient_cabbage"
+  },
+  {
+    "id": "ingredient_cannellini_beans",
+    "displayName": "Cannellini Beans",
+    "normalizedName": "cannellini beans",
+    "category": "Pantry",
+    "defaultUnit": "cans",
+    "estimatedPrice": 4.21,
+    "imageName": "ingredient_cannellini_beans"
+  },
+  {
+    "id": "ingredient_carrots",
+    "displayName": "Carrots",
+    "normalizedName": "carrots",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 3.56,
+    "imageName": "ingredient_carrots"
+  },
+  {
+    "id": "ingredient_celery",
+    "displayName": "Celery",
+    "normalizedName": "celery",
+    "category": "Produce",
+    "defaultUnit": "stalks",
+    "estimatedPrice": 3.54,
+    "imageName": "ingredient_celery"
+  },
+  {
+    "id": "ingredient_cherry_tomatoes",
+    "displayName": "Cherry Tomatoes",
+    "normalizedName": "cherry tomatoes",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.78,
+    "imageName": "ingredient_cherry_tomatoes"
+  },
+  {
+    "id": "ingredient_chicken_thighs",
+    "displayName": "Chicken Thighs",
+    "normalizedName": "chicken thighs",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 9.7,
+    "imageName": "ingredient_chicken_thighs"
+  },
+  {
+    "id": "ingredient_chili_powder",
+    "displayName": "Chili Powder",
+    "normalizedName": "chili powder",
+    "category": "Produce",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.84,
+    "imageName": "ingredient_chili_powder"
+  },
+  {
+    "id": "ingredient_chipotle_in_adobo",
+    "displayName": "Chipotle In Adobo",
+    "normalizedName": "chipotle in adobo",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.41,
+    "imageName": "ingredient_chipotle_in_adobo"
+  },
+  {
+    "id": "ingredient_cilantro",
+    "displayName": "Cilantro",
+    "normalizedName": "cilantro",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.1,
+    "imageName": "ingredient_cilantro"
+  },
+  {
+    "id": "ingredient_corn_kernels",
+    "displayName": "Corn Kernels",
+    "normalizedName": "corn kernels",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.92,
+    "imageName": "ingredient_corn_kernels"
+  },
+  {
+    "id": "ingredient_corn_tortillas",
+    "displayName": "Corn Tortillas",
+    "normalizedName": "corn tortillas",
+    "category": "Pantry",
+    "defaultUnit": "each",
+    "estimatedPrice": 3.53,
+    "imageName": "ingredient_corn_tortillas"
+  },
+  {
+    "id": "ingredient_cotija",
+    "displayName": "Cotija",
+    "normalizedName": "cotija",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.48,
+    "imageName": "ingredient_cotija"
+  },
+  {
+    "id": "ingredient_cremini_mushrooms",
+    "displayName": "Cremini Mushrooms",
+    "normalizedName": "cremini mushrooms",
+    "category": "Produce",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.66,
+    "imageName": "ingredient_cremini_mushrooms"
+  },
+  {
+    "id": "ingredient_crushed_red_pepper_flakes",
+    "displayName": "Crushed Red Pepper Flakes",
+    "normalizedName": "crushed red pepper flakes",
+    "category": "Produce",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 4.53,
+    "imageName": "ingredient_crushed_red_pepper_flakes"
+  },
+  {
+    "id": "ingredient_cumin",
+    "displayName": "Cumin",
+    "normalizedName": "cumin",
+    "category": "Produce",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 3.93,
+    "imageName": "ingredient_cumin"
+  },
+  {
+    "id": "ingredient_dry_white_wine",
+    "displayName": "Dry White Wine",
+    "normalizedName": "dry white wine",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.0,
+    "imageName": "ingredient_dry_white_wine"
+  },
+  {
+    "id": "ingredient_egg",
+    "displayName": "Egg",
+    "normalizedName": "egg",
+    "category": "Protein",
+    "defaultUnit": "each",
+    "estimatedPrice": 8.64,
+    "imageName": "ingredient_egg"
+  },
+  {
+    "id": "ingredient_eggplant",
+    "displayName": "Eggplant",
+    "normalizedName": "eggplant",
+    "category": "Protein",
+    "defaultUnit": "large",
+    "estimatedPrice": 8.56,
+    "imageName": "ingredient_eggplant"
+  },
+  {
+    "id": "ingredient_flour",
+    "displayName": "Flour",
+    "normalizedName": "flour",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.6,
+    "imageName": "ingredient_flour"
+  },
+  {
+    "id": "ingredient_fresh_basil",
+    "displayName": "Fresh Basil",
+    "normalizedName": "fresh basil",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.36,
+    "imageName": "ingredient_fresh_basil"
+  },
+  {
+    "id": "ingredient_fresh_sage",
+    "displayName": "Fresh Sage",
+    "normalizedName": "fresh sage",
+    "category": "Produce",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.53,
+    "imageName": "ingredient_fresh_sage"
+  },
+  {
+    "id": "ingredient_fresh_thyme",
+    "displayName": "Fresh Thyme",
+    "normalizedName": "fresh thyme",
+    "category": "Produce",
+    "defaultUnit": "tsp",
+    "estimatedPrice": 4.16,
+    "imageName": "ingredient_fresh_thyme"
+  },
+  {
+    "id": "ingredient_garlic",
+    "displayName": "Garlic",
+    "normalizedName": "garlic",
+    "category": "Produce",
+    "defaultUnit": "cloves",
+    "estimatedPrice": 4.48,
+    "imageName": "ingredient_garlic"
+  },
+  {
+    "id": "ingredient_jalape_o",
+    "displayName": "Jalapeño",
+    "normalizedName": "jalapeño",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.25,
+    "imageName": "ingredient_jalape_o"
+  },
+  {
+    "id": "ingredient_kale",
+    "displayName": "Kale",
+    "normalizedName": "kale",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.28,
+    "imageName": "ingredient_kale"
+  },
+  {
+    "id": "ingredient_lemon",
+    "displayName": "Lemon",
+    "normalizedName": "lemon",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.08,
+    "imageName": "ingredient_lemon"
+  },
+  {
+    "id": "ingredient_lettuce",
+    "displayName": "Lettuce",
+    "normalizedName": "lettuce",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.83,
+    "imageName": "ingredient_lettuce"
+  },
+  {
+    "id": "ingredient_lime",
+    "displayName": "Lime",
+    "normalizedName": "lime",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.07,
+    "imageName": "ingredient_lime"
+  },
+  {
+    "id": "ingredient_linguine",
+    "displayName": "Linguine",
+    "normalizedName": "linguine",
+    "category": "Produce",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.51,
+    "imageName": "ingredient_linguine"
+  },
+  {
+    "id": "ingredient_marinara_sauce",
+    "displayName": "Marinara Sauce",
+    "normalizedName": "marinara sauce",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.9,
+    "imageName": "ingredient_marinara_sauce"
+  },
+  {
+    "id": "ingredient_mexican_crema",
+    "displayName": "Mexican Crema",
+    "normalizedName": "mexican crema",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.24,
+    "imageName": "ingredient_mexican_crema"
+  },
+  {
+    "id": "ingredient_monterey_jack",
+    "displayName": "Monterey Jack",
+    "normalizedName": "monterey jack",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.76,
+    "imageName": "ingredient_monterey_jack"
+  },
+  {
+    "id": "ingredient_mozzarella",
+    "displayName": "Mozzarella",
+    "normalizedName": "mozzarella",
+    "category": "Dairy",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.47,
+    "imageName": "ingredient_mozzarella"
+  },
+  {
+    "id": "ingredient_olive_oil",
+    "displayName": "Olive Oil",
+    "normalizedName": "olive oil",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 3.48,
+    "imageName": "ingredient_olive_oil"
+  },
+  {
+    "id": "ingredient_onion",
+    "displayName": "Onion",
+    "normalizedName": "onion",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.35,
+    "imageName": "ingredient_onion"
+  },
+  {
+    "id": "ingredient_orange",
+    "displayName": "Orange",
+    "normalizedName": "orange",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.22,
+    "imageName": "ingredient_orange"
+  },
+  {
+    "id": "ingredient_parmesan",
+    "displayName": "Parmesan",
+    "normalizedName": "parmesan",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.49,
+    "imageName": "ingredient_parmesan"
+  },
+  {
+    "id": "ingredient_parmesan_rind",
+    "displayName": "Parmesan Rind",
+    "normalizedName": "parmesan rind",
+    "category": "Dairy",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.17,
+    "imageName": "ingredient_parmesan_rind"
+  },
+  {
+    "id": "ingredient_parsley",
+    "displayName": "Parsley",
+    "normalizedName": "parsley",
+    "category": "Produce",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.39,
+    "imageName": "ingredient_parsley"
+  },
+  {
+    "id": "ingredient_poblano_peppers",
+    "displayName": "Poblano Peppers",
+    "normalizedName": "poblano peppers",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.35,
+    "imageName": "ingredient_poblano_peppers"
+  },
+  {
+    "id": "ingredient_potato_gnocchi",
+    "displayName": "Potato Gnocchi",
+    "normalizedName": "potato gnocchi",
+    "category": "Pantry",
+    "defaultUnit": "oz",
+    "estimatedPrice": 3.12,
+    "imageName": "ingredient_potato_gnocchi"
+  },
+  {
+    "id": "ingredient_radish",
+    "displayName": "Radish",
+    "normalizedName": "radish",
+    "category": "Produce",
+    "defaultUnit": "bunch",
+    "estimatedPrice": 4.31,
+    "imageName": "ingredient_radish"
+  },
+  {
+    "id": "ingredient_red_onion",
+    "displayName": "Red Onion",
+    "normalizedName": "red onion",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 3.95,
+    "imageName": "ingredient_red_onion"
+  },
+  {
+    "id": "ingredient_ricotta",
+    "displayName": "Ricotta",
+    "normalizedName": "ricotta",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.46,
+    "imageName": "ingredient_ricotta"
+  },
+  {
+    "id": "ingredient_rosemary",
+    "displayName": "Rosemary",
+    "normalizedName": "rosemary",
+    "category": "Produce",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 4.7,
+    "imageName": "ingredient_rosemary"
+  },
+  {
+    "id": "ingredient_shallot",
+    "displayName": "Shallot",
+    "normalizedName": "shallot",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.56,
+    "imageName": "ingredient_shallot"
+  },
+  {
+    "id": "ingredient_shredded_chicken",
+    "displayName": "Shredded Chicken",
+    "normalizedName": "shredded chicken",
+    "category": "Protein",
+    "defaultUnit": "cups",
+    "estimatedPrice": 9.27,
+    "imageName": "ingredient_shredded_chicken"
+  },
+  {
+    "id": "ingredient_shrimp",
+    "displayName": "Shrimp",
+    "normalizedName": "shrimp",
+    "category": "Protein",
+    "defaultUnit": "lb",
+    "estimatedPrice": 8.85,
+    "imageName": "ingredient_shrimp"
+  },
+  {
+    "id": "ingredient_sour_cream",
+    "displayName": "Sour Cream",
+    "normalizedName": "sour cream",
+    "category": "Dairy",
+    "defaultUnit": "cup",
+    "estimatedPrice": 4.08,
+    "imageName": "ingredient_sour_cream"
+  },
+  {
+    "id": "ingredient_spaghetti",
+    "displayName": "Spaghetti",
+    "normalizedName": "spaghetti",
+    "category": "Produce",
+    "defaultUnit": "oz",
+    "estimatedPrice": 4.33,
+    "imageName": "ingredient_spaghetti"
+  },
+  {
+    "id": "ingredient_spinach",
+    "displayName": "Spinach",
+    "normalizedName": "spinach",
+    "category": "Produce",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.35,
+    "imageName": "ingredient_spinach"
+  },
+  {
+    "id": "ingredient_tomatillo_salsa",
+    "displayName": "Tomatillo Salsa",
+    "normalizedName": "tomatillo salsa",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.24,
+    "imageName": "ingredient_tomatillo_salsa"
+  },
+  {
+    "id": "ingredient_tomato_paste",
+    "displayName": "Tomato Paste",
+    "normalizedName": "tomato paste",
+    "category": "Pantry",
+    "defaultUnit": "tbsp",
+    "estimatedPrice": 4.15,
+    "imageName": "ingredient_tomato_paste"
+  },
+  {
+    "id": "ingredient_tomatoes",
+    "displayName": "Tomatoes",
+    "normalizedName": "tomatoes",
+    "category": "Produce",
+    "defaultUnit": "each",
+    "estimatedPrice": 4.35,
+    "imageName": "ingredient_tomatoes"
+  },
+  {
+    "id": "ingredient_tostada_shells",
+    "displayName": "Tostada Shells",
+    "normalizedName": "tostada shells",
+    "category": "Pantry",
+    "defaultUnit": "each",
+    "estimatedPrice": 3.17,
+    "imageName": "ingredient_tostada_shells"
+  },
+  {
+    "id": "ingredient_vegetable_stock",
+    "displayName": "Vegetable Stock",
+    "normalizedName": "vegetable stock",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 3.44,
+    "imageName": "ingredient_vegetable_stock"
+  },
+  {
+    "id": "ingredient_white_rice",
+    "displayName": "White Rice",
+    "normalizedName": "white rice",
+    "category": "Pantry",
+    "defaultUnit": "cups",
+    "estimatedPrice": 4.04,
+    "imageName": "ingredient_white_rice"
+  },
+  {
+    "id": "ingredient_white_wine",
+    "displayName": "White Wine",
+    "normalizedName": "white wine",
+    "category": "Pantry",
+    "defaultUnit": "cup",
+    "estimatedPrice": 3.87,
+    "imageName": "ingredient_white_wine"
+  }
+]

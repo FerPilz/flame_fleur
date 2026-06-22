@@ -5,7 +5,7 @@ struct ShoppingCartSectionView: View {
     let items: [ShoppingCartItem]
     let isCollapsed: Bool
     let onToggleCollapsed: () -> Void
-    let onToggleChecked: (ShoppingCartItem) -> Void
+    let onToggleSelection: (ShoppingCartItem) -> Void
     let onIncrement: (ShoppingCartItem) -> Void
     let onDecrement: (ShoppingCartItem) -> Void
     let onUpdateStore: (ShoppingCartItem, ShoppingStoreOption) -> Void
@@ -56,7 +56,7 @@ struct ShoppingCartSectionView: View {
 
                         ShoppingCartItemRow(
                             item: item,
-                            onToggleChecked: { onToggleChecked(item) },
+                            onToggleSelection: { onToggleSelection(item) },
                             onIncrement: { onIncrement(item) },
                             onDecrement: { onDecrement(item) },
                             onUpdateStore: { option in onUpdateStore(item, option) }
@@ -91,7 +91,7 @@ struct ShoppingCartSectionView: View {
         items: SampleShoppingCartItems.currentWeek.filter { $0.category == .produce },
         isCollapsed: false,
         onToggleCollapsed: {},
-        onToggleChecked: { _ in },
+        onToggleSelection: { _ in },
         onIncrement: { _ in },
         onDecrement: { _ in },
         onUpdateStore: { _, _ in }

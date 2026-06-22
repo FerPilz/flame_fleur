@@ -50,7 +50,11 @@ struct RecipeRepository {
     }
 
     func ingredients(for recipeID: String) -> [String] {
-        recipe(id: recipeID)?.ingredients ?? []
+        recipe(id: recipeID)?.ingredientLines ?? recipe(id: recipeID)?.ingredients ?? []
+    }
+
+    func structuredIngredients(for recipeID: String) -> [RecipeIngredient] {
+        recipe(id: recipeID)?.structuredIngredients ?? []
     }
 
     func instructions(for recipeID: String) -> [String] {

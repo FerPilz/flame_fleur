@@ -8,7 +8,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-italian-1",
-    "imageName": "ff_home_recipe_world_cuisine_italian_spicy_tomato_basil_pasta",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_1",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -70,7 +70,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-italian-2",
-    "imageName": "ff_home_recipe_vegetarian_mushrooms_creamy_mushroom_risotto",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_2",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -134,7 +134,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-italian-3",
-    "imageName": "pasta",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_3",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -192,7 +192,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-italian-4",
-    "imageName": "pasta",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_4",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -250,7 +250,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-italian-5",
-    "imageName": "pasta",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_5",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -313,7 +313,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-italian-6",
-    "imageName": "pasta",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_6",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -371,7 +371,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-mexican-1",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_1",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -431,7 +431,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-mexican-2",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_2",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -493,7 +493,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-mexican-3",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_3",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -551,7 +551,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-mexican-4",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_4",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -609,7 +609,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-mexican-5",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_5",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -672,7 +672,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-mexican-6",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_6",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -730,7 +730,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-korean-1",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_korean_1",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -790,7 +790,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-korean-2",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_korean_2",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -852,7 +852,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-korean-3",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_korean_3",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -910,7 +910,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-korean-4",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_korean_4",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -968,7 +968,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-korean-5",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_korean_5",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -1031,7 +1031,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-korean-6",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_korean_6",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -1089,7 +1089,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-german-1",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_german_1",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -1149,7 +1149,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-german-2",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_german_2",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -1212,7 +1212,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-german-3",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_german_3",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -1270,7 +1270,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-german-4",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_german_4",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -1328,7 +1328,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-german-5",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_german_5",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -1391,7 +1391,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-german-6",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_german_6",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -1449,7 +1449,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-japanese-1",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_japanese_1",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -1509,7 +1509,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-japanese-2",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_japanese_2",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -1572,7 +1572,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-japanese-3",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_japanese_3",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -1630,7 +1630,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-japanese-4",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_japanese_4",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -1688,7 +1688,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-japanese-5",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_japanese_5",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -1751,7 +1751,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-japanese-6",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_japanese_6",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -1809,7 +1809,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-thai-1",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_thai_1",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -1869,7 +1869,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-thai-2",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_thai_2",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -1932,7 +1932,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-thai-3",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_thai_3",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -1990,7 +1990,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-thai-4",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_thai_4",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -2048,7 +2048,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-thai-5",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_thai_5",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -2110,7 +2110,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-thai-6",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_thai_6",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -2169,7 +2169,7 @@
     "creatorName": "@homechef.anna",
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-indian-1",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_indian_1",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -2229,7 +2229,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-indian-2",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_indian_2",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -2292,7 +2292,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-indian-3",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_indian_3",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -2408,7 +2408,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-indian-5",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_indian_5",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -2470,7 +2470,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-indian-6",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_indian_6",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -2529,7 +2529,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-chinese-1",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_chinese_1",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -2587,7 +2587,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-chinese-2",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_chinese_2",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -2650,7 +2650,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-chinese-3",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_chinese_3",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -2708,7 +2708,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-chinese-4",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_chinese_4",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -2766,7 +2766,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-chinese-5",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_chinese_5",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -2828,7 +2828,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-chinese-6",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_chinese_6",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -2887,7 +2887,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-french-1",
-    "imageName": "dessert",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_french_1",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -3008,7 +3008,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-french-3",
-    "imageName": "dessert",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_french_3",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -3067,7 +3067,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-french-4",
-    "imageName": "dessert",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_french_4",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -3187,7 +3187,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-french-6",
-    "imageName": "dessert",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_french_6",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -3246,7 +3246,7 @@
     "creatorName": "@homechef.anna",
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-greek-1",
-    "imageName": "salad",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_greek_1",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -3307,7 +3307,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-greek-2",
-    "imageName": "salad",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_greek_2",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -3371,7 +3371,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-greek-3",
-    "imageName": "salad",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_greek_3",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -3431,7 +3431,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-greek-4",
-    "imageName": "salad",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_greek_4",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -3492,7 +3492,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-greek-5",
-    "imageName": "salad",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_greek_5",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -3555,7 +3555,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-greek-6",
-    "imageName": "salad",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_greek_6",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -3614,7 +3614,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-spanish-1",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_spanish_1",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -3672,7 +3672,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-spanish-2",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_spanish_2",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -3735,7 +3735,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-spanish-3",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_spanish_3",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -3852,7 +3852,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-spanish-5",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_spanish_5",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -3914,7 +3914,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-spanish-6",
-    "imageName": "citrus",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_spanish_6",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -3972,7 +3972,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-middle-eastern-1",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_middle_eastern_1",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -4030,7 +4030,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-middle-eastern-2",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_middle_eastern_2",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -4092,7 +4092,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-middle-eastern-3",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_middle_eastern_3",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -4151,7 +4151,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-middle-eastern-4",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_middle_eastern_4",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -4209,7 +4209,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-middle-eastern-5",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_middle_eastern_5",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -4271,7 +4271,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-middle-eastern-6",
-    "imageName": "bowl",
+    "imageName": "ff_recipe_recipe_seed_world_cuisine_middle_eastern_6",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -4329,7 +4329,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-fish-1",
-    "imageName": "ff_home_recipe_meat_seafood_fish_honey_garlic_salmon",
+    "imageName": "ff_recipe_recipe_seed_meat_seafood_fish_1",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -4391,7 +4391,7 @@
     "creatorName": "@bakewithleo",
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-fish-2",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_meat_seafood_fish_2",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -4455,7 +4455,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-fish-3",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_meat_seafood_fish_3",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -4515,7 +4515,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-fish-4",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_meat_seafood_fish_4",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -4575,7 +4575,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-fish-5",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_meat_seafood_fish_5",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -4638,7 +4638,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-fish-6",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_meat_seafood_fish_6",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -4697,7 +4697,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-shrimp-1",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_meat_seafood_shrimp_1",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -4757,7 +4757,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-shrimp-2",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_meat_seafood_shrimp_2",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -4820,7 +4820,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-shrimp-3",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_meat_seafood_shrimp_3",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -4880,7 +4880,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-shrimp-4",
-    "imageName": "salmon",
+    "imageName": "ff_recipe_recipe_seed_meat_seafood_shrimp_4",
     "ingredients": [
       "shallot",
       "vegetable stock",

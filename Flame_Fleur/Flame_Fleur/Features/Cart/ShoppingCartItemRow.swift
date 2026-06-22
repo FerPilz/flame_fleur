@@ -2,54 +2,62 @@ import SwiftUI
 
 struct ShoppingCartItemRow: View {
     let item: ShoppingCartItem
-    let onToggleChecked: () -> Void
+    let onToggleSelection: () -> Void
     let onIncrement: () -> Void
     let onDecrement: () -> Void
     let onUpdateStore: (ShoppingStoreOption) -> Void
 
     var body: some View {
-        HStack(alignment: .center, spacing: AppSpacing.xs) {
-            Button(action: onToggleChecked) {
+        HStack(alignment: .top, spacing: AppSpacing.xs) {
+            Button(action: onToggleSelection) {
                 Image(systemName: item.isChecked ? "checkmark.circle.fill" : "circle")
-                    .font(AppTypography.caption)
+                    .font(.system(size: 18, weight: .semibold))
                     .foregroundStyle(item.isChecked ? AppColors.olive : AppColors.tertiaryText)
-                    .frame(width: 20, height: 20)
+                    .frame(width: 24, height: 24)
+                    .padding(.top, 2)
             }
             .buttonStyle(.plain)
+            .accessibilityLabel(Text(item.isChecked ? "Deselect \(item.name)" : "Select \(item.name)"))
 
             FoodImagePlaceholder(imageName: item.imageName, style: .thumbnail)
                 .frame(width: 34, height: 34)
 
-            VStack(alignment: .leading, spacing: 1) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(item.name)
-                    .font(AppTypography.caption)
+                    .font(AppTypography.callout)
                     .foregroundStyle(AppColors.primaryText)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
-                    .layoutPriority(2)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                Text(item.quantityText)
+                Text("\(item.quantityText) · \(item.category.title)")
                     .font(AppTypography.metadata)
                     .foregroundStyle(AppColors.secondaryText)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.86)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .layoutPriority(1)
 
-            quantityControl
+            VStack(alignment: .trailing, spacing: AppSpacing.xxs) {
+                Text(ShoppingCartStore.currencyString(item.estimatedLineCost))
+                    .font(AppTypography.metadata)
+                    .foregroundStyle(AppColors.primaryText)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.82)
 
-            storeMenu
-
-            Text(ShoppingCartStore.currencyString(item.estimatedLineCost))
-                .font(AppTypography.metadata)
-                .foregroundStyle(AppColors.primaryText)
-                .lineLimit(1)
-                .minimumScaleFactor(0.78)
-                .frame(width: 44, alignment: .trailing)
+                HStack(spacing: AppSpacing.xxs) {
+                    quantityControl
+                    storeMenu
+                }
+            }
         }
         .padding(.horizontal, AppSpacing.xs)
-        .frame(minHeight: 46)
-        .opacity(item.isChecked ? 0.58 : 1)
+        .padding(.vertical, AppSpacing.xs)
+        .frame(minHeight: 60)
+        .background(
+            RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous)
+                .fill(item.isChecked ? AppColors.softOlive.opacity(0.42) : Color.clear)
+        )
     }
 
     private var quantityControl: some View {
@@ -95,9 +103,9 @@ struct ShoppingCartItemRow: View {
         } label: {
             HStack(spacing: AppSpacing.xxs) {
                 Text(shortStoreName)
-                    .font(AppTypography.metadata)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
+            .font(AppTypography.metadata)
+            .lineLimit(1)
+            .truncationMode(.tail)
 
                 Image(systemName: "chevron.down")
                     .font(AppTypography.metadata)
@@ -125,7 +133,7 @@ struct ShoppingCartItemRow: View {
 #Preview {
     ShoppingCartItemRow(
         item: SampleShoppingCartItems.currentWeek[0],
-        onToggleChecked: {},
+        onToggleSelection: {},
         onIncrement: {},
         onDecrement: {},
         onUpdateStore: { _ in }

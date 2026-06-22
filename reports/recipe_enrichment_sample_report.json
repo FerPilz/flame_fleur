@@ -1,0 +1,357 @@
+{
+  "validationPassed": true,
+  "recipeCount": 10,
+  "uniqueSampleIngredientCount": 65,
+  "uniqueShoppingIngredientCount": 65,
+  "recipeIdsEnriched": [
+    "recipe-seed-world-cuisine-italian-1",
+    "recipe-seed-world-cuisine-italian-2",
+    "recipe-seed-world-cuisine-italian-3",
+    "recipe-seed-world-cuisine-italian-4",
+    "recipe-seed-world-cuisine-italian-5",
+    "recipe-seed-world-cuisine-italian-6",
+    "recipe-seed-world-cuisine-mexican-1",
+    "recipe-seed-world-cuisine-mexican-2",
+    "recipe-seed-world-cuisine-mexican-3",
+    "recipe-seed-world-cuisine-mexican-4"
+  ],
+  "shoppingIngredientsGenerated": [
+    {
+      "id": "ingredient_arborio_rice",
+      "displayName": "Arborio Rice",
+      "normalizedName": "arborio rice"
+    },
+    {
+      "id": "ingredient_avocado",
+      "displayName": "Avocado",
+      "normalizedName": "avocado"
+    },
+    {
+      "id": "ingredient_basil",
+      "displayName": "Basil",
+      "normalizedName": "basil"
+    },
+    {
+      "id": "ingredient_black_beans",
+      "displayName": "Black Beans",
+      "normalizedName": "black beans"
+    },
+    {
+      "id": "ingredient_black_pepper",
+      "displayName": "Black Pepper",
+      "normalizedName": "black pepper"
+    },
+    {
+      "id": "ingredient_breadcrumbs",
+      "displayName": "Breadcrumbs",
+      "normalizedName": "breadcrumbs"
+    },
+    {
+      "id": "ingredient_butter",
+      "displayName": "Butter",
+      "normalizedName": "butter"
+    },
+    {
+      "id": "ingredient_cabbage",
+      "displayName": "Cabbage",
+      "normalizedName": "cabbage"
+    },
+    {
+      "id": "ingredient_cannellini_beans",
+      "displayName": "Cannellini Beans",
+      "normalizedName": "cannellini beans"
+    },
+    {
+      "id": "ingredient_carrots",
+      "displayName": "Carrots",
+      "normalizedName": "carrots"
+    },
+    {
+      "id": "ingredient_celery",
+      "displayName": "Celery",
+      "normalizedName": "celery"
+    },
+    {
+      "id": "ingredient_cherry_tomatoes",
+      "displayName": "Cherry Tomatoes",
+      "normalizedName": "cherry tomatoes"
+    },
+    {
+      "id": "ingredient_chicken_thighs",
+      "displayName": "Chicken Thighs",
+      "normalizedName": "chicken thighs"
+    },
+    {
+      "id": "ingredient_chili_powder",
+      "displayName": "Chili Powder",
+      "normalizedName": "chili powder"
+    },
+    {
+      "id": "ingredient_chipotle_in_adobo",
+      "displayName": "Chipotle In Adobo",
+      "normalizedName": "chipotle in adobo"
+    },
+    {
+      "id": "ingredient_cilantro",
+      "displayName": "Cilantro",
+      "normalizedName": "cilantro"
+    },
+    {
+      "id": "ingredient_corn_kernels",
+      "displayName": "Corn Kernels",
+      "normalizedName": "corn kernels"
+    },
+    {
+      "id": "ingredient_corn_tortillas",
+      "displayName": "Corn Tortillas",
+      "normalizedName": "corn tortillas"
+    },
+    {
+      "id": "ingredient_cotija",
+      "displayName": "Cotija",
+      "normalizedName": "cotija"
+    },
+    {
+      "id": "ingredient_cremini_mushrooms",
+      "displayName": "Cremini Mushrooms",
+      "normalizedName": "cremini mushrooms"
+    },
+    {
+      "id": "ingredient_crushed_red_pepper_flakes",
+      "displayName": "Crushed Red Pepper Flakes",
+      "normalizedName": "crushed red pepper flakes"
+    },
+    {
+      "id": "ingredient_cumin",
+      "displayName": "Cumin",
+      "normalizedName": "cumin"
+    },
+    {
+      "id": "ingredient_dry_white_wine",
+      "displayName": "Dry White Wine",
+      "normalizedName": "dry white wine"
+    },
+    {
+      "id": "ingredient_egg",
+      "displayName": "Egg",
+      "normalizedName": "egg"
+    },
+    {
+      "id": "ingredient_eggplant",
+      "displayName": "Eggplant",
+      "normalizedName": "eggplant"
+    },
+    {
+      "id": "ingredient_flour",
+      "displayName": "Flour",
+      "normalizedName": "flour"
+    },
+    {
+      "id": "ingredient_fresh_basil",
+      "displayName": "Fresh Basil",
+      "normalizedName": "fresh basil"
+    },
+    {
+      "id": "ingredient_fresh_sage",
+      "displayName": "Fresh Sage",
+      "normalizedName": "fresh sage"
+    },
+    {
+      "id": "ingredient_fresh_thyme",
+      "displayName": "Fresh Thyme",
+      "normalizedName": "fresh thyme"
+    },
+    {
+      "id": "ingredient_garlic",
+      "displayName": "Garlic",
+      "normalizedName": "garlic"
+    },
+    {
+      "id": "ingredient_jalape_o",
+      "displayName": "Jalapeño",
+      "normalizedName": "jalapeño"
+    },
+    {
+      "id": "ingredient_kale",
+      "displayName": "Kale",
+      "normalizedName": "kale"
+    },
+    {
+      "id": "ingredient_lemon",
+      "displayName": "Lemon",
+      "normalizedName": "lemon"
+    },
+    {
+      "id": "ingredient_lettuce",
+      "displayName": "Lettuce",
+      "normalizedName": "lettuce"
+    },
+    {
+      "id": "ingredient_lime",
+      "displayName": "Lime",
+      "normalizedName": "lime"
+    },
+    {
+      "id": "ingredient_linguine",
+      "displayName": "Linguine",
+      "normalizedName": "linguine"
+    },
+    {
+      "id": "ingredient_marinara_sauce",
+      "displayName": "Marinara Sauce",
+      "normalizedName": "marinara sauce"
+    },
+    {
+      "id": "ingredient_mexican_crema",
+      "displayName": "Mexican Crema",
+      "normalizedName": "mexican crema"
+    },
+    {
+      "id": "ingredient_monterey_jack",
+      "displayName": "Monterey Jack",
+      "normalizedName": "monterey jack"
+    },
+    {
+      "id": "ingredient_mozzarella",
+      "displayName": "Mozzarella",
+      "normalizedName": "mozzarella"
+    },
+    {
+      "id": "ingredient_olive_oil",
+      "displayName": "Olive Oil",
+      "normalizedName": "olive oil"
+    },
+    {
+      "id": "ingredient_onion",
+      "displayName": "Onion",
+      "normalizedName": "onion"
+    },
+    {
+      "id": "ingredient_orange",
+      "displayName": "Orange",
+      "normalizedName": "orange"
+    },
+    {
+      "id": "ingredient_parmesan",
+      "displayName": "Parmesan",
+      "normalizedName": "parmesan"
+    },
+    {
+      "id": "ingredient_parmesan_rind",
+      "displayName": "Parmesan Rind",
+      "normalizedName": "parmesan rind"
+    },
+    {
+      "id": "ingredient_parsley",
+      "displayName": "Parsley",
+      "normalizedName": "parsley"
+    },
+    {
+      "id": "ingredient_poblano_peppers",
+      "displayName": "Poblano Peppers",
+      "normalizedName": "poblano peppers"
+    },
+    {
+      "id": "ingredient_potato_gnocchi",
+      "displayName": "Potato Gnocchi",
+      "normalizedName": "potato gnocchi"
+    },
+    {
+      "id": "ingredient_radish",
+      "displayName": "Radish",
+      "normalizedName": "radish"
+    },
+    {
+      "id": "ingredient_red_onion",
+      "displayName": "Red Onion",
+      "normalizedName": "red onion"
+    },
+    {
+      "id": "ingredient_ricotta",
+      "displayName": "Ricotta",
+      "normalizedName": "ricotta"
+    },
+    {
+      "id": "ingredient_rosemary",
+      "displayName": "Rosemary",
+      "normalizedName": "rosemary"
+    },
+    {
+      "id": "ingredient_shallot",
+      "displayName": "Shallot",
+      "normalizedName": "shallot"
+    },
+    {
+      "id": "ingredient_shredded_chicken",
+      "displayName": "Shredded Chicken",
+      "normalizedName": "shredded chicken"
+    },
+    {
+      "id": "ingredient_shrimp",
+      "displayName": "Shrimp",
+      "normalizedName": "shrimp"
+    },
+    {
+      "id": "ingredient_sour_cream",
+      "displayName": "Sour Cream",
+      "normalizedName": "sour cream"
+    },
+    {
+      "id": "ingredient_spaghetti",
+      "displayName": "Spaghetti",
+      "normalizedName": "spaghetti"
+    },
+    {
+      "id": "ingredient_spinach",
+      "displayName": "Spinach",
+      "normalizedName": "spinach"
+    },
+    {
+      "id": "ingredient_tomatillo_salsa",
+      "displayName": "Tomatillo Salsa",
+      "normalizedName": "tomatillo salsa"
+    },
+    {
+      "id": "ingredient_tomato_paste",
+      "displayName": "Tomato Paste",
+      "normalizedName": "tomato paste"
+    },
+    {
+      "id": "ingredient_tomatoes",
+      "displayName": "Tomatoes",
+      "normalizedName": "tomatoes"
+    },
+    {
+      "id": "ingredient_tostada_shells",
+      "displayName": "Tostada Shells",
+      "normalizedName": "tostada shells"
+    },
+    {
+      "id": "ingredient_vegetable_stock",
+      "displayName": "Vegetable Stock",
+      "normalizedName": "vegetable stock"
+    },
+    {
+      "id": "ingredient_white_rice",
+      "displayName": "White Rice",
+      "normalizedName": "white rice"
+    },
+    {
+      "id": "ingredient_white_wine",
+      "displayName": "White Wine",
+      "normalizedName": "white wine"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "nextRecommendedSteps": [
+    "Review the sample recipe structure against the current Swift model.",
+    "Promote the sample enrichment schema into a repeatable generator for the full 342-recipe batch.",
+    "Decide how the Swift `Recipe` and shopping models should evolve to support structured ingredients and per-serving nutrition."
+  ],
+  "schemaCompatibilityConcerns": [
+    "Current Swift `Recipe.ingredients` is `[String]`, but the sample uses structured ingredient objects.",
+    "Current Swift `Recipe` stores `prepTimeMinutes`, `cookingTimeMinutes`, `totalTimeMinutes`, `calories`, and `nutrition`; the enriched sample adds `prepMinutes`, `cookMinutes`, `totalMinutes`, `caloriesPerServing`, and `nutritionPerServing`.",
+    "Current shopping item model has no `normalizedName` field; the catalog sample uses it for deduplication and matching."
+  ]
+}
