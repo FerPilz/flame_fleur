@@ -109,7 +109,7 @@ struct FoodImagePlaceholder: View {
     private var content: some View {
         if let imageName = availableImageName {
             GeometryReader { proxy in
-                Image(imageName)
+                resolvedImage(named: imageName)
                     .resizable()
                     .scaledToFill()
                     .frame(width: proxy.size.width, height: proxy.size.height)
@@ -122,11 +122,27 @@ struct FoodImagePlaceholder: View {
     private var availableImageName: String? {
         guard let imageName = imageName?.trimmingCharacters(in: .whitespacesAndNewlines),
               !imageName.isEmpty,
-              AssetImageAvailability.exists(named: imageName) else {
+              AssetImageAvailability.exists(named: imageName) || RecipeImageStore.shared.hasLocalImage(named: imageName) else {
             return nil
         }
 
         return imageName
+    }
+
+    private func resolvedImage(named imageName: String) -> Image {
+        if AssetImageAvailability.exists(named: imageName) {
+            Image(imageName)
+        } else if let localImage = RecipeImageStore.shared.platformImage(named: imageName) {
+            #if canImport(UIKit)
+            Image(uiImage: localImage)
+            #elseif canImport(AppKit)
+            Image(nsImage: localImage)
+            #else
+            Image(imageName)
+            #endif
+        } else {
+            Image(imageName)
+        }
     }
 
     private var placeholderContent: some View {

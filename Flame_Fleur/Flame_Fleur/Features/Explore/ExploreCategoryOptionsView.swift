@@ -4,8 +4,10 @@ struct ExploreCategoryOptionsView: View {
     let group: ExploreCategoryGroup
     let onSubcategorySelected: (ExploreSubcategory) -> Void
     let onCartSelected: () -> Void
+    let onProfileSelected: () -> Void
     let onSettingsSelected: () -> Void
 
+    @EnvironmentObject private var shoppingCartStore: ShoppingCartStore
     @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
     @State private var selectedSubcategoryID: String?
@@ -14,11 +16,13 @@ struct ExploreCategoryOptionsView: View {
         group: ExploreCategoryGroup,
         onSubcategorySelected: @escaping (ExploreSubcategory) -> Void = { _ in },
         onCartSelected: @escaping () -> Void = {},
+        onProfileSelected: @escaping () -> Void = {},
         onSettingsSelected: @escaping () -> Void = {}
     ) {
         self.group = group
         self.onSubcategorySelected = onSubcategorySelected
         self.onCartSelected = onCartSelected
+        self.onProfileSelected = onProfileSelected
         self.onSettingsSelected = onSettingsSelected
     }
 
@@ -35,11 +39,11 @@ struct ExploreCategoryOptionsView: View {
                     }
                 ],
                 trailingActions: [
-                    AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1) {
+                    AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: shoppingCartStore.totalItemCount) {
                         onCartSelected()
                     },
-                    AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile settings") {
-                        onSettingsSelected()
+                    AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile") {
+                        onProfileSelected()
                     }
                 ]
             )
@@ -143,4 +147,5 @@ struct ExploreCategoryOptionsView: View {
 
 #Preview {
     ExploreCategoryOptionsView(group: SampleExploreCategories.groups[0])
+        .environmentObject(ShoppingCartStore.shared)
 }

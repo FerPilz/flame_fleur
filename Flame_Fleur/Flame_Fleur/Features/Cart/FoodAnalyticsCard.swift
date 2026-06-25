@@ -1,24 +1,18 @@
 import SwiftUI
 
 struct FoodAnalyticsCard: View {
+    let balance: MacroBalance
     let onUpgrade: () -> Void
-
-    private let segments: [FoodAnalyticsSegment] = [
-        FoodAnalyticsSegment(title: "Carbs", value: 0.32, color: AppColors.olive),
-        FoodAnalyticsSegment(title: "Protein", value: 0.27, color: AppColors.burntOrange),
-        FoodAnalyticsSegment(title: "Fiber", value: 0.19, color: AppColors.premiumGold),
-        FoodAnalyticsSegment(title: "Other", value: 0.22, color: AppColors.tertiaryText.opacity(0.55))
-    ]
 
     var body: some View {
         SurfaceCard(
             backgroundColor: AppColors.elevatedCardBackground,
             cornerRadius: AppRadius.large,
-            contentPadding: AppSpacing.xs
+            contentPadding: AppSpacing.sm
         ) {
-            VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
                 HStack(spacing: AppSpacing.xs) {
-                    Image(systemName: "chart.bar.xaxis")
+                    Image(systemName: "chart.bar.fill")
                         .font(AppTypography.caption)
                         .foregroundStyle(AppColors.olive)
 
@@ -26,92 +20,95 @@ struct FoodAnalyticsCard: View {
                         .font(AppTypography.cardTitle)
                         .foregroundStyle(AppColors.primaryText)
 
-                    Text("Insights about your cart")
-                        .font(AppTypography.metadata)
-                        .foregroundStyle(AppColors.tertiaryText)
-
                     Spacer()
-                }
 
-                segmentedBar
-                    .frame(height: 8)
-
-                HStack(spacing: AppSpacing.xs) {
-                    ForEach(segments) { segment in
-                        HStack(spacing: AppSpacing.xxs) {
-                            Circle()
-                                .fill(segment.color)
-                                .frame(width: 6, height: 6)
-
-                            Text(segment.title)
-                                .font(AppTypography.metadata)
-                                .foregroundStyle(AppColors.secondaryText)
-                                .lineLimit(1)
-                        }
-                    }
-                }
-
-                Button(action: onUpgrade) {
-                    HStack(spacing: AppSpacing.xs) {
-                        Image(systemName: "sparkle")
-                            .font(AppTypography.caption)
-                            .foregroundStyle(AppColors.premiumGold)
-
-                        Text("Unlock deeper food analysis and savings.")
-                            .font(AppTypography.metadata)
-                            .foregroundStyle(AppColors.secondaryText)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.82)
-
-                        Spacer(minLength: AppSpacing.xs)
-
+                    Button(action: onUpgrade) {
                         Text("Upgrade")
                             .font(AppTypography.metadata)
                             .foregroundStyle(AppColors.olive)
-
-                        Image(systemName: "chevron.right")
-                            .font(AppTypography.metadata)
-                            .foregroundStyle(AppColors.olive)
+                            .padding(.horizontal, AppSpacing.sm)
+                            .frame(height: 24)
+                            .background(Capsule(style: .continuous).fill(AppColors.softOlive))
+                            .overlay(Capsule(style: .continuous).stroke(AppColors.warmBorder, lineWidth: 1))
                     }
-                    .padding(.horizontal, AppSpacing.xs)
-                    .frame(height: 28)
-                    .background(
-                        Capsule(style: .continuous)
-                            .fill(AppColors.softOrange.opacity(0.55))
-                    )
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
+
+                segmentedMacroBar
+
+                HStack(spacing: AppSpacing.xs) {
+                    legendPill(title: "Protein", value: balance.proteinText, tint: AppColors.olive)
+                    legendPill(title: "Carbs", value: balance.carbsText, tint: AppColors.burntOrange)
+                    legendPill(title: "Fat", value: balance.fatText, tint: AppColors.premiumGold)
+                }
             }
         }
     }
 
-    private var segmentedBar: some View {
+    private var segmentedMacroBar: some View {
         GeometryReader { proxy in
             HStack(spacing: 0) {
-                ForEach(segments) { segment in
-                    segment.color
-                        .frame(width: proxy.size.width * segment.value)
-                }
+                segment(width: proxy.size.width * balance.proteinPercentage, tint: AppColors.olive)
+                segment(width: proxy.size.width * balance.carbsPercentage, tint: AppColors.burntOrange)
+                segment(width: proxy.size.width * balance.fatPercentage, tint: AppColors.premiumGold)
             }
-            .clipShape(Capsule(style: .continuous))
+            .frame(width: proxy.size.width, height: 12, alignment: .leading)
+            .background(
+                Capsule(style: .continuous)
+                    .fill(AppColors.cardBackground.opacity(0.72))
+            )
             .overlay(
                 Capsule(style: .continuous)
                     .stroke(AppColors.warmBorder, lineWidth: 1)
             )
         }
+        .frame(height: 12)
+    }
+
+    private func segment(width: CGFloat, tint: Color) -> some View {
+        Rectangle()
+            .fill(tint)
+            .frame(width: max(width, 0))
+    }
+
+    private func legendPill(title: String, value: String, tint: Color) -> some View {
+        HStack(spacing: AppSpacing.xxs) {
+            Circle()
+                .fill(tint)
+                .frame(width: 8, height: 8)
+
+            Text("\(title) \(value)")
+                .font(AppTypography.metadata)
+                .foregroundStyle(AppColors.secondaryText)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+        }
+        .padding(.horizontal, AppSpacing.xs)
+        .frame(height: 24)
+        .background(
+            Capsule(style: .continuous)
+                .fill(AppColors.softOlive.opacity(0.42))
+        )
+        .overlay(
+            Capsule(style: .continuous)
+                .stroke(AppColors.warmBorder, lineWidth: 1)
+        )
+        .frame(maxWidth: .infinity)
     }
 }
 
-private struct FoodAnalyticsSegment: Identifiable {
-    let title: String
-    let value: CGFloat
-    let color: Color
-
-    var id: String { title }
-}
-
 #Preview {
-    FoodAnalyticsCard {}
-        .padding()
-        .background(AppColors.appBackground)
+    FoodAnalyticsCard(
+        balance: MacroBalance(
+            summary: NutritionSummary(
+                calories: 1_280,
+                proteinGrams: 84,
+                carbohydrateGrams: 146,
+                fatGrams: 48
+            )
+        ),
+        onUpgrade: {}
+    )
+    .padding()
+    .background(AppColors.appBackground)
 }

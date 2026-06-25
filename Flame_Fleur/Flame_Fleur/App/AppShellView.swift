@@ -4,21 +4,23 @@ struct AppShellView: View {
     @State private var selectedTab: AppTab = .home
     @State private var previousTab: AppTab = .home
     @State private var lastNonPlannerTab: AppTab = .home
+    @State private var pendingExploreLaunchContext: ExploreLaunchContext?
     @StateObject private var shoppingCartStore = ShoppingCartStore.shared
     @StateObject private var mealPlannerStore = MealPlannerStore.shared
+    @StateObject private var userRecipeStore = UserRecipeStore.shared
     @StateObject private var userProfileStore = UserProfileStore.shared
     @StateObject private var appSettingsStore = AppSettingsStore.shared
     @StateObject private var favoritesStore = FavoritesStore.shared
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView()
+            HomeView(openExplore: openExplore)
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
                 .tag(AppTab.home)
 
-            ExploreView()
+            ExploreView(launchContext: $pendingExploreLaunchContext)
                 .tabItem {
                     Label("Explore", systemImage: "magnifyingglass")
                 }
@@ -54,6 +56,7 @@ struct AppShellView: View {
         .toolbarBackground(.visible, for: .tabBar)
         .environmentObject(shoppingCartStore)
         .environmentObject(mealPlannerStore)
+        .environmentObject(userRecipeStore)
         .environmentObject(userProfileStore)
         .environmentObject(appSettingsStore)
         .environmentObject(favoritesStore)
@@ -63,6 +66,11 @@ struct AppShellView: View {
                 lastNonPlannerTab = newTab
             }
         }
+    }
+
+    private func openExplore(_ context: ExploreLaunchContext) {
+        pendingExploreLaunchContext = context
+        selectedTab = .explore
     }
 
     private func goBackFromMainTab(_ tab: AppTab) {

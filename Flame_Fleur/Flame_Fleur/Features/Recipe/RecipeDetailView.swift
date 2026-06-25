@@ -4,6 +4,8 @@ struct RecipeDetailView: View {
     let recipeID: String
     let onBack: (() -> Void)?
     let onViewIngredients: () -> Void
+    let plannerSelectionContext: PlannerRecipeSelectionContext?
+    let onAddToPlanner: ((Recipe) -> Void)?
 
     @EnvironmentObject private var favoritesStore: FavoritesStore
     @EnvironmentObject private var cartStore: ShoppingCartStore
@@ -16,23 +18,16 @@ struct RecipeDetailView: View {
 
     init(
         recipeID: String,
-        onViewIngredients: @escaping () -> Void = {}
-    ) {
-        self.init(
-            recipeID: recipeID,
-            onBack: nil,
-            onViewIngredients: onViewIngredients
-        )
-    }
-
-    init(
-        recipeID: String,
-        onBack: (() -> Void)?,
-        onViewIngredients: @escaping () -> Void = {}
+        onBack: (() -> Void)? = nil,
+        onViewIngredients: @escaping () -> Void = {},
+        plannerSelectionContext: PlannerRecipeSelectionContext? = nil,
+        onAddToPlanner: ((Recipe) -> Void)? = nil
     ) {
         self.recipeID = recipeID
         self.onBack = onBack
         self.onViewIngredients = onViewIngredients
+        self.plannerSelectionContext = plannerSelectionContext
+        self.onAddToPlanner = onAddToPlanner
     }
 
     var body: some View {
@@ -61,6 +56,16 @@ struct RecipeDetailView: View {
                 AppColors.appBackground
                     .ignoresSafeArea()
 
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 0) {
+                        Color.clear
+                            .frame(height: heroHeight - RecipeDetailLayout.panelOverlap)
+
+                        contentPanel(recipe)
+                    }
+                }
+                .zIndex(0)
+
                 RecipeHeroHeader(
                     recipe: recipe,
                     isFavorite: favoritesStore.isFavorite(recipe.id),
@@ -73,18 +78,10 @@ struct RecipeDetailView: View {
                 )
                 .frame(height: heroHeight)
                 .ignoresSafeArea(edges: .top)
-
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 0) {
-                        Color.clear
-                            .frame(height: heroHeight - RecipeDetailLayout.panelOverlap)
-
-                        contentPanel(recipe)
-                    }
-                }
+                .zIndex(1)
             }
             .safeAreaInset(edge: .bottom) {
-                bottomActionBar
+                bottomActionBar(recipe)
             }
         }
     }
@@ -101,6 +98,8 @@ struct RecipeDetailView: View {
         VStack(alignment: .leading, spacing: AppSpacing.lg) {
             titleBlock(recipe)
             RecipeInfoCarousel(recipe: recipe)
+            sourcePreview(recipe)
+            notesPreview(recipe)
             nutritionPreview(recipe)
             ChefPilotCard(isEnabled: $isChefPilotEnabled)
             ingredientsPreview(recipe)
@@ -140,6 +139,22 @@ struct RecipeDetailView: View {
                 .lineLimit(3)
                 .lineSpacing(3)
                 .fixedSize(horizontal: false, vertical: true)
+
+            if let plannerSelectionContext {
+                Text(plannerSelectionContext.subtitle)
+                    .font(AppTypography.metadata)
+                    .foregroundStyle(AppColors.olive)
+                    .padding(.horizontal, AppSpacing.sm)
+                    .frame(height: 26)
+                    .background(
+                        Capsule(style: .continuous)
+                            .fill(AppColors.softOlive)
+                    )
+                    .overlay(
+                        Capsule(style: .continuous)
+                            .stroke(AppColors.warmBorder, lineWidth: 1)
+                    )
+            }
         }
     }
 
@@ -225,6 +240,92 @@ struct RecipeDetailView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
+    @ViewBuilder
+    private func sourcePreview(_ recipe: Recipe) -> some View {
+        if recipe.userRecipeSourceType == .importedURL
+            || recipe.sourceURLString?.isEmpty == false
+            || recipe.sourceHost?.isEmpty == false {
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                SectionHeaderView("Source", style: .compact)
+
+                SurfaceCard(
+                    backgroundColor: AppColors.elevatedCardBackground,
+                    borderColor: AppColors.warmBorder,
+                    cornerRadius: AppRadius.large,
+                    contentPadding: AppSpacing.sm,
+                    showsShadow: false
+                ) {
+                    VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                        if let sourceHost = recipe.sourceHost?.trimmingCharacters(in: .whitespacesAndNewlines),
+                           !sourceHost.isEmpty {
+                            metadataLine(systemName: "globe", text: sourceHost)
+                        }
+
+                        if let sourceURLString = recipe.sourceURLString?.trimmingCharacters(in: .whitespacesAndNewlines),
+                           !sourceURLString.isEmpty {
+                            if let url = URL(string: sourceURLString) {
+                                Link(destination: url) {
+                                    metadataLine(systemName: "link", text: sourceURLString)
+                                }
+                                .buttonStyle(.plain)
+                            } else {
+                                metadataLine(systemName: "link", text: sourceURLString)
+                            }
+                        }
+
+                        if let importedAt = recipe.importedAt {
+                            metadataLine(
+                                systemName: "calendar",
+                                text: "Imported \(importedAt.formatted(date: .abbreviated, time: .omitted))"
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func notesPreview(_ recipe: Recipe) -> some View {
+        if let notes = recipe.notes?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !notes.isEmpty {
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                SectionHeaderView("Notes", style: .compact)
+
+                SurfaceCard(
+                    backgroundColor: AppColors.cardBackground.opacity(0.70),
+                    borderColor: AppColors.warmBorder,
+                    cornerRadius: AppRadius.large,
+                    contentPadding: AppSpacing.sm,
+                    showsShadow: false
+                ) {
+                    Text(notes)
+                        .font(AppTypography.callout)
+                        .foregroundStyle(AppColors.secondaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+        }
+    }
+
+    private func metadataLine(systemName: String, text: String) -> some View {
+        HStack(alignment: .top, spacing: AppSpacing.xs) {
+            Image(systemName: systemName)
+                .font(AppTypography.metadata)
+                .foregroundStyle(AppColors.olive)
+                .frame(width: 16, alignment: .center)
+                .padding(.top, 2)
+
+            Text(text)
+                .font(AppTypography.callout)
+                .foregroundStyle(AppColors.secondaryText)
+                .lineLimit(3)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Spacer(minLength: 0)
+        }
+    }
+
     private func cookingSteps(_ recipe: Recipe) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.sm) {
             SectionHeaderView("Cooking Steps", subtitle: "\(recipe.instructions.count) guided steps", style: .compact)
@@ -297,10 +398,25 @@ struct RecipeDetailView: View {
         }
     }
 
-    private var bottomActionBar: some View {
+    private func bottomActionBar(_ recipe: Recipe) -> some View {
         VStack(spacing: AppSpacing.xs) {
-            PrimaryButton("View Ingredients", systemImage: "list.bullet.clipboard", style: .recipe, height: 50) {
-                onViewIngredients()
+            if let plannerSelectionContext, let onAddToPlanner {
+                PrimaryButton(plannerSelectionContext.actionTitle, systemImage: "plus", style: .recipe, height: 50) {
+                    onAddToPlanner(recipe)
+                }
+
+                Button {
+                    onViewIngredients()
+                } label: {
+                    Text("View Ingredients")
+                        .font(AppTypography.smallButton)
+                        .foregroundStyle(AppColors.olive)
+                }
+                .buttonStyle(.plain)
+            } else {
+                PrimaryButton("View Ingredients", systemImage: "list.bullet.clipboard", style: .recipe, height: 50) {
+                    onViewIngredients()
+                }
             }
         }
         .padding(.horizontal, AppSpacing.lg)

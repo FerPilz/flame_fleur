@@ -4,6 +4,7 @@ struct ShoppingCartView: View {
     let onClose: (() -> Void)?
 
     @EnvironmentObject private var cartStore: ShoppingCartStore
+    @Environment(\.dismiss) private var dismiss
 
     @State private var isAddItemSheetPresented = false
     @State private var isSaveCartSheetPresented = false
@@ -13,6 +14,8 @@ struct ShoppingCartView: View {
     @State private var didSaveCart = false
     @State private var draftCartName = "Weekly groceries"
 
+    private let cartHorizontalPadding = AppSpacing.md
+
     init(onClose: (() -> Void)? = nil) {
         self.onClose = onClose
     }
@@ -21,16 +24,26 @@ struct ShoppingCartView: View {
         AppScreen(
             contentSpacing: AppSpacing.sm,
             headerTopPadding: AppSpacing.xxs,
-            contentBottomPadding: AppSpacing.xxxl + AppSpacing.lg
+            contentHorizontalPadding: cartHorizontalPadding,
+            contentTopPadding: AppSpacing.xs,
+            contentBottomPadding: AppSpacing.xxxl + 44
         ) {
             fixedHeader
         } content: {
-            if cartStore.items.isEmpty {
-                emptyCartState
-            } else {
-                FoodAnalyticsCard(onUpgrade: placeholderUpgrade)
-                cartSections
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                if cartStore.items.isEmpty {
+                    emptyCartState
+                } else {
+                    cartSections
+                }
+
+                FoodAnalyticsCard(
+                    balance: cartStore.recipeMacroBalance,
+                    onUpgrade: placeholderUpgrade
+                )
             }
+            .padding(.top, AppSpacing.xs)
+            .padding(.bottom, AppSpacing.sm)
         }
         .safeAreaInset(edge: .bottom) {
             bottomActionBar
@@ -62,32 +75,45 @@ struct ShoppingCartView: View {
         } message: {
             Text("This removes all selected ingredients from the cart.")
         }
+        .toolbar(.hidden, for: .navigationBar)
     }
 
     private var fixedHeader: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.xs) {
-            HStack(alignment: .center, spacing: AppSpacing.sm) {
-                VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: AppSpacing.sm) {
+            ZStack {
+                VStack(alignment: .center, spacing: 2) {
                     Text("Flame & Fleur")
-                        .font(.system(size: 21, weight: .medium, design: .serif))
+                        .font(AppTypography.brandTitle)
                         .foregroundStyle(AppColors.olive)
                         .lineLimit(1)
+                        .allowsTightening(true)
+                        .padding(.horizontal, AppTopActionMetrics.centeredTitleInset)
+                        .frame(maxWidth: .infinity, alignment: .center)
 
                     Text("Shopping Cart")
-                        .font(.system(size: 24, weight: .bold, design: .default))
+                        .font(.system(size: 21, weight: .semibold, design: .default))
                         .foregroundStyle(AppColors.primaryText)
                         .lineLimit(1)
-                        .fixedSize(horizontal: false, vertical: true)
+                        .allowsTightening(true)
                         .accessibilityAddTraits(.isHeader)
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
+                .frame(maxWidth: .infinity)
 
-                Spacer(minLength: AppSpacing.xs)
+                HStack(alignment: .center, spacing: AppSpacing.sm) {
+                    backButton
+                        .frame(width: AppTopActionMetrics.actionGroupWidth, alignment: .leading)
 
-                HStack(spacing: AppSpacing.xs) {
-                    savedCartsButton
-                    shareButton
+                    Spacer(minLength: 0)
+
+                    HStack(spacing: AppSpacing.xs) {
+                        savedCartsButton
+                        shareButton
+                    }
+                    .frame(width: AppTopActionMetrics.actionGroupWidth, alignment: .trailing)
                 }
             }
+            .frame(minHeight: 44)
 
             VStack(spacing: AppSpacing.sm) {
                 addItemRow
@@ -101,6 +127,18 @@ struct ShoppingCartView: View {
                     deleteSelectedButton
                 }
             }
+        }
+    }
+
+    private var backButton: some View {
+        IconCircleButton(
+            systemName: "chevron.left",
+            accessibilityLabel: "Back",
+            size: AppTopActionMetrics.compactButtonSize,
+            backgroundColor: AppColors.elevatedCardBackground,
+            foregroundColor: AppColors.darkOlive
+        ) {
+            closeCart()
         }
     }
 
@@ -280,9 +318,17 @@ struct ShoppingCartView: View {
                         .stroke(AppColors.warmBorder, lineWidth: 1)
                 )
         )
-        .padding(.horizontal, AppSpacing.screenHorizontal)
+        .padding(.horizontal, cartHorizontalPadding)
         .padding(.bottom, AppSpacing.xxs)
         .background(AppColors.appBackground.opacity(0.96))
+    }
+
+    private func closeCart() {
+        if let onClose {
+            onClose()
+        } else {
+            dismiss()
+        }
     }
 
     private var saveCartSheet: some View {

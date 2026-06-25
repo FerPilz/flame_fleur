@@ -42,7 +42,7 @@ struct ShoppingCartSectionView: View {
                             .foregroundStyle(AppColors.secondaryText)
                             .rotationEffect(.degrees(isCollapsed ? -90 : 0))
                     }
-                    .padding(.horizontal, AppSpacing.sm)
+                    .padding(.horizontal, AppSpacing.xs)
                     .frame(height: 38)
                 }
                 .buttonStyle(.plain)
@@ -52,7 +52,7 @@ struct ShoppingCartSectionView: View {
                         Rectangle()
                             .fill(AppColors.warmBorder.opacity(0.72))
                             .frame(height: 1)
-                            .padding(.leading, AppSpacing.md)
+                            .padding(.leading, AppSpacing.sm)
 
                         ShoppingCartItemRow(
                             item: item,

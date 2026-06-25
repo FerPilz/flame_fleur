@@ -3,7 +3,8 @@ import SwiftUI
 enum AppTopActionMetrics {
     static let buttonSize: CGFloat = 34
     static let compactButtonSize: CGFloat = 32
-    static let actionGroupWidth: CGFloat = 76
+    static let actionGroupWidth: CGFloat = 96
+    static let centeredTitleInset: CGFloat = 104
     static let minimumTopOffset: CGFloat = 44
 }
 
@@ -55,10 +56,12 @@ struct IconCircleButton: View {
                         .frame(width: 15, height: 15)
                         .background(Circle().fill(AppColors.burntOrange))
                         .offset(x: 3, y: -3)
-                }
+                    }
             }
         }
         .buttonStyle(.plain)
+        .frame(width: max(size, 44), height: max(size, 44), alignment: .center)
+        .contentShape(Circle())
         .accessibilityLabel(Text(accessibilityLabel))
     }
 
@@ -83,7 +86,7 @@ struct IconCircleButton: View {
 #Preview {
     HStack {
         IconCircleButton(systemName: "line.3.horizontal", accessibilityLabel: "Menu") {}
-        IconCircleButton(systemName: "basket", accessibilityLabel: "Shopping basket", badgeValue: 1) {}
+        IconCircleButton(systemName: "basket", accessibilityLabel: "Shopping basket", badgeValue: 4) {}
     }
     .padding()
     .background(AppColors.appBackground)

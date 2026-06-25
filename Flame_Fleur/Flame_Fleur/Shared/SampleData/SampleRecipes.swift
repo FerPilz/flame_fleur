@@ -1,12 +1,22 @@
 import Foundation
 
 enum SampleRecipes {
-    static let all: [Recipe] = loadSeedRecipes()
+    static let all: [Recipe] = uniqueRecipes(loadSeedRecipes() + CookflowSnacksBreakfastSeed.recipes)
     static let seedCoverage = RecipeSeedCoverage(
         recipes: all,
-        expectedSubcategoryIDs: SampleExploreCategories.groups.flatMap { group in
-            group.subcategories.map(\.id)
-        }
+        expectedRecipeCountsBySubcategoryID: Dictionary(
+            uniqueKeysWithValues: SampleExploreCategories.groups.flatMap { group in
+                group.subcategories.map { subcategory in
+                    let expectedCount: Int
+                    if subcategory.id == "breakfast-egg-based" {
+                        expectedCount = 6
+                    } else {
+                        expectedCount = ["snacks", "breakfast"].contains(subcategory.parentGroupID) ? 5 : 6
+                    }
+                    return (subcategory.id, expectedCount)
+                }
+            }
+        )
     )
 
     private static func loadSeedRecipes(bundle: Bundle = .main) -> [Recipe] {
@@ -25,6 +35,11 @@ enum SampleRecipes {
         }
 
         return recipes
+    }
+
+    private static func uniqueRecipes(_ recipes: [Recipe]) -> [Recipe] {
+        var seenIDs = Set<String>()
+        return recipes.filter { seenIDs.insert($0.id).inserted }
     }
 
     private static let fallbackRecipes: [Recipe] = [
@@ -112,20 +127,20 @@ struct RecipeSeedCoverage {
     let missingSubcategoryIDs: [String]
     let invalidSubcategoryCounts: [String: Int]
 
-    init(recipes: [Recipe], expectedSubcategoryIDs: [String]) {
+    init(recipes: [Recipe], expectedRecipeCountsBySubcategoryID: [String: Int]) {
         let counts = Dictionary(grouping: recipes.compactMap(\.subcategoryID), by: { $0 })
             .mapValues(\.count)
-        let expectedIDs = Set(expectedSubcategoryIDs)
+        let expectedIDs = Set(expectedRecipeCountsBySubcategoryID.keys)
 
         self.totalRecipeCount = recipes.count
         self.totalSubcategoryCount = counts.keys.count
-        self.missingSubcategoryIDs = expectedSubcategoryIDs.filter { counts[$0] == nil }
+        self.missingSubcategoryIDs = expectedRecipeCountsBySubcategoryID.keys.filter { counts[$0] == nil }
         self.invalidSubcategoryCounts = counts.filter { subcategoryID, count in
-            expectedIDs.contains(subcategoryID) && count != 6
+            expectedIDs.contains(subcategoryID) && count != expectedRecipeCountsBySubcategoryID[subcategoryID, default: count]
         }
     }
 
-    var hasExactlySixRecipesPerSubcategory: Bool {
+    var hasExpectedRecipeCountPerSubcategory: Bool {
         missingSubcategoryIDs.isEmpty && invalidSubcategoryCounts.isEmpty
     }
 }

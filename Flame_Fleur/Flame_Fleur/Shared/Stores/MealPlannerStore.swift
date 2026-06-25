@@ -13,6 +13,7 @@ final class MealPlannerStore: ObservableObject {
     @Published private(set) var savedPlanNames: [String] = []
 
     private let calendar: Calendar
+    private let recipeRepository = RecipeRepository.shared
 
     init(
         selectedDate: Date = Date(),
@@ -79,6 +80,27 @@ final class MealPlannerStore: ObservableObject {
     }
 
     @discardableResult
+    func addRecipeToPlannerSlot(
+        recipeID: String,
+        date: Date,
+        mealType: MealSlot,
+        slotID: String? = nil,
+        mode: PlannerRecipeSelectionContext.Mode = .add
+    ) -> Bool {
+        guard let recipe = recipeRepository.recipe(id: recipeID) else {
+            return false
+        }
+
+        let didAdd = addRecipe(recipe, on: date, slot: mealType)
+        guard didAdd else { return false }
+
+        selectDate(date)
+        _ = slotID
+        _ = mode
+        return true
+    }
+
+    @discardableResult
     func addRecipeToFirstAvailableWeekSlot(_ recipe: Recipe, preferredDate: Date) -> Bool {
         if addRecipe(recipe, on: preferredDate) {
             return true
@@ -125,7 +147,7 @@ final class MealPlannerStore: ObservableObject {
     var weeklySummary: MealPlanSummary {
         let weeklyMeals = mealsInVisibleWeek
         let caloriesByDay = weekDates.map { date in
-            meals(for: date).reduce(0) { $0 + $1.calories }
+            Int(NutritionCalculator.summary(from: meals(for: date)).calories.rounded())
         }
         let averageCalories = caloriesByDay.isEmpty ? 0 : caloriesByDay.reduce(0, +) / caloriesByDay.count
         let mealsPlanned = weeklyMeals.count
@@ -140,21 +162,27 @@ final class MealPlannerStore: ObservableObject {
     }
 
     var macroBalance: MacroBalance {
-        mealsInVisibleWeek.reduce(MacroBalance(proteinGrams: 0, carbsGrams: 0, fatGrams: 0)) { balance, meal in
-            MacroBalance(
-                proteinGrams: balance.proteinGrams + meal.proteinGrams,
-                carbsGrams: balance.carbsGrams + meal.carbsGrams,
-                fatGrams: balance.fatGrams + meal.fatGrams
-            )
-        }
+        MacroBalance(summary: weeklyNutritionSummary)
+    }
+
+    var selectedDayNutritionSummary: NutritionSummary {
+        NutritionCalculator.summary(from: meals(for: selectedDate))
+    }
+
+    var selectedDayMacroBalance: MacroBalance {
+        MacroBalance(summary: selectedDayNutritionSummary)
     }
 
     func totalCalories(for date: Date) -> Int {
-        meals(for: date).reduce(0) { $0 + $1.calories }
+        Int(NutritionCalculator.summary(from: meals(for: date)).calories.rounded())
     }
 
     var mealsInSelectedWeek: [PlannedMeal] {
         mealsInVisibleWeek
+    }
+
+    var weeklyNutritionSummary: NutritionSummary {
+        NutritionCalculator.summary(from: mealsInVisibleWeek)
     }
 
     private var mealsInVisibleWeek: [PlannedMeal] {
@@ -170,15 +198,17 @@ final class MealPlannerStore: ObservableObject {
     }
 
     private func plannedMeal(from recipe: Recipe, date: Date, slot: MealSlot) -> PlannedMeal {
-        PlannedMeal(
+        let nutrition = NutritionCalculator.summary(from: recipe)
+
+        return PlannedMeal(
             date: date,
             slot: slot,
             recipeID: recipe.id,
             title: recipe.title,
-            calories: recipe.calories,
-            proteinGrams: recipe.nutrition.proteinGrams,
-            carbsGrams: recipe.nutrition.carbsGrams,
-            fatGrams: recipe.nutrition.fatGrams,
+            calories: Int(nutrition.calories.rounded()),
+            proteinGrams: Int(nutrition.proteinGrams.rounded()),
+            carbsGrams: Int(nutrition.carbohydrateGrams.rounded()),
+            fatGrams: Int(nutrition.fatGrams.rounded()),
             imageName: recipe.imageName
         )
     }

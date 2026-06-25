@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum AppTypography {
-    static let brandTitle = Font.system(size: 22, weight: .medium, design: .serif)
+    static let brandTitle = Font.system(size: 18, weight: .medium, design: .serif)
     static let screenTitle = Font.system(size: 30, weight: .semibold, design: .serif)
     static let recipeDetailTitle = Font.system(size: 30, weight: .semibold, design: .serif)
     static let heroTitle = Font.system(size: 24, weight: .semibold, design: .serif)

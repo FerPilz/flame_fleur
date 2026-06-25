@@ -4,15 +4,55 @@ struct ProfileView: View {
     let onBack: (() -> Void)?
 
     @EnvironmentObject private var profileStore: UserProfileStore
+    @EnvironmentObject private var favoritesStore: FavoritesStore
+    @EnvironmentObject private var userRecipeStore: UserRecipeStore
     @Environment(\.dismiss) private var dismiss
 
     @State private var isPreferencesEditorPresented = false
     @State private var isAchievementsPresented = false
-    @State private var isSettingsPresented = false
-    @State private var alert: ProfileAlert?
+    @State private var navigationPath: [ProfileRoute] = []
+
+    private let recipeRepository = RecipeRepository.shared
 
     private var profile: UserProfile {
         profileStore.profile
+    }
+
+    private var displayName: String {
+        let trimmed = profile.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? "Profile" : trimmed
+    }
+
+    private var displayLocation: String? {
+        let trimmed = profile.location.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
+    }
+
+    private var displayTagline: String? {
+        let trimmed = profile.tagline.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
+    }
+
+    private var displayCuisineStyle: String {
+        let trimmed = profile.cuisineStyle.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? "Not set" : trimmed
+    }
+
+    private var displayMemberSinceText: String? {
+        guard profile.memberSince.timeIntervalSince1970 > 0 else { return nil }
+        return profile.memberSince.formatted(.dateTime.month(.abbreviated).year())
+    }
+
+    private var safePreferences: [ProfilePreference] {
+        profile.preferences
+    }
+
+    private var safeFavoriteCuisines: [FavoriteCuisine] {
+        profile.favoriteCuisines
+    }
+
+    private var safeAchievements: [ProfileAchievement] {
+        profile.achievements
     }
 
     init(onBack: (() -> Void)? = nil) {
@@ -20,7 +60,7 @@ struct ProfileView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             ZStack {
                 AppColors.appBackground.ignoresSafeArea()
 
@@ -31,6 +71,7 @@ struct ProfileView: View {
                         profileSummaryCard
                         preferencesSection
                         favoriteCuisinesSection
+                        savedRecipesSection
                         achievementsSection
                     }
                     .padding(.horizontal, AppSpacing.screenHorizontal)
@@ -54,15 +95,40 @@ struct ProfileView: View {
                     .presentationDragIndicator(.visible)
                     .presentationCornerRadius(AppRadius.hero)
             }
-            .navigationDestination(isPresented: $isSettingsPresented) {
-                SettingsView()
-            }
-            .alert(item: $alert) { alert in
-                Alert(
-                    title: Text(alert.title),
-                    message: Text(alert.message),
-                    dismissButton: .default(Text("OK"))
-                )
+            .navigationDestination(for: ProfileRoute.self) { route in
+                switch route {
+                case .recipe(let recipeID):
+                    if recipeRepository.recipe(id: recipeID) != nil {
+                        RecipeDetailView(
+                            recipeID: recipeID,
+                            onBack: {
+                                if !navigationPath.isEmpty {
+                                    navigationPath.removeLast()
+                                }
+                            },
+                            onViewIngredients: {
+                                navigationPath.append(.ingredients(recipeID))
+                            }
+                        )
+                    } else {
+                        EmptyView()
+                    }
+                case .ingredients(let recipeID):
+                    if recipeRepository.recipe(id: recipeID) != nil {
+                        RecipeIngredientsView(
+                            recipeID: recipeID,
+                            onBack: {
+                                if !navigationPath.isEmpty {
+                                    navigationPath.removeLast()
+                                }
+                            }
+                        )
+                    } else {
+                        EmptyView()
+                    }
+                case .settings:
+                    SettingsView()
+                }
             }
         }
     }
@@ -102,46 +168,43 @@ struct ProfileView: View {
 
     private var identityHeader: some View {
         VStack(spacing: AppSpacing.xs) {
-            ZStack(alignment: .bottomTrailing) {
-                FoodImagePlaceholder(imageName: profile.profileImageName, style: .circle)
-                    .frame(width: 92, height: 92)
-
-                Button(action: showPhotoPlaceholder) {
-                    Image(systemName: "camera.fill")
-                        .font(AppTypography.metadata)
-                        .foregroundStyle(AppColors.olive)
-                        .frame(width: 28, height: 28)
-                        .background(Circle().fill(AppColors.elevatedCardBackground))
-                        .overlay(Circle().stroke(AppColors.warmBorder, lineWidth: 1))
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel(Text("Edit profile photo"))
-            }
+            FoodImagePlaceholder(imageName: profile.profileImageName, style: .circle)
+                .frame(width: 92, height: 92)
 
             VStack(spacing: AppSpacing.xxs) {
-                Text(profile.name)
+                Text(displayName)
                     .font(AppTypography.heroTitle)
                     .foregroundStyle(AppColors.primaryText)
                     .lineLimit(1)
 
-                Label(profile.location, systemImage: "mappin.circle.fill")
-                    .font(AppTypography.metadata)
-                    .foregroundStyle(AppColors.olive)
-                    .lineLimit(1)
-
-                HStack(spacing: AppSpacing.xxs) {
-                    Text(profile.tagline)
-                        .font(AppTypography.metadata)
-                        .foregroundStyle(AppColors.secondaryText)
-
-                    Image(systemName: "checkmark.circle.fill")
+                if let displayLocation {
+                    Label(displayLocation, systemImage: "mappin.circle.fill")
                         .font(AppTypography.metadata)
                         .foregroundStyle(AppColors.olive)
+                        .lineLimit(1)
                 }
-                .padding(.horizontal, AppSpacing.sm)
-                .frame(height: 26)
-                .background(Capsule(style: .continuous).fill(AppColors.elevatedCardBackground))
-                .overlay(Capsule(style: .continuous).stroke(AppColors.warmBorder, lineWidth: 1))
+
+                if let displayTagline {
+                    HStack(spacing: AppSpacing.xxs) {
+                        Text(displayTagline)
+                            .font(AppTypography.metadata)
+                            .foregroundStyle(AppColors.secondaryText)
+
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(AppTypography.metadata)
+                            .foregroundStyle(AppColors.olive)
+                    }
+                    .padding(.horizontal, AppSpacing.sm)
+                    .frame(height: 26)
+                    .background(Capsule(style: .continuous).fill(AppColors.elevatedCardBackground))
+                    .overlay(Capsule(style: .continuous).stroke(AppColors.warmBorder, lineWidth: 1))
+                }
+
+                if let displayMemberSinceText {
+                    Text("Member since \(displayMemberSinceText)")
+                        .font(AppTypography.metadata)
+                        .foregroundStyle(AppColors.tertiaryText)
+                }
             }
         }
         .frame(maxWidth: .infinity)
@@ -153,34 +216,42 @@ struct ProfileView: View {
             cornerRadius: AppRadius.extraLarge,
             contentPadding: AppSpacing.sm
         ) {
-            HStack(spacing: AppSpacing.xs) {
-                summaryMetric(
-                    title: "Cuisine style",
-                    value: profile.cuisineStyle,
-                    subtitle: nil,
-                    systemImage: "fork.knife"
-                )
+            VStack(spacing: AppSpacing.xs) {
+                HStack(spacing: AppSpacing.xs) {
+                    summaryMetric(
+                        title: "Cuisine style",
+                        value: displayCuisineStyle,
+                        subtitle: nil,
+                        systemImage: "fork.knife"
+                    )
 
-                verticalDivider
+                    verticalDivider
 
-                Button(action: showFavoriteMealsPlaceholder) {
                     summaryMetric(
                         title: "Favorite meals",
-                        value: "\(profile.favoriteMealsCount)",
-                        subtitle: "Recipes",
+                        value: "\(favoritesStore.favoriteRecipeIDs.count)",
+                        subtitle: "Saved",
                         systemImage: "heart.fill"
                     )
                 }
-                .buttonStyle(.plain)
 
-                verticalDivider
+                HStack(spacing: AppSpacing.xs) {
+                    summaryMetric(
+                        title: "Saved recipes",
+                        value: "\(userRecipeStore.myRecipes.count)",
+                        subtitle: "My Recipes",
+                        systemImage: "book.closed"
+                    )
 
-                summaryMetric(
-                    title: "Member since",
-                    value: profile.memberSince.formatted(.dateTime.month(.abbreviated).year()),
-                    subtitle: nil,
-                    systemImage: "calendar"
-                )
+                    verticalDivider
+
+                    summaryMetric(
+                        title: "Location",
+                        value: profile.location,
+                        subtitle: nil,
+                        systemImage: "mappin.circle.fill"
+                    )
+                }
             }
         }
     }
@@ -191,15 +262,21 @@ struct ProfileView: View {
                 isPreferencesEditorPresented = true
             }
 
-            LazyVGrid(
-                columns: [
-                    GridItem(.flexible(), spacing: AppSpacing.xs),
-                    GridItem(.flexible(), spacing: AppSpacing.xs)
-                ],
-                spacing: AppSpacing.xs
-            ) {
-                ForEach(profile.preferences) { preference in
-                    preferenceCard(preference)
+            if safePreferences.isEmpty {
+                Text("No preferences selected yet.")
+                    .font(AppTypography.callout)
+                    .foregroundStyle(AppColors.secondaryText)
+            } else {
+                LazyVGrid(
+                    columns: [
+                        GridItem(.flexible(), spacing: AppSpacing.xs),
+                        GridItem(.flexible(), spacing: AppSpacing.xs)
+                    ],
+                    spacing: AppSpacing.xs
+                ) {
+                    ForEach(safePreferences) { preference in
+                        preferenceCard(preference)
+                    }
                 }
             }
         }
@@ -211,16 +288,55 @@ struct ProfileView: View {
                 .font(AppTypography.cardTitle)
                 .foregroundStyle(AppColors.primaryText)
 
-            HorizontalCarousel(
-                items: profile.favoriteCuisines,
-                visibleItemCount: 3.35,
-                itemSpacing: AppSpacing.xs,
-                cardHeight: 106,
-                edgePadding: 1
-            ) { cuisine in
-                cuisineCard(cuisine)
+            if safeFavoriteCuisines.isEmpty {
+                Text("Favorite cuisines will appear here.")
+                    .font(AppTypography.callout)
+                    .foregroundStyle(AppColors.secondaryText)
+            } else {
+                HorizontalCarousel(
+                    items: safeFavoriteCuisines,
+                    visibleItemCount: 3.35,
+                    itemSpacing: AppSpacing.xs,
+                    cardHeight: 106,
+                    edgePadding: 1
+                ) { cuisine in
+                    cuisineCard(cuisine)
+                }
             }
         }
+    }
+
+    private var savedRecipesSection: some View {
+        let recipes = savedRecipeCarouselItems
+
+        guard !recipes.isEmpty else {
+            return AnyView(EmptyView())
+        }
+
+        return AnyView(
+            VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                Text("Saved Recipes")
+                    .font(AppTypography.cardTitle)
+                    .foregroundStyle(AppColors.primaryText)
+
+                HorizontalCarousel(
+                    items: recipes,
+                    visibleItemCount: 3,
+                    cardHeight: 166
+                ) { recipe in
+                    RecipeCard(
+                        recipe: recipe,
+                        isFavorite: favoritesStore.isFavorite(recipe.id),
+                        action: {
+                            navigationPath.append(.recipe(recipe.id))
+                        },
+                        favoriteAction: {
+                            favoritesStore.toggleFavorite(recipe.id)
+                        }
+                    )
+                }
+            }
+        )
     }
 
     private var achievementsSection: some View {
@@ -229,9 +345,15 @@ struct ProfileView: View {
                 isAchievementsPresented = true
             }
 
-            HStack(spacing: AppSpacing.xs) {
-                ForEach(profile.achievements) { achievement in
-                    achievementCard(achievement)
+            if safeAchievements.isEmpty {
+                Text("Achievements will appear once activity is recorded.")
+                    .font(AppTypography.callout)
+                    .foregroundStyle(AppColors.secondaryText)
+            } else {
+                HStack(spacing: AppSpacing.xs) {
+                    ForEach(safeAchievements) { achievement in
+                        achievementCard(achievement)
+                    }
                 }
             }
         }
@@ -406,7 +528,7 @@ struct ProfileView: View {
     }
 
     private func openSettings() {
-        isSettingsPresented = true
+        navigationPath.append(.settings)
     }
 
     private func goBack() {
@@ -417,29 +539,26 @@ struct ProfileView: View {
         }
     }
 
-    private func showPhotoPlaceholder() {
-        alert = ProfileAlert(
-            title: "Edit Photo",
-            message: "Profile photo editing is a local placeholder for now."
-        )
-    }
+    private var savedRecipeCarouselItems: [Recipe] {
+        let favoriteRecipes = favoritesStore.favoriteRecipeIDs.compactMap { recipeRepository.recipe(id: $0) }
+        if !favoriteRecipes.isEmpty {
+            return Array(favoriteRecipes.prefix(3))
+        }
 
-    private func showFavoriteMealsPlaceholder() {
-        alert = ProfileAlert(
-            title: "Favorite Meals",
-            message: "Favorite meal navigation is not wired in this pass."
-        )
+        return Array(userRecipeStore.myRecipes.prefix(3))
     }
 }
 
-private struct ProfileAlert: Identifiable {
-    let id = UUID()
-    let title: String
-    let message: String
+private enum ProfileRoute: Hashable {
+    case recipe(String)
+    case ingredients(String)
+    case settings
 }
 
 #Preview {
     ProfileView()
         .environmentObject(UserProfileStore.shared)
+        .environmentObject(FavoritesStore.shared)
+        .environmentObject(UserRecipeStore.shared)
         .environmentObject(AppSettingsStore.shared)
 }

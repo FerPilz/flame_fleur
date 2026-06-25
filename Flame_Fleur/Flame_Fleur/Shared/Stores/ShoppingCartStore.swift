@@ -164,6 +164,14 @@ final class ShoppingCartStore: ObservableObject {
         Set(items.map(\.category)).count
     }
 
+    var recipeNutritionSummary: NutritionSummary {
+        NutritionCalculator.summary(from: items) { RecipeRepository.shared.recipe(id: $0) }
+    }
+
+    var recipeMacroBalance: MacroBalance {
+        MacroBalance(summary: recipeNutritionSummary)
+    }
+
     var cartSummaryText: String {
         let itemLines = items.map { item in
             "- \(item.name): \(item.quantityText) at \(item.storeName)"

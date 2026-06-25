@@ -20,8 +20,17 @@ struct Recipe: Identifiable, Hashable, Codable {
     let difficulty: RecipeDifficulty
     let tags: [String]
     let imageName: String?
+    let remoteImageURLString: String?
+    let userRecipeSourceType: UserRecipeSourceType?
+    let sourceURLString: String?
+    let sourceHost: String?
+    let importedAt: Date?
+    let notes: String?
     let isPremium: Bool
     let isCommunityRecipe: Bool
+    let isUserCreated: Bool
+    let createdAt: Date?
+    let updatedAt: Date?
     let ingredients: [String]
     let structuredIngredients: [RecipeIngredient]
     let instructions: [String]
@@ -49,8 +58,17 @@ struct Recipe: Identifiable, Hashable, Codable {
         difficulty: RecipeDifficulty,
         tags: [String] = [],
         imageName: String? = nil,
+        remoteImageURLString: String? = nil,
+        userRecipeSourceType: UserRecipeSourceType? = nil,
+        sourceURLString: String? = nil,
+        sourceHost: String? = nil,
+        importedAt: Date? = nil,
+        notes: String? = nil,
         isPremium: Bool = false,
         isCommunityRecipe: Bool = false,
+        isUserCreated: Bool = false,
+        createdAt: Date? = nil,
+        updatedAt: Date? = nil,
         ingredients: [String] = [],
         structuredIngredients: [RecipeIngredient] = [],
         instructions: [String] = [],
@@ -77,8 +95,17 @@ struct Recipe: Identifiable, Hashable, Codable {
         self.difficulty = difficulty
         self.tags = tags
         self.imageName = imageName
+        self.remoteImageURLString = remoteImageURLString
+        self.userRecipeSourceType = userRecipeSourceType
+        self.sourceURLString = sourceURLString
+        self.sourceHost = sourceHost
+        self.importedAt = importedAt
+        self.notes = notes
         self.isPremium = isPremium
         self.isCommunityRecipe = isCommunityRecipe
+        self.isUserCreated = isUserCreated
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
 
         let resolvedStructuredIngredients = structuredIngredients.isEmpty
             ? ingredients.map { RecipeIngredient(legacyName: $0) }
@@ -148,8 +175,17 @@ struct Recipe: Identifiable, Hashable, Codable {
         case difficulty
         case tags
         case imageName
+        case remoteImageURLString
+        case userRecipeSourceType
+        case sourceURLString
+        case sourceHost
+        case importedAt
+        case notes
         case isPremium
         case isCommunityRecipe
+        case isUserCreated
+        case createdAt
+        case updatedAt
         case ingredients
         case instructions
         case nutrition
@@ -207,8 +243,17 @@ struct Recipe: Identifiable, Hashable, Codable {
             difficulty: difficulty,
             tags: tags,
             imageName: try container.decodeIfPresent(String.self, forKey: .imageName),
+            remoteImageURLString: try container.decodeIfPresent(String.self, forKey: .remoteImageURLString),
+            userRecipeSourceType: try container.decodeIfPresent(UserRecipeSourceType.self, forKey: .userRecipeSourceType),
+            sourceURLString: try container.decodeIfPresent(String.self, forKey: .sourceURLString),
+            sourceHost: try container.decodeIfPresent(String.self, forKey: .sourceHost),
+            importedAt: try container.decodeIfPresent(Date.self, forKey: .importedAt),
+            notes: try container.decodeIfPresent(String.self, forKey: .notes),
             isPremium: try container.decodeIfPresent(Bool.self, forKey: .isPremium) ?? false,
             isCommunityRecipe: try container.decodeIfPresent(Bool.self, forKey: .isCommunityRecipe) ?? false,
+            isUserCreated: try container.decodeIfPresent(Bool.self, forKey: .isUserCreated) ?? false,
+            createdAt: try container.decodeIfPresent(Date.self, forKey: .createdAt),
+            updatedAt: try container.decodeIfPresent(Date.self, forKey: .updatedAt),
             ingredients: structuredIngredients.map(\.name),
             structuredIngredients: structuredIngredients,
             instructions: instructions,
@@ -244,14 +289,106 @@ struct Recipe: Identifiable, Hashable, Codable {
         try container.encode(difficulty, forKey: .difficulty)
         try container.encode(tags, forKey: .tags)
         try container.encodeIfPresent(imageName, forKey: .imageName)
+        try container.encodeIfPresent(remoteImageURLString, forKey: .remoteImageURLString)
+        try container.encodeIfPresent(userRecipeSourceType, forKey: .userRecipeSourceType)
+        try container.encodeIfPresent(sourceURLString, forKey: .sourceURLString)
+        try container.encodeIfPresent(sourceHost, forKey: .sourceHost)
+        try container.encodeIfPresent(importedAt, forKey: .importedAt)
+        try container.encodeIfPresent(notes, forKey: .notes)
         try container.encode(isPremium, forKey: .isPremium)
         try container.encode(isCommunityRecipe, forKey: .isCommunityRecipe)
+        try container.encode(isUserCreated, forKey: .isUserCreated)
+        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
         try container.encode(structuredIngredients, forKey: .ingredients)
         try container.encode(instructions, forKey: .instructions)
         try container.encode(nutrition, forKey: .nutrition)
         try container.encode(nutritionPerServing, forKey: .nutritionPerServing)
         try container.encode(equipment, forKey: .equipment)
         try container.encode(tips, forKey: .tips)
+    }
+
+    static func userCreated(
+        title: String,
+        description: String = "",
+        categoryGroupID: String = "my-recipes",
+        subcategoryID: String? = "my-recipes",
+        subcategoryTitle: String? = "My Recipes",
+        category: RecipeCategory,
+        servings: Int,
+        prepTimeMinutes: Int = 0,
+        cookingTimeMinutes: Int = 0,
+        totalTimeMinutes: Int? = nil,
+        tags: [String] = [],
+        imageName: String? = nil,
+        remoteImageURLString: String? = nil,
+        userRecipeSourceType: UserRecipeSourceType = .manualUser,
+        sourceURLString: String? = nil,
+        sourceHost: String? = nil,
+        importedAt: Date? = nil,
+        notes: String? = nil,
+        ingredients: [RecipeIngredient],
+        instructions: [String]
+    ) -> Recipe {
+        Recipe(
+            id: "user_recipe_\(UUID().uuidString.lowercased())",
+            title: title,
+            subtitle: description.isEmpty ? category.title : description,
+            description: description,
+            categoryGroupID: categoryGroupID,
+            subcategoryID: subcategoryID,
+            subcategoryTitle: subcategoryTitle,
+            category: category,
+            sectionTags: [],
+            prepTimeMinutes: prepTimeMinutes,
+            cookingTimeMinutes: cookingTimeMinutes,
+            totalTimeMinutes: totalTimeMinutes ?? prepTimeMinutes + cookingTimeMinutes,
+            calories: 0,
+            servings: servings,
+            difficulty: .easy,
+            tags: tags,
+            imageName: imageName,
+            remoteImageURLString: remoteImageURLString,
+            userRecipeSourceType: userRecipeSourceType,
+            sourceURLString: sourceURLString,
+            sourceHost: sourceHost,
+            importedAt: importedAt,
+            notes: notes,
+            isPremium: false,
+            isCommunityRecipe: false,
+            isUserCreated: true,
+            createdAt: Date(),
+            updatedAt: Date(),
+            ingredients: ingredients.map(\.name),
+            structuredIngredients: ingredients,
+            instructions: instructions,
+            nutrition: nil,
+            equipment: [],
+            tips: []
+        )
+    }
+
+    var isValidUserRecipe: Bool {
+        validationIssues.isEmpty
+    }
+
+    var validationIssues: [String] {
+        var issues: [String] = []
+
+        if title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            issues.append("title")
+        }
+        if structuredIngredients.isEmpty {
+            issues.append("ingredients")
+        }
+        if instructions.isEmpty {
+            issues.append("instructions")
+        }
+        if servings <= 0 {
+            issues.append("servings")
+        }
+
+        return issues
     }
 }
 
@@ -277,6 +414,18 @@ struct RecipeNutrition: Hashable, Codable {
             sugarGrams: max(3, calories / 110),
             sodiumMilligrams: max(280, calories + 120)
         )
+    }
+}
+
+extension RecipeNutrition {
+    var nutritionSummary: NutritionSummary {
+        NutritionCalculator.summary(from: self)
+    }
+}
+
+extension Recipe {
+    var nutritionSummary: NutritionSummary {
+        NutritionCalculator.summary(from: self)
     }
 }
 

@@ -7,7 +7,11 @@ struct RecipeIngredient: Identifiable, Hashable, Codable {
     let unit: String
     let category: String
     let notes: String?
+    let rawText: String?
     let displayQuantity: String
+    let catalogIngredientID: String?
+    let catalogNormalizedName: String?
+    let isCustomIngredient: Bool
 
     init(
         id: String? = nil,
@@ -16,7 +20,11 @@ struct RecipeIngredient: Identifiable, Hashable, Codable {
         unit: String,
         category: String,
         notes: String? = nil,
-        displayQuantity: String = ""
+        rawText: String? = nil,
+        displayQuantity: String = "",
+        catalogIngredientID: String? = nil,
+        catalogNormalizedName: String? = nil,
+        isCustomIngredient: Bool = false
     ) {
         self.id = id ?? RecipeIngredient.stableID(
             name: name,
@@ -30,9 +38,13 @@ struct RecipeIngredient: Identifiable, Hashable, Codable {
         self.unit = unit
         self.category = category
         self.notes = notes
+        self.rawText = rawText?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty
         self.displayQuantity = displayQuantity.isEmpty
             ? RecipeIngredient.defaultDisplayQuantity(quantity: quantity, unit: unit)
             : displayQuantity
+        self.catalogIngredientID = catalogIngredientID
+        self.catalogNormalizedName = catalogNormalizedName
+        self.isCustomIngredient = isCustomIngredient
     }
 
     init(legacyName: String) {
@@ -42,16 +54,21 @@ struct RecipeIngredient: Identifiable, Hashable, Codable {
             unit: "",
             category: "",
             notes: nil,
+            rawText: nil,
             displayQuantity: ""
         )
     }
 
     var normalizedName: String {
-        RecipeIngredient.normalize(name)
+        catalogNormalizedName ?? RecipeIngredient.normalize(name)
     }
 
     var displayLine: String {
-        displayQuantity.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        if let rawText {
+            return rawText
+        }
+
+        return displayQuantity.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             ? name
             : "\(displayQuantity) \(name)"
     }
@@ -63,7 +80,11 @@ struct RecipeIngredient: Identifiable, Hashable, Codable {
         case unit
         case category
         case notes
+        case rawText
         case displayQuantity
+        case catalogIngredientID
+        case catalogNormalizedName
+        case isCustomIngredient
     }
 
     init(from decoder: Decoder) throws {
@@ -79,7 +100,11 @@ struct RecipeIngredient: Identifiable, Hashable, Codable {
         let unit = try container.decodeIfPresent(String.self, forKey: .unit) ?? ""
         let category = try container.decodeIfPresent(String.self, forKey: .category) ?? ""
         let notes = try container.decodeIfPresent(String.self, forKey: .notes)
+        let rawText = try container.decodeIfPresent(String.self, forKey: .rawText)
         let displayQuantity = try container.decodeIfPresent(String.self, forKey: .displayQuantity) ?? ""
+        let catalogIngredientID = try container.decodeIfPresent(String.self, forKey: .catalogIngredientID)
+        let catalogNormalizedName = try container.decodeIfPresent(String.self, forKey: .catalogNormalizedName)
+        let isCustomIngredient = try container.decodeIfPresent(Bool.self, forKey: .isCustomIngredient) ?? false
 
         self.init(
             id: try container.decodeIfPresent(String.self, forKey: .id),
@@ -88,7 +113,11 @@ struct RecipeIngredient: Identifiable, Hashable, Codable {
             unit: unit,
             category: category,
             notes: notes,
-            displayQuantity: displayQuantity
+            rawText: rawText,
+            displayQuantity: displayQuantity,
+            catalogIngredientID: catalogIngredientID,
+            catalogNormalizedName: catalogNormalizedName,
+            isCustomIngredient: isCustomIngredient
         )
     }
 
@@ -149,5 +178,11 @@ struct RecipeIngredient: Identifiable, Hashable, Codable {
         }
 
         return String(format: "%.2f", quantity).replacingOccurrences(of: #"0+$"#, with: "", options: .regularExpression).replacingOccurrences(of: #"\.$"#, with: "", options: .regularExpression)
+    }
+}
+
+private extension String {
+    var nonEmpty: String? {
+        isEmpty ? nil : self
     }
 }

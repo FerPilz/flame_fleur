@@ -39,10 +39,22 @@ struct PlannerDaySelector: View {
                                 .id(date)
                         }
                     }
+                    .frame(minWidth: proxyWidth, alignment: .center)
                     .padding(.horizontal, 1)
                     .padding(.vertical, 1)
                 }
                 .scrollClipDisabled()
+                .background(
+                    GeometryReader { geo in
+                        Color.clear
+                            .onAppear {
+                                proxyWidth = geo.size.width
+                            }
+                            .onChange(of: geo.size.width) { _, newWidth in
+                                proxyWidth = newWidth
+                            }
+                    }
+                )
                 .onChange(of: selectedDate) { _, newDate in
                     withAnimation(.easeInOut(duration: 0.2)) {
                         proxy.scrollTo(newDate, anchor: .center)
@@ -90,6 +102,8 @@ struct PlannerDaySelector: View {
         .buttonStyle(.plain)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
+
+    @State private var proxyWidth: CGFloat = 0
 }
 
 #Preview {

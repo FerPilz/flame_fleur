@@ -6,9 +6,9 @@ struct PlannerView: View {
 
     let onExit: () -> Void
 
+    @State private var navigationPath: [PlannerRoute] = []
     @State private var isCartPresented = false
     @State private var isCalendarPresented = false
-    @State private var selectedMealSlot: PlannerSlotSelection?
     @State private var isSavePromptPresented = false
     @State private var draftPlanName = ""
     @State private var toastMessage: String?
@@ -22,7 +22,7 @@ struct PlannerView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             ZStack(alignment: .bottom) {
                 AppColors.appBackground.ignoresSafeArea()
 
@@ -39,15 +39,14 @@ struct PlannerView: View {
                                     mealPlannerStore.selectDate(date)
                                 },
                                 onEmptySlotTap: { date, slot in
-                                    mealPlannerStore.selectDate(date)
-                                    selectedMealSlot = PlannerSlotSelection(date: date, slot: slot)
+                                    openRecipePicker(for: date, slot: slot, mode: .add)
                                 },
-                                onMealTap: { _ in
-                                    showToast("Recipe preview coming soon")
+                                onMealTap: { meal in
+                                    openRecipePicker(for: meal.date, slot: meal.slot, mode: .replace)
                                 }
                             )
 
-                            WeeklyMacroBalanceCard(balance: mealPlannerStore.macroBalance)
+                            WeeklyMacroBalanceCard(balance: mealPlannerStore.selectedDayMacroBalance)
 
                             PlannerPremiumInsightsCard(onUpgrade: placeholderUpgrade)
 
@@ -57,7 +56,7 @@ struct PlannerView: View {
                         }
                         .padding(.horizontal, AppSpacing.screenHorizontal)
                         .padding(.top, AppSpacing.xs)
-                        .padding(.bottom, AppSpacing.xxxl + AppSpacing.md)
+                        .padding(.bottom, AppSpacing.xxxl + AppSpacing.xxl + 72)
                     }
                 }
 
@@ -80,6 +79,60 @@ struct PlannerView: View {
                 }
                     .toolbar(.hidden, for: .tabBar)
             }
+            .navigationDestination(for: PlannerRoute.self) { route in
+                switch route {
+                case .recipePicker(let context):
+                    PlannerRecipePickerView(context: context) { recipeID in
+                        navigationPath.append(.recipe(recipeID: recipeID, context: context))
+                    }
+                case .recipe(let recipeID, let context):
+                    if recipeRepository.recipe(id: recipeID) != nil {
+                        RecipeDetailView(
+                            recipeID: recipeID,
+                            onBack: {
+                                if !navigationPath.isEmpty {
+                                    navigationPath.removeLast()
+                                }
+                            },
+                            onViewIngredients: {
+                                navigationPath.append(.ingredients(recipeID))
+                            },
+                            plannerSelectionContext: context,
+                            onAddToPlanner: { recipe in
+                                let didAdd = mealPlannerStore.addRecipeToPlannerSlot(
+                                    recipeID: recipe.id,
+                                    date: context.date,
+                                    mealType: context.mealType,
+                                    slotID: context.slotID,
+                                    mode: context.mode
+                                )
+
+                                if didAdd {
+                                    navigationPath.removeAll()
+                                    showToast(context.mode == .add ? "Added to \(context.mealType.title)" : "Replaced in \(context.mealType.title)")
+                                } else {
+                                    showToast("Recipe is unavailable")
+                                }
+                            }
+                        )
+                    } else {
+                        EmptyView()
+                    }
+                case .ingredients(let recipeID):
+                    if recipeRepository.recipe(id: recipeID) != nil {
+                        RecipeIngredientsView(
+                            recipeID: recipeID,
+                            onBack: {
+                                if !navigationPath.isEmpty {
+                                    navigationPath.removeLast()
+                                }
+                            }
+                        )
+                    } else {
+                        EmptyView()
+                    }
+                }
+            }
             .sheet(isPresented: $isCalendarPresented) {
                 PlannerCalendarPickerSheet(
                     selectedDate: Binding(
@@ -90,18 +143,6 @@ struct PlannerView: View {
                 .presentationDetents([.height(430)])
                 .presentationDragIndicator(.visible)
                 .presentationCornerRadius(AppRadius.hero)
-            }
-            .sheet(item: $selectedMealSlot) { selection in
-                MealSelectionView(
-                    date: selection.date,
-                    slot: selection.slot,
-                    recipes: mealSelectionRecipes
-                ) { recipe in
-                    mealPlannerStore.addRecipe(recipe, on: selection.date, slot: selection.slot)
-                    showToast("\(selection.slot.title) added")
-                }
-                .presentationDetents([.large])
-                .presentationDragIndicator(.visible)
             }
             .alert("Save Plan", isPresented: $isSavePromptPresented) {
                 TextField("Plan name", text: $draftPlanName)
@@ -122,33 +163,33 @@ struct PlannerView: View {
 
     private var header: some View {
         VStack(spacing: 2) {
-            HStack(spacing: AppSpacing.sm) {
-                IconCircleButton(
-                    systemName: "chevron.left",
-                    accessibilityLabel: "Exit meal planner",
-                    size: AppTopActionMetrics.buttonSize,
-                    backgroundColor: AppColors.elevatedCardBackground,
-                    foregroundColor: AppColors.darkOlive,
-                    action: onExit
-                )
-                .frame(width: AppTopActionMetrics.actionGroupWidth, alignment: .leading)
-
-                Spacer(minLength: AppSpacing.xs)
-
+            ZStack {
                 Text("Flame & Fleur")
-                    .font(AppTypography.sectionTitle)
+                    .font(AppTypography.brandTitle)
                     .foregroundStyle(AppColors.olive)
                     .lineLimit(1)
-                    .minimumScaleFactor(0.82)
                     .allowsTightening(true)
+                    .padding(.horizontal, AppTopActionMetrics.centeredTitleInset)
                     .frame(maxWidth: .infinity)
                     .accessibilityAddTraits(.isHeader)
 
-                Spacer(minLength: AppSpacing.xs)
+                HStack(spacing: AppSpacing.sm) {
+                    IconCircleButton(
+                        systemName: "chevron.left",
+                        accessibilityLabel: "Exit meal planner",
+                        size: AppTopActionMetrics.buttonSize,
+                        backgroundColor: AppColors.elevatedCardBackground,
+                        foregroundColor: AppColors.darkOlive,
+                        action: onExit
+                    )
+                    .frame(width: AppTopActionMetrics.actionGroupWidth, alignment: .leading)
 
-                cartButton
+                    Spacer(minLength: 0)
+
+                    cartButton
+                }
             }
-            .frame(height: 30)
+            .frame(height: 44)
 
             Text("Meal Planner")
                 .font(AppTypography.heroTitle)
@@ -187,6 +228,22 @@ struct PlannerView: View {
         .frame(width: AppTopActionMetrics.actionGroupWidth, alignment: .trailing)
     }
 
+    private func openRecipePicker(for date: Date, slot: MealSlot, mode: PlannerRecipeSelectionContext.Mode) {
+        mealPlannerStore.selectDate(date)
+
+        navigationPath.append(
+            .recipePicker(
+                PlannerRecipeSelectionContext(
+                    date: mealPlannerStore.selectedDate,
+                    dayLabel: dayLabel(for: date),
+                    mealType: slot,
+                    slotID: slot.id,
+                    mode: mode
+                )
+            )
+        )
+    }
+
     private var smartSuggestionRecipes: [Recipe] {
         var seenIDs = Set<String>()
         let recipes = recipeRepository.aiRecommendedRecipes
@@ -199,10 +256,6 @@ struct PlannerView: View {
             }
             .prefix(8)
         )
-    }
-
-    private var mealSelectionRecipes: [Recipe] {
-        recipeRepository.allRecipes
     }
 
     private func placeholderUpgrade() {
@@ -291,15 +344,16 @@ struct PlannerView: View {
         }
     }
 
+    private func dayLabel(for date: Date) -> String {
+        date.formatted(.dateTime.weekday(.wide))
+    }
+
 }
 
-private struct PlannerSlotSelection: Identifiable {
-    let date: Date
-    let slot: MealSlot
-
-    var id: String {
-        "\(date.timeIntervalSince1970)-\(slot.id)"
-    }
+private enum PlannerRoute: Hashable {
+    case recipePicker(PlannerRecipeSelectionContext)
+    case recipe(recipeID: String, context: PlannerRecipeSelectionContext)
+    case ingredients(String)
 }
 
 private struct PlannerMenuSheet: View {

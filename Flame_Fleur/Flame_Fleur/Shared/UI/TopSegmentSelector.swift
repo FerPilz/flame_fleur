@@ -28,47 +28,44 @@ struct TopSegmentSelector: View {
     }
 
     var body: some View {
-        HStack(spacing: 0) {
-            ForEach(options) { option in
-                Button {
-                    selection = option.id
-                    onSelect(option)
-                } label: {
-                    segmentContent(option)
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: AppSpacing.md) {
+                ForEach(options) { option in
+                    Button {
+                        selection = option.id
+                        onSelect(option)
+                    } label: {
+                        segmentContent(option)
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
-                .frame(maxWidth: .infinity)
             }
+            .padding(.vertical, 2)
         }
-        .padding(.top, AppSpacing.xs)
-        .padding(.bottom, AppSpacing.xs)
-        .overlay(alignment: .bottom) {
-            Rectangle()
-                .fill(AppColors.divider.opacity(0.75))
-                .frame(height: 1)
-        }
+        .frame(height: AppSpacing.xl + AppSpacing.xxs)
     }
 
     private func segmentContent(_ option: TopSegmentOption) -> some View {
         let isActive = selection == option.id
 
-        return VStack(spacing: AppSpacing.xxs) {
-            Image(systemName: option.systemImage)
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundStyle(isActive ? AppColors.olive : AppColors.tertiaryText)
-                .frame(height: 15)
+        return VStack(spacing: 3) {
+            HStack(spacing: AppSpacing.xxs) {
+                Image(systemName: option.systemImage)
+                    .font(.system(size: 16, weight: .semibold))
 
-            Text(option.title)
-                .font(AppTypography.tabLabel)
-                .foregroundStyle(isActive ? AppColors.olive : AppColors.secondaryText)
-                .lineLimit(1)
-                .minimumScaleFactor(0.70)
-                .allowsTightening(true)
+                Text(option.title)
+                    .font(AppTypography.metadata)
+            }
+            .foregroundStyle(isActive ? AppColors.olive : AppColors.secondaryText)
+            .lineLimit(1)
+            .fixedSize(horizontal: true, vertical: false)
 
             Capsule(style: .continuous)
                 .fill(isActive ? AppColors.olive : .clear)
-                .frame(width: 28, height: 2)
+                .frame(height: 2)
         }
+        .padding(.horizontal, AppSpacing.xxs)
+        .padding(.vertical, 4)
         .contentShape(Rectangle())
     }
 }

@@ -4,9 +4,11 @@ struct SubcategoryRecipeListView: View {
     let subcategory: ExploreSubcategory
     let onRecipeSelected: (Recipe.ID) -> Void
     let onCartSelected: () -> Void
+    let onProfileSelected: () -> Void
     let onSettingsSelected: () -> Void
 
     @EnvironmentObject private var favoritesStore: FavoritesStore
+    @EnvironmentObject private var shoppingCartStore: ShoppingCartStore
     @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
     @State private var selectedFilter: RecipeListFilter = .all
@@ -18,11 +20,13 @@ struct SubcategoryRecipeListView: View {
         subcategory: ExploreSubcategory,
         onRecipeSelected: @escaping (Recipe.ID) -> Void = { _ in },
         onCartSelected: @escaping () -> Void = {},
+        onProfileSelected: @escaping () -> Void = {},
         onSettingsSelected: @escaping () -> Void = {}
     ) {
         self.subcategory = subcategory
         self.onRecipeSelected = onRecipeSelected
         self.onCartSelected = onCartSelected
+        self.onProfileSelected = onProfileSelected
         self.onSettingsSelected = onSettingsSelected
     }
 
@@ -39,11 +43,11 @@ struct SubcategoryRecipeListView: View {
                     }
                 ],
                 trailingActions: [
-                    AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1) {
+                    AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: shoppingCartStore.totalItemCount) {
                         onCartSelected()
                     },
-                    AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile settings") {
-                        onSettingsSelected()
+                    AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile") {
+                        onProfileSelected()
                     }
                 ]
             )
@@ -281,4 +285,5 @@ private enum RecipeListSort: String, CaseIterable, Identifiable {
         subcategory: ExploreCategoryRepository.shared.subcategory(id: "meat-seafood-fish")!
     )
     .environmentObject(FavoritesStore.shared)
+    .environmentObject(ShoppingCartStore.shared)
 }

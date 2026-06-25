@@ -1,14 +1,27 @@
 import SwiftUI
 
 struct ExploreView: View {
+    @Binding private var launchContext: ExploreLaunchContext?
+    @EnvironmentObject private var favoritesStore: FavoritesStore
+    @EnvironmentObject private var userRecipeStore: UserRecipeStore
+    @EnvironmentObject private var shoppingCartStore: ShoppingCartStore
+
     @State private var searchText = ""
     @State private var selectedFilter: ExploreFilter = .all
     @State private var selectedSubcategoryID: String?
     @State private var selectedQuickAction: ExploreQuickAction?
+    @State private var isAddRecipeOptionsPresented = false
+    @State private var isAddRecipePresented = false
+    @State private var isImportRecipePresented = false
+    @State private var pendingAddRecipeAction: AddRecipeAction?
     @State private var navigationPath: [ExploreRoute] = []
 
     private let recipeRepository = RecipeRepository.shared
     private let categoryRepository = ExploreCategoryRepository.shared
+
+    init(launchContext: Binding<ExploreLaunchContext?> = .constant(nil)) {
+        self._launchContext = launchContext
+    }
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
@@ -24,11 +37,11 @@ struct ExploreView: View {
                         }
                     ],
                     trailingActions: [
-                        AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1) {
+                        AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: shoppingCartStore.totalItemCount) {
                             navigationPath.append(.cart)
                         },
-                        AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile settings") {
-                            navigationPath.append(.settings)
+                        AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile") {
+                            navigationPath.append(.profile)
                         }
                     ]
                 )
@@ -46,6 +59,8 @@ struct ExploreView: View {
                 ForEach(visibleCategoryGroups) { group in
                     categorySection(group)
                 }
+
+                myRecipesSection
             }
             .navigationDestination(for: ExploreRoute.self) { route in
                 switch route {
@@ -56,6 +71,8 @@ struct ExploreView: View {
                         navigationPath.append(.subcategory(subcategory.id))
                     } onCartSelected: {
                         navigationPath.append(.cart)
+                    } onProfileSelected: {
+                        navigationPath.append(.profile)
                     } onSettingsSelected: {
                         navigationPath.append(.settings)
                     }
@@ -65,6 +82,8 @@ struct ExploreView: View {
                             navigationPath.append(.recipe(recipeID))
                         } onCartSelected: {
                             navigationPath.append(.cart)
+                        } onProfileSelected: {
+                            navigationPath.append(.profile)
                         } onSettingsSelected: {
                             navigationPath.append(.settings)
                         }
@@ -108,11 +127,87 @@ struct ExploreView: View {
                             }
                         }
                     )
+                case .profile:
+                    ProfileView(onBack: {
+                        if !navigationPath.isEmpty {
+                            navigationPath.removeLast()
+                        }
+                    })
                 case .settings:
                     SettingsView()
                 }
             }
+            .onAppear {
+                consumeLaunchContextIfNeeded()
+            }
+            .onChange(of: launchContext) { _, _ in
+                consumeLaunchContextIfNeeded()
+            }
+            .sheet(isPresented: $isAddRecipePresented, onDismiss: {
+                selectedQuickAction = nil
+            }) {
+                AddRecipeView()
+            }
+            .sheet(isPresented: $isImportRecipePresented, onDismiss: {
+                selectedQuickAction = nil
+            }) {
+                RecipeImportURLView()
+            }
+            .sheet(isPresented: $isAddRecipeOptionsPresented, onDismiss: {
+                selectedQuickAction = nil
+
+                switch pendingAddRecipeAction {
+                case .manual:
+                    isAddRecipePresented = true
+                case .importWebsite:
+                    isImportRecipePresented = true
+                case .none:
+                    break
+                }
+
+                pendingAddRecipeAction = nil
+            }) {
+                AddRecipeOptionsSheet(
+                    onAddManually: {
+                        pendingAddRecipeAction = .manual
+                    },
+                    onImportFromWebsite: {
+                        pendingAddRecipeAction = .importWebsite
+                    }
+                )
+            }
             .toolbar(.hidden, for: .navigationBar)
+        }
+    }
+
+    private func consumeLaunchContextIfNeeded() {
+        guard let launchContext else {
+            return
+        }
+
+        applyLaunchContext(launchContext)
+        self.launchContext = nil
+    }
+
+    private func applyLaunchContext(_ context: ExploreLaunchContext) {
+        selectedQuickAction = nil
+        selectedSubcategoryID = nil
+        navigationPath.removeAll()
+
+        switch context {
+        case .featured, .community, .topPicks, .aiRecommended, .worldCuisine, .snacks, .breakfast:
+            selectedFilter = .all
+            searchText = ""
+        case .highProtein:
+            selectedFilter = .highProtein
+            searchText = ""
+        case .eggBased:
+            selectedFilter = .all
+            searchText = ""
+            selectedSubcategoryID = "breakfast-egg-based"
+        case .salmon:
+            selectedFilter = .carnivore
+            searchText = "salmon"
         }
     }
 
@@ -155,6 +250,12 @@ struct ExploreView: View {
     private func quickActionButton(_ quickAction: ExploreQuickAction) -> some View {
         Button {
             selectedQuickAction = quickAction
+            switch quickAction {
+            case .addRecipe:
+                isAddRecipeOptionsPresented = true
+            case .importRecipe:
+                isImportRecipePresented = true
+            }
         } label: {
             HStack(spacing: AppSpacing.xxs) {
                 Image(systemName: quickAction.systemImage)
@@ -181,16 +282,88 @@ struct ExploreView: View {
     }
 
     private var filterChips: some View {
-        HStack(spacing: AppSpacing.xs) {
-            ForEach(ExploreFilter.allCases) { filter in
-                FilterChip(
-                    filter.title,
-                    isSelected: selectedFilter == filter
-                ) {
-                    selectedFilter = filter
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: AppSpacing.xs) {
+                ForEach(ExploreFilter.allCases) { filter in
+                    FilterChip(
+                        filter.title,
+                        systemImage: filter.systemImage,
+                        isSelected: selectedFilter == filter,
+                        selectedColor: filter.selectedColor
+                    ) {
+                        selectedFilter = filter
+                    }
                 }
             }
         }
+    }
+
+    private var myRecipesSection: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.sm) {
+            SectionHeaderView(
+                "My Recipes",
+                subtitle: myRecipesSectionSubtitle,
+                style: .explore
+            )
+
+            if userRecipeStore.myRecipes.isEmpty {
+                myRecipesEmptyState
+            } else if visibleMyRecipes.isEmpty {
+                SurfaceCard(cornerRadius: AppRadius.large, contentPadding: AppSpacing.sm) {
+                    Text("No saved recipes match this search.")
+                        .font(AppTypography.callout)
+                        .foregroundStyle(AppColors.secondaryText)
+                }
+            } else {
+                VStack(spacing: AppSpacing.xs) {
+                    ForEach(visibleMyRecipes) { recipe in
+                        RecipeListRow(
+                            recipe: recipe,
+                            isFavorite: favoritesStore.isFavorite(recipe.id),
+                            onFavoriteTap: {
+                                favoritesStore.toggleFavorite(recipe.id)
+                            },
+                            onTap: {
+                                navigationPath.append(.recipe(recipe.id))
+                            }
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private var myRecipesEmptyState: some View {
+        LazyVGrid(columns: categoryColumns, spacing: AppSpacing.sm) {
+            ForEach(0..<3, id: \.self) { _ in
+                addRecipeCircleButton
+            }
+        }
+    }
+
+    private var addRecipeCircleButton: some View {
+        Button {
+            isAddRecipeOptionsPresented = true
+        } label: {
+            VStack(spacing: AppSpacing.xxs) {
+                ZStack {
+                    Circle()
+                        .fill(AppColors.elevatedCardBackground)
+                        .frame(width: 95, height: 95)
+                        .overlay(
+                            Circle()
+                                .stroke(AppColors.warmBorder, lineWidth: 1)
+                        )
+
+                    Image(systemName: "plus")
+                        .font(.system(size: 22, weight: .semibold))
+                        .foregroundStyle(AppColors.olive)
+                }
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text("Add recipe"))
     }
 
     private func categorySection(_ group: ExploreCategoryGroup) -> some View {
@@ -226,25 +399,54 @@ struct ExploreView: View {
         Array(repeating: GridItem(.flexible(), spacing: AppSpacing.sm), count: 3)
     }
 
+    private var myRecipesSectionSubtitle: String {
+        let count = userRecipeStore.myRecipes.count
+        return count == 1 ? "1 saved recipe" : "\(count) saved recipes"
+    }
+
+    private var visibleMyRecipes: [Recipe] {
+        let trimmedSearch = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let recipes = userRecipeStore.myRecipes
+
+        guard !trimmedSearch.isEmpty else {
+            return recipes
+        }
+
+        return recipes.filter { recipe in
+            recipe.title.localizedCaseInsensitiveContains(trimmedSearch)
+            || recipe.subtitle.localizedCaseInsensitiveContains(trimmedSearch)
+            || recipe.sourceHost?.localizedCaseInsensitiveContains(trimmedSearch) == true
+            || recipe.ingredientLines.contains { $0.localizedCaseInsensitiveContains(trimmedSearch) }
+        }
+    }
+
     private var visibleCategoryGroups: [ExploreCategoryGroup] {
         let trimmedSearch = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
 
         return categoryRepository.allGroups.compactMap { group in
-            let subcategories = group.subcategories.filter { subcategory in
-                selectedFilter.matches(subcategory)
-                && matchesSearch(subcategory, group: group, searchText: trimmedSearch)
+            let searchMatchedSubcategories = group.subcategories.filter { subcategory in
+                matchesSearch(subcategory, group: group, searchText: trimmedSearch)
             }
 
-            guard !subcategories.isEmpty else {
+            guard !searchMatchedSubcategories.isEmpty else {
                 return nil
             }
+
+            let filteredSubcategories = searchMatchedSubcategories.filter { subcategory in
+                selectedFilter.matches(subcategory)
+            }
+            let previewSubcategories = filteredSubcategories.isEmpty
+                ? searchMatchedSubcategories
+                : filteredSubcategories
 
             return ExploreCategoryGroup(
                 id: group.id,
                 title: group.title,
                 subtitle: group.subtitle,
                 imageName: group.imageName,
-                subcategories: shouldShowPreviewOnly(searchText: trimmedSearch) ? Array(subcategories.prefix(3)) : subcategories
+                subcategories: shouldShowPreviewOnly(searchText: trimmedSearch)
+                    ? Array(previewSubcategories.prefix(3))
+                    : previewSubcategories
             )
         }
     }
@@ -299,12 +501,18 @@ private enum ExploreQuickAction: Equatable {
     }
 }
 
+private enum AddRecipeAction {
+    case manual
+    case importWebsite
+}
+
 private enum ExploreRoute: Hashable {
     case categoryGroup(String)
     case subcategory(String)
     case recipe(String)
     case ingredients(String)
     case cart
+    case profile
     case settings
 }
 
@@ -312,6 +520,9 @@ private enum ExploreFilter: String, CaseIterable, Identifiable {
     case all
     case protein
     case vegetarian
+    case highProtein
+    case budget
+    case carnivore
     case quickMeals
 
     var id: String { rawValue }
@@ -324,8 +535,46 @@ private enum ExploreFilter: String, CaseIterable, Identifiable {
             return "Protein"
         case .vegetarian:
             return "Vegetarian"
+        case .highProtein:
+            return "High Protein"
+        case .budget:
+            return "Budget"
+        case .carnivore:
+            return "Carnivore"
         case .quickMeals:
             return "Quick Meals"
+        }
+    }
+
+    var systemImage: String? {
+        switch self {
+        case .all:
+            return nil
+        case .protein:
+            return "fork.knife"
+        case .vegetarian:
+            return "leaf"
+        case .highProtein:
+            return "bolt.fill"
+        case .budget:
+            return "dollarsign.circle"
+        case .carnivore:
+            return "flame"
+        case .quickMeals:
+            return "clock"
+        }
+    }
+
+    var selectedColor: Color {
+        switch self {
+        case .all, .protein, .quickMeals:
+            return AppColors.burntOrange
+        case .vegetarian, .budget:
+            return AppColors.olive
+        case .highProtein:
+            return AppColors.premiumGold
+        case .carnivore:
+            return AppColors.darkOlive
         }
     }
 
@@ -337,6 +586,12 @@ private enum ExploreFilter: String, CaseIterable, Identifiable {
             return matches(subcategory, categories: proteinCategories, keywords: ["protein", "chicken", "fish", "seafood", "lean", "egg", "yogurt"])
         case .vegetarian:
             return matches(subcategory, categories: vegetarianCategories, keywords: ["tofu", "tempeh", "beans", "lentils", "mushroom", "vegetable", "plant"])
+        case .highProtein:
+            return matches(subcategory, categories: highProteinCategories, keywords: ["protein", "yogurt", "egg", "lean", "fitness", "seafood"])
+        case .budget:
+            return matches(subcategory, categories: budgetCategories, keywords: ["budget", "pantry", "quick", "simple", "everyday", "weekly"])
+        case .carnivore:
+            return matches(subcategory, categories: carnivoreCategories, keywords: ["meat", "seafood", "fish", "chicken", "protein", "grill"])
         case .quickMeals:
             return matches(subcategory, categories: quickMealCategories, keywords: ["bowl", "taco", "salad", "skewer", "protein"])
         }
@@ -379,6 +634,44 @@ private enum ExploreFilter: String, CaseIterable, Identifiable {
         ]
     }
 
+    private var highProteinCategories: Set<RecipeCategory> {
+        [
+            .highProtein,
+            .proteinBowls,
+            .leanMeals,
+            .fitnessMeals,
+            .fish,
+            .seafood,
+            .chicken,
+            .grilledChicken
+        ]
+    }
+
+    private var budgetCategories: Set<RecipeCategory> {
+        [
+            .pantry,
+            .soup,
+            .salad,
+            .toast,
+            .breakfast,
+            .grainBowl,
+            .vegetarian,
+            .beansLentils
+        ]
+    }
+
+    private var carnivoreCategories: Set<RecipeCategory> {
+        [
+            .meat,
+            .seafood,
+            .fish,
+            .chicken,
+            .grilledChicken,
+            .chickenBowls,
+            .chickenPasta
+        ]
+    }
+
     private var quickMealCategories: Set<RecipeCategory> {
         [
             .fish,
@@ -399,4 +692,7 @@ private enum ExploreFilter: String, CaseIterable, Identifiable {
 
 #Preview {
     ExploreView()
+        .environmentObject(FavoritesStore.shared)
+        .environmentObject(UserRecipeStore.shared)
+        .environmentObject(ShoppingCartStore.shared)
 }

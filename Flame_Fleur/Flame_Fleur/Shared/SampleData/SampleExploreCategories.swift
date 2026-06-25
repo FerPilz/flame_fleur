@@ -21,6 +21,7 @@ enum SampleExploreCategories {
                 SubcategorySeed("Middle Eastern", imageName: "ff_subcat_world_cuisine_middle_eastern")
             ]
         ),
+    ] + CookflowSnacksBreakfastSeed.groups + [
         makeGroup(
             id: "meat-seafood",
             title: "Meat & Seafood",

@@ -42,19 +42,6 @@ struct RecipeIngredientsView: View {
                 AppColors.appBackground
                     .ignoresSafeArea()
 
-                RecipeHeroHeader(
-                    recipe: recipe,
-                    isFavorite: favoritesStore.isFavorite(recipe.id),
-                    shareText: shareText(for: recipe),
-                    showsBackButton: false,
-                    onCartTap: nil,
-                    cartBadgeValue: nil,
-                    onBack: { goBack() },
-                    onFavoriteTap: { favoritesStore.toggleFavorite(recipe.id) }
-                )
-                .frame(height: heroHeight)
-                .ignoresSafeArea(edges: .top)
-
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 0) {
                         Color.clear
@@ -63,34 +50,26 @@ struct RecipeIngredientsView: View {
                         contentPanel(recipe)
                     }
                 }
+                .zIndex(0)
 
-                heroBackButton(topInset: proxy.safeAreaInsets.top)
+                RecipeHeroHeader(
+                    recipe: recipe,
+                    isFavorite: favoritesStore.isFavorite(recipe.id),
+                    shareText: shareText(for: recipe),
+                    showsBackButton: true,
+                    onCartTap: nil,
+                    cartBadgeValue: nil,
+                    onBack: { goBack() },
+                    onFavoriteTap: { favoritesStore.toggleFavorite(recipe.id) }
+                )
+                .frame(height: heroHeight)
+                .ignoresSafeArea(edges: .top)
+                .zIndex(1)
             }
             .safeAreaInset(edge: .bottom) {
                 bottomActionBar(recipe)
             }
         }
-    }
-
-    private func heroBackButton(topInset: CGFloat) -> some View {
-        VStack {
-            HStack {
-                IconCircleButton(
-                    systemName: "chevron.left",
-                    accessibilityLabel: "Back",
-                    size: AppTopActionMetrics.buttonSize,
-                    backgroundColor: AppColors.elevatedCardBackground.opacity(0.94),
-                    foregroundColor: AppColors.olive,
-                    action: goBack
-                )
-
-                Spacer(minLength: 0)
-            }
-
-            Spacer(minLength: 0)
-        }
-        .padding(.horizontal, AppSpacing.lg)
-        .padding(.top, max(topInset + AppSpacing.sm, AppTopActionMetrics.minimumTopOffset))
     }
 
     private func goBack() {

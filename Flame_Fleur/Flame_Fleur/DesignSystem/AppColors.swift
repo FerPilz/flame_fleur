@@ -1,6 +1,7 @@
 import SwiftUI
 
 enum AppColors {
+    static let porcelainCream = Color(red: 252.0 / 255.0, green: 250.0 / 255.0, blue: 240.0 / 255.0)
     static let appBackground = Color(red: 1.000, green: 0.992, blue: 0.973)
     static let cardBackground = Color(red: 0.973, green: 0.945, blue: 0.906)
     static let elevatedCardBackground = Color(red: 1.000, green: 0.996, blue: 0.984)

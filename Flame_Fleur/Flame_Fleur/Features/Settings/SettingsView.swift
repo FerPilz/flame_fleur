@@ -13,6 +13,16 @@ struct SettingsView: View {
         profileStore.profile
     }
 
+    private var displayProfileName: String {
+        let trimmed = profile.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? "Profile" : trimmed
+    }
+
+    private var displayLocation: String {
+        let trimmed = settings.location.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? "Not set" : trimmed
+    }
+
     private var settings: AppSettings {
         settingsStore.settings
     }
@@ -79,11 +89,11 @@ struct SettingsView: View {
                 activeSheet = .account
             } label: {
                 HStack(spacing: AppSpacing.sm) {
-                    FoodImagePlaceholder(imageName: profile.profileImageName, style: .circle)
-                        .frame(width: 44, height: 44)
+                        FoodImagePlaceholder(imageName: profile.profileImageName, style: .circle)
+                            .frame(width: 44, height: 44)
 
                     VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-                        Text(profile.name)
+                        Text(displayProfileName)
                             .font(AppTypography.bodyEmphasis)
                             .foregroundStyle(AppColors.primaryText)
                             .lineLimit(1)
@@ -197,7 +207,7 @@ struct SettingsView: View {
                 title: "Location",
                 action: { activeSheet = .location }
             ) {
-                SettingsRowValue(settings.location)
+                SettingsRowValue(displayLocation)
             }
         }
     }

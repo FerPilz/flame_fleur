@@ -1,0 +1,5862 @@
+{
+  "version": "snacks-breakfast-seed-v1",
+  "purpose": "Add Snacks and Breakfast categories with 6 subcategories each and 5 recipes per subcategory, with an expanded egg-based breakfast set.",
+  "counts": {
+    "categories": 2,
+    "subcategories": 12,
+    "recipes": 61,
+    "recipesPerSubcategory": 5,
+    "subcategoriesPerCategory": 6
+  },
+  "assetContract": {
+    "imageDirectorySuggestion": "assets/images/generated/recipes",
+    "imageKeyFormat": "lowercase-kebab-case",
+    "imageFileFormat": "<imageKey>.png",
+    "important": "Use imageKey/imageFile as the stable link between generated image assets and app data. Avoid spaces, accents, punctuation, or title-case filenames.",
+    "assetMapExample": "recipe-snacks-savory-bites-mini-caprese-skewers: require('../assets/images/generated/recipes/recipe-snacks-savory-bites-mini-caprese-skewers.png')"
+  },
+  "categories": [
+    {
+      "id": "snacks",
+      "slug": "snacks",
+      "title": "Snacks",
+      "description": "Small bites, dips, crunchy plates, and protein-forward snack recipes for anytime cravings.",
+      "sortOrder": 1,
+      "enabled": true,
+      "displayType": "category",
+      "imageKey": "category-snacks",
+      "imageFile": "category-snacks.png",
+      "imageAlt": "Snacks category image",
+      "imagePrompt": "Square editorial food photography for a snacks recipe app category, warm cream background, natural light, inviting assortment, no text, no logo."
+    },
+    {
+      "id": "breakfast",
+      "slug": "breakfast",
+      "title": "Breakfast",
+      "description": "Morning meals from fast weekday options to high-protein bowls and relaxed weekend brunch.",
+      "sortOrder": 2,
+      "enabled": true,
+      "displayType": "category",
+      "imageKey": "category-breakfast",
+      "imageFile": "category-breakfast.png",
+      "imageAlt": "Breakfast category image",
+      "imagePrompt": "Square editorial food photography for a breakfast recipe app category, warm cream background, natural light, inviting assortment, no text, no logo."
+    }
+  ],
+  "subcategories": [
+    {
+      "id": "snacks-savory-bites",
+      "slug": "savory-bites",
+      "categoryId": "snacks",
+      "title": "Savory Bites",
+      "description": "Small salty bites that feel satisfying without becoming a full meal.",
+      "sortOrder": 1,
+      "enabled": true,
+      "displayType": "circle",
+      "imageKey": "subcategory-snacks-savory-bites",
+      "imageFile": "subcategory-snacks-savory-bites.png",
+      "imageAlt": "Savory Bites subcategory image",
+      "imagePrompt": "Square close-up food photo representing savory bites in the snacks category, warm cream background, app-friendly composition, no text, no logo."
+    },
+    {
+      "id": "snacks-sweet-snacks",
+      "slug": "sweet-snacks",
+      "categoryId": "snacks",
+      "title": "Sweet Snacks",
+      "description": "Fruit-forward, lightly sweet snacks and quick treats.",
+      "sortOrder": 2,
+      "enabled": true,
+      "displayType": "circle",
+      "imageKey": "subcategory-snacks-sweet-snacks",
+      "imageFile": "subcategory-snacks-sweet-snacks.png",
+      "imageAlt": "Sweet Snacks subcategory image",
+      "imagePrompt": "Square close-up food photo representing sweet snacks in the snacks category, warm cream background, app-friendly composition, no text, no logo."
+    },
+    {
+      "id": "snacks-high-protein-snacks",
+      "slug": "high-protein-snacks",
+      "categoryId": "snacks",
+      "title": "High Protein Snacks",
+      "description": "Snack recipes built around yogurt, seafood, poultry, legumes, or dairy.",
+      "sortOrder": 3,
+      "enabled": true,
+      "displayType": "circle",
+      "imageKey": "subcategory-snacks-high-protein-snacks",
+      "imageFile": "subcategory-snacks-high-protein-snacks.png",
+      "imageAlt": "High Protein Snacks subcategory image",
+      "imagePrompt": "Square close-up food photo representing high protein snacks in the snacks category, warm cream background, app-friendly composition, no text, no logo."
+    },
+    {
+      "id": "snacks-fresh-and-light",
+      "slug": "fresh-and-light",
+      "categoryId": "snacks",
+      "title": "Fresh & Light",
+      "description": "Refreshing snacks with bright produce, citrus, herbs, and lighter portions.",
+      "sortOrder": 4,
+      "enabled": true,
+      "displayType": "circle",
+      "imageKey": "subcategory-snacks-fresh-and-light",
+      "imageFile": "subcategory-snacks-fresh-and-light.png",
+      "imageAlt": "Fresh & Light subcategory image",
+      "imagePrompt": "Square close-up food photo representing fresh & light in the snacks category, warm cream background, app-friendly composition, no text, no logo."
+    },
+    {
+      "id": "snacks-dips-and-spreads",
+      "slug": "dips-and-spreads",
+      "categoryId": "snacks",
+      "title": "Dips & Spreads",
+      "description": "Scoopable dips, spreads, and snack boards for vegetables, crackers, or toast.",
+      "sortOrder": 5,
+      "enabled": true,
+      "displayType": "circle",
+      "imageKey": "subcategory-snacks-dips-and-spreads",
+      "imageFile": "subcategory-snacks-dips-and-spreads.png",
+      "imageAlt": "Dips & Spreads subcategory image",
+      "imagePrompt": "Square close-up food photo representing dips & spreads in the snacks category, warm cream background, app-friendly composition, no text, no logo."
+    },
+    {
+      "id": "snacks-crunchy-snacks",
+      "slug": "crunchy-snacks",
+      "categoryId": "snacks",
+      "title": "Crunchy Snacks",
+      "description": "Crisp, roasted, baked, and snackable recipes with texture.",
+      "sortOrder": 6,
+      "enabled": true,
+      "displayType": "circle",
+      "imageKey": "subcategory-snacks-crunchy-snacks",
+      "imageFile": "subcategory-snacks-crunchy-snacks.png",
+      "imageAlt": "Crunchy Snacks subcategory image",
+      "imagePrompt": "Square close-up food photo representing crunchy snacks in the snacks category, warm cream background, app-friendly composition, no text, no logo."
+    },
+    {
+      "id": "breakfast-quick-breakfasts",
+      "slug": "quick-breakfasts",
+      "categoryId": "breakfast",
+      "title": "Quick Breakfasts",
+      "description": "Fast breakfasts that are simple enough for busy mornings.",
+      "sortOrder": 1,
+      "enabled": true,
+      "displayType": "circle",
+      "imageKey": "subcategory-breakfast-quick-breakfasts",
+      "imageFile": "subcategory-breakfast-quick-breakfasts.png",
+      "imageAlt": "Quick Breakfasts subcategory image",
+      "imagePrompt": "Square close-up food photo representing quick breakfasts in the breakfast category, warm cream background, app-friendly composition, no text, no logo."
+    },
+    {
+      "id": "breakfast-egg-based",
+      "slug": "egg-based",
+      "categoryId": "breakfast",
+      "title": "Egg-Based",
+      "description": "Egg-centered breakfasts, scrambles, bites, skillets, and frittatas.",
+      "sortOrder": 2,
+      "enabled": true,
+      "displayType": "circle",
+      "imageKey": "subcategory-breakfast-egg-based",
+      "imageFile": "subcategory-breakfast-egg-based.png",
+      "imageAlt": "Egg-Based subcategory image",
+      "imagePrompt": "Square close-up food photo representing egg-based in the breakfast category, warm cream background, app-friendly composition, no text, no logo."
+    },
+    {
+      "id": "breakfast-oats-and-grains",
+      "slug": "oats-and-grains",
+      "categoryId": "breakfast",
+      "title": "Oats & Grains",
+      "description": "Warm, chilled, baked, and savory bowls made with oats, quinoa, chia, and grains.",
+      "sortOrder": 3,
+      "enabled": true,
+      "displayType": "circle",
+      "imageKey": "subcategory-breakfast-oats-and-grains",
+      "imageFile": "subcategory-breakfast-oats-and-grains.png",
+      "imageAlt": "Oats & Grains subcategory image",
+      "imagePrompt": "Square close-up food photo representing oats & grains in the breakfast category, warm cream background, app-friendly composition, no text, no logo."
+    },
+    {
+      "id": "breakfast-smoothies-and-bowls",
+      "slug": "smoothies-and-bowls",
+      "categoryId": "breakfast",
+      "title": "Smoothies & Bowls",
+      "description": "Blended breakfasts and colorful bowls with fruit, greens, dairy, or protein.",
+      "sortOrder": 4,
+      "enabled": true,
+      "displayType": "circle",
+      "imageKey": "subcategory-breakfast-smoothies-and-bowls",
+      "imageFile": "subcategory-breakfast-smoothies-and-bowls.png",
+      "imageAlt": "Smoothies & Bowls subcategory image",
+      "imagePrompt": "Square close-up food photo representing smoothies & bowls in the breakfast category, warm cream background, app-friendly composition, no text, no logo."
+    },
+    {
+      "id": "breakfast-high-protein-breakfast",
+      "slug": "high-protein-breakfast",
+      "categoryId": "breakfast",
+      "title": "High Protein Breakfast",
+      "description": "Breakfast recipes designed to keep protein higher and mornings more filling.",
+      "sortOrder": 5,
+      "enabled": true,
+      "displayType": "circle",
+      "imageKey": "subcategory-breakfast-high-protein-breakfast",
+      "imageFile": "subcategory-breakfast-high-protein-breakfast.png",
+      "imageAlt": "High Protein Breakfast subcategory image",
+      "imagePrompt": "Square close-up food photo representing high protein breakfast in the breakfast category, warm cream background, app-friendly composition, no text, no logo."
+    },
+    {
+      "id": "breakfast-weekend-brunch",
+      "slug": "weekend-brunch",
+      "categoryId": "breakfast",
+      "title": "Weekend Brunch",
+      "description": "More relaxed breakfast and brunch recipes for slow mornings.",
+      "sortOrder": 6,
+      "enabled": true,
+      "displayType": "circle",
+      "imageKey": "subcategory-breakfast-weekend-brunch",
+      "imageFile": "subcategory-breakfast-weekend-brunch.png",
+      "imageAlt": "Weekend Brunch subcategory image",
+      "imagePrompt": "Square close-up food photo representing weekend brunch in the breakfast category, warm cream background, app-friendly composition, no text, no logo."
+    }
+  ],
+  "recipes": [
+    {
+      "id": "recipe-snacks-savory-bites-mini-caprese-skewers",
+      "slug": "mini-caprese-skewers",
+      "title": "Mini Caprese Skewers",
+      "description": "Cherry tomatoes, mozzarella, basil, and balsamic glaze on easy snack skewers.",
+      "shortDescription": "Cherry tomatoes, mozzarella, basil, and balsamic glaze on easy snack skewers.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-savory-bites",
+      "mealType": "snack",
+      "sortOrder": 1,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 0,
+      "totalMinutes": 10,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Italian-inspired",
+      "calories": 170,
+      "proteinGrams": 8,
+      "carbsGrams": 7,
+      "fatGrams": 12,
+      "nutrition": {
+        "calories": 170,
+        "proteinGrams": 8,
+        "carbsGrams": 7,
+        "fatGrams": 12
+      },
+      "tags": [
+        "mediterranean",
+        "quick",
+        "savory-bites",
+        "snack",
+        "snacks",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Cherry tomatoes",
+          "quantity": 24,
+          "unit": "pieces",
+          "department": "Produce"
+        },
+        {
+          "name": "Mini mozzarella balls",
+          "quantity": 8,
+          "unit": "oz",
+          "department": "Dairy"
+        },
+        {
+          "name": "Fresh basil leaves",
+          "quantity": 24,
+          "unit": "leaves",
+          "department": "Produce"
+        },
+        {
+          "name": "Balsamic glaze",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Extra virgin olive oil",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Thread tomatoes, mozzarella, and basil onto small skewers."
+        },
+        {
+          "step": 2,
+          "text": "Arrange on a plate and drizzle with olive oil and balsamic glaze."
+        },
+        {
+          "step": 3,
+          "text": "Season lightly with salt and pepper before serving."
+        }
+      ],
+      "imageKey": "recipe-snacks-savory-bites-mini-caprese-skewers",
+      "imageFile": "recipe-snacks-savory-bites-mini-caprese-skewers.png",
+      "imageAlt": "Mini Caprese Skewers recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Mini Caprese Skewers, cherry tomatoes, mozzarella, basil, and balsamic glaze on easy snack skewers. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-savory-bites-cucumber-feta-toast-coins",
+      "slug": "cucumber-feta-toast-coins",
+      "title": "Cucumber Feta Toast Coins",
+      "description": "Crisp cucumber rounds topped with whipped feta, dill, and cracked pepper.",
+      "shortDescription": "Crisp cucumber rounds topped with whipped feta, dill, and cracked pepper.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-savory-bites",
+      "mealType": "snack",
+      "sortOrder": 2,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 12,
+      "cookMinutes": 0,
+      "totalMinutes": 12,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Mediterranean",
+      "calories": 120,
+      "proteinGrams": 6,
+      "carbsGrams": 6,
+      "fatGrams": 8,
+      "nutrition": {
+        "calories": 120,
+        "proteinGrams": 6,
+        "carbsGrams": 6,
+        "fatGrams": 8
+      },
+      "tags": [
+        "low-carb",
+        "quick",
+        "savory-bites",
+        "snack",
+        "snacks",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "English cucumber",
+          "quantity": 1,
+          "unit": "large",
+          "department": "Produce"
+        },
+        {
+          "name": "Feta cheese",
+          "quantity": 4,
+          "unit": "oz",
+          "department": "Dairy"
+        },
+        {
+          "name": "Greek yogurt",
+          "quantity": 3,
+          "unit": "tbsp",
+          "department": "Dairy"
+        },
+        {
+          "name": "Fresh dill",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Lemon juice",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Slice cucumber into thick coins."
+        },
+        {
+          "step": 2,
+          "text": "Mash feta with yogurt, dill, lemon juice, and pepper."
+        },
+        {
+          "step": 3,
+          "text": "Spoon feta mixture onto cucumber coins and serve chilled."
+        }
+      ],
+      "imageKey": "recipe-snacks-savory-bites-cucumber-feta-toast-coins",
+      "imageFile": "recipe-snacks-savory-bites-cucumber-feta-toast-coins.png",
+      "imageAlt": "Cucumber Feta Toast Coins recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Cucumber Feta Toast Coins, crisp cucumber rounds topped with whipped feta, dill, and cracked pepper. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-savory-bites-herbed-turkey-lettuce-cups",
+      "slug": "herbed-turkey-lettuce-cups",
+      "title": "Herbed Turkey Lettuce Cups",
+      "description": "Lean turkey, herbs, and crunchy vegetables tucked into little lettuce cups.",
+      "shortDescription": "Lean turkey, herbs, and crunchy vegetables tucked into little lettuce cups.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-savory-bites",
+      "mealType": "snack",
+      "sortOrder": 3,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 12,
+      "cookMinutes": 8,
+      "totalMinutes": 20,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Moderate",
+      "cuisine": "American",
+      "calories": 210,
+      "proteinGrams": 20,
+      "carbsGrams": 8,
+      "fatGrams": 10,
+      "nutrition": {
+        "calories": 210,
+        "proteinGrams": 20,
+        "carbsGrams": 8,
+        "fatGrams": 10
+      },
+      "tags": [
+        "high-protein",
+        "low-carb",
+        "meat",
+        "savory-bites",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Ground turkey",
+          "quantity": 12,
+          "unit": "oz",
+          "department": "Meat"
+        },
+        {
+          "name": "Butter lettuce leaves",
+          "quantity": 12,
+          "unit": "leaves",
+          "department": "Produce"
+        },
+        {
+          "name": "Diced celery",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Chopped parsley",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Plain Greek yogurt",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Dairy"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Cook turkey in a skillet until browned and fully cooked."
+        },
+        {
+          "step": 2,
+          "text": "Mix turkey with celery, parsley, yogurt, salt, and pepper."
+        },
+        {
+          "step": 3,
+          "text": "Spoon into lettuce leaves and serve as cups."
+        }
+      ],
+      "imageKey": "recipe-snacks-savory-bites-herbed-turkey-lettuce-cups",
+      "imageFile": "recipe-snacks-savory-bites-herbed-turkey-lettuce-cups.png",
+      "imageAlt": "Herbed Turkey Lettuce Cups recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Herbed Turkey Lettuce Cups, lean turkey, herbs, and crunchy vegetables tucked into little lettuce cups. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-savory-bites-tomato-basil-rice-cakes",
+      "slug": "tomato-basil-rice-cakes",
+      "title": "Tomato Basil Rice Cakes",
+      "description": "Light rice cakes layered with tomato, basil, cottage cheese, and olive oil.",
+      "shortDescription": "Light rice cakes layered with tomato, basil, cottage cheese, and olive oil.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-savory-bites",
+      "mealType": "snack",
+      "sortOrder": 4,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 0,
+      "totalMinutes": 8,
+      "servings": 2,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Italian-inspired",
+      "calories": 190,
+      "proteinGrams": 10,
+      "carbsGrams": 24,
+      "fatGrams": 6,
+      "nutrition": {
+        "calories": 190,
+        "proteinGrams": 10,
+        "carbsGrams": 24,
+        "fatGrams": 6
+      },
+      "tags": [
+        "quick",
+        "savory-bites",
+        "snack",
+        "snacks",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Plain rice cakes",
+          "quantity": 4,
+          "unit": "pieces",
+          "department": "Pantry"
+        },
+        {
+          "name": "Cottage cheese",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Roma tomato",
+          "quantity": 1,
+          "unit": "large",
+          "department": "Produce"
+        },
+        {
+          "name": "Fresh basil",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Olive oil",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Spread cottage cheese over rice cakes."
+        },
+        {
+          "step": 2,
+          "text": "Top with sliced tomato and basil."
+        },
+        {
+          "step": 3,
+          "text": "Drizzle with olive oil and season before serving."
+        }
+      ],
+      "imageKey": "recipe-snacks-savory-bites-tomato-basil-rice-cakes",
+      "imageFile": "recipe-snacks-savory-bites-tomato-basil-rice-cakes.png",
+      "imageAlt": "Tomato Basil Rice Cakes recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Tomato Basil Rice Cakes, light rice cakes layered with tomato, basil, cottage cheese, and olive oil. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-savory-bites-garlic-parmesan-mushroom-bites",
+      "slug": "garlic-parmesan-mushroom-bites",
+      "title": "Garlic Parmesan Mushroom Bites",
+      "description": "Roasted mushroom caps with garlic, parmesan, parsley, and lemon.",
+      "shortDescription": "Roasted mushroom caps with garlic, parmesan, parsley, and lemon.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-savory-bites",
+      "mealType": "snack",
+      "sortOrder": 5,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 15,
+      "totalMinutes": 25,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Italian-inspired",
+      "calories": 160,
+      "proteinGrams": 9,
+      "carbsGrams": 8,
+      "fatGrams": 10,
+      "nutrition": {
+        "calories": 160,
+        "proteinGrams": 9,
+        "carbsGrams": 8,
+        "fatGrams": 10
+      },
+      "tags": [
+        "savory",
+        "savory-bites",
+        "snack",
+        "snacks",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Cremini mushrooms",
+          "quantity": 16,
+          "unit": "oz",
+          "department": "Produce"
+        },
+        {
+          "name": "Grated parmesan",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Garlic cloves",
+          "quantity": 2,
+          "unit": "cloves",
+          "department": "Produce"
+        },
+        {
+          "name": "Fresh parsley",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Lemon zest",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Toss mushrooms with minced garlic, parmesan, parsley, lemon zest, and olive oil."
+        },
+        {
+          "step": 2,
+          "text": "Roast until tender and golden."
+        },
+        {
+          "step": 3,
+          "text": "Serve warm with extra parmesan."
+        }
+      ],
+      "imageKey": "recipe-snacks-savory-bites-garlic-parmesan-mushroom-bites",
+      "imageFile": "recipe-snacks-savory-bites-garlic-parmesan-mushroom-bites.png",
+      "imageAlt": "Garlic Parmesan Mushroom Bites recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Garlic Parmesan Mushroom Bites, roasted mushroom caps with garlic, parmesan, parsley, and lemon. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-sweet-snacks-cinnamon-apple-yogurt-dip",
+      "slug": "cinnamon-apple-yogurt-dip",
+      "title": "Cinnamon Apple Yogurt Dip",
+      "description": "Apple wedges with a creamy cinnamon Greek yogurt dip.",
+      "shortDescription": "Apple wedges with a creamy cinnamon Greek yogurt dip.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-sweet-snacks",
+      "mealType": "snack",
+      "sortOrder": 1,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 0,
+      "totalMinutes": 10,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 150,
+      "proteinGrams": 10,
+      "carbsGrams": 25,
+      "fatGrams": 3,
+      "nutrition": {
+        "calories": 150,
+        "proteinGrams": 10,
+        "carbsGrams": 25,
+        "fatGrams": 3
+      },
+      "tags": [
+        "high-protein",
+        "snack",
+        "snacks",
+        "sweet",
+        "sweet-snacks",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Apples",
+          "quantity": 3,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Plain Greek yogurt",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Honey",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Ground cinnamon",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Vanilla extract",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Stir yogurt, honey, cinnamon, and vanilla together."
+        },
+        {
+          "step": 2,
+          "text": "Slice apples into wedges."
+        },
+        {
+          "step": 3,
+          "text": "Serve apple wedges with yogurt dip."
+        }
+      ],
+      "imageKey": "recipe-snacks-sweet-snacks-cinnamon-apple-yogurt-dip",
+      "imageFile": "recipe-snacks-sweet-snacks-cinnamon-apple-yogurt-dip.png",
+      "imageAlt": "Cinnamon Apple Yogurt Dip recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Cinnamon Apple Yogurt Dip, apple wedges with a creamy cinnamon greek yogurt dip. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-sweet-snacks-chocolate-date-energy-bites",
+      "slug": "chocolate-date-energy-bites",
+      "title": "Chocolate Date Energy Bites",
+      "description": "No-bake cocoa date bites with oats, almond butter, and chia.",
+      "shortDescription": "No-bake cocoa date bites with oats, almond butter, and chia.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-sweet-snacks",
+      "mealType": "snack",
+      "sortOrder": 2,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 15,
+      "cookMinutes": 0,
+      "totalMinutes": 15,
+      "servings": 10,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 135,
+      "proteinGrams": 4,
+      "carbsGrams": 18,
+      "fatGrams": 6,
+      "nutrition": {
+        "calories": 135,
+        "proteinGrams": 4,
+        "carbsGrams": 18,
+        "fatGrams": 6
+      },
+      "tags": [
+        "meal-prep",
+        "no-cook",
+        "snack",
+        "snacks",
+        "sweet",
+        "sweet-snacks"
+      ],
+      "dietary": [
+        "vegetarian",
+        "dairy-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Pitted dates",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Rolled oats",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Almond butter",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Unsweetened cocoa powder",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Chia seeds",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Pulse dates, oats, almond butter, cocoa, and chia until sticky."
+        },
+        {
+          "step": 2,
+          "text": "Roll into bite-size balls."
+        },
+        {
+          "step": 3,
+          "text": "Chill until firm."
+        }
+      ],
+      "imageKey": "recipe-snacks-sweet-snacks-chocolate-date-energy-bites",
+      "imageFile": "recipe-snacks-sweet-snacks-chocolate-date-energy-bites.png",
+      "imageAlt": "Chocolate Date Energy Bites recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Chocolate Date Energy Bites, no-bake cocoa date bites with oats, almond butter, and chia. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-sweet-snacks-berry-almond-cottage-bowl",
+      "slug": "berry-almond-cottage-bowl",
+      "title": "Berry Almond Cottage Bowl",
+      "description": "Cottage cheese topped with berries, almonds, and a touch of honey.",
+      "shortDescription": "Cottage cheese topped with berries, almonds, and a touch of honey.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-sweet-snacks",
+      "mealType": "snack",
+      "sortOrder": 3,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 5,
+      "cookMinutes": 0,
+      "totalMinutes": 5,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 240,
+      "proteinGrams": 21,
+      "carbsGrams": 24,
+      "fatGrams": 8,
+      "nutrition": {
+        "calories": 240,
+        "proteinGrams": 21,
+        "carbsGrams": 24,
+        "fatGrams": 8
+      },
+      "tags": [
+        "high-protein",
+        "quick",
+        "snack",
+        "snacks",
+        "sweet",
+        "sweet-snacks"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Cottage cheese",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Mixed berries",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Sliced almonds",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Honey",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Lemon zest",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Spoon cottage cheese into a bowl."
+        },
+        {
+          "step": 2,
+          "text": "Top with berries, almonds, honey, and lemon zest."
+        },
+        {
+          "step": 3,
+          "text": "Serve cold."
+        }
+      ],
+      "imageKey": "recipe-snacks-sweet-snacks-berry-almond-cottage-bowl",
+      "imageFile": "recipe-snacks-sweet-snacks-berry-almond-cottage-bowl.png",
+      "imageAlt": "Berry Almond Cottage Bowl recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Berry Almond Cottage Bowl, cottage cheese topped with berries, almonds, and a touch of honey. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-sweet-snacks-honey-peach-ricotta-toast",
+      "slug": "honey-peach-ricotta-toast",
+      "title": "Honey Peach Ricotta Toast",
+      "description": "Creamy ricotta toast with peaches, honey, and toasted pistachios.",
+      "shortDescription": "Creamy ricotta toast with peaches, honey, and toasted pistachios.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-sweet-snacks",
+      "mealType": "snack",
+      "sortOrder": 4,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 2,
+      "totalMinutes": 10,
+      "servings": 2,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Italian-inspired",
+      "calories": 260,
+      "proteinGrams": 11,
+      "carbsGrams": 35,
+      "fatGrams": 9,
+      "nutrition": {
+        "calories": 260,
+        "proteinGrams": 11,
+        "carbsGrams": 35,
+        "fatGrams": 9
+      },
+      "tags": [
+        "snack",
+        "snacks",
+        "sweet",
+        "sweet-snacks",
+        "toast"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Whole grain bread",
+          "quantity": 2,
+          "unit": "slices",
+          "department": "Bakery"
+        },
+        {
+          "name": "Ricotta cheese",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Peach",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Honey",
+          "quantity": 2,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Chopped pistachios",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Toast bread until crisp."
+        },
+        {
+          "step": 2,
+          "text": "Spread ricotta over each slice."
+        },
+        {
+          "step": 3,
+          "text": "Top with peach slices, honey, and pistachios."
+        }
+      ],
+      "imageKey": "recipe-snacks-sweet-snacks-honey-peach-ricotta-toast",
+      "imageFile": "recipe-snacks-sweet-snacks-honey-peach-ricotta-toast.png",
+      "imageAlt": "Honey Peach Ricotta Toast recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Honey Peach Ricotta Toast, creamy ricotta toast with peaches, honey, and toasted pistachios. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-sweet-snacks-banana-oat-cookie-bites",
+      "slug": "banana-oat-cookie-bites",
+      "title": "Banana Oat Cookie Bites",
+      "description": "Soft two-bite banana oat cookies with cinnamon and mini chocolate chips.",
+      "shortDescription": "Soft two-bite banana oat cookies with cinnamon and mini chocolate chips.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-sweet-snacks",
+      "mealType": "snack",
+      "sortOrder": 5,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 14,
+      "totalMinutes": 24,
+      "servings": 12,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 95,
+      "proteinGrams": 3,
+      "carbsGrams": 16,
+      "fatGrams": 3,
+      "nutrition": {
+        "calories": 95,
+        "proteinGrams": 3,
+        "carbsGrams": 16,
+        "fatGrams": 3
+      },
+      "tags": [
+        "budget",
+        "meal-prep",
+        "snack",
+        "snacks",
+        "sweet",
+        "sweet-snacks"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Ripe bananas",
+          "quantity": 2,
+          "unit": "large",
+          "department": "Produce"
+        },
+        {
+          "name": "Rolled oats",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Mini chocolate chips",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Ground cinnamon",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Peanut butter",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Mash bananas with peanut butter and cinnamon."
+        },
+        {
+          "step": 2,
+          "text": "Stir in oats and chocolate chips."
+        },
+        {
+          "step": 3,
+          "text": "Scoop onto a sheet pan and bake until set."
+        }
+      ],
+      "imageKey": "recipe-snacks-sweet-snacks-banana-oat-cookie-bites",
+      "imageFile": "recipe-snacks-sweet-snacks-banana-oat-cookie-bites.png",
+      "imageAlt": "Banana Oat Cookie Bites recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Banana Oat Cookie Bites, soft two-bite banana oat cookies with cinnamon and mini chocolate chips. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-high-protein-snacks-greek-yogurt-ranch-cups",
+      "slug": "greek-yogurt-ranch-cups",
+      "title": "Greek Yogurt Ranch Cups",
+      "description": "Crunchy vegetables with a high-protein Greek yogurt ranch dip.",
+      "shortDescription": "Crunchy vegetables with a high-protein Greek yogurt ranch dip.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-high-protein-snacks",
+      "mealType": "snack",
+      "sortOrder": 1,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 12,
+      "cookMinutes": 0,
+      "totalMinutes": 12,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 140,
+      "proteinGrams": 15,
+      "carbsGrams": 12,
+      "fatGrams": 4,
+      "nutrition": {
+        "calories": 140,
+        "proteinGrams": 15,
+        "carbsGrams": 12,
+        "fatGrams": 4
+      },
+      "tags": [
+        "high-protein",
+        "high-protein-snacks",
+        "quick",
+        "snack",
+        "snacks",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Plain Greek yogurt",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Ranch seasoning",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Carrot sticks",
+          "quantity": 2,
+          "unit": "cups",
+          "department": "Produce"
+        },
+        {
+          "name": "Celery sticks",
+          "quantity": 2,
+          "unit": "cups",
+          "department": "Produce"
+        },
+        {
+          "name": "Bell pepper strips",
+          "quantity": 2,
+          "unit": "cups",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Mix Greek yogurt with ranch seasoning."
+        },
+        {
+          "step": 2,
+          "text": "Divide vegetables into snack cups."
+        },
+        {
+          "step": 3,
+          "text": "Add dip to each cup and chill."
+        }
+      ],
+      "imageKey": "recipe-snacks-high-protein-snacks-greek-yogurt-ranch-cups",
+      "imageFile": "recipe-snacks-high-protein-snacks-greek-yogurt-ranch-cups.png",
+      "imageAlt": "Greek Yogurt Ranch Cups recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Greek Yogurt Ranch Cups, crunchy vegetables with a high-protein greek yogurt ranch dip. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-high-protein-snacks-tuna-avocado-cucumber-boats",
+      "slug": "tuna-avocado-cucumber-boats",
+      "title": "Tuna Avocado Cucumber Boats",
+      "description": "Cucumber boats filled with lemony tuna, avocado, herbs, and pepper.",
+      "shortDescription": "Cucumber boats filled with lemony tuna, avocado, herbs, and pepper.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-high-protein-snacks",
+      "mealType": "snack",
+      "sortOrder": 2,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 12,
+      "cookMinutes": 0,
+      "totalMinutes": 12,
+      "servings": 2,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Seafood",
+      "calories": 250,
+      "proteinGrams": 24,
+      "carbsGrams": 10,
+      "fatGrams": 14,
+      "nutrition": {
+        "calories": 250,
+        "proteinGrams": 24,
+        "carbsGrams": 10,
+        "fatGrams": 14
+      },
+      "tags": [
+        "high-protein",
+        "high-protein-snacks",
+        "low-carb",
+        "seafood",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "gluten-free",
+        "dairy-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Canned tuna",
+          "quantity": 1,
+          "unit": "can",
+          "department": "Seafood"
+        },
+        {
+          "name": "English cucumber",
+          "quantity": 1,
+          "unit": "large",
+          "department": "Produce"
+        },
+        {
+          "name": "Avocado",
+          "quantity": 0.5,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Lemon juice",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Chopped chives",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Halve cucumber lengthwise and scoop a shallow channel."
+        },
+        {
+          "step": 2,
+          "text": "Mix tuna with mashed avocado, lemon, chives, salt, and pepper."
+        },
+        {
+          "step": 3,
+          "text": "Fill cucumber boats and slice into snack pieces."
+        }
+      ],
+      "imageKey": "recipe-snacks-high-protein-snacks-tuna-avocado-cucumber-boats",
+      "imageFile": "recipe-snacks-high-protein-snacks-tuna-avocado-cucumber-boats.png",
+      "imageAlt": "Tuna Avocado Cucumber Boats recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Tuna Avocado Cucumber Boats, cucumber boats filled with lemony tuna, avocado, herbs, and pepper. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-high-protein-snacks-chicken-hummus-snack-plate",
+      "slug": "chicken-hummus-snack-plate",
+      "title": "Chicken Hummus Snack Plate",
+      "description": "A balanced mini plate with chicken, hummus, cucumber, carrots, and pita.",
+      "shortDescription": "A balanced mini plate with chicken, hummus, cucumber, carrots, and pita.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-high-protein-snacks",
+      "mealType": "snack",
+      "sortOrder": 3,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 0,
+      "totalMinutes": 10,
+      "servings": 2,
+      "difficulty": "Easy",
+      "costLevel": "Moderate",
+      "cuisine": "Mediterranean",
+      "calories": 310,
+      "proteinGrams": 28,
+      "carbsGrams": 26,
+      "fatGrams": 11,
+      "nutrition": {
+        "calories": 310,
+        "proteinGrams": 28,
+        "carbsGrams": 26,
+        "fatGrams": 11
+      },
+      "tags": [
+        "high-protein",
+        "high-protein-snacks",
+        "meal-prep",
+        "meat",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "dairy-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Cooked chicken breast",
+          "quantity": 6,
+          "unit": "oz",
+          "department": "Meat"
+        },
+        {
+          "name": "Hummus",
+          "quantity": 0.33,
+          "unit": "cup",
+          "department": "Deli"
+        },
+        {
+          "name": "Mini pita",
+          "quantity": 1,
+          "unit": "piece",
+          "department": "Bakery"
+        },
+        {
+          "name": "Cucumber slices",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Carrot sticks",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Slice cooked chicken into strips."
+        },
+        {
+          "step": 2,
+          "text": "Arrange chicken, hummus, pita, cucumber, and carrots on a plate."
+        },
+        {
+          "step": 3,
+          "text": "Season hummus with paprika or herbs if desired."
+        }
+      ],
+      "imageKey": "recipe-snacks-high-protein-snacks-chicken-hummus-snack-plate",
+      "imageFile": "recipe-snacks-high-protein-snacks-chicken-hummus-snack-plate.png",
+      "imageAlt": "Chicken Hummus Snack Plate recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Chicken Hummus Snack Plate, a balanced mini plate with chicken, hummus, cucumber, carrots, and pita. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-high-protein-snacks-edamame-chili-lime-cups",
+      "slug": "edamame-chili-lime-cups",
+      "title": "Edamame Chili Lime Cups",
+      "description": "Shelled edamame tossed with lime, chili, sea salt, and sesame.",
+      "shortDescription": "Shelled edamame tossed with lime, chili, sea salt, and sesame.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-high-protein-snacks",
+      "mealType": "snack",
+      "sortOrder": 4,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 5,
+      "cookMinutes": 5,
+      "totalMinutes": 10,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Asian-inspired",
+      "calories": 180,
+      "proteinGrams": 17,
+      "carbsGrams": 15,
+      "fatGrams": 7,
+      "nutrition": {
+        "calories": 180,
+        "proteinGrams": 17,
+        "carbsGrams": 15,
+        "fatGrams": 7
+      },
+      "tags": [
+        "high-protein",
+        "high-protein-snacks",
+        "plant-based",
+        "quick",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "vegetarian",
+        "vegan",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Shelled edamame",
+          "quantity": 2,
+          "unit": "cups",
+          "department": "Frozen"
+        },
+        {
+          "name": "Lime juice",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Chili powder",
+          "quantity": 0.75,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Sesame oil",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Sesame seeds",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Steam edamame until warm."
+        },
+        {
+          "step": 2,
+          "text": "Toss with lime juice, chili powder, sesame oil, and salt."
+        },
+        {
+          "step": 3,
+          "text": "Sprinkle sesame seeds on top."
+        }
+      ],
+      "imageKey": "recipe-snacks-high-protein-snacks-edamame-chili-lime-cups",
+      "imageFile": "recipe-snacks-high-protein-snacks-edamame-chili-lime-cups.png",
+      "imageAlt": "Edamame Chili Lime Cups recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Edamame Chili Lime Cups, shelled edamame tossed with lime, chili, sea salt, and sesame. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-high-protein-snacks-turkey-cheddar-roll-ups",
+      "slug": "turkey-cheddar-roll-ups",
+      "title": "Turkey Cheddar Roll Ups",
+      "description": "Turkey slices rolled with cheddar, spinach, and mustard for a fast protein snack.",
+      "shortDescription": "Turkey slices rolled with cheddar, spinach, and mustard for a fast protein snack.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-high-protein-snacks",
+      "mealType": "snack",
+      "sortOrder": 5,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 0,
+      "totalMinutes": 8,
+      "servings": 2,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 230,
+      "proteinGrams": 24,
+      "carbsGrams": 5,
+      "fatGrams": 13,
+      "nutrition": {
+        "calories": 230,
+        "proteinGrams": 24,
+        "carbsGrams": 5,
+        "fatGrams": 13
+      },
+      "tags": [
+        "high-protein",
+        "high-protein-snacks",
+        "meat",
+        "quick",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Deli turkey slices",
+          "quantity": 6,
+          "unit": "slices",
+          "department": "Deli"
+        },
+        {
+          "name": "Cheddar cheese slices",
+          "quantity": 3,
+          "unit": "slices",
+          "department": "Dairy"
+        },
+        {
+          "name": "Baby spinach",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Dijon mustard",
+          "quantity": 2,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Pickle spears",
+          "quantity": 2,
+          "unit": "pieces",
+          "department": "Deli"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Spread mustard over turkey slices."
+        },
+        {
+          "step": 2,
+          "text": "Layer cheddar, spinach, and pickle pieces."
+        },
+        {
+          "step": 3,
+          "text": "Roll tightly and slice in half."
+        }
+      ],
+      "imageKey": "recipe-snacks-high-protein-snacks-turkey-cheddar-roll-ups",
+      "imageFile": "recipe-snacks-high-protein-snacks-turkey-cheddar-roll-ups.png",
+      "imageAlt": "Turkey Cheddar Roll Ups recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Turkey Cheddar Roll Ups, turkey slices rolled with cheddar, spinach, and mustard for a fast protein snack. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-fresh-and-light-watermelon-feta-mint-cups",
+      "slug": "watermelon-feta-mint-cups",
+      "title": "Watermelon Feta Mint Cups",
+      "description": "Juicy watermelon cubes with feta, mint, lime, and a pinch of chili.",
+      "shortDescription": "Juicy watermelon cubes with feta, mint, lime, and a pinch of chili.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-fresh-and-light",
+      "mealType": "snack",
+      "sortOrder": 1,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 0,
+      "totalMinutes": 10,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Mediterranean",
+      "calories": 130,
+      "proteinGrams": 5,
+      "carbsGrams": 18,
+      "fatGrams": 5,
+      "nutrition": {
+        "calories": 130,
+        "proteinGrams": 5,
+        "carbsGrams": 18,
+        "fatGrams": 5
+      },
+      "tags": [
+        "fresh",
+        "fresh-and-light",
+        "snack",
+        "snacks",
+        "summer",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Watermelon cubes",
+          "quantity": 4,
+          "unit": "cups",
+          "department": "Produce"
+        },
+        {
+          "name": "Feta cheese",
+          "quantity": 0.33,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Fresh mint",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Lime juice",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Chili flakes",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Divide watermelon into small cups."
+        },
+        {
+          "step": 2,
+          "text": "Top with feta and mint."
+        },
+        {
+          "step": 3,
+          "text": "Finish with lime juice and chili flakes."
+        }
+      ],
+      "imageKey": "recipe-snacks-fresh-and-light-watermelon-feta-mint-cups",
+      "imageFile": "recipe-snacks-fresh-and-light-watermelon-feta-mint-cups.png",
+      "imageAlt": "Watermelon Feta Mint Cups recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Watermelon Feta Mint Cups, juicy watermelon cubes with feta, mint, lime, and a pinch of chili. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-fresh-and-light-citrus-jicama-sticks",
+      "slug": "citrus-jicama-sticks",
+      "title": "Citrus Jicama Sticks",
+      "description": "Crunchy jicama sticks with orange, lime, chili, and sea salt.",
+      "shortDescription": "Crunchy jicama sticks with orange, lime, chili, and sea salt.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-fresh-and-light",
+      "mealType": "snack",
+      "sortOrder": 2,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 12,
+      "cookMinutes": 0,
+      "totalMinutes": 12,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Mexican-inspired",
+      "calories": 90,
+      "proteinGrams": 2,
+      "carbsGrams": 22,
+      "fatGrams": 0,
+      "nutrition": {
+        "calories": 90,
+        "proteinGrams": 2,
+        "carbsGrams": 22,
+        "fatGrams": 0
+      },
+      "tags": [
+        "budget",
+        "fresh",
+        "fresh-and-light",
+        "low-fat",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "vegetarian",
+        "vegan",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Jicama",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Orange",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Lime juice",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Chili lime seasoning",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Fresh cilantro",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Peel and cut jicama into sticks."
+        },
+        {
+          "step": 2,
+          "text": "Toss with orange segments, lime, seasoning, and cilantro."
+        },
+        {
+          "step": 3,
+          "text": "Serve chilled."
+        }
+      ],
+      "imageKey": "recipe-snacks-fresh-and-light-citrus-jicama-sticks",
+      "imageFile": "recipe-snacks-fresh-and-light-citrus-jicama-sticks.png",
+      "imageAlt": "Citrus Jicama Sticks recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Citrus Jicama Sticks, crunchy jicama sticks with orange, lime, chili, and sea salt. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-fresh-and-light-avocado-tomato-lettuce-cups",
+      "slug": "avocado-tomato-lettuce-cups",
+      "title": "Avocado Tomato Lettuce Cups",
+      "description": "Butter lettuce cups with avocado, tomato, lime, and pumpkin seeds.",
+      "shortDescription": "Butter lettuce cups with avocado, tomato, lime, and pumpkin seeds.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-fresh-and-light",
+      "mealType": "snack",
+      "sortOrder": 3,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 0,
+      "totalMinutes": 10,
+      "servings": 2,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Mexican-inspired",
+      "calories": 220,
+      "proteinGrams": 5,
+      "carbsGrams": 15,
+      "fatGrams": 17,
+      "nutrition": {
+        "calories": 220,
+        "proteinGrams": 5,
+        "carbsGrams": 15,
+        "fatGrams": 17
+      },
+      "tags": [
+        "fresh",
+        "fresh-and-light",
+        "plant-based",
+        "quick",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "vegetarian",
+        "vegan",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Butter lettuce leaves",
+          "quantity": 8,
+          "unit": "leaves",
+          "department": "Produce"
+        },
+        {
+          "name": "Avocado",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Cherry tomatoes",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Lime juice",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Pumpkin seeds",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Mash avocado with lime and salt."
+        },
+        {
+          "step": 2,
+          "text": "Spoon into lettuce leaves."
+        },
+        {
+          "step": 3,
+          "text": "Top with tomatoes and pumpkin seeds."
+        }
+      ],
+      "imageKey": "recipe-snacks-fresh-and-light-avocado-tomato-lettuce-cups",
+      "imageFile": "recipe-snacks-fresh-and-light-avocado-tomato-lettuce-cups.png",
+      "imageAlt": "Avocado Tomato Lettuce Cups recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Avocado Tomato Lettuce Cups, butter lettuce cups with avocado, tomato, lime, and pumpkin seeds. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-fresh-and-light-strawberry-cucumber-salad-cups",
+      "slug": "strawberry-cucumber-salad-cups",
+      "title": "Strawberry Cucumber Salad Cups",
+      "description": "Mini salad cups with strawberry, cucumber, basil, and a light vinaigrette.",
+      "shortDescription": "Mini salad cups with strawberry, cucumber, basil, and a light vinaigrette.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-fresh-and-light",
+      "mealType": "snack",
+      "sortOrder": 4,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 12,
+      "cookMinutes": 0,
+      "totalMinutes": 12,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 110,
+      "proteinGrams": 3,
+      "carbsGrams": 14,
+      "fatGrams": 5,
+      "nutrition": {
+        "calories": 110,
+        "proteinGrams": 3,
+        "carbsGrams": 14,
+        "fatGrams": 5
+      },
+      "tags": [
+        "fresh",
+        "fresh-and-light",
+        "snack",
+        "snacks",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Strawberries",
+          "quantity": 2,
+          "unit": "cups",
+          "department": "Produce"
+        },
+        {
+          "name": "Cucumber",
+          "quantity": 1,
+          "unit": "large",
+          "department": "Produce"
+        },
+        {
+          "name": "Fresh basil",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Goat cheese",
+          "quantity": 2,
+          "unit": "oz",
+          "department": "Dairy"
+        },
+        {
+          "name": "White balsamic vinegar",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Dice strawberries and cucumber."
+        },
+        {
+          "step": 2,
+          "text": "Toss with basil, goat cheese, vinegar, salt, and pepper."
+        },
+        {
+          "step": 3,
+          "text": "Divide into small snack cups."
+        }
+      ],
+      "imageKey": "recipe-snacks-fresh-and-light-strawberry-cucumber-salad-cups",
+      "imageFile": "recipe-snacks-fresh-and-light-strawberry-cucumber-salad-cups.png",
+      "imageAlt": "Strawberry Cucumber Salad Cups recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Strawberry Cucumber Salad Cups, mini salad cups with strawberry, cucumber, basil, and a light vinaigrette. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-fresh-and-light-zesty-shrimp-mango-bites",
+      "slug": "zesty-shrimp-mango-bites",
+      "title": "Zesty Shrimp Mango Bites",
+      "description": "Shrimp, mango, lime, and cilantro served in crisp cucumber rounds.",
+      "shortDescription": "Shrimp, mango, lime, and cilantro served in crisp cucumber rounds.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-fresh-and-light",
+      "mealType": "snack",
+      "sortOrder": 5,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 15,
+      "cookMinutes": 5,
+      "totalMinutes": 20,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Moderate",
+      "cuisine": "Tropical",
+      "calories": 160,
+      "proteinGrams": 18,
+      "carbsGrams": 13,
+      "fatGrams": 4,
+      "nutrition": {
+        "calories": 160,
+        "proteinGrams": 18,
+        "carbsGrams": 13,
+        "fatGrams": 4
+      },
+      "tags": [
+        "fresh",
+        "fresh-and-light",
+        "high-protein",
+        "seafood",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "gluten-free",
+        "dairy-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Cooked shrimp",
+          "quantity": 12,
+          "unit": "oz",
+          "department": "Seafood"
+        },
+        {
+          "name": "Mango",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Cucumber",
+          "quantity": 1,
+          "unit": "large",
+          "department": "Produce"
+        },
+        {
+          "name": "Lime juice",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Fresh cilantro",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Dice shrimp and mango, then toss with lime and cilantro."
+        },
+        {
+          "step": 2,
+          "text": "Slice cucumber into thick rounds."
+        },
+        {
+          "step": 3,
+          "text": "Top each cucumber round with shrimp mango mixture."
+        }
+      ],
+      "imageKey": "recipe-snacks-fresh-and-light-zesty-shrimp-mango-bites",
+      "imageFile": "recipe-snacks-fresh-and-light-zesty-shrimp-mango-bites.png",
+      "imageAlt": "Zesty Shrimp Mango Bites recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Zesty Shrimp Mango Bites, shrimp, mango, lime, and cilantro served in crisp cucumber rounds. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-dips-and-spreads-roasted-red-pepper-hummus",
+      "slug": "roasted-red-pepper-hummus",
+      "title": "Roasted Red Pepper Hummus",
+      "description": "Creamy chickpea hummus blended with roasted red peppers and paprika.",
+      "shortDescription": "Creamy chickpea hummus blended with roasted red peppers and paprika.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-dips-and-spreads",
+      "mealType": "snack",
+      "sortOrder": 1,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 0,
+      "totalMinutes": 10,
+      "servings": 6,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Mediterranean",
+      "calories": 160,
+      "proteinGrams": 6,
+      "carbsGrams": 18,
+      "fatGrams": 7,
+      "nutrition": {
+        "calories": 160,
+        "proteinGrams": 6,
+        "carbsGrams": 18,
+        "fatGrams": 7
+      },
+      "tags": [
+        "budget",
+        "dip",
+        "dips-and-spreads",
+        "plant-based",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "vegetarian",
+        "vegan",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Canned chickpeas",
+          "quantity": 1,
+          "unit": "can",
+          "department": "Pantry"
+        },
+        {
+          "name": "Roasted red peppers",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Tahini",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Lemon juice",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Smoked paprika",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Blend chickpeas, peppers, tahini, lemon, paprika, and salt."
+        },
+        {
+          "step": 2,
+          "text": "Add water until creamy."
+        },
+        {
+          "step": 3,
+          "text": "Serve with vegetables or pita."
+        }
+      ],
+      "imageKey": "recipe-snacks-dips-and-spreads-roasted-red-pepper-hummus",
+      "imageFile": "recipe-snacks-dips-and-spreads-roasted-red-pepper-hummus.png",
+      "imageAlt": "Roasted Red Pepper Hummus recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Roasted Red Pepper Hummus, creamy chickpea hummus blended with roasted red peppers and paprika. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-dips-and-spreads-green-goddess-cottage-dip",
+      "slug": "green-goddess-cottage-dip",
+      "title": "Green Goddess Cottage Dip",
+      "description": "A creamy cottage cheese dip blended with herbs, lemon, and garlic.",
+      "shortDescription": "A creamy cottage cheese dip blended with herbs, lemon, and garlic.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-dips-and-spreads",
+      "mealType": "snack",
+      "sortOrder": 2,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 0,
+      "totalMinutes": 8,
+      "servings": 6,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 120,
+      "proteinGrams": 14,
+      "carbsGrams": 6,
+      "fatGrams": 4,
+      "nutrition": {
+        "calories": 120,
+        "proteinGrams": 14,
+        "carbsGrams": 6,
+        "fatGrams": 4
+      },
+      "tags": [
+        "dip",
+        "dips-and-spreads",
+        "high-protein",
+        "snack",
+        "snacks",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Cottage cheese",
+          "quantity": 1.5,
+          "unit": "cups",
+          "department": "Dairy"
+        },
+        {
+          "name": "Fresh parsley",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Fresh chives",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Lemon juice",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Garlic clove",
+          "quantity": 1,
+          "unit": "clove",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Blend cottage cheese, herbs, lemon, garlic, salt, and pepper."
+        },
+        {
+          "step": 2,
+          "text": "Thin with water if needed."
+        },
+        {
+          "step": 3,
+          "text": "Serve chilled with crunchy vegetables."
+        }
+      ],
+      "imageKey": "recipe-snacks-dips-and-spreads-green-goddess-cottage-dip",
+      "imageFile": "recipe-snacks-dips-and-spreads-green-goddess-cottage-dip.png",
+      "imageAlt": "Green Goddess Cottage Dip recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Green Goddess Cottage Dip, a creamy cottage cheese dip blended with herbs, lemon, and garlic. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-dips-and-spreads-black-bean-corn-salsa",
+      "slug": "black-bean-corn-salsa",
+      "title": "Black Bean Corn Salsa",
+      "description": "A scoopable salsa with black beans, corn, tomato, lime, and cilantro.",
+      "shortDescription": "A scoopable salsa with black beans, corn, tomato, lime, and cilantro.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-dips-and-spreads",
+      "mealType": "snack",
+      "sortOrder": 3,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 12,
+      "cookMinutes": 0,
+      "totalMinutes": 12,
+      "servings": 6,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Mexican-inspired",
+      "calories": 150,
+      "proteinGrams": 7,
+      "carbsGrams": 26,
+      "fatGrams": 2,
+      "nutrition": {
+        "calories": 150,
+        "proteinGrams": 7,
+        "carbsGrams": 26,
+        "fatGrams": 2
+      },
+      "tags": [
+        "budget",
+        "dip",
+        "dips-and-spreads",
+        "plant-based",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "vegetarian",
+        "vegan",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Black beans",
+          "quantity": 1,
+          "unit": "can",
+          "department": "Pantry"
+        },
+        {
+          "name": "Corn kernels",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Frozen"
+        },
+        {
+          "name": "Roma tomatoes",
+          "quantity": 2,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Lime juice",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Fresh cilantro",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Rinse and drain black beans."
+        },
+        {
+          "step": 2,
+          "text": "Mix beans, corn, diced tomatoes, lime, cilantro, and salt."
+        },
+        {
+          "step": 3,
+          "text": "Chill before serving."
+        }
+      ],
+      "imageKey": "recipe-snacks-dips-and-spreads-black-bean-corn-salsa",
+      "imageFile": "recipe-snacks-dips-and-spreads-black-bean-corn-salsa.png",
+      "imageAlt": "Black Bean Corn Salsa recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Black Bean Corn Salsa, a scoopable salsa with black beans, corn, tomato, lime, and cilantro. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-dips-and-spreads-whipped-feta-honey-dip",
+      "slug": "whipped-feta-honey-dip",
+      "title": "Whipped Feta Honey Dip",
+      "description": "Salty whipped feta with Greek yogurt, honey, lemon, and thyme.",
+      "shortDescription": "Salty whipped feta with Greek yogurt, honey, lemon, and thyme.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-dips-and-spreads",
+      "mealType": "snack",
+      "sortOrder": 4,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 0,
+      "totalMinutes": 8,
+      "servings": 6,
+      "difficulty": "Easy",
+      "costLevel": "Moderate",
+      "cuisine": "Mediterranean",
+      "calories": 170,
+      "proteinGrams": 8,
+      "carbsGrams": 8,
+      "fatGrams": 12,
+      "nutrition": {
+        "calories": 170,
+        "proteinGrams": 8,
+        "carbsGrams": 8,
+        "fatGrams": 12
+      },
+      "tags": [
+        "dip",
+        "dips-and-spreads",
+        "snack",
+        "snacks",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Feta cheese",
+          "quantity": 8,
+          "unit": "oz",
+          "department": "Dairy"
+        },
+        {
+          "name": "Greek yogurt",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Honey",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Lemon zest",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Fresh thyme",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Blend feta and Greek yogurt until smooth."
+        },
+        {
+          "step": 2,
+          "text": "Spoon into a bowl and top with honey, lemon zest, and thyme."
+        },
+        {
+          "step": 3,
+          "text": "Serve with cucumbers or crackers."
+        }
+      ],
+      "imageKey": "recipe-snacks-dips-and-spreads-whipped-feta-honey-dip",
+      "imageFile": "recipe-snacks-dips-and-spreads-whipped-feta-honey-dip.png",
+      "imageAlt": "Whipped Feta Honey Dip recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Whipped Feta Honey Dip, salty whipped feta with greek yogurt, honey, lemon, and thyme. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-dips-and-spreads-creamy-avocado-lime-dip",
+      "slug": "creamy-avocado-lime-dip",
+      "title": "Creamy Avocado Lime Dip",
+      "description": "Avocado, lime, cilantro, and yogurt blended into a bright snack dip.",
+      "shortDescription": "Avocado, lime, cilantro, and yogurt blended into a bright snack dip.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-dips-and-spreads",
+      "mealType": "snack",
+      "sortOrder": 5,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 0,
+      "totalMinutes": 8,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Mexican-inspired",
+      "calories": 180,
+      "proteinGrams": 5,
+      "carbsGrams": 12,
+      "fatGrams": 14,
+      "nutrition": {
+        "calories": 180,
+        "proteinGrams": 5,
+        "carbsGrams": 12,
+        "fatGrams": 14
+      },
+      "tags": [
+        "dip",
+        "dips-and-spreads",
+        "quick",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Avocados",
+          "quantity": 2,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Greek yogurt",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Lime juice",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Fresh cilantro",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Garlic powder",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Blend avocado, yogurt, lime, cilantro, garlic powder, and salt."
+        },
+        {
+          "step": 2,
+          "text": "Taste and adjust lime."
+        },
+        {
+          "step": 3,
+          "text": "Serve immediately or cover tightly."
+        }
+      ],
+      "imageKey": "recipe-snacks-dips-and-spreads-creamy-avocado-lime-dip",
+      "imageFile": "recipe-snacks-dips-and-spreads-creamy-avocado-lime-dip.png",
+      "imageAlt": "Creamy Avocado Lime Dip recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Creamy Avocado Lime Dip, avocado, lime, cilantro, and yogurt blended into a bright snack dip. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-crunchy-snacks-spiced-chickpea-crunch",
+      "slug": "spiced-chickpea-crunch",
+      "title": "Spiced Chickpea Crunch",
+      "description": "Oven-roasted chickpeas with cumin, paprika, and garlic.",
+      "shortDescription": "Oven-roasted chickpeas with cumin, paprika, and garlic.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-crunchy-snacks",
+      "mealType": "snack",
+      "sortOrder": 1,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 25,
+      "totalMinutes": 33,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Mediterranean",
+      "calories": 170,
+      "proteinGrams": 8,
+      "carbsGrams": 26,
+      "fatGrams": 5,
+      "nutrition": {
+        "calories": 170,
+        "proteinGrams": 8,
+        "carbsGrams": 26,
+        "fatGrams": 5
+      },
+      "tags": [
+        "budget",
+        "crunchy",
+        "crunchy-snacks",
+        "plant-based",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "vegetarian",
+        "vegan",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Canned chickpeas",
+          "quantity": 2,
+          "unit": "cans",
+          "department": "Pantry"
+        },
+        {
+          "name": "Olive oil",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Ground cumin",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Smoked paprika",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Garlic powder",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Dry chickpeas very well with a towel."
+        },
+        {
+          "step": 2,
+          "text": "Toss with oil and spices."
+        },
+        {
+          "step": 3,
+          "text": "Roast until crisp, shaking the pan once."
+        }
+      ],
+      "imageKey": "recipe-snacks-crunchy-snacks-spiced-chickpea-crunch",
+      "imageFile": "recipe-snacks-crunchy-snacks-spiced-chickpea-crunch.png",
+      "imageAlt": "Spiced Chickpea Crunch recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Spiced Chickpea Crunch, oven-roasted chickpeas with cumin, paprika, and garlic. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-crunchy-snacks-parmesan-zucchini-chips",
+      "slug": "parmesan-zucchini-chips",
+      "title": "Parmesan Zucchini Chips",
+      "description": "Thin zucchini rounds baked with parmesan until crisp at the edges.",
+      "shortDescription": "Thin zucchini rounds baked with parmesan until crisp at the edges.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-crunchy-snacks",
+      "mealType": "snack",
+      "sortOrder": 2,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 12,
+      "cookMinutes": 20,
+      "totalMinutes": 32,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Italian-inspired",
+      "calories": 110,
+      "proteinGrams": 7,
+      "carbsGrams": 8,
+      "fatGrams": 6,
+      "nutrition": {
+        "calories": 110,
+        "proteinGrams": 7,
+        "carbsGrams": 8,
+        "fatGrams": 6
+      },
+      "tags": [
+        "crunchy",
+        "crunchy-snacks",
+        "snack",
+        "snacks",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Zucchini",
+          "quantity": 2,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Grated parmesan",
+          "quantity": 0.33,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Olive oil",
+          "quantity": 2,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Italian seasoning",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Garlic powder",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Slice zucchini into thin rounds."
+        },
+        {
+          "step": 2,
+          "text": "Toss with oil, parmesan, and seasonings."
+        },
+        {
+          "step": 3,
+          "text": "Bake until golden and crisp around the edges."
+        }
+      ],
+      "imageKey": "recipe-snacks-crunchy-snacks-parmesan-zucchini-chips",
+      "imageFile": "recipe-snacks-crunchy-snacks-parmesan-zucchini-chips.png",
+      "imageAlt": "Parmesan Zucchini Chips recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Parmesan Zucchini Chips, thin zucchini rounds baked with parmesan until crisp at the edges. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-crunchy-snacks-sesame-seaweed-rice-crisps",
+      "slug": "sesame-seaweed-rice-crisps",
+      "title": "Sesame Seaweed Rice Crisps",
+      "description": "Mini rice crisps brushed with sesame oil and wrapped with seaweed.",
+      "shortDescription": "Mini rice crisps brushed with sesame oil and wrapped with seaweed.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-crunchy-snacks",
+      "mealType": "snack",
+      "sortOrder": 3,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 6,
+      "totalMinutes": 14,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Asian-inspired",
+      "calories": 140,
+      "proteinGrams": 3,
+      "carbsGrams": 24,
+      "fatGrams": 4,
+      "nutrition": {
+        "calories": 140,
+        "proteinGrams": 3,
+        "carbsGrams": 24,
+        "fatGrams": 4
+      },
+      "tags": [
+        "crunchy",
+        "crunchy-snacks",
+        "quick",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "vegetarian",
+        "dairy-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Cooked sushi rice",
+          "quantity": 1.5,
+          "unit": "cups",
+          "department": "Pantry"
+        },
+        {
+          "name": "Nori sheets",
+          "quantity": 2,
+          "unit": "sheets",
+          "department": "Pantry"
+        },
+        {
+          "name": "Sesame oil",
+          "quantity": 2,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Sesame seeds",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Low sodium soy sauce",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Press rice into small compact squares."
+        },
+        {
+          "step": 2,
+          "text": "Brush with sesame oil and crisp in a skillet."
+        },
+        {
+          "step": 3,
+          "text": "Wrap with nori strips and sprinkle sesame seeds."
+        }
+      ],
+      "imageKey": "recipe-snacks-crunchy-snacks-sesame-seaweed-rice-crisps",
+      "imageFile": "recipe-snacks-crunchy-snacks-sesame-seaweed-rice-crisps.png",
+      "imageAlt": "Sesame Seaweed Rice Crisps recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Sesame Seaweed Rice Crisps, mini rice crisps brushed with sesame oil and wrapped with seaweed. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-crunchy-snacks-chili-lime-tortilla-triangles",
+      "slug": "chili-lime-tortilla-triangles",
+      "title": "Chili Lime Tortilla Triangles",
+      "description": "Baked tortilla triangles dusted with chili, lime, and sea salt.",
+      "shortDescription": "Baked tortilla triangles dusted with chili, lime, and sea salt.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-crunchy-snacks",
+      "mealType": "snack",
+      "sortOrder": 4,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 10,
+      "totalMinutes": 18,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Mexican-inspired",
+      "calories": 150,
+      "proteinGrams": 4,
+      "carbsGrams": 27,
+      "fatGrams": 4,
+      "nutrition": {
+        "calories": 150,
+        "proteinGrams": 4,
+        "carbsGrams": 27,
+        "fatGrams": 4
+      },
+      "tags": [
+        "budget",
+        "crunchy",
+        "crunchy-snacks",
+        "snack",
+        "snacks"
+      ],
+      "dietary": [
+        "vegetarian",
+        "vegan"
+      ],
+      "ingredients": [
+        {
+          "name": "Corn tortillas",
+          "quantity": 6,
+          "unit": "small",
+          "department": "Bakery"
+        },
+        {
+          "name": "Avocado oil",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Lime zest",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Chili powder",
+          "quantity": 0.75,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Sea salt",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Cut tortillas into triangles."
+        },
+        {
+          "step": 2,
+          "text": "Brush with oil and season with lime zest, chili, and salt."
+        },
+        {
+          "step": 3,
+          "text": "Bake until crisp."
+        }
+      ],
+      "imageKey": "recipe-snacks-crunchy-snacks-chili-lime-tortilla-triangles",
+      "imageFile": "recipe-snacks-crunchy-snacks-chili-lime-tortilla-triangles.png",
+      "imageAlt": "Chili Lime Tortilla Triangles recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Chili Lime Tortilla Triangles, baked tortilla triangles dusted with chili, lime, and sea salt. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-snacks-crunchy-snacks-maple-cinnamon-granola-clusters",
+      "slug": "maple-cinnamon-granola-clusters",
+      "title": "Maple Cinnamon Granola Clusters",
+      "description": "Crunchy oat clusters with maple, cinnamon, almonds, and pumpkin seeds.",
+      "shortDescription": "Crunchy oat clusters with maple, cinnamon, almonds, and pumpkin seeds.",
+      "categoryId": "snacks",
+      "subcategoryId": "snacks-crunchy-snacks",
+      "mealType": "snack",
+      "sortOrder": 5,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 24,
+      "totalMinutes": 34,
+      "servings": 8,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 210,
+      "proteinGrams": 6,
+      "carbsGrams": 28,
+      "fatGrams": 9,
+      "nutrition": {
+        "calories": 210,
+        "proteinGrams": 6,
+        "carbsGrams": 28,
+        "fatGrams": 9
+      },
+      "tags": [
+        "crunchy",
+        "crunchy-snacks",
+        "meal-prep",
+        "snack",
+        "snacks",
+        "sweet"
+      ],
+      "dietary": [
+        "vegetarian",
+        "dairy-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Rolled oats",
+          "quantity": 2,
+          "unit": "cups",
+          "department": "Pantry"
+        },
+        {
+          "name": "Sliced almonds",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Pumpkin seeds",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Maple syrup",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Ground cinnamon",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Mix oats, almonds, seeds, maple syrup, cinnamon, and a pinch of salt."
+        },
+        {
+          "step": 2,
+          "text": "Press onto a lined sheet pan."
+        },
+        {
+          "step": 3,
+          "text": "Bake until golden, then cool completely before breaking into clusters."
+        }
+      ],
+      "imageKey": "recipe-snacks-crunchy-snacks-maple-cinnamon-granola-clusters",
+      "imageFile": "recipe-snacks-crunchy-snacks-maple-cinnamon-granola-clusters.png",
+      "imageAlt": "Maple Cinnamon Granola Clusters recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Maple Cinnamon Granola Clusters, crunchy oat clusters with maple, cinnamon, almonds, and pumpkin seeds. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-quick-breakfasts-berry-almond-overnight-oats",
+      "slug": "berry-almond-overnight-oats",
+      "title": "Berry Almond Overnight Oats",
+      "description": "Creamy overnight oats with berries, almonds, yogurt, and chia.",
+      "shortDescription": "Creamy overnight oats with berries, almonds, yogurt, and chia.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-quick-breakfasts",
+      "mealType": "breakfast",
+      "sortOrder": 1,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 0,
+      "totalMinutes": 8,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 360,
+      "proteinGrams": 18,
+      "carbsGrams": 52,
+      "fatGrams": 10,
+      "nutrition": {
+        "calories": 360,
+        "proteinGrams": 18,
+        "carbsGrams": 52,
+        "fatGrams": 10
+      },
+      "tags": [
+        "breakfast",
+        "meal-prep",
+        "quick",
+        "quick-breakfasts",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Rolled oats",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Greek yogurt",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Milk",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Mixed berries",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Chia seeds",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Stir oats, yogurt, milk, chia, and a pinch of salt in a jar."
+        },
+        {
+          "step": 2,
+          "text": "Refrigerate overnight."
+        },
+        {
+          "step": 3,
+          "text": "Top with berries and almonds before eating."
+        }
+      ],
+      "imageKey": "recipe-breakfast-quick-breakfasts-berry-almond-overnight-oats",
+      "imageFile": "recipe-breakfast-quick-breakfasts-berry-almond-overnight-oats.png",
+      "imageAlt": "Berry Almond Overnight Oats recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Berry Almond Overnight Oats, creamy overnight oats with berries, almonds, yogurt, and chia. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-quick-breakfasts-peanut-butter-banana-toast",
+      "slug": "peanut-butter-banana-toast",
+      "title": "Peanut Butter Banana Toast",
+      "description": "Whole grain toast with peanut butter, banana, cinnamon, and hemp seeds.",
+      "shortDescription": "Whole grain toast with peanut butter, banana, cinnamon, and hemp seeds.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-quick-breakfasts",
+      "mealType": "breakfast",
+      "sortOrder": 2,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 5,
+      "cookMinutes": 2,
+      "totalMinutes": 7,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 390,
+      "proteinGrams": 15,
+      "carbsGrams": 47,
+      "fatGrams": 18,
+      "nutrition": {
+        "calories": 390,
+        "proteinGrams": 15,
+        "carbsGrams": 47,
+        "fatGrams": 18
+      },
+      "tags": [
+        "breakfast",
+        "budget",
+        "quick",
+        "quick-breakfasts"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Whole grain bread",
+          "quantity": 2,
+          "unit": "slices",
+          "department": "Bakery"
+        },
+        {
+          "name": "Peanut butter",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Banana",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Hemp seeds",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Ground cinnamon",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Toast bread until golden."
+        },
+        {
+          "step": 2,
+          "text": "Spread peanut butter over toast."
+        },
+        {
+          "step": 3,
+          "text": "Top with banana, hemp seeds, and cinnamon."
+        }
+      ],
+      "imageKey": "recipe-breakfast-quick-breakfasts-peanut-butter-banana-toast",
+      "imageFile": "recipe-breakfast-quick-breakfasts-peanut-butter-banana-toast.png",
+      "imageAlt": "Peanut Butter Banana Toast recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Peanut Butter Banana Toast, whole grain toast with peanut butter, banana, cinnamon, and hemp seeds. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-quick-breakfasts-spinach-feta-egg-mug",
+      "slug": "spinach-feta-egg-mug",
+      "title": "Spinach Feta Egg Mug",
+      "description": "A microwave egg mug with spinach, feta, tomato, and herbs.",
+      "shortDescription": "A microwave egg mug with spinach, feta, tomato, and herbs.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-quick-breakfasts",
+      "mealType": "breakfast",
+      "sortOrder": 3,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 5,
+      "cookMinutes": 2,
+      "totalMinutes": 7,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Mediterranean",
+      "calories": 250,
+      "proteinGrams": 20,
+      "carbsGrams": 8,
+      "fatGrams": 16,
+      "nutrition": {
+        "calories": 250,
+        "proteinGrams": 20,
+        "carbsGrams": 8,
+        "fatGrams": 16
+      },
+      "tags": [
+        "breakfast",
+        "high-protein",
+        "quick",
+        "quick-breakfasts",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Eggs",
+          "quantity": 2,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Baby spinach",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Feta cheese",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Dairy"
+        },
+        {
+          "name": "Cherry tomatoes",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Dried oregano",
+          "quantity": 0.25,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Whisk eggs in a greased microwave-safe mug."
+        },
+        {
+          "step": 2,
+          "text": "Stir in spinach, feta, tomatoes, and oregano."
+        },
+        {
+          "step": 3,
+          "text": "Microwave in short bursts until set."
+        }
+      ],
+      "imageKey": "recipe-breakfast-quick-breakfasts-spinach-feta-egg-mug",
+      "imageFile": "recipe-breakfast-quick-breakfasts-spinach-feta-egg-mug.png",
+      "imageAlt": "Spinach Feta Egg Mug recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Spinach Feta Egg Mug, a microwave egg mug with spinach, feta, tomato, and herbs. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-quick-breakfasts-yogurt-parfait-crunch",
+      "slug": "yogurt-parfait-crunch",
+      "title": "Yogurt Parfait Crunch",
+      "description": "Greek yogurt layered with berries, granola, honey, and seeds.",
+      "shortDescription": "Greek yogurt layered with berries, granola, honey, and seeds.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-quick-breakfasts",
+      "mealType": "breakfast",
+      "sortOrder": 4,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 5,
+      "cookMinutes": 0,
+      "totalMinutes": 5,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 330,
+      "proteinGrams": 24,
+      "carbsGrams": 43,
+      "fatGrams": 8,
+      "nutrition": {
+        "calories": 330,
+        "proteinGrams": 24,
+        "carbsGrams": 43,
+        "fatGrams": 8
+      },
+      "tags": [
+        "breakfast",
+        "high-protein",
+        "quick",
+        "quick-breakfasts"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Plain Greek yogurt",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Mixed berries",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Granola",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Honey",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Pumpkin seeds",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Spoon half the yogurt into a glass or bowl."
+        },
+        {
+          "step": 2,
+          "text": "Layer with berries and granola."
+        },
+        {
+          "step": 3,
+          "text": "Finish with honey and pumpkin seeds."
+        }
+      ],
+      "imageKey": "recipe-breakfast-quick-breakfasts-yogurt-parfait-crunch",
+      "imageFile": "recipe-breakfast-quick-breakfasts-yogurt-parfait-crunch.png",
+      "imageAlt": "Yogurt Parfait Crunch recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Yogurt Parfait Crunch, greek yogurt layered with berries, granola, honey, and seeds. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-quick-breakfasts-avocado-egg-breakfast-wrap",
+      "slug": "avocado-egg-breakfast-wrap",
+      "title": "Avocado Egg Breakfast Wrap",
+      "description": "A fast breakfast wrap with egg, avocado, greens, and salsa.",
+      "shortDescription": "A fast breakfast wrap with egg, avocado, greens, and salsa.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-quick-breakfasts",
+      "mealType": "breakfast",
+      "sortOrder": 5,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 5,
+      "totalMinutes": 13,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Mexican-inspired",
+      "calories": 420,
+      "proteinGrams": 21,
+      "carbsGrams": 38,
+      "fatGrams": 22,
+      "nutrition": {
+        "calories": 420,
+        "proteinGrams": 21,
+        "carbsGrams": 38,
+        "fatGrams": 22
+      },
+      "tags": [
+        "breakfast",
+        "high-protein",
+        "quick",
+        "quick-breakfasts"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Whole wheat tortilla",
+          "quantity": 1,
+          "unit": "large",
+          "department": "Bakery"
+        },
+        {
+          "name": "Eggs",
+          "quantity": 2,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Avocado",
+          "quantity": 0.5,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Baby spinach",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Salsa",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Deli"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Scramble eggs in a skillet."
+        },
+        {
+          "step": 2,
+          "text": "Warm tortilla and layer with avocado, spinach, eggs, and salsa."
+        },
+        {
+          "step": 3,
+          "text": "Roll tightly and serve."
+        }
+      ],
+      "imageKey": "recipe-breakfast-quick-breakfasts-avocado-egg-breakfast-wrap",
+      "imageFile": "recipe-breakfast-quick-breakfasts-avocado-egg-breakfast-wrap.png",
+      "imageAlt": "Avocado Egg Breakfast Wrap recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Avocado Egg Breakfast Wrap, a fast breakfast wrap with egg, avocado, greens, and salsa. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-egg-based-mushroom-swiss-egg-bites",
+      "slug": "mushroom-swiss-egg-bites",
+      "title": "Mushroom Swiss Egg Bites",
+      "description": "Mini egg bites with mushrooms, Swiss cheese, and chives.",
+      "shortDescription": "Mini egg bites with mushrooms, Swiss cheese, and chives.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-egg-based",
+      "mealType": "breakfast",
+      "sortOrder": 1,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 18,
+      "totalMinutes": 28,
+      "servings": 6,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 180,
+      "proteinGrams": 14,
+      "carbsGrams": 5,
+      "fatGrams": 12,
+      "nutrition": {
+        "calories": 180,
+        "proteinGrams": 14,
+        "carbsGrams": 5,
+        "fatGrams": 12
+      },
+      "tags": [
+        "breakfast",
+        "egg",
+        "egg-based",
+        "meal-prep",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Eggs",
+          "quantity": 6,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Sliced mushrooms",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Swiss cheese",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Milk",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Fresh chives",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Whisk eggs with milk, salt, and pepper."
+        },
+        {
+          "step": 2,
+          "text": "Divide mushrooms, cheese, and chives into muffin cups."
+        },
+        {
+          "step": 3,
+          "text": "Pour in eggs and bake until set."
+        }
+      ],
+      "imageKey": "recipe-breakfast-egg-based-mushroom-swiss-egg-bites",
+      "imageFile": "recipe-breakfast-egg-based-mushroom-swiss-egg-bites.png",
+      "imageAlt": "Mushroom Swiss Egg Bites recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Mushroom Swiss Egg Bites, mini egg bites with mushrooms, swiss cheese, and chives. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-egg-based-tomato-basil-shakshuka-cups",
+      "slug": "tomato-basil-shakshuka-cups",
+      "title": "Tomato Basil Shakshuka Cups",
+      "description": "Individual baked eggs in tomato pepper sauce with basil.",
+      "shortDescription": "Individual baked eggs in tomato pepper sauce with basil.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-egg-based",
+      "mealType": "breakfast",
+      "sortOrder": 2,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 18,
+      "totalMinutes": 28,
+      "servings": 4,
+      "difficulty": "Medium",
+      "costLevel": "Budget",
+      "cuisine": "Mediterranean",
+      "calories": 230,
+      "proteinGrams": 16,
+      "carbsGrams": 18,
+      "fatGrams": 12,
+      "nutrition": {
+        "calories": 230,
+        "proteinGrams": 16,
+        "carbsGrams": 18,
+        "fatGrams": 12
+      },
+      "tags": [
+        "breakfast",
+        "egg",
+        "egg-based",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Eggs",
+          "quantity": 4,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Crushed tomatoes",
+          "quantity": 1.5,
+          "unit": "cups",
+          "department": "Pantry"
+        },
+        {
+          "name": "Bell pepper",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Garlic cloves",
+          "quantity": 2,
+          "unit": "cloves",
+          "department": "Produce"
+        },
+        {
+          "name": "Fresh basil",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Simmer tomatoes, bell pepper, garlic, salt, and pepper until thickened."
+        },
+        {
+          "step": 2,
+          "text": "Spoon sauce into ramekins and crack in eggs."
+        },
+        {
+          "step": 3,
+          "text": "Bake until whites are set and garnish with basil."
+        }
+      ],
+      "imageKey": "recipe-breakfast-egg-based-tomato-basil-shakshuka-cups",
+      "imageFile": "recipe-breakfast-egg-based-tomato-basil-shakshuka-cups.png",
+      "imageAlt": "Tomato Basil Shakshuka Cups recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Tomato Basil Shakshuka Cups, individual baked eggs in tomato pepper sauce with basil. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-egg-based-smoked-salmon-scramble-toast",
+      "slug": "smoked-salmon-scramble-toast",
+      "title": "Smoked Salmon Scramble Toast",
+      "description": "Soft scrambled eggs with smoked salmon, dill, and whole grain toast.",
+      "shortDescription": "Soft scrambled eggs with smoked salmon, dill, and whole grain toast.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-egg-based",
+      "mealType": "breakfast",
+      "sortOrder": 3,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 6,
+      "totalMinutes": 14,
+      "servings": 2,
+      "difficulty": "Easy",
+      "costLevel": "Moderate",
+      "cuisine": "European-inspired",
+      "calories": 380,
+      "proteinGrams": 27,
+      "carbsGrams": 28,
+      "fatGrams": 18,
+      "nutrition": {
+        "calories": 380,
+        "proteinGrams": 27,
+        "carbsGrams": 28,
+        "fatGrams": 18
+      },
+      "tags": [
+        "breakfast",
+        "egg",
+        "egg-based",
+        "high-protein",
+        "seafood"
+      ],
+      "dietary": [
+        "pescatarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Eggs",
+          "quantity": 4,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Smoked salmon",
+          "quantity": 3,
+          "unit": "oz",
+          "department": "Seafood"
+        },
+        {
+          "name": "Whole grain bread",
+          "quantity": 2,
+          "unit": "slices",
+          "department": "Bakery"
+        },
+        {
+          "name": "Fresh dill",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Cream cheese",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Dairy"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Toast bread and spread with cream cheese."
+        },
+        {
+          "step": 2,
+          "text": "Soft scramble eggs over low heat."
+        },
+        {
+          "step": 3,
+          "text": "Top toast with eggs, smoked salmon, and dill."
+        }
+      ],
+      "imageKey": "recipe-breakfast-egg-based-smoked-salmon-scramble-toast",
+      "imageFile": "recipe-breakfast-egg-based-smoked-salmon-scramble-toast.png",
+      "imageAlt": "Smoked Salmon Scramble Toast recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Smoked Salmon Scramble Toast, soft scrambled eggs with smoked salmon, dill, and whole grain toast. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-egg-based-veggie-breakfast-frittata-squares",
+      "slug": "veggie-breakfast-frittata-squares",
+      "title": "Veggie Breakfast Frittata Squares",
+      "description": "Sheet-pan frittata squares with peppers, spinach, onion, and cheese.",
+      "shortDescription": "Sheet-pan frittata squares with peppers, spinach, onion, and cheese.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-egg-based",
+      "mealType": "breakfast",
+      "sortOrder": 4,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 12,
+      "cookMinutes": 22,
+      "totalMinutes": 34,
+      "servings": 6,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 210,
+      "proteinGrams": 17,
+      "carbsGrams": 9,
+      "fatGrams": 13,
+      "nutrition": {
+        "calories": 210,
+        "proteinGrams": 17,
+        "carbsGrams": 9,
+        "fatGrams": 13
+      },
+      "tags": [
+        "breakfast",
+        "egg",
+        "egg-based",
+        "meal-prep",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Eggs",
+          "quantity": 8,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Baby spinach",
+          "quantity": 2,
+          "unit": "cups",
+          "department": "Produce"
+        },
+        {
+          "name": "Bell peppers",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Red onion",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Shredded mozzarella",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Dairy"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Whisk eggs with salt and pepper."
+        },
+        {
+          "step": 2,
+          "text": "Pour into a baking dish with vegetables and cheese."
+        },
+        {
+          "step": 3,
+          "text": "Bake until set, then cut into squares."
+        }
+      ],
+      "imageKey": "recipe-breakfast-egg-based-veggie-breakfast-frittata-squares",
+      "imageFile": "recipe-breakfast-egg-based-veggie-breakfast-frittata-squares.png",
+      "imageAlt": "Veggie Breakfast Frittata Squares recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Veggie Breakfast Frittata Squares, sheet-pan frittata squares with peppers, spinach, onion, and cheese. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-egg-based-turkey-sausage-egg-skillet",
+      "slug": "turkey-sausage-egg-skillet",
+      "title": "Turkey Sausage Egg Skillet",
+      "description": "A hearty egg skillet with turkey sausage, peppers, potatoes, and herbs.",
+      "shortDescription": "A hearty egg skillet with turkey sausage, peppers, potatoes, and herbs.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-egg-based",
+      "mealType": "breakfast",
+      "sortOrder": 5,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 18,
+      "totalMinutes": 28,
+      "servings": 4,
+      "difficulty": "Medium",
+      "costLevel": "Moderate",
+      "cuisine": "American",
+      "calories": 430,
+      "proteinGrams": 31,
+      "carbsGrams": 30,
+      "fatGrams": 21,
+      "nutrition": {
+        "calories": 430,
+        "proteinGrams": 31,
+        "carbsGrams": 30,
+        "fatGrams": 21
+      },
+      "tags": [
+        "breakfast",
+        "egg",
+        "egg-based",
+        "high-protein",
+        "meat"
+      ],
+      "dietary": [
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Turkey sausage",
+          "quantity": 10,
+          "unit": "oz",
+          "department": "Meat"
+        },
+        {
+          "name": "Eggs",
+          "quantity": 4,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Baby potatoes",
+          "quantity": 2,
+          "unit": "cups",
+          "department": "Produce"
+        },
+        {
+          "name": "Bell peppers",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Green onions",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Brown turkey sausage in a skillet."
+        },
+        {
+          "step": 2,
+          "text": "Add par-cooked potatoes and peppers and cook until golden."
+        },
+        {
+          "step": 3,
+          "text": "Crack in eggs, cover, and cook until set."
+        }
+      ],
+      "imageKey": "recipe-breakfast-egg-based-turkey-sausage-egg-skillet",
+      "imageFile": "recipe-breakfast-egg-based-turkey-sausage-egg-skillet.png",
+      "imageAlt": "Turkey Sausage Egg Skillet recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Turkey Sausage Egg Skillet, a hearty egg skillet with turkey sausage, peppers, potatoes, and herbs. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-oats-and-grains-cinnamon-apple-protein-oats",
+      "slug": "cinnamon-apple-protein-oats",
+      "title": "Cinnamon Apple Protein Oats",
+      "description": "Warm oats with diced apple, cinnamon, Greek yogurt, and walnuts.",
+      "shortDescription": "Warm oats with diced apple, cinnamon, Greek yogurt, and walnuts.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-oats-and-grains",
+      "mealType": "breakfast",
+      "sortOrder": 1,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 5,
+      "cookMinutes": 8,
+      "totalMinutes": 13,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 410,
+      "proteinGrams": 24,
+      "carbsGrams": 58,
+      "fatGrams": 11,
+      "nutrition": {
+        "calories": 410,
+        "proteinGrams": 24,
+        "carbsGrams": 58,
+        "fatGrams": 11
+      },
+      "tags": [
+        "breakfast",
+        "budget",
+        "high-protein",
+        "oats",
+        "oats-and-grains"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Rolled oats",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Apple",
+          "quantity": 1,
+          "unit": "small",
+          "department": "Produce"
+        },
+        {
+          "name": "Milk",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Greek yogurt",
+          "quantity": 0.33,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Walnuts",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Cook oats with milk, apple, cinnamon, and a pinch of salt."
+        },
+        {
+          "step": 2,
+          "text": "Remove from heat and stir in Greek yogurt."
+        },
+        {
+          "step": 3,
+          "text": "Top with walnuts."
+        }
+      ],
+      "imageKey": "recipe-breakfast-oats-and-grains-cinnamon-apple-protein-oats",
+      "imageFile": "recipe-breakfast-oats-and-grains-cinnamon-apple-protein-oats.png",
+      "imageAlt": "Cinnamon Apple Protein Oats recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Cinnamon Apple Protein Oats, warm oats with diced apple, cinnamon, greek yogurt, and walnuts. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-oats-and-grains-savory-miso-oat-bowl",
+      "slug": "savory-miso-oat-bowl",
+      "title": "Savory Miso Oat Bowl",
+      "description": "Savory oats with miso, mushrooms, spinach, sesame, and a jammy egg.",
+      "shortDescription": "Savory oats with miso, mushrooms, spinach, sesame, and a jammy egg.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-oats-and-grains",
+      "mealType": "breakfast",
+      "sortOrder": 2,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 12,
+      "totalMinutes": 20,
+      "servings": 1,
+      "difficulty": "Medium",
+      "costLevel": "Budget",
+      "cuisine": "Japanese-inspired",
+      "calories": 390,
+      "proteinGrams": 20,
+      "carbsGrams": 48,
+      "fatGrams": 13,
+      "nutrition": {
+        "calories": 390,
+        "proteinGrams": 20,
+        "carbsGrams": 48,
+        "fatGrams": 13
+      },
+      "tags": [
+        "breakfast",
+        "oats",
+        "oats-and-grains",
+        "savory",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Rolled oats",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "White miso paste",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Mushrooms",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Baby spinach",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Egg",
+          "quantity": 1,
+          "unit": "large",
+          "department": "Dairy"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Cook oats with water and miso until creamy."
+        },
+        {
+          "step": 2,
+          "text": "Sauté mushrooms and spinach until tender."
+        },
+        {
+          "step": 3,
+          "text": "Top oats with vegetables, egg, and sesame."
+        }
+      ],
+      "imageKey": "recipe-breakfast-oats-and-grains-savory-miso-oat-bowl",
+      "imageFile": "recipe-breakfast-oats-and-grains-savory-miso-oat-bowl.png",
+      "imageAlt": "Savory Miso Oat Bowl recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Savory Miso Oat Bowl, savory oats with miso, mushrooms, spinach, sesame, and a jammy egg. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-oats-and-grains-blueberry-quinoa-breakfast-bowl",
+      "slug": "blueberry-quinoa-breakfast-bowl",
+      "title": "Blueberry Quinoa Breakfast Bowl",
+      "description": "Fluffy quinoa with blueberries, yogurt, almonds, and maple.",
+      "shortDescription": "Fluffy quinoa with blueberries, yogurt, almonds, and maple.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-oats-and-grains",
+      "mealType": "breakfast",
+      "sortOrder": 3,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 5,
+      "cookMinutes": 15,
+      "totalMinutes": 20,
+      "servings": 2,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 370,
+      "proteinGrams": 16,
+      "carbsGrams": 55,
+      "fatGrams": 10,
+      "nutrition": {
+        "calories": 370,
+        "proteinGrams": 16,
+        "carbsGrams": 55,
+        "fatGrams": 10
+      },
+      "tags": [
+        "breakfast",
+        "grain",
+        "oats-and-grains",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Cooked quinoa",
+          "quantity": 1.5,
+          "unit": "cups",
+          "department": "Pantry"
+        },
+        {
+          "name": "Blueberries",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Greek yogurt",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Sliced almonds",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Maple syrup",
+          "quantity": 2,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Warm quinoa with a splash of milk or water."
+        },
+        {
+          "step": 2,
+          "text": "Divide into bowls and top with yogurt and blueberries."
+        },
+        {
+          "step": 3,
+          "text": "Finish with almonds and maple syrup."
+        }
+      ],
+      "imageKey": "recipe-breakfast-oats-and-grains-blueberry-quinoa-breakfast-bowl",
+      "imageFile": "recipe-breakfast-oats-and-grains-blueberry-quinoa-breakfast-bowl.png",
+      "imageAlt": "Blueberry Quinoa Breakfast Bowl recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Blueberry Quinoa Breakfast Bowl, fluffy quinoa with blueberries, yogurt, almonds, and maple. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-oats-and-grains-banana-walnut-baked-oatmeal",
+      "slug": "banana-walnut-baked-oatmeal",
+      "title": "Banana Walnut Baked Oatmeal",
+      "description": "Soft baked oatmeal squares with banana, walnuts, cinnamon, and milk.",
+      "shortDescription": "Soft baked oatmeal squares with banana, walnuts, cinnamon, and milk.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-oats-and-grains",
+      "mealType": "breakfast",
+      "sortOrder": 4,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 30,
+      "totalMinutes": 40,
+      "servings": 6,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 320,
+      "proteinGrams": 10,
+      "carbsGrams": 47,
+      "fatGrams": 12,
+      "nutrition": {
+        "calories": 320,
+        "proteinGrams": 10,
+        "carbsGrams": 47,
+        "fatGrams": 12
+      },
+      "tags": [
+        "breakfast",
+        "budget",
+        "meal-prep",
+        "oats",
+        "oats-and-grains"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Rolled oats",
+          "quantity": 2,
+          "unit": "cups",
+          "department": "Pantry"
+        },
+        {
+          "name": "Bananas",
+          "quantity": 2,
+          "unit": "large",
+          "department": "Produce"
+        },
+        {
+          "name": "Milk",
+          "quantity": 1.5,
+          "unit": "cups",
+          "department": "Dairy"
+        },
+        {
+          "name": "Walnuts",
+          "quantity": 0.33,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Egg",
+          "quantity": 1,
+          "unit": "large",
+          "department": "Dairy"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Mash bananas and mix with oats, milk, egg, walnuts, cinnamon, and salt."
+        },
+        {
+          "step": 2,
+          "text": "Pour into a baking dish."
+        },
+        {
+          "step": 3,
+          "text": "Bake until set and slice into squares."
+        }
+      ],
+      "imageKey": "recipe-breakfast-oats-and-grains-banana-walnut-baked-oatmeal",
+      "imageFile": "recipe-breakfast-oats-and-grains-banana-walnut-baked-oatmeal.png",
+      "imageAlt": "Banana Walnut Baked Oatmeal recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Banana Walnut Baked Oatmeal, soft baked oatmeal squares with banana, walnuts, cinnamon, and milk. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-oats-and-grains-coconut-mango-chia-oats",
+      "slug": "coconut-mango-chia-oats",
+      "title": "Coconut Mango Chia Oats",
+      "description": "Overnight oats with mango, coconut milk, chia, and lime.",
+      "shortDescription": "Overnight oats with mango, coconut milk, chia, and lime.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-oats-and-grains",
+      "mealType": "breakfast",
+      "sortOrder": 5,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 0,
+      "totalMinutes": 8,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Tropical",
+      "calories": 390,
+      "proteinGrams": 12,
+      "carbsGrams": 55,
+      "fatGrams": 14,
+      "nutrition": {
+        "calories": 390,
+        "proteinGrams": 12,
+        "carbsGrams": 55,
+        "fatGrams": 14
+      },
+      "tags": [
+        "breakfast",
+        "meal-prep",
+        "oats",
+        "oats-and-grains"
+      ],
+      "dietary": [
+        "vegetarian",
+        "dairy-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Rolled oats",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Light coconut milk",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Mango",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Chia seeds",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Lime zest",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Stir oats, coconut milk, chia, lime zest, and salt in a jar."
+        },
+        {
+          "step": 2,
+          "text": "Refrigerate overnight."
+        },
+        {
+          "step": 3,
+          "text": "Top with mango before serving."
+        }
+      ],
+      "imageKey": "recipe-breakfast-oats-and-grains-coconut-mango-chia-oats",
+      "imageFile": "recipe-breakfast-oats-and-grains-coconut-mango-chia-oats.png",
+      "imageAlt": "Coconut Mango Chia Oats recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Coconut Mango Chia Oats, overnight oats with mango, coconut milk, chia, and lime. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-smoothies-and-bowls-green-protein-smoothie-bowl",
+      "slug": "green-protein-smoothie-bowl",
+      "title": "Green Protein Smoothie Bowl",
+      "description": "A thick green bowl with spinach, banana, yogurt, protein, and kiwi.",
+      "shortDescription": "A thick green bowl with spinach, banana, yogurt, protein, and kiwi.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-smoothies-and-bowls",
+      "mealType": "breakfast",
+      "sortOrder": 1,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 0,
+      "totalMinutes": 8,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 360,
+      "proteinGrams": 27,
+      "carbsGrams": 48,
+      "fatGrams": 8,
+      "nutrition": {
+        "calories": 360,
+        "proteinGrams": 27,
+        "carbsGrams": 48,
+        "fatGrams": 8
+      },
+      "tags": [
+        "breakfast",
+        "high-protein",
+        "smoothie",
+        "smoothies-and-bowls",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Baby spinach",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Frozen banana",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Frozen"
+        },
+        {
+          "name": "Greek yogurt",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Vanilla protein powder",
+          "quantity": 1,
+          "unit": "scoop",
+          "department": "Pantry"
+        },
+        {
+          "name": "Kiwi",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Blend spinach, banana, yogurt, protein powder, and a splash of milk until thick."
+        },
+        {
+          "step": 2,
+          "text": "Pour into a bowl."
+        },
+        {
+          "step": 3,
+          "text": "Top with sliced kiwi and seeds."
+        }
+      ],
+      "imageKey": "recipe-breakfast-smoothies-and-bowls-green-protein-smoothie-bowl",
+      "imageFile": "recipe-breakfast-smoothies-and-bowls-green-protein-smoothie-bowl.png",
+      "imageAlt": "Green Protein Smoothie Bowl recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Green Protein Smoothie Bowl, a thick green bowl with spinach, banana, yogurt, protein, and kiwi. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-smoothies-and-bowls-strawberry-banana-kefir-smoothie",
+      "slug": "strawberry-banana-kefir-smoothie",
+      "title": "Strawberry Banana Kefir Smoothie",
+      "description": "A drinkable smoothie with kefir, strawberries, banana, and flax.",
+      "shortDescription": "A drinkable smoothie with kefir, strawberries, banana, and flax.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-smoothies-and-bowls",
+      "mealType": "breakfast",
+      "sortOrder": 2,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 5,
+      "cookMinutes": 0,
+      "totalMinutes": 5,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 300,
+      "proteinGrams": 16,
+      "carbsGrams": 52,
+      "fatGrams": 5,
+      "nutrition": {
+        "calories": 300,
+        "proteinGrams": 16,
+        "carbsGrams": 52,
+        "fatGrams": 5
+      },
+      "tags": [
+        "breakfast",
+        "quick",
+        "smoothie",
+        "smoothies-and-bowls"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Plain kefir",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Frozen strawberries",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Frozen"
+        },
+        {
+          "name": "Banana",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Ground flaxseed",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Honey",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Add kefir, strawberries, banana, flax, and honey to a blender."
+        },
+        {
+          "step": 2,
+          "text": "Blend until smooth."
+        },
+        {
+          "step": 3,
+          "text": "Pour into a glass and serve immediately."
+        }
+      ],
+      "imageKey": "recipe-breakfast-smoothies-and-bowls-strawberry-banana-kefir-smoothie",
+      "imageFile": "recipe-breakfast-smoothies-and-bowls-strawberry-banana-kefir-smoothie.png",
+      "imageAlt": "Strawberry Banana Kefir Smoothie recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Strawberry Banana Kefir Smoothie, a drinkable smoothie with kefir, strawberries, banana, and flax. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-smoothies-and-bowls-chocolate-almond-smoothie-bowl",
+      "slug": "chocolate-almond-smoothie-bowl",
+      "title": "Chocolate Almond Smoothie Bowl",
+      "description": "A cocoa almond smoothie bowl topped with banana, granola, and cacao nibs.",
+      "shortDescription": "A cocoa almond smoothie bowl topped with banana, granola, and cacao nibs.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-smoothies-and-bowls",
+      "mealType": "breakfast",
+      "sortOrder": 3,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 0,
+      "totalMinutes": 8,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Moderate",
+      "cuisine": "American",
+      "calories": 430,
+      "proteinGrams": 22,
+      "carbsGrams": 54,
+      "fatGrams": 16,
+      "nutrition": {
+        "calories": 430,
+        "proteinGrams": 22,
+        "carbsGrams": 54,
+        "fatGrams": 16
+      },
+      "tags": [
+        "breakfast",
+        "smoothie",
+        "smoothies-and-bowls",
+        "sweet"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Greek yogurt",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Frozen banana",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Frozen"
+        },
+        {
+          "name": "Almond butter",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Unsweetened cocoa powder",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Granola",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Blend yogurt, banana, almond butter, cocoa, and a splash of milk until thick."
+        },
+        {
+          "step": 2,
+          "text": "Spoon into a bowl."
+        },
+        {
+          "step": 3,
+          "text": "Top with granola and cacao nibs."
+        }
+      ],
+      "imageKey": "recipe-breakfast-smoothies-and-bowls-chocolate-almond-smoothie-bowl",
+      "imageFile": "recipe-breakfast-smoothies-and-bowls-chocolate-almond-smoothie-bowl.png",
+      "imageAlt": "Chocolate Almond Smoothie Bowl recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Chocolate Almond Smoothie Bowl, a cocoa almond smoothie bowl topped with banana, granola, and cacao nibs. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-smoothies-and-bowls-tropical-cottage-cheese-bowl",
+      "slug": "tropical-cottage-cheese-bowl",
+      "title": "Tropical Cottage Cheese Bowl",
+      "description": "Blended cottage cheese bowl with pineapple, mango, coconut, and lime.",
+      "shortDescription": "Blended cottage cheese bowl with pineapple, mango, coconut, and lime.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-smoothies-and-bowls",
+      "mealType": "breakfast",
+      "sortOrder": 4,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 0,
+      "totalMinutes": 8,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Tropical",
+      "calories": 340,
+      "proteinGrams": 25,
+      "carbsGrams": 42,
+      "fatGrams": 8,
+      "nutrition": {
+        "calories": 340,
+        "proteinGrams": 25,
+        "carbsGrams": 42,
+        "fatGrams": 8
+      },
+      "tags": [
+        "bowl",
+        "breakfast",
+        "high-protein",
+        "smoothies-and-bowls"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Cottage cheese",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Pineapple",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Mango",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Unsweetened coconut",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Lime juice",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Blend cottage cheese with half the fruit and lime until creamy."
+        },
+        {
+          "step": 2,
+          "text": "Spoon into a bowl."
+        },
+        {
+          "step": 3,
+          "text": "Top with remaining fruit and coconut."
+        }
+      ],
+      "imageKey": "recipe-breakfast-smoothies-and-bowls-tropical-cottage-cheese-bowl",
+      "imageFile": "recipe-breakfast-smoothies-and-bowls-tropical-cottage-cheese-bowl.png",
+      "imageAlt": "Tropical Cottage Cheese Bowl recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Tropical Cottage Cheese Bowl, blended cottage cheese bowl with pineapple, mango, coconut, and lime. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-smoothies-and-bowls-blueberry-spinach-smoothie",
+      "slug": "blueberry-spinach-smoothie",
+      "title": "Blueberry Spinach Smoothie",
+      "description": "A balanced smoothie with blueberries, spinach, oats, yogurt, and almond milk.",
+      "shortDescription": "A balanced smoothie with blueberries, spinach, oats, yogurt, and almond milk.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-smoothies-and-bowls",
+      "mealType": "breakfast",
+      "sortOrder": 5,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 5,
+      "cookMinutes": 0,
+      "totalMinutes": 5,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 320,
+      "proteinGrams": 18,
+      "carbsGrams": 50,
+      "fatGrams": 7,
+      "nutrition": {
+        "calories": 320,
+        "proteinGrams": 18,
+        "carbsGrams": 50,
+        "fatGrams": 7
+      },
+      "tags": [
+        "breakfast",
+        "quick",
+        "smoothie",
+        "smoothies-and-bowls"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Frozen blueberries",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Frozen"
+        },
+        {
+          "name": "Baby spinach",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Greek yogurt",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Rolled oats",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Almond milk",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Dairy"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Add all ingredients to a blender."
+        },
+        {
+          "step": 2,
+          "text": "Blend until smooth and creamy."
+        },
+        {
+          "step": 3,
+          "text": "Serve cold."
+        }
+      ],
+      "imageKey": "recipe-breakfast-smoothies-and-bowls-blueberry-spinach-smoothie",
+      "imageFile": "recipe-breakfast-smoothies-and-bowls-blueberry-spinach-smoothie.png",
+      "imageAlt": "Blueberry Spinach Smoothie recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Blueberry Spinach Smoothie, a balanced smoothie with blueberries, spinach, oats, yogurt, and almond milk. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-high-protein-breakfast-cottage-cheese-pancake-stack",
+      "slug": "cottage-cheese-pancake-stack",
+      "title": "Cottage Cheese Pancake Stack",
+      "description": "Tender high-protein pancakes made with cottage cheese, oats, and eggs.",
+      "shortDescription": "Tender high-protein pancakes made with cottage cheese, oats, and eggs.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-high-protein-breakfast",
+      "mealType": "breakfast",
+      "sortOrder": 1,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 12,
+      "totalMinutes": 22,
+      "servings": 2,
+      "difficulty": "Medium",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 420,
+      "proteinGrams": 32,
+      "carbsGrams": 42,
+      "fatGrams": 14,
+      "nutrition": {
+        "calories": 420,
+        "proteinGrams": 32,
+        "carbsGrams": 42,
+        "fatGrams": 14
+      },
+      "tags": [
+        "breakfast",
+        "high-protein",
+        "high-protein-breakfast",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Cottage cheese",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Eggs",
+          "quantity": 2,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Rolled oats",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Baking powder",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Blueberries",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Blend cottage cheese, eggs, oats, baking powder, and salt into batter."
+        },
+        {
+          "step": 2,
+          "text": "Cook small pancakes on a nonstick skillet."
+        },
+        {
+          "step": 3,
+          "text": "Serve with blueberries."
+        }
+      ],
+      "imageKey": "recipe-breakfast-high-protein-breakfast-cottage-cheese-pancake-stack",
+      "imageFile": "recipe-breakfast-high-protein-breakfast-cottage-cheese-pancake-stack.png",
+      "imageAlt": "Cottage Cheese Pancake Stack recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Cottage Cheese Pancake Stack, tender high-protein pancakes made with cottage cheese, oats, and eggs. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-high-protein-breakfast-chicken-sausage-breakfast-bowl",
+      "slug": "chicken-sausage-breakfast-bowl",
+      "title": "Chicken Sausage Breakfast Bowl",
+      "description": "A filling bowl with chicken sausage, eggs, potatoes, spinach, and salsa.",
+      "shortDescription": "A filling bowl with chicken sausage, eggs, potatoes, spinach, and salsa.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-high-protein-breakfast",
+      "mealType": "breakfast",
+      "sortOrder": 2,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 15,
+      "totalMinutes": 25,
+      "servings": 2,
+      "difficulty": "Medium",
+      "costLevel": "Moderate",
+      "cuisine": "American",
+      "calories": 460,
+      "proteinGrams": 35,
+      "carbsGrams": 38,
+      "fatGrams": 19,
+      "nutrition": {
+        "calories": 460,
+        "proteinGrams": 35,
+        "carbsGrams": 38,
+        "fatGrams": 19
+      },
+      "tags": [
+        "breakfast",
+        "high-protein",
+        "high-protein-breakfast",
+        "meat"
+      ],
+      "dietary": [
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Chicken sausage",
+          "quantity": 8,
+          "unit": "oz",
+          "department": "Meat"
+        },
+        {
+          "name": "Eggs",
+          "quantity": 2,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Baby potatoes",
+          "quantity": 2,
+          "unit": "cups",
+          "department": "Produce"
+        },
+        {
+          "name": "Baby spinach",
+          "quantity": 2,
+          "unit": "cups",
+          "department": "Produce"
+        },
+        {
+          "name": "Salsa",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Deli"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Brown chicken sausage and potatoes in a skillet."
+        },
+        {
+          "step": 2,
+          "text": "Add spinach and cook until wilted."
+        },
+        {
+          "step": 3,
+          "text": "Top with cooked eggs and salsa."
+        }
+      ],
+      "imageKey": "recipe-breakfast-high-protein-breakfast-chicken-sausage-breakfast-bowl",
+      "imageFile": "recipe-breakfast-high-protein-breakfast-chicken-sausage-breakfast-bowl.png",
+      "imageAlt": "Chicken Sausage Breakfast Bowl recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Chicken Sausage Breakfast Bowl, a filling bowl with chicken sausage, eggs, potatoes, spinach, and salsa. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-high-protein-breakfast-greek-yogurt-protein-waffles",
+      "slug": "greek-yogurt-protein-waffles",
+      "title": "Greek Yogurt Protein Waffles",
+      "description": "Crisp waffles made with Greek yogurt, egg, oats, and protein powder.",
+      "shortDescription": "Crisp waffles made with Greek yogurt, egg, oats, and protein powder.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-high-protein-breakfast",
+      "mealType": "breakfast",
+      "sortOrder": 3,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 10,
+      "totalMinutes": 20,
+      "servings": 2,
+      "difficulty": "Medium",
+      "costLevel": "Moderate",
+      "cuisine": "American",
+      "calories": 410,
+      "proteinGrams": 34,
+      "carbsGrams": 46,
+      "fatGrams": 10,
+      "nutrition": {
+        "calories": 410,
+        "proteinGrams": 34,
+        "carbsGrams": 46,
+        "fatGrams": 10
+      },
+      "tags": [
+        "breakfast",
+        "high-protein",
+        "high-protein-breakfast",
+        "vegetarian"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Greek yogurt",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Egg",
+          "quantity": 1,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Rolled oats",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Vanilla protein powder",
+          "quantity": 1,
+          "unit": "scoop",
+          "department": "Pantry"
+        },
+        {
+          "name": "Baking powder",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Blend ingredients into a thick batter."
+        },
+        {
+          "step": 2,
+          "text": "Cook in a preheated waffle iron until crisp."
+        },
+        {
+          "step": 3,
+          "text": "Serve with fruit or yogurt."
+        }
+      ],
+      "imageKey": "recipe-breakfast-high-protein-breakfast-greek-yogurt-protein-waffles",
+      "imageFile": "recipe-breakfast-high-protein-breakfast-greek-yogurt-protein-waffles.png",
+      "imageAlt": "Greek Yogurt Protein Waffles recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Greek Yogurt Protein Waffles, crisp waffles made with greek yogurt, egg, oats, and protein powder. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-high-protein-breakfast-tofu-veggie-breakfast-scramble",
+      "slug": "tofu-veggie-breakfast-scramble",
+      "title": "Tofu Veggie Breakfast Scramble",
+      "description": "A plant-forward scramble with tofu, peppers, spinach, turmeric, and avocado.",
+      "shortDescription": "A plant-forward scramble with tofu, peppers, spinach, turmeric, and avocado.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-high-protein-breakfast",
+      "mealType": "breakfast",
+      "sortOrder": 4,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 12,
+      "totalMinutes": 22,
+      "servings": 2,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 380,
+      "proteinGrams": 28,
+      "carbsGrams": 24,
+      "fatGrams": 20,
+      "nutrition": {
+        "calories": 380,
+        "proteinGrams": 28,
+        "carbsGrams": 24,
+        "fatGrams": 20
+      },
+      "tags": [
+        "breakfast",
+        "high-protein",
+        "high-protein-breakfast",
+        "plant-based"
+      ],
+      "dietary": [
+        "vegetarian",
+        "vegan",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Firm tofu",
+          "quantity": 14,
+          "unit": "oz",
+          "department": "Produce"
+        },
+        {
+          "name": "Bell pepper",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Produce"
+        },
+        {
+          "name": "Baby spinach",
+          "quantity": 2,
+          "unit": "cups",
+          "department": "Produce"
+        },
+        {
+          "name": "Turmeric",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Avocado",
+          "quantity": 0.5,
+          "unit": "medium",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Crumble tofu into a skillet with bell pepper and turmeric."
+        },
+        {
+          "step": 2,
+          "text": "Cook until hot and lightly golden."
+        },
+        {
+          "step": 3,
+          "text": "Fold in spinach and serve with avocado."
+        }
+      ],
+      "imageKey": "recipe-breakfast-high-protein-breakfast-tofu-veggie-breakfast-scramble",
+      "imageFile": "recipe-breakfast-high-protein-breakfast-tofu-veggie-breakfast-scramble.png",
+      "imageAlt": "Tofu Veggie Breakfast Scramble recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Tofu Veggie Breakfast Scramble, a plant-forward scramble with tofu, peppers, spinach, turmeric, and avocado. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-high-protein-breakfast-turkey-bacon-egg-white-wrap",
+      "slug": "turkey-bacon-egg-white-wrap",
+      "title": "Turkey Bacon Egg White Wrap",
+      "description": "Egg whites, turkey bacon, spinach, and cheese wrapped for a lean breakfast.",
+      "shortDescription": "Egg whites, turkey bacon, spinach, and cheese wrapped for a lean breakfast.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-high-protein-breakfast",
+      "mealType": "breakfast",
+      "sortOrder": 5,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 8,
+      "cookMinutes": 8,
+      "totalMinutes": 16,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 390,
+      "proteinGrams": 36,
+      "carbsGrams": 34,
+      "fatGrams": 13,
+      "nutrition": {
+        "calories": 390,
+        "proteinGrams": 36,
+        "carbsGrams": 34,
+        "fatGrams": 13
+      },
+      "tags": [
+        "breakfast",
+        "high-protein",
+        "high-protein-breakfast",
+        "meat",
+        "quick"
+      ],
+      "dietary": [
+        "high-protein"
+      ],
+      "ingredients": [
+        {
+          "name": "Egg whites",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Turkey bacon",
+          "quantity": 3,
+          "unit": "slices",
+          "department": "Meat"
+        },
+        {
+          "name": "Whole wheat tortilla",
+          "quantity": 1,
+          "unit": "large",
+          "department": "Bakery"
+        },
+        {
+          "name": "Baby spinach",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Reduced-fat cheddar",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Dairy"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Cook turkey bacon until crisp."
+        },
+        {
+          "step": 2,
+          "text": "Scramble egg whites with spinach."
+        },
+        {
+          "step": 3,
+          "text": "Wrap egg whites, turkey bacon, and cheddar in a warm tortilla."
+        }
+      ],
+      "imageKey": "recipe-breakfast-high-protein-breakfast-turkey-bacon-egg-white-wrap",
+      "imageFile": "recipe-breakfast-high-protein-breakfast-turkey-bacon-egg-white-wrap.png",
+      "imageAlt": "Turkey Bacon Egg White Wrap recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Turkey Bacon Egg White Wrap, egg whites, turkey bacon, spinach, and cheese wrapped for a lean breakfast. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-weekend-brunch-lemon-ricotta-pancakes",
+      "slug": "lemon-ricotta-pancakes",
+      "title": "Lemon Ricotta Pancakes",
+      "description": "Fluffy ricotta pancakes with lemon zest and a light berry topping.",
+      "shortDescription": "Fluffy ricotta pancakes with lemon zest and a light berry topping.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-weekend-brunch",
+      "mealType": "breakfast",
+      "sortOrder": 1,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 12,
+      "cookMinutes": 15,
+      "totalMinutes": 27,
+      "servings": 4,
+      "difficulty": "Medium",
+      "costLevel": "Moderate",
+      "cuisine": "Italian-inspired",
+      "calories": 390,
+      "proteinGrams": 18,
+      "carbsGrams": 50,
+      "fatGrams": 14,
+      "nutrition": {
+        "calories": 390,
+        "proteinGrams": 18,
+        "carbsGrams": 50,
+        "fatGrams": 14
+      },
+      "tags": [
+        "breakfast",
+        "brunch",
+        "vegetarian",
+        "weekend-brunch"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Ricotta cheese",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Eggs",
+          "quantity": 2,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "All-purpose flour",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Pantry"
+        },
+        {
+          "name": "Lemon zest",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        },
+        {
+          "name": "Mixed berries",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Whisk ricotta, eggs, flour, lemon zest, baking powder, and milk into batter."
+        },
+        {
+          "step": 2,
+          "text": "Cook pancakes on a griddle until golden."
+        },
+        {
+          "step": 3,
+          "text": "Serve with berries."
+        }
+      ],
+      "imageKey": "recipe-breakfast-weekend-brunch-lemon-ricotta-pancakes",
+      "imageFile": "recipe-breakfast-weekend-brunch-lemon-ricotta-pancakes.png",
+      "imageAlt": "Lemon Ricotta Pancakes recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Lemon Ricotta Pancakes, fluffy ricotta pancakes with lemon zest and a light berry topping. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-weekend-brunch-mediterranean-breakfast-flatbread",
+      "slug": "mediterranean-breakfast-flatbread",
+      "title": "Mediterranean Breakfast Flatbread",
+      "description": "Warm flatbread with eggs, hummus, cucumber, tomato, feta, and herbs.",
+      "shortDescription": "Warm flatbread with eggs, hummus, cucumber, tomato, feta, and herbs.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-weekend-brunch",
+      "mealType": "breakfast",
+      "sortOrder": 2,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 8,
+      "totalMinutes": 18,
+      "servings": 2,
+      "difficulty": "Easy",
+      "costLevel": "Moderate",
+      "cuisine": "Mediterranean",
+      "calories": 450,
+      "proteinGrams": 22,
+      "carbsGrams": 48,
+      "fatGrams": 20,
+      "nutrition": {
+        "calories": 450,
+        "proteinGrams": 22,
+        "carbsGrams": 48,
+        "fatGrams": 20
+      },
+      "tags": [
+        "breakfast",
+        "brunch",
+        "vegetarian",
+        "weekend-brunch"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Flatbread",
+          "quantity": 2,
+          "unit": "pieces",
+          "department": "Bakery"
+        },
+        {
+          "name": "Eggs",
+          "quantity": 2,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Hummus",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Deli"
+        },
+        {
+          "name": "Cucumber tomato salad",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Feta cheese",
+          "quantity": 0.25,
+          "unit": "cup",
+          "department": "Dairy"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Warm flatbread and spread with hummus."
+        },
+        {
+          "step": 2,
+          "text": "Top with cooked eggs, cucumber tomato salad, and feta."
+        },
+        {
+          "step": 3,
+          "text": "Finish with herbs and pepper."
+        }
+      ],
+      "imageKey": "recipe-breakfast-weekend-brunch-mediterranean-breakfast-flatbread",
+      "imageFile": "recipe-breakfast-weekend-brunch-mediterranean-breakfast-flatbread.png",
+      "imageAlt": "Mediterranean Breakfast Flatbread recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Mediterranean Breakfast Flatbread, warm flatbread with eggs, hummus, cucumber, tomato, feta, and herbs. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-weekend-brunch-brioche-french-toast-bites",
+      "slug": "brioche-french-toast-bites",
+      "title": "Brioche French Toast Bites",
+      "description": "Golden French toast cubes with cinnamon, berries, and maple yogurt.",
+      "shortDescription": "Golden French toast cubes with cinnamon, berries, and maple yogurt.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-weekend-brunch",
+      "mealType": "breakfast",
+      "sortOrder": 3,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 12,
+      "totalMinutes": 22,
+      "servings": 4,
+      "difficulty": "Medium",
+      "costLevel": "Moderate",
+      "cuisine": "French-inspired",
+      "calories": 430,
+      "proteinGrams": 16,
+      "carbsGrams": 58,
+      "fatGrams": 16,
+      "nutrition": {
+        "calories": 430,
+        "proteinGrams": 16,
+        "carbsGrams": 58,
+        "fatGrams": 16
+      },
+      "tags": [
+        "breakfast",
+        "brunch",
+        "sweet",
+        "weekend-brunch"
+      ],
+      "dietary": [
+        "vegetarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Brioche bread",
+          "quantity": 6,
+          "unit": "slices",
+          "department": "Bakery"
+        },
+        {
+          "name": "Eggs",
+          "quantity": 3,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Milk",
+          "quantity": 0.75,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Ground cinnamon",
+          "quantity": 1,
+          "unit": "tsp",
+          "department": "Pantry"
+        },
+        {
+          "name": "Greek yogurt",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Dairy"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Cut brioche into cubes and dip in egg, milk, cinnamon, and vanilla."
+        },
+        {
+          "step": 2,
+          "text": "Cook on a griddle until golden."
+        },
+        {
+          "step": 3,
+          "text": "Serve with maple yogurt and berries."
+        }
+      ],
+      "imageKey": "recipe-breakfast-weekend-brunch-brioche-french-toast-bites",
+      "imageFile": "recipe-breakfast-weekend-brunch-brioche-french-toast-bites.png",
+      "imageAlt": "Brioche French Toast Bites recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Brioche French Toast Bites, golden french toast cubes with cinnamon, berries, and maple yogurt. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-weekend-brunch-sweet-potato-breakfast-hash",
+      "slug": "sweet-potato-breakfast-hash",
+      "title": "Sweet Potato Breakfast Hash",
+      "description": "Roasted sweet potatoes with peppers, onions, eggs, and avocado.",
+      "shortDescription": "Roasted sweet potatoes with peppers, onions, eggs, and avocado.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-weekend-brunch",
+      "mealType": "breakfast",
+      "sortOrder": 4,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 12,
+      "cookMinutes": 25,
+      "totalMinutes": 37,
+      "servings": 4,
+      "difficulty": "Medium",
+      "costLevel": "Budget",
+      "cuisine": "American",
+      "calories": 420,
+      "proteinGrams": 18,
+      "carbsGrams": 48,
+      "fatGrams": 18,
+      "nutrition": {
+        "calories": 420,
+        "proteinGrams": 18,
+        "carbsGrams": 48,
+        "fatGrams": 18
+      },
+      "tags": [
+        "breakfast",
+        "brunch",
+        "budget",
+        "vegetarian",
+        "weekend-brunch"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Sweet potatoes",
+          "quantity": 3,
+          "unit": "cups",
+          "department": "Produce"
+        },
+        {
+          "name": "Bell peppers",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Red onion",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Eggs",
+          "quantity": 4,
+          "unit": "large",
+          "department": "Dairy"
+        },
+        {
+          "name": "Avocado",
+          "quantity": 1,
+          "unit": "medium",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Roast sweet potatoes, peppers, and onion until tender."
+        },
+        {
+          "step": 2,
+          "text": "Make small wells and add eggs."
+        },
+        {
+          "step": 3,
+          "text": "Bake until eggs are set and top with avocado."
+        }
+      ],
+      "imageKey": "recipe-breakfast-weekend-brunch-sweet-potato-breakfast-hash",
+      "imageFile": "recipe-breakfast-weekend-brunch-sweet-potato-breakfast-hash.png",
+      "imageAlt": "Sweet Potato Breakfast Hash recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Sweet Potato Breakfast Hash, roasted sweet potatoes with peppers, onions, eggs, and avocado. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-weekend-brunch-smoked-salmon-bagel-board",
+      "slug": "smoked-salmon-bagel-board",
+      "title": "Smoked Salmon Bagel Board",
+      "description": "A brunch board with bagels, smoked salmon, cream cheese, cucumber, capers, and herbs.",
+      "shortDescription": "A brunch board with bagels, smoked salmon, cream cheese, cucumber, capers, and herbs.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-weekend-brunch",
+      "mealType": "breakfast",
+      "sortOrder": 5,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 15,
+      "cookMinutes": 0,
+      "totalMinutes": 15,
+      "servings": 4,
+      "difficulty": "Easy",
+      "costLevel": "Moderate",
+      "cuisine": "American",
+      "calories": 480,
+      "proteinGrams": 25,
+      "carbsGrams": 52,
+      "fatGrams": 20,
+      "nutrition": {
+        "calories": 480,
+        "proteinGrams": 25,
+        "carbsGrams": 52,
+        "fatGrams": 20
+      },
+      "tags": [
+        "breakfast",
+        "brunch",
+        "seafood",
+        "weekend-brunch"
+      ],
+      "dietary": [
+        "pescatarian"
+      ],
+      "ingredients": [
+        {
+          "name": "Mini bagels",
+          "quantity": 4,
+          "unit": "pieces",
+          "department": "Bakery"
+        },
+        {
+          "name": "Smoked salmon",
+          "quantity": 8,
+          "unit": "oz",
+          "department": "Seafood"
+        },
+        {
+          "name": "Cream cheese",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Cucumber",
+          "quantity": 1,
+          "unit": "large",
+          "department": "Produce"
+        },
+        {
+          "name": "Capers",
+          "quantity": 2,
+          "unit": "tbsp",
+          "department": "Pantry"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Slice and toast bagels if desired."
+        },
+        {
+          "step": 2,
+          "text": "Arrange smoked salmon, cream cheese, cucumber, capers, and herbs on a board."
+        },
+        {
+          "step": 3,
+          "text": "Let everyone assemble their own bagel bites."
+        }
+      ],
+      "imageKey": "recipe-breakfast-weekend-brunch-smoked-salmon-bagel-board",
+      "imageFile": "recipe-breakfast-weekend-brunch-smoked-salmon-bagel-board.png",
+      "imageAlt": "Smoked Salmon Bagel Board recipe image",
+      "imagePrompt": "Square overhead editorial food photo of Smoked Salmon Bagel Board, a brunch board with bagels, smoked salmon, cream cheese, cucumber, capers, and herbs. Warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    },
+    {
+      "id": "recipe-breakfast-egg-based-spinach-ricotta-breakfast-omelet",
+      "slug": "spinach-ricotta-breakfast-omelet",
+      "title": "Spinach Ricotta Breakfast Omelet",
+      "description": "A soft omelet folded with ricotta, spinach, and chives for a creamy high-protein breakfast.",
+      "shortDescription": "A soft omelet folded with ricotta, spinach, and chives for a creamy high-protein breakfast.",
+      "categoryId": "breakfast",
+      "subcategoryId": "breakfast-egg-based",
+      "mealType": "breakfast",
+      "sortOrder": 6,
+      "enabled": true,
+      "featured": false,
+      "prepMinutes": 10,
+      "cookMinutes": 8,
+      "totalMinutes": 18,
+      "servings": 1,
+      "difficulty": "Easy",
+      "costLevel": "Budget",
+      "cuisine": "Mediterranean-inspired",
+      "calories": 320,
+      "proteinGrams": 22,
+      "carbsGrams": 8,
+      "fatGrams": 22,
+      "nutrition": {
+        "calories": 320,
+        "proteinGrams": 22,
+        "carbsGrams": 8,
+        "fatGrams": 22
+      },
+      "tags": [
+        "breakfast",
+        "egg-based",
+        "high-protein",
+        "omelet",
+        "brunch"
+      ],
+      "dietary": [
+        "vegetarian",
+        "gluten-free"
+      ],
+      "ingredients": [
+        {
+          "name": "Large eggs",
+          "quantity": 4,
+          "unit": "pieces",
+          "department": "Dairy"
+        },
+        {
+          "name": "Ricotta cheese",
+          "quantity": 0.5,
+          "unit": "cup",
+          "department": "Dairy"
+        },
+        {
+          "name": "Baby spinach",
+          "quantity": 1,
+          "unit": "cup",
+          "department": "Produce"
+        },
+        {
+          "name": "Butter",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Dairy"
+        },
+        {
+          "name": "Fresh chives",
+          "quantity": 1,
+          "unit": "tbsp",
+          "department": "Produce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Whisk the eggs with a pinch of salt and pepper until smooth."
+        },
+        {
+          "step": 2,
+          "text": "Sauté the spinach in butter, then pour in the eggs and cook until just set."
+        },
+        {
+          "step": 3,
+          "text": "Fold in ricotta, finish with chives, and serve warm."
+        }
+      ],
+      "imageKey": "ff_home_recipe_high_protein_greek_yogurt_greek_yogurt_berry_bowl",
+      "imageFile": "ff_home_recipe_high_protein_greek_yogurt_greek_yogurt_berry_bowl.png",
+      "imageAlt": "Spinach Ricotta Breakfast Omelet recipe image",
+      "imagePrompt": "Square overhead editorial food photo of a spinach ricotta breakfast omelet, folded eggs with ricotta and wilted spinach, bright chives, warm cream surface, natural light, appetizing plating, mobile recipe card composition, no text, no logo, no hands."
+    }
+  ],
+  "indexes": {
+    "subcategoriesByCategory": {
+      "snacks": [
+        "snacks-savory-bites",
+        "snacks-sweet-snacks",
+        "snacks-high-protein-snacks",
+        "snacks-fresh-and-light",
+        "snacks-dips-and-spreads",
+        "snacks-crunchy-snacks"
+      ],
+      "breakfast": [
+        "breakfast-quick-breakfasts",
+        "breakfast-egg-based",
+        "breakfast-oats-and-grains",
+        "breakfast-smoothies-and-bowls",
+        "breakfast-high-protein-breakfast",
+        "breakfast-weekend-brunch"
+      ]
+    },
+    "recipesBySubcategory": {
+      "snacks-savory-bites": [
+        "recipe-snacks-savory-bites-mini-caprese-skewers",
+        "recipe-snacks-savory-bites-cucumber-feta-toast-coins",
+        "recipe-snacks-savory-bites-herbed-turkey-lettuce-cups",
+        "recipe-snacks-savory-bites-tomato-basil-rice-cakes",
+        "recipe-snacks-savory-bites-garlic-parmesan-mushroom-bites"
+      ],
+      "snacks-sweet-snacks": [
+        "recipe-snacks-sweet-snacks-cinnamon-apple-yogurt-dip",
+        "recipe-snacks-sweet-snacks-chocolate-date-energy-bites",
+        "recipe-snacks-sweet-snacks-berry-almond-cottage-bowl",
+        "recipe-snacks-sweet-snacks-honey-peach-ricotta-toast",
+        "recipe-snacks-sweet-snacks-banana-oat-cookie-bites"
+      ],
+      "snacks-high-protein-snacks": [
+        "recipe-snacks-high-protein-snacks-greek-yogurt-ranch-cups",
+        "recipe-snacks-high-protein-snacks-tuna-avocado-cucumber-boats",
+        "recipe-snacks-high-protein-snacks-chicken-hummus-snack-plate",
+        "recipe-snacks-high-protein-snacks-edamame-chili-lime-cups",
+        "recipe-snacks-high-protein-snacks-turkey-cheddar-roll-ups"
+      ],
+      "snacks-fresh-and-light": [
+        "recipe-snacks-fresh-and-light-watermelon-feta-mint-cups",
+        "recipe-snacks-fresh-and-light-citrus-jicama-sticks",
+        "recipe-snacks-fresh-and-light-avocado-tomato-lettuce-cups",
+        "recipe-snacks-fresh-and-light-strawberry-cucumber-salad-cups",
+        "recipe-snacks-fresh-and-light-zesty-shrimp-mango-bites"
+      ],
+      "snacks-dips-and-spreads": [
+        "recipe-snacks-dips-and-spreads-roasted-red-pepper-hummus",
+        "recipe-snacks-dips-and-spreads-green-goddess-cottage-dip",
+        "recipe-snacks-dips-and-spreads-black-bean-corn-salsa",
+        "recipe-snacks-dips-and-spreads-whipped-feta-honey-dip",
+        "recipe-snacks-dips-and-spreads-creamy-avocado-lime-dip"
+      ],
+      "snacks-crunchy-snacks": [
+        "recipe-snacks-crunchy-snacks-spiced-chickpea-crunch",
+        "recipe-snacks-crunchy-snacks-parmesan-zucchini-chips",
+        "recipe-snacks-crunchy-snacks-sesame-seaweed-rice-crisps",
+        "recipe-snacks-crunchy-snacks-chili-lime-tortilla-triangles",
+        "recipe-snacks-crunchy-snacks-maple-cinnamon-granola-clusters"
+      ],
+      "breakfast-quick-breakfasts": [
+        "recipe-breakfast-quick-breakfasts-berry-almond-overnight-oats",
+        "recipe-breakfast-quick-breakfasts-peanut-butter-banana-toast",
+        "recipe-breakfast-quick-breakfasts-spinach-feta-egg-mug",
+        "recipe-breakfast-quick-breakfasts-yogurt-parfait-crunch",
+        "recipe-breakfast-quick-breakfasts-avocado-egg-breakfast-wrap"
+      ],
+      "breakfast-egg-based": [
+        "recipe-breakfast-egg-based-mushroom-swiss-egg-bites",
+        "recipe-breakfast-egg-based-tomato-basil-shakshuka-cups",
+        "recipe-breakfast-egg-based-smoked-salmon-scramble-toast",
+        "recipe-breakfast-egg-based-veggie-breakfast-frittata-squares",
+        "recipe-breakfast-egg-based-turkey-sausage-egg-skillet",
+        "recipe-breakfast-egg-based-spinach-ricotta-breakfast-omelet"
+      ],
+      "breakfast-oats-and-grains": [
+        "recipe-breakfast-oats-and-grains-cinnamon-apple-protein-oats",
+        "recipe-breakfast-oats-and-grains-savory-miso-oat-bowl",
+        "recipe-breakfast-oats-and-grains-blueberry-quinoa-breakfast-bowl",
+        "recipe-breakfast-oats-and-grains-banana-walnut-baked-oatmeal",
+        "recipe-breakfast-oats-and-grains-coconut-mango-chia-oats"
+      ],
+      "breakfast-smoothies-and-bowls": [
+        "recipe-breakfast-smoothies-and-bowls-green-protein-smoothie-bowl",
+        "recipe-breakfast-smoothies-and-bowls-strawberry-banana-kefir-smoothie",
+        "recipe-breakfast-smoothies-and-bowls-chocolate-almond-smoothie-bowl",
+        "recipe-breakfast-smoothies-and-bowls-tropical-cottage-cheese-bowl",
+        "recipe-breakfast-smoothies-and-bowls-blueberry-spinach-smoothie"
+      ],
+      "breakfast-high-protein-breakfast": [
+        "recipe-breakfast-high-protein-breakfast-cottage-cheese-pancake-stack",
+        "recipe-breakfast-high-protein-breakfast-chicken-sausage-breakfast-bowl",
+        "recipe-breakfast-high-protein-breakfast-greek-yogurt-protein-waffles",
+        "recipe-breakfast-high-protein-breakfast-tofu-veggie-breakfast-scramble",
+        "recipe-breakfast-high-protein-breakfast-turkey-bacon-egg-white-wrap"
+      ],
+      "breakfast-weekend-brunch": [
+        "recipe-breakfast-weekend-brunch-lemon-ricotta-pancakes",
+        "recipe-breakfast-weekend-brunch-mediterranean-breakfast-flatbread",
+        "recipe-breakfast-weekend-brunch-brioche-french-toast-bites",
+        "recipe-breakfast-weekend-brunch-sweet-potato-breakfast-hash",
+        "recipe-breakfast-weekend-brunch-smoked-salmon-bagel-board"
+      ]
+    }
+  }
+}

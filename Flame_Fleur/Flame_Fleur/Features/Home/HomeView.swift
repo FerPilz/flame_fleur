@@ -1,82 +1,66 @@
 import SwiftUI
 
 struct HomeView: View {
-    private enum SectionID {
-        static let featured = "featured"
-        static let community = "community"
-        static let topPicks = "topPicks"
-        static let aiRecommend = "aiRecommend"
-    }
+    let openExplore: (ExploreLaunchContext) -> Void
 
     @EnvironmentObject private var favoritesStore: FavoritesStore
+    @EnvironmentObject private var shoppingCartStore: ShoppingCartStore
 
     @State private var navigationPath: [HomeRoute] = []
-    @State private var selectedSegment = SectionID.featured
+    @State private var selectedSegment = HomeShowcaseSection.featured.id
 
     private let recipeRepository = RecipeRepository.shared
 
-    private let topSegments = [
-        TopSegmentOption(id: SectionID.featured, title: "Featured", systemImage: "leaf.fill"),
-        TopSegmentOption(id: SectionID.community, title: "Community", systemImage: "person.2.fill"),
-        TopSegmentOption(id: SectionID.topPicks, title: "Top Picks", systemImage: "star.fill"),
-        TopSegmentOption(id: SectionID.aiRecommend, title: "AI Recommend", systemImage: "sparkles")
-    ]
-
-    private var featuredRecipes: [Recipe] {
-        recipeRepository.featuredRecipes
-    }
-
-    private var communityRecipes: [Recipe] {
-        recipeRepository.communityRecipes
-    }
-
-    private var topPickRecipes: [Recipe] {
-        recipeRepository.topPicksRecipes
-    }
-
-    private var aiRecommendRecipes: [Recipe] {
-        recipeRepository.aiRecommendedRecipes
+    init(openExplore: @escaping (ExploreLaunchContext) -> Void = { _ in }) {
+        self.openExplore = openExplore
     }
 
     var body: some View {
-        NavigationStack(path: $navigationPath) {
-            ScrollViewReader { proxy in
+        ScrollViewReader { proxy in
+            NavigationStack(path: $navigationPath) {
                 AppScreen(
-                    contentSpacing: AppSpacing.sm,
-                    headerTopPadding: AppSpacing.xs,
-                    contentBottomPadding: AppSpacing.xxxl + AppSpacing.xxl
+                    contentSpacing: 0,
+                    headerTopPadding: AppSpacing.xxs,
+                    contentTopPadding: AppSpacing.xs,
+                    contentBottomPadding: AppSpacing.xxxl + AppSpacing.xxl,
+                    backgroundColor: AppColors.porcelainCream
                 ) {
-                    AppHeader(
-                        leadingActions: [
-                            AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Open menu") {
-                                navigationPath.append(.settings)
-                            }
-                        ],
-                        trailingActions: [
-                            AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: 1) {
-                                navigationPath.append(.cart)
-                            },
-                            AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile settings") {
-                                navigationPath.append(.settings)
-                            }
-                        ]
-                    )
+                    VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                        AppHeader(
+                            title: "ALLSPICED",
+                            titleFont: .custom("Copperplate-Bold", size: 25),
+                            leadingActions: [
+                                AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Open settings") {
+                                    navigationPath.append(.settings)
+                                }
+                            ],
+                            trailingActions: [
+                                AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: shoppingCartStore.totalItemCount) {
+                                    navigationPath.append(.cart)
+                                },
+                                AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile") {
+                                    navigationPath.append(.profile)
+                                }
+                            ]
+                        )
 
-                    TopSegmentSelector(options: topSegments, selection: $selectedSegment) { option in
-                        withAnimation(.easeInOut(duration: 0.24)) {
-                            proxy.scrollTo(option.id, anchor: .top)
+                        TopSegmentSelector(options: topSegments, selection: $selectedSegment) { option in
+                            withAnimation(.easeInOut(duration: 0.24)) {
+                                proxy.scrollTo(option.id, anchor: .top)
+                            }
                         }
                     }
                 } content: {
-                    featuredSection
-                        .id(SectionID.featured)
+                    VStack(alignment: .leading, spacing: AppSpacing.lg) {
+                        featuredSection
+                            .id(HomeShowcaseSection.featured.id)
 
-                    recipeSection(title: "Community", id: SectionID.community, recipes: communityRecipes, showsCreator: true)
-
-                    recipeSection(title: "Top Picks", id: SectionID.topPicks, recipes: topPickRecipes)
-
-                    recipeSection(title: "AI Recommend", id: SectionID.aiRecommend, recipes: aiRecommendRecipes)
-                        .padding(.top, AppSpacing.xs)
+                        ForEach(visibleHomeSections) { section in
+                            homeCarouselSection(for: section)
+                                .id(section.id)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .navigationDestination(for: HomeRoute.self) { route in
                     switch route {
@@ -110,13 +94,17 @@ struct HomeView: View {
                             EmptyView()
                         }
                     case .cart:
-                        ShoppingCartView(
-                            onClose: {
-                                if !navigationPath.isEmpty {
-                                    navigationPath.removeLast()
-                                }
+                        ShoppingCartView {
+                            if !navigationPath.isEmpty {
+                                navigationPath.removeLast()
                             }
-                        )
+                        }
+                    case .profile:
+                        ProfileView(onBack: {
+                            if !navigationPath.isEmpty {
+                                navigationPath.removeLast()
+                            }
+                        })
                     case .settings:
                         SettingsView()
                     }
@@ -127,8 +115,10 @@ struct HomeView: View {
     }
 
     private var featuredSection: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-            SectionHeaderView("Featured", actionTitle: "See all", style: .compact) {}
+        VStack(alignment: .leading, spacing: AppSpacing.xs) {
+            SectionHeaderView(HomeShowcaseSection.featured.headerTitle, actionTitle: "See all", style: .compact) {
+                openExplore(.featured)
+            }
 
             HorizontalCarousel(
                 items: featuredRecipes,
@@ -137,39 +127,66 @@ struct HomeView: View {
             ) { recipe in
                 HeroRecipeCard(
                     recipe: recipe,
-                    isFavorite: isFavorite(recipe),
+                    isFavorite: favoritesStore.isFavorite(recipe.id),
                     action: {
                         navigationPath.append(.recipe(recipe.id))
                     },
                     favoriteAction: {
-                        toggleFavorite(recipe)
+                        favoritesStore.toggleFavorite(recipe.id)
                     }
                 )
             }
+            .clipped()
 
             pageDots
         }
     }
 
-    private func recipeSection(title: String, id: String, recipes: [Recipe], showsCreator: Bool = false) -> some View {
-        VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-            SectionHeaderView(title, actionTitle: "See all", style: .compact) {}
+    private func homeCarouselSection(for section: HomeShowcaseSection) -> some View {
+        let items = recipeRepository.homeCarouselRecipes(for: section)
 
-            HorizontalCarousel(items: recipes, cardHeight: 160) { recipe in
-                RecipeCard(
-                    recipe: recipe,
-                    showsCreator: showsCreator,
-                    isFavorite: isFavorite(recipe),
-                    action: {
-                        navigationPath.append(.recipe(recipe.id))
-                    },
-                    favoriteAction: {
-                        toggleFavorite(recipe)
-                    }
-                )
-            }
+        guard !items.isEmpty else {
+            return AnyView(EmptyView())
         }
-        .id(id)
+
+        return AnyView(
+            VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                SectionHeaderView(section.headerTitle, actionTitle: "See all", style: .compact) {
+                    openExplore(section.exploreLaunchContext)
+                }
+
+                HorizontalCarousel(
+                    items: items,
+                    visibleItemCount: 3,
+                    cardHeight: 166
+                ) { recipe in
+                    RecipeCard(
+                        recipe: recipe,
+                        isFavorite: favoritesStore.isFavorite(recipe.id),
+                        action: {
+                            navigationPath.append(.recipe(recipe.id))
+                        },
+                        favoriteAction: {
+                            favoritesStore.toggleFavorite(recipe.id)
+                        }
+                    )
+                }
+            }
+        )
+    }
+
+    private var featuredRecipes: [Recipe] {
+        recipeRepository.featuredRecipes
+    }
+
+    private var visibleHomeSections: [HomeShowcaseSection] {
+        HomeShowcaseSection.carouselSections.filter { section in
+            !recipeRepository.homeCarouselRecipes(for: section).isEmpty
+        }
+    }
+
+    private var topSegments: [TopSegmentOption] {
+        ([HomeShowcaseSection.featured] + visibleHomeSections).map(\.selectorOption)
     }
 
     private var pageDots: some View {
@@ -182,20 +199,13 @@ struct HomeView: View {
         }
         .frame(maxWidth: .infinity)
     }
-
-    private func isFavorite(_ recipe: Recipe) -> Bool {
-        favoritesStore.isFavorite(recipe.id)
-    }
-
-    private func toggleFavorite(_ recipe: Recipe) {
-        favoritesStore.toggleFavorite(recipe.id)
-    }
 }
 
 private enum HomeRoute: Hashable {
     case recipe(String)
     case ingredients(String)
     case cart
+    case profile
     case settings
 }
 

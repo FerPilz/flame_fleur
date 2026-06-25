@@ -8,7 +8,7 @@ struct ShoppingCartItemRow: View {
     let onUpdateStore: (ShoppingStoreOption) -> Void
 
     var body: some View {
-        HStack(alignment: .top, spacing: AppSpacing.xs) {
+        HStack(alignment: .top, spacing: AppSpacing.xxs) {
             Button(action: onToggleSelection) {
                 Image(systemName: item.isChecked ? "checkmark.circle.fill" : "circle")
                     .font(.system(size: 18, weight: .semibold))
@@ -51,9 +51,9 @@ struct ShoppingCartItemRow: View {
                 }
             }
         }
-        .padding(.horizontal, AppSpacing.xs)
+        .padding(.horizontal, AppSpacing.xxs)
         .padding(.vertical, AppSpacing.xs)
-        .frame(minHeight: 60)
+        .frame(minHeight: 58)
         .background(
             RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous)
                 .fill(item.isChecked ? AppColors.softOlive.opacity(0.42) : Color.clear)
@@ -80,8 +80,8 @@ struct ShoppingCartItemRow: View {
             }
         }
         .foregroundStyle(AppColors.olive)
-        .padding(.horizontal, AppSpacing.xxs)
-        .frame(width: 58, height: 24)
+        .padding(.horizontal, 3)
+        .frame(width: 56, height: 24)
         .background(
             Capsule(style: .continuous)
                 .fill(AppColors.elevatedCardBackground)
@@ -103,16 +103,16 @@ struct ShoppingCartItemRow: View {
         } label: {
             HStack(spacing: AppSpacing.xxs) {
                 Text(shortStoreName)
-            .font(AppTypography.metadata)
-            .lineLimit(1)
-            .truncationMode(.tail)
+                    .font(AppTypography.metadata)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
 
                 Image(systemName: "chevron.down")
                     .font(AppTypography.metadata)
             }
             .foregroundStyle(AppColors.secondaryText)
-            .padding(.horizontal, AppSpacing.xs)
-            .frame(width: 78, height: 24)
+            .padding(.horizontal, AppSpacing.xxs)
+            .frame(width: 72, height: 24)
             .background(
                 Capsule(style: .continuous)
                     .fill(AppColors.elevatedCardBackground)

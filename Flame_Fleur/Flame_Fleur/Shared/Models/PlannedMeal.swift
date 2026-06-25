@@ -36,3 +36,9 @@ struct PlannedMeal: Identifiable, Hashable, Codable {
         self.imageName = imageName
     }
 }
+
+extension PlannedMeal {
+    var nutritionSummary: NutritionSummary {
+        NutritionCalculator.summary(from: self)
+    }
+}

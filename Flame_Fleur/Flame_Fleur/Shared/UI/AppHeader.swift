@@ -22,39 +22,40 @@ struct AppHeaderAction: Identifiable {
 
 struct AppHeader: View {
     let title: String
+    let titleFont: Font
     let leadingActions: [AppHeaderAction]
     let trailingActions: [AppHeaderAction]
 
     init(
         title: String = "Flame & Fleur",
+        titleFont: Font = AppTypography.brandTitle,
         leadingActions: [AppHeaderAction] = [],
         trailingActions: [AppHeaderAction] = []
     ) {
         self.title = title
+        self.titleFont = titleFont
         self.leadingActions = leadingActions
         self.trailingActions = trailingActions
     }
 
     var body: some View {
-        HStack(spacing: AppSpacing.sm) {
-            actionGroup(leadingActions, isLeading: true)
-
-            Spacer(minLength: AppSpacing.xs)
-
+        ZStack {
             Text(title)
-                .font(AppTypography.brandTitle)
+                .font(titleFont)
                 .foregroundStyle(AppColors.olive)
                 .lineLimit(1)
-                .minimumScaleFactor(0.82)
                 .allowsTightening(true)
+                .padding(.horizontal, AppTopActionMetrics.centeredTitleInset)
                 .frame(maxWidth: .infinity)
                 .accessibilityAddTraits(.isHeader)
 
-            Spacer(minLength: AppSpacing.xs)
-
-            actionGroup(trailingActions, isLeading: false)
+            HStack(spacing: AppSpacing.sm) {
+                actionGroup(leadingActions, isLeading: true)
+                Spacer(minLength: 0)
+                actionGroup(trailingActions, isLeading: false)
+            }
         }
-        .frame(height: 34)
+        .frame(height: 44)
     }
 
     private func actionGroup(_ actions: [AppHeaderAction], isLeading: Bool) -> some View {
@@ -79,7 +80,7 @@ struct AppHeader: View {
     AppHeader(
         leadingActions: [AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Menu")],
         trailingActions: [
-            AppHeaderAction(systemName: "cart", accessibilityLabel: "Cart", badgeValue: 1),
+            AppHeaderAction(systemName: "cart", accessibilityLabel: "Cart", badgeValue: 4),
             AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Profile")
         ]
     )
