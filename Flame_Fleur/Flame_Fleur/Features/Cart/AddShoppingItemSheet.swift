@@ -5,24 +5,29 @@ struct AddShoppingItemSheet: View {
     @EnvironmentObject private var cartStore: ShoppingCartStore
 
     @State private var searchText = ""
+    @State private var searchResults: [ShoppingIngredientCatalogItem] = []
+    @State private var quantities: [String: Int] = [:]
+    @State private var addedResultIDs: Set<String> = []
 
-    private let suggestedItems = SampleShoppingCartItems.suggestedItems
+    private let resultLimit = 20
 
     var body: some View {
         ZStack {
             AppColors.appBackground.ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                LazyVStack(alignment: .leading, spacing: AppSpacing.sm) {
                     sheetHeader
                     searchBar
-                    suggestedHeader
-                    suggestedItemsContent
+                    resultsContent
                 }
                 .padding(.horizontal, AppSpacing.screenHorizontal)
                 .padding(.top, AppSpacing.md)
                 .padding(.bottom, AppSpacing.lg)
             }
+        }
+        .task(id: normalizedSearchText) {
+            await updateSearchResults()
         }
     }
 
@@ -67,15 +72,41 @@ struct AddShoppingItemSheet: View {
         )
     }
 
-    private var suggestedHeader: some View {
+    @ViewBuilder
+    private var resultsContent: some View {
+        if normalizedSearchText.isEmpty {
+            initialSearchState
+        } else {
+            resultsHeader
+
+            if searchResults.isEmpty {
+                noMatchesState
+            } else {
+                searchResultsCard
+            }
+
+            if canAddCustomItem {
+                customItemCard
+            }
+        }
+    }
+
+    private var initialSearchState: some View {
+        Text("Search for an ingredient")
+            .font(AppTypography.callout)
+            .foregroundStyle(AppColors.secondaryText)
+            .frame(maxWidth: .infinity, minHeight: 96, alignment: .center)
+    }
+
+    private var resultsHeader: some View {
         HStack(alignment: .firstTextBaseline) {
-            Text(trimmedSearchText.isEmpty ? "Suggested Items" : "Catalog Matches")
+            Text("Catalog Matches")
                 .font(AppTypography.sectionTitle)
                 .foregroundStyle(AppColors.primaryText)
 
             Spacer()
 
-            Text("\(filteredSuggestedItems.count)")
+            Text("\(searchResults.count)")
                 .font(AppTypography.metadata)
                 .foregroundStyle(AppColors.secondaryText)
                 .padding(.horizontal, AppSpacing.xs)
@@ -84,34 +115,22 @@ struct AddShoppingItemSheet: View {
         }
     }
 
-    private var suggestedItemsContent: some View {
-        VStack(spacing: AppSpacing.xs) {
-            if filteredSuggestedItems.isEmpty {
-                emptySuggestedItemsCard
-            } else {
-                suggestedItemsCard
-            }
-
-            if canAddGenericSearchItem {
-                genericAddItemCard
-            }
-        }
-    }
-
-    private var suggestedItemsCard: some View {
+    private var searchResultsCard: some View {
         SurfaceCard(
             backgroundColor: AppColors.elevatedCardBackground,
             cornerRadius: AppRadius.large,
             contentPadding: AppSpacing.xs
         ) {
-            VStack(spacing: AppSpacing.xxs) {
-                ForEach(filteredSuggestedItems) { item in
+            LazyVStack(spacing: AppSpacing.xxs) {
+                ForEach(searchResults) { catalogItem in
                     AddShoppingSuggestedItemRow(
-                        item: item,
-                        onAdd: { addItem(item) }
+                        item: cartStore.item(for: catalogItem),
+                        quantity: quantityBinding(for: catalogItem.id),
+                        isAdded: addedResultIDs.contains(catalogItem.id),
+                        onAdd: { addCatalogItem(catalogItem) }
                     )
 
-                    if item.id != filteredSuggestedItems.last?.id {
+                    if catalogItem.id != searchResults.last?.id {
                         Rectangle()
                             .fill(AppColors.warmBorder.opacity(0.70))
                             .frame(height: 1)
@@ -121,60 +140,30 @@ struct AddShoppingItemSheet: View {
         }
     }
 
-    private var genericAddItemCard: some View {
+    private var customItemCard: some View {
         SurfaceCard(
             backgroundColor: AppColors.softOlive.opacity(0.55),
             cornerRadius: AppRadius.large,
             contentPadding: AppSpacing.sm
         ) {
             AddShoppingSuggestedItemRow(
-                item: genericSearchItem,
-                onAdd: addGenericSearchItem
+                item: customItem,
+                quantity: quantityBinding(for: customItemID),
+                isAdded: addedResultIDs.contains(customItemID),
+                onAdd: addCustomItem
             )
         }
     }
 
-    private var emptySuggestedItemsCard: some View {
+    private var noMatchesState: some View {
         SurfaceCard(
             backgroundColor: AppColors.elevatedCardBackground,
             cornerRadius: AppRadius.large,
             contentPadding: AppSpacing.md
         ) {
-            VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                Image(systemName: "magnifyingglass")
-                    .font(AppTypography.sectionTitle)
-                    .foregroundStyle(AppColors.olive)
-
-                Text("No catalog matches")
-                    .font(AppTypography.cardTitle)
-                    .foregroundStyle(AppColors.primaryText)
-
-                Text("Add the item to Other or refine your search.")
-                    .font(AppTypography.callout)
-                    .foregroundStyle(AppColors.secondaryText)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-    }
-
-    private var filteredSuggestedItems: [ShoppingCartItem] {
-        let filtered = suggestedItems.filter { item in
-            guard !normalizedSearchText.isEmpty else { return true }
-
-            return item.normalizedName.contains(normalizedSearchText)
-            || normalized(item.category.title).contains(normalizedSearchText)
-            || normalized(item.unit).contains(normalizedSearchText)
-        }
-
-        return filtered.sorted { lhs, rhs in
-            let lhsRank = searchRank(for: lhs)
-            let rhsRank = searchRank(for: rhs)
-
-            if lhsRank != rhsRank {
-                return lhsRank < rhsRank
-            }
-
-            return lhs.name.localizedCaseInsensitiveCompare(rhs.name) == .orderedAscending
+            Text("No catalog matches")
+                .font(AppTypography.cardTitle)
+                .foregroundStyle(AppColors.primaryText)
         }
     }
 
@@ -183,25 +172,24 @@ struct AddShoppingItemSheet: View {
     }
 
     private var normalizedSearchText: String {
-        trimmedSearchText
-            .lowercased()
-            .replacingOccurrences(of: #"[^\p{L}\p{N}]+"#, with: " ", options: .regularExpression)
-            .replacingOccurrences(of: #"\s+"#, with: " ", options: .regularExpression)
-            .trimmingCharacters(in: .whitespacesAndNewlines)
+        IngredientSuggestionEngine.normalize(searchText)
     }
 
-    private var canAddGenericSearchItem: Bool {
-        guard !normalizedSearchText.isEmpty else { return false }
-        return !suggestedItems.contains { $0.normalizedName == normalizedSearchText }
+    private var hasExactCatalogMatch: Bool {
+        SampleShoppingIngredientCatalog.byNormalizedName[normalizedSearchText] != nil
     }
 
-    private var displayGenericItemName: String {
-        trimmedSearchText.localizedCapitalized
+    private var canAddCustomItem: Bool {
+        !normalizedSearchText.isEmpty && !hasExactCatalogMatch
     }
 
-    private var genericSearchItem: ShoppingCartItem {
+    private var customItemID: String {
+        "custom-\(normalizedSearchText)"
+    }
+
+    private var customItem: ShoppingCartItem {
         ShoppingCartItem(
-            name: displayGenericItemName,
+            name: trimmedSearchText.localizedCapitalized,
             unit: "item",
             category: .other,
             price: 0,
@@ -209,58 +197,66 @@ struct AddShoppingItemSheet: View {
         )
     }
 
-    private func addGenericSearchItem() {
-        guard canAddGenericSearchItem else { return }
-
-        cartStore.addItem(genericSearchItem)
-        dismiss()
-    }
-
-    private func addItem(_ item: ShoppingCartItem) {
-        cartStore.addItem(
-            ShoppingCartItem(
-                name: item.name,
-                unit: item.unit,
-                displayQuantity: item.displayQuantity,
-                category: item.category,
-                price: item.price,
-                storeName: item.storeName,
-                imageName: item.imageName,
-                notes: item.notes
-            )
+    private func quantityBinding(for id: String) -> Binding<Int> {
+        Binding(
+            get: { quantities[id, default: 1] },
+            set: { quantities[id] = $0 }
         )
-        dismiss()
     }
 
-    private func searchRank(for item: ShoppingCartItem) -> Int {
-        let isCatalogBacked = SampleShoppingIngredientCatalog.byNormalizedName[item.normalizedName] != nil
+    private func updateSearchResults() async {
+        let query = normalizedSearchText
 
-        guard !normalizedSearchText.isEmpty else {
-            return isCatalogBacked ? 0 : 1
+        guard !query.isEmpty else {
+            searchResults = []
+            quantities = [:]
+            addedResultIDs = []
+            return
         }
 
-        if item.normalizedName == normalizedSearchText {
-            return isCatalogBacked ? 0 : 1
+        do {
+            try await Task.sleep(for: .milliseconds(250))
+        } catch {
+            return
         }
 
-        if item.normalizedName.hasPrefix(normalizedSearchText) {
-            return isCatalogBacked ? 2 : 3
-        }
+        guard !Task.isCancelled, query == normalizedSearchText else { return }
 
-        if item.normalizedName.contains(normalizedSearchText) {
-            return isCatalogBacked ? 4 : 5
-        }
+        let results = IngredientSuggestionEngine.suggestions(for: query, limit: resultLimit)
+        guard !Task.isCancelled, query == normalizedSearchText else { return }
 
-        return isCatalogBacked ? 6 : 7
+        searchResults = results
+        let resultIDs = Set(results.map(\.id))
+        quantities = quantities.filter { resultIDs.contains($0.key) }
+        addedResultIDs = addedResultIDs.intersection(resultIDs)
     }
 
-    private func normalized(_ value: String) -> String {
-        value
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .lowercased()
-            .replacingOccurrences(of: #"[^\p{L}\p{N}]+"#, with: " ", options: .regularExpression)
-            .replacingOccurrences(of: #"\s+"#, with: " ", options: .regularExpression)
-            .trimmingCharacters(in: .whitespacesAndNewlines)
+    private func addCatalogItem(_ catalogItem: ShoppingIngredientCatalogItem) {
+        let quantity = quantities[catalogItem.id, default: 1]
+        cartStore.addItem(cartStore.item(for: catalogItem, quantity: quantity))
+        markAdded(catalogItem.id)
+        quantities[catalogItem.id] = 1
+    }
+
+    private func addCustomItem() {
+        guard canAddCustomItem else { return }
+
+        let quantity = quantities[customItemID, default: 1]
+        var item = customItem
+        item.quantity = quantity
+        cartStore.addItem(item)
+        markAdded(customItemID)
+        quantities[customItemID] = 1
+    }
+
+    private func markAdded(_ id: String) {
+        addedResultIDs.insert(id)
+
+        Task {
+            try? await Task.sleep(for: .seconds(1))
+            guard !Task.isCancelled else { return }
+            addedResultIDs.remove(id)
+        }
     }
 }
 
