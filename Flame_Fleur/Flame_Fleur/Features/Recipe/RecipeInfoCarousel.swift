@@ -4,59 +4,99 @@ struct RecipeInfoCarousel: View {
     let recipe: Recipe
 
     var body: some View {
-        HorizontalCarousel(
-            items: metrics,
-            visibleItemCount: 2.74,
-            itemSpacing: AppSpacing.xs,
-            cardHeight: 68,
-            edgePadding: AppSpacing.xxs
-        ) { metric in
-            SurfaceCard(
-                backgroundColor: AppColors.elevatedCardBackground,
-                borderColor: AppColors.warmBorder,
-                cornerRadius: AppRadius.large,
-                contentPadding: AppSpacing.xs,
-                showsShadow: false
-            ) {
-                VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-                    HStack(spacing: AppSpacing.xxs) {
-                        Image(systemName: metric.systemImage)
-                            .font(AppTypography.metadata)
-                            .foregroundStyle(AppColors.olive)
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: RecipeInfoCarouselLayout.itemSpacing) {
+                ForEach(Array(metrics.enumerated()), id: \.element.id) { index, metric in
+                    HStack(alignment: .center, spacing: RecipeInfoCarouselLayout.itemContentSpacing) {
+                        metric.iconView
 
-                        Text(metric.title)
-                            .font(AppTypography.metadata)
-                            .foregroundStyle(AppColors.secondaryText)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
+                        VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                            Text(metric.title)
+                                .font(AppTypography.body)
+                                .foregroundStyle(AppColors.secondaryText)
+                                .lineLimit(1)
+                                .fixedSize(horizontal: true, vertical: false)
+
+                            Text(metric.value)
+                                .font(AppTypography.bodyEmphasis)
+                                .foregroundStyle(AppColors.primaryText)
+                                .lineLimit(1)
+                                .fixedSize(horizontal: true, vertical: false)
+                        }
+
+                        if index < metrics.count - 1 {
+                            Rectangle()
+                                .fill(AppColors.warmBorder)
+                                .frame(width: 2, height: RecipeInfoCarouselLayout.dividerHeight)
+                                .padding(.leading, RecipeInfoCarouselLayout.spaceBeforeDivider)
+                        }
                     }
-
-                    Text(metric.value)
-                        .font(AppTypography.bodyEmphasis)
-                        .foregroundStyle(AppColors.primaryText)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
+                    .padding(.leading, RecipeInfoCarouselLayout.itemLeadingPadding)
+                    .padding(.trailing, RecipeInfoCarouselLayout.itemTrailingPadding)
+                    .frame(minHeight: RecipeInfoCarouselLayout.itemHeight)
                 }
             }
+            .padding(.horizontal, RecipeInfoCarouselLayout.carouselSidePadding)
         }
     }
 
     private var metrics: [RecipeInfoMetric] {
         [
-            RecipeInfoMetric(title: "Prep", value: "\(recipe.prepMinutes) min", systemImage: "leaf"),
-            RecipeInfoMetric(title: "Cook", value: "\(recipe.cookMinutes) min", systemImage: "flame"),
-            RecipeInfoMetric(title: "Total", value: "\(recipe.totalMinutes) min", systemImage: "timer"),
-            RecipeInfoMetric(title: "Serves", value: recipe.servingsText, systemImage: "person.2"),
-            RecipeInfoMetric(title: "Difficulty", value: recipe.difficulty.title, systemImage: "gauge.with.dots.needle.33percent")
+            RecipeInfoMetric(title: "Prep", value: "\(recipe.prepMinutes) min", icon: .asset("PrepTimeIcon"), iconSize: 32, isLast: false),
+            RecipeInfoMetric(title: "Cook", value: "\(recipe.cookMinutes) min", icon: .asset("CookIcon"), iconSize: 32, isLast: false),
+            RecipeInfoMetric(title: "Calories", value: recipe.caloriesText, icon: .system("flame"), iconSize: 24, isLast: false),
+            RecipeInfoMetric(title: "Serves", value: recipe.servingsText, icon: .system("person.2"), iconSize: 26, isLast: false),
+            RecipeInfoMetric(
+                title: "Difficulty",
+                value: recipe.difficulty.title,
+                icon: .asset("Difficulty"),
+                iconSize: 40,
+                isLast: true
+            )
         ]
     }
+}
+
+private enum RecipeInfoIcon {
+    case system(String)
+    case asset(String)
 }
 
 private struct RecipeInfoMetric: Identifiable {
     let id = UUID()
     let title: String
     let value: String
-    let systemImage: String
+    let icon: RecipeInfoIcon
+    let iconSize: CGFloat
+    let isLast: Bool
+
+    @ViewBuilder
+    var iconView: some View {
+        switch icon {
+        case let .system(name):
+            Image(systemName: name)
+                .font(.system(size: iconSize, weight: .regular))
+                .foregroundStyle(Color("DeepBasil"))
+        case let .asset(name):
+            Image(name)
+                .renderingMode(.template)
+                .resizable()
+                .scaledToFit()
+                .frame(width: iconSize, height: iconSize)
+                .foregroundStyle(Color("DeepBasil"))
+        }
+    }
+}
+
+private enum RecipeInfoCarouselLayout {
+    static let itemHeight: CGFloat = 68
+    static let itemSpacing: CGFloat = 4
+    static let itemContentSpacing: CGFloat = 4
+    static let itemLeadingPadding: CGFloat = 4
+    static let itemTrailingPadding: CGFloat = 4
+    static let spaceBeforeDivider: CGFloat = 8
+    static let dividerHeight: CGFloat = 48
+    static let carouselSidePadding: CGFloat = 0
 }
 
 #Preview {

@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Spicy Tomato Basil Pasta.jpg",
+      "filename" : "Gemini_Generated_Image_3tz2bk3tz2bk3tz2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -17,5 +17,9 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "template"
   }
 }

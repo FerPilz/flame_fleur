@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Outer symmetrical semicircle gauge arc -->
+  <path d="M3.5,15.5 C3.5,10.8 7.3,7 12,7 C16.7,7 20.5,10.8 20.5,15.5"></path>
+  
+  <!-- Center pivot ring matching the reference style -->
+  <circle cx="12" cy="15.5" r="1.4"></circle>
+  
+  <!-- Gauge needle pointing slightly right of center, angled at 45 degrees -->
+  <line x1="13" y1="14.5" x2="16.5" y2="11"></line>
+  
+  <!-- Symmetrical, balanced tick marks tracking the exact visual angles -->
+  <line x1="4.5" y1="14" x2="6" y2="14"></line>
+  <line x1="6.8" y1="10.2" x2="8.1" y2="11.5"></line>
+  <line x1="12" y1="8.5" x2="12" y2="10"></line>
+  <line x1="17.2" y1="10.2" x2="15.9" y2="11.5"></line>
+  <line x1="19.5" y1="14" x2="18" y2="14"></line>
+</svg>
