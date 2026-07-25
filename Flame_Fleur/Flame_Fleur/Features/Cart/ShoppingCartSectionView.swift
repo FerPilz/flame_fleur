@@ -19,10 +19,8 @@ struct ShoppingCartSectionView: View {
             VStack(spacing: 0) {
                 Button(action: onToggleCollapsed) {
                     HStack(spacing: AppSpacing.xs) {
-                        Image(systemName: category.systemImage)
-                            .font(AppTypography.caption)
-                            .foregroundStyle(categoryAccent)
-                            .frame(width: 20)
+                        CartCategoryIconView(category: category, size: 32)
+                            .frame(width: 32, height: 32)
 
                         Text(category.title)
                             .font(AppTypography.cardTitle)
@@ -67,22 +65,6 @@ struct ShoppingCartSectionView: View {
         }
     }
 
-    private var categoryAccent: Color {
-        switch category {
-        case .produce:
-            return AppColors.olive
-        case .dairy:
-            return AppColors.premiumGold
-        case .protein:
-            return AppColors.burntOrange
-        case .pantry, .bakery:
-            return AppColors.secondaryText
-        case .frozen:
-            return AppColors.tertiaryText
-        case .other:
-            return AppColors.olive
-        }
-    }
 }
 
 #Preview {

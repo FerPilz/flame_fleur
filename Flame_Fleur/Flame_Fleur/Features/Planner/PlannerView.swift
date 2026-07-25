@@ -5,20 +5,34 @@ struct PlannerView: View {
     @EnvironmentObject private var shoppingCartStore: ShoppingCartStore
 
     let onExit: () -> Void
+    let onOpenExploreForRecipeSelection: (PlannerRecipeSelectionContext) -> Void
+    @Binding private var pendingSharedMealPlanImport: SharedMealPlanPayload?
+    @Binding private var sharedMealPlanImportError: String?
 
     @State private var navigationPath: [PlannerRoute] = []
     @State private var isCartPresented = false
     @State private var isCalendarPresented = false
-    @State private var isSavePromptPresented = false
-    @State private var draftPlanName = ""
+    @State private var isPlannerClearDialogPresented = false
+    @State private var isShareSheetPresented = false
+    @State private var shareSheetItems: [Any] = []
     @State private var toastMessage: String?
-    @State private var didSavePlan = false
     @State private var didTapAddPlanToCart = false
+    @State private var rangeStartDate: Date?
+    @State private var rangeEndDate: Date?
 
+    private let calendar = Calendar.current
     private let recipeRepository = RecipeRepository.shared
 
-    init(onExit: @escaping () -> Void = {}) {
+    init(
+        onExit: @escaping () -> Void = {},
+        onOpenExploreForRecipeSelection: @escaping (PlannerRecipeSelectionContext) -> Void = { _ in },
+        pendingSharedMealPlanImport: Binding<SharedMealPlanPayload?> = .constant(nil),
+        sharedMealPlanImportError: Binding<String?> = .constant(nil)
+    ) {
         self.onExit = onExit
+        self.onOpenExploreForRecipeSelection = onOpenExploreForRecipeSelection
+        self._pendingSharedMealPlanImport = pendingSharedMealPlanImport
+        self._sharedMealPlanImportError = sharedMealPlanImportError
     }
 
     var body: some View {
@@ -26,38 +40,57 @@ struct PlannerView: View {
             ZStack(alignment: .bottom) {
                 AppColors.appBackground.ignoresSafeArea()
 
-                VStack(spacing: 0) {
+                AppScreen(
+                    contentSpacing: 0,
+                    headerTopPadding: AppSpacing.xs,
+                    contentHorizontalPadding: 10,
+                    contentTopPadding: AppSpacing.xs,
+                    contentBottomPadding: AppSpacing.bottomTabClearance
+                ) {
                     header
-
-                    ScrollView(showsIndicators: false) {
-                        VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                            PlannerWeeklySummaryCard(summary: mealPlannerStore.weeklySummary)
-
-                            PlannerMealGrid(
-                                plannerStore: mealPlannerStore,
-                                onDayTap: { date in
-                                    mealPlannerStore.selectDate(date)
-                                },
-                                onEmptySlotTap: { date, slot in
-                                    openRecipePicker(for: date, slot: slot, mode: .add)
-                                },
-                                onMealTap: { meal in
-                                    openRecipePicker(for: meal.date, slot: meal.slot, mode: .replace)
-                                }
-                            )
-
-                            WeeklyMacroBalanceCard(balance: mealPlannerStore.selectedDayMacroBalance)
-
-                            PlannerPremiumInsightsCard(onUpgrade: placeholderUpgrade)
-
-                            SmartSuggestionsCarousel(recipes: smartSuggestionRecipes) { recipe in
-                                addSmartSuggestion(recipe)
+                } content: {
+                    VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                        PlannerDaySelector(
+                            selectedDate: mealPlannerStore.selectedDate,
+                            visibleMonth: mealPlannerStore.visibleMonth,
+                            rangeStartDate: rangeStartDate,
+                            rangeEndDate: rangeEndDate,
+                            mealCountForDate: { date in
+                                mealPlannerStore.meals(for: date).count
+                            },
+                            onOpenCalendar: { isCalendarPresented = true },
+                            onSelectDate: { date in
+                                selectDateFromCarousel(date)
                             }
+                        )
+
+                        PlannerWeeklySummaryCard(summary: mealPlannerStore.weeklySummary)
+
+                        PlannerMealGrid(
+                            plannerStore: mealPlannerStore,
+                            onDayTap: { date in
+                                mealPlannerStore.selectDate(date)
+                            },
+                            onEmptySlotTap: { date, slot in
+                                openRecipePicker(for: date, slot: slot, mode: .add)
+                            },
+                            onMealTap: { meal in
+                                openRecipePicker(for: meal.date, slot: meal.slot, mode: .replace)
+                            },
+                            onRemoveMeal: { date, slot in
+                                mealPlannerStore.removeMeal(on: date, slot: slot)
+                            }
+                        )
+
+                        WeeklyMacroBalanceCard(balance: mealPlannerStore.selectedDayMacroBalance)
+
+                        PlannerPremiumInsightsCard(onUpgrade: placeholderUpgrade)
+
+                        SmartSuggestionsCarousel(recipes: smartSuggestionRecipes) { recipe in
+                            addSmartSuggestion(recipe)
                         }
-                        .padding(.horizontal, AppSpacing.screenHorizontal)
-                        .padding(.top, AppSpacing.xs)
-                        .padding(.bottom, AppSpacing.xxxl + AppSpacing.xxl + 72)
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
                 if let toastMessage {
@@ -68,10 +101,58 @@ struct PlannerView: View {
             .safeAreaInset(edge: .bottom) {
                 PlannerBottomActionBar(
                     didAddPlanToCart: didTapAddPlanToCart,
-                    didSavePlan: didSavePlan,
-                    onAddPlanToCart: addPlanToCart,
-                    onSavePlan: presentSavePlanPrompt
+                    onSharePlan: presentSharePlan,
+                    onAddPlanToCart: addPlanToCart
                 )
+            }
+            .confirmationDialog("Clear Planner", isPresented: $isPlannerClearDialogPresented, titleVisibility: .visible) {
+                Button("Clear selected day", role: .destructive) {
+                    mealPlannerStore.clearPlannerDay(mealPlannerStore.selectedDate)
+                }
+
+                Button("Clear entire planner", role: .destructive) {
+                    mealPlannerStore.clearPlanner()
+                }
+
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("Choose whether to clear only the selected day or all planned meals.")
+            }
+            .confirmationDialog(
+                "Import shared plan?",
+                isPresented: Binding(
+                    get: { pendingSharedMealPlanImport != nil },
+                    set: { if !$0 { pendingSharedMealPlanImport = nil } }
+                ),
+                titleVisibility: .visible
+            ) {
+                Button("Import") {
+                    importSharedPlan()
+                }
+
+                Button("Cancel", role: .cancel) {
+                    pendingSharedMealPlanImport = nil
+                }
+            } message: {
+                Text("This will replace your current planner for this week.")
+            }
+            .alert(
+                "Couldn’t Import Plan",
+                isPresented: Binding(
+                    get: { sharedMealPlanImportError != nil },
+                    set: { if !$0 { sharedMealPlanImportError = nil } }
+                )
+            ) {
+                Button("OK", role: .cancel) {
+                    sharedMealPlanImportError = nil
+                }
+            } message: {
+                Text(sharedMealPlanImportError ?? "The selected file could not be imported.")
+            }
+            .sheet(isPresented: $isShareSheetPresented, onDismiss: cleanupShareSheet) {
+                if !shareSheetItems.isEmpty {
+                    ActivityView(activityItems: shareSheetItems)
+                }
             }
             .navigationDestination(isPresented: $isCartPresented) {
                 ShoppingCartView {
@@ -144,104 +225,66 @@ struct PlannerView: View {
                 .presentationDragIndicator(.visible)
                 .presentationCornerRadius(AppRadius.hero)
             }
-            .alert("Save Plan", isPresented: $isSavePromptPresented) {
-                TextField("Plan name", text: $draftPlanName)
-                Button("Cancel", role: .cancel) {
-                    draftPlanName = ""
-                }
-                Button("Save") {
-                    saveNamedPlan()
-                }
-            } message: {
-                Text("Name this week's meal plan.")
-            }
-            .tint(AppColors.olive)
+            .tint(AppColors.basilGreen)
             .toolbar(.hidden, for: .navigationBar)
             .toolbar(.hidden, for: .tabBar)
         }
     }
 
     private var header: some View {
-        VStack(spacing: 2) {
-            ZStack {
-                Text("Flame & Fleur")
-                    .font(AppTypography.brandTitle)
-                    .foregroundStyle(AppColors.olive)
-                    .lineLimit(1)
-                    .allowsTightening(true)
-                    .padding(.horizontal, AppTopActionMetrics.centeredTitleInset)
-                    .frame(maxWidth: .infinity)
-                    .accessibilityAddTraits(.isHeader)
-
-                HStack(spacing: AppSpacing.sm) {
-                    IconCircleButton(
-                        systemName: "chevron.left",
-                        accessibilityLabel: "Exit meal planner",
-                        size: AppTopActionMetrics.buttonSize,
-                        backgroundColor: AppColors.elevatedCardBackground,
-                        foregroundColor: AppColors.darkOlive,
-                        action: onExit
-                    )
-                    .frame(width: AppTopActionMetrics.actionGroupWidth, alignment: .leading)
-
-                    Spacer(minLength: 0)
-
-                    cartButton
+        AppHeader(
+            leadingActions: [
+                AppHeaderAction(systemName: "chevron.left", accessibilityLabel: "Exit meal planner") {
+                    onExit()
                 }
-            }
-            .frame(height: 44)
-
-            Text("Meal Planner")
-                .font(AppTypography.heroTitle)
-                .foregroundStyle(AppColors.olive)
-                .lineLimit(1)
-                .accessibilityAddTraits(.isHeader)
-
-            PlannerDaySelector(
-                selectedDate: mealPlannerStore.selectedDate,
-                visibleMonth: mealPlannerStore.visibleMonth,
-                weekDates: mealPlannerStore.weekDates,
-                mealCountForDate: { date in
-                    mealPlannerStore.meals(for: date).count
+            ],
+            trailingActions: [
+                AppHeaderAction(systemName: "trash", accessibilityLabel: "Clear planner") {
+                    isPlannerClearDialogPresented = true
                 },
-                onOpenCalendar: { isCalendarPresented = true },
-                onSelectDate: { date in
-                    mealPlannerStore.selectDate(date)
+                AppHeaderAction(systemName: "cart", accessibilityLabel: "Open shopping cart", badgeValue: shoppingCartStore.totalItemCount) {
+                    isCartPresented = true
                 }
-            )
-        }
-        .padding(.horizontal, AppSpacing.screenHorizontal)
-        .padding(.top, AppSpacing.xs)
-        .padding(.bottom, AppSpacing.xxs)
-        .background(AppColors.appBackground)
-    }
-
-    private var cartButton: some View {
-        IconCircleButton(
-            systemName: "cart",
-            accessibilityLabel: "Open shopping cart",
-            size: AppTopActionMetrics.buttonSize,
-            backgroundColor: AppColors.elevatedCardBackground,
-            foregroundColor: AppColors.darkOlive,
-            action: { isCartPresented = true }
+            ]
         )
-        .frame(width: AppTopActionMetrics.actionGroupWidth, alignment: .trailing)
     }
 
     private func openRecipePicker(for date: Date, slot: MealSlot, mode: PlannerRecipeSelectionContext.Mode) {
-        mealPlannerStore.selectDate(date)
-
-        navigationPath.append(
-            .recipePicker(
-                PlannerRecipeSelectionContext(
-                    date: mealPlannerStore.selectedDate,
-                    dayLabel: dayLabel(for: date),
-                    mealType: slot,
-                    slotID: slot.id,
-                    mode: mode
-                )
-            )
+        let normalizedDate = calendar.startOfDay(for: date)
+        let context = PlannerRecipeSelectionContext(
+            date: normalizedDate,
+            dayLabel: dayLabel(for: normalizedDate),
+            mealType: slot,
+            slotID: slot.id,
+            mode: mode
         )
+
+        mealPlannerStore.selectDate(normalizedDate)
+
+        if mode == .add {
+            onOpenExploreForRecipeSelection(context)
+        } else {
+            navigationPath.append(
+                .recipePicker(context)
+            )
+        }
+    }
+
+    private func selectDateFromCarousel(_ date: Date) {
+        let normalizedDate = calendar.startOfDay(for: date)
+        updateRangeSelection(with: normalizedDate)
+        mealPlannerStore.selectDate(normalizedDate)
+    }
+
+    private func updateRangeSelection(with date: Date) {
+        let updatedRange = PlannerDateRangeSelection.updatedRange(
+            startDate: rangeStartDate,
+            endDate: rangeEndDate,
+            selecting: date,
+            calendar: calendar
+        )
+        rangeStartDate = updatedRange.startDate
+        rangeEndDate = updatedRange.endDate
     }
 
     private var smartSuggestionRecipes: [Recipe] {
@@ -280,7 +323,11 @@ struct PlannerView: View {
                 continue
             }
 
-            shoppingCartStore.addRecipeIngredients(recipe.structuredIngredients, from: recipe)
+            shoppingCartStore.addRecipeIngredients(
+                recipe.structuredIngredients,
+                from: recipe,
+                shouldRecordUsage: false
+            )
             addedItemCount += recipe.structuredIngredients.count
         }
 
@@ -288,6 +335,27 @@ struct PlannerView: View {
             showToast("No recipe ingredients to add")
             return
         }
+
+        let weeklyRecipes: [Recipe] = mealPlannerStore.mealsInSelectedWeek.compactMap { meal -> Recipe? in
+            guard let recipeID = meal.recipeID else {
+                return nil
+            }
+
+            return recipeRepository.recipe(id: recipeID)
+        }
+        let weeklyNutrition = NutritionCalculator.summary(from: weeklyRecipes)
+
+        UsageTrackingStore.shared.record(
+            type: .planAddedToCart,
+            recipeTitle: "Weekly plan",
+            ingredientNames: weeklyRecipes.flatMap { recipe in
+                RecipeInsightResolver.normalizedIngredientNames(for: recipe)
+            },
+            calories: weeklyNutrition.calories,
+            proteinGrams: weeklyNutrition.proteinGrams,
+            carbGrams: weeklyNutrition.carbohydrateGrams,
+            fatGrams: weeklyNutrition.fatGrams
+        )
 
         didTapAddPlanToCart = true
         showToast("Plan added to cart (\(addedItemCount) items)")
@@ -297,27 +365,54 @@ struct PlannerView: View {
         }
     }
 
-    private func presentSavePlanPrompt() {
-        draftPlanName = "Week of \(mealPlannerStore.weekDates.first?.formatted(.dateTime.month(.abbreviated).day()) ?? "Meal Plan")"
-        isSavePromptPresented = true
+    private func presentSharePlan() {
+        do {
+            let payload = mealPlannerStore.sharedMealPlanPayload()
+            let shareURL = try MealPlanSharingService.exportFileURL(for: payload)
+            let plannedRecipes: [Recipe] = mealPlannerStore.mealsInSelectedWeek.compactMap { meal -> Recipe? in
+                guard let recipeID = meal.recipeID else {
+                    return nil
+                }
+
+                return recipeRepository.recipe(id: recipeID)
+            }
+            let plannedNutrition = NutritionCalculator.summary(from: plannedRecipes)
+
+            UsageTrackingStore.shared.record(
+                type: .planShared,
+                recipeTitle: "Weekly plan",
+                ingredientNames: plannedRecipes.flatMap { recipe in
+                    RecipeInsightResolver.normalizedIngredientNames(for: recipe)
+                },
+                calories: plannedNutrition.calories,
+                proteinGrams: plannedNutrition.proteinGrams,
+                carbGrams: plannedNutrition.carbohydrateGrams,
+                fatGrams: plannedNutrition.fatGrams
+            )
+            shareSheetItems = [shareURL]
+            isShareSheetPresented = true
+        } catch {
+            showToast("Couldn’t prepare share file")
+        }
     }
 
-    private func saveNamedPlan() {
-        let trimmedName = draftPlanName.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        guard !trimmedName.isEmpty else {
-            showToast("Enter a plan name")
+    private func importSharedPlan() {
+        guard let payload = pendingSharedMealPlanImport else {
             return
         }
 
-        mealPlannerStore.savePlan(named: trimmedName)
-        draftPlanName = ""
-        didSavePlan = true
-        showToast("Plan saved")
+        let summary = mealPlannerStore.replacePlanner(with: payload)
+        pendingSharedMealPlanImport = nil
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
-            didSavePlan = false
+        if summary.unresolvedMealCount > 0 {
+            showToast("Imported plan with \(summary.unresolvedMealCount) missing recipe(s)")
+        } else {
+            showToast("Shared plan imported")
         }
+    }
+
+    private func cleanupShareSheet() {
+        shareSheetItems = []
     }
 
     private func plannerToast(_ message: String) -> some View {
@@ -327,7 +422,7 @@ struct PlannerView: View {
             .padding(.horizontal, AppSpacing.md)
             .frame(height: 34)
             .background(Capsule(style: .continuous).fill(AppColors.darkOlive))
-            .padding(.bottom, AppSpacing.xxxl + AppSpacing.md)
+            .padding(.bottom, AppSpacing.xl)
     }
 
     private func showToast(_ message: String) {
@@ -354,6 +449,33 @@ private enum PlannerRoute: Hashable {
     case recipePicker(PlannerRecipeSelectionContext)
     case recipe(recipeID: String, context: PlannerRecipeSelectionContext)
     case ingredients(String)
+}
+
+private enum PlannerDateRangeSelection {
+    static func updatedRange(
+        startDate: Date?,
+        endDate: Date?,
+        selecting date: Date,
+        calendar: Calendar
+    ) -> (startDate: Date?, endDate: Date?) {
+        let normalizedDate = calendar.startOfDay(for: date)
+
+        guard let startDate else {
+            return (normalizedDate, nil)
+        }
+
+        let normalizedStartDate = calendar.startOfDay(for: startDate)
+
+        if endDate != nil {
+            return (normalizedDate, nil)
+        }
+
+        if normalizedDate < normalizedStartDate {
+            return (normalizedDate, normalizedStartDate)
+        }
+
+        return (normalizedStartDate, normalizedDate)
+    }
 }
 
 private struct PlannerMenuSheet: View {
@@ -433,5 +555,5 @@ private struct PlannerMenuSheet: View {
 #Preview {
     PlannerView()
         .environmentObject(MealPlannerStore.shared)
-        .environmentObject(ShoppingCartStore(items: SampleShoppingCartItems.currentWeek))
+        .environmentObject(ShoppingCartStore.shared)
 }

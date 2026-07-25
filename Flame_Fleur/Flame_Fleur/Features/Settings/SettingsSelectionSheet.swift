@@ -44,15 +44,17 @@ struct SettingsSelectionSheet: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: AppSpacing.md) {
-                header
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: AppSpacing.md) {
+                        header
 
-                VStack(spacing: AppSpacing.xs) {
-                    ForEach(options) { option in
-                        optionRow(option)
+                        VStack(spacing: AppSpacing.xs) {
+                            ForEach(options) { option in
+                                optionRow(option)
+                            }
+                        }
                     }
                 }
-
-                Spacer(minLength: AppSpacing.md)
 
                 if allowsMultiple {
                     PrimaryButton("Apply", style: .olive, height: 44) {
@@ -75,12 +77,15 @@ struct SettingsSelectionSheet: View {
                 Text(title)
                     .font(AppTypography.heroTitle)
                     .foregroundStyle(AppColors.primaryText)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 if let subtitle {
                     Text(subtitle)
                         .font(AppTypography.callout)
                         .foregroundStyle(AppColors.secondaryText)
                         .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             }
 

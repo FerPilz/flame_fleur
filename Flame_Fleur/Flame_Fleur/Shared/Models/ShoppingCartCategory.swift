@@ -5,8 +5,10 @@ enum ShoppingCartCategory: String, CaseIterable, Identifiable, Codable, Hashable
     case dairy
     case protein
     case pantry
-    case frozen
     case bakery
+    case frozen
+    case beverages
+    case household
     case other
 
     var id: String { rawValue }
@@ -16,15 +18,19 @@ enum ShoppingCartCategory: String, CaseIterable, Identifiable, Codable, Hashable
         case .produce:
             return "Produce"
         case .dairy:
-            return "Dairy"
+            return "Dairy & Eggs"
         case .protein:
-            return "Protein"
+            return "Meat & Seafood"
         case .pantry:
             return "Pantry"
-        case .frozen:
-            return "Frozen"
         case .bakery:
             return "Bakery"
+        case .frozen:
+            return "Frozen"
+        case .beverages:
+            return "Beverages"
+        case .household:
+            return "Household"
         case .other:
             return "Other"
         }
@@ -40,10 +46,14 @@ enum ShoppingCartCategory: String, CaseIterable, Identifiable, Codable, Hashable
             return "flame.fill"
         case .pantry:
             return "cabinet.fill"
-        case .frozen:
-            return "snowflake"
         case .bakery:
             return "birthday.cake.fill"
+        case .frozen:
+            return "snowflake"
+        case .beverages:
+            return "cup.and.saucer.fill"
+        case .household:
+            return "house.fill"
         case .other:
             return "basket.fill"
         }

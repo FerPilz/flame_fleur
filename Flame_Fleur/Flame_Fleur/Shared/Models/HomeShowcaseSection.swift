@@ -2,15 +2,17 @@ import Foundation
 
 enum HomeShowcaseSection: String, CaseIterable, Identifiable {
     case featured
-    case community
-    case worldCuisine
-    case topPicks
-    case aiRecommended
+    case beef
+    case vegetarian
+    case chickenSalad
+    case tuna
+    case plantBasedBowls
+    case piesAndTarts
+    case mexican
+    case korean
+    case breakfastBakes
+    case cookies
     case highProtein
-    case snacks
-    case breakfast
-    case eggBased
-    case salmon
 
     var id: String { rawValue }
 
@@ -18,24 +20,28 @@ enum HomeShowcaseSection: String, CaseIterable, Identifiable {
         switch self {
         case .featured:
             return "Featured"
-        case .community:
-            return "Community"
-        case .worldCuisine:
-            return "World Cuisine"
-        case .topPicks:
-            return "Top Picks for You"
-        case .aiRecommended:
-            return "AI Recommend"
+        case .beef:
+            return "Beef"
+        case .vegetarian:
+            return "Vegetarian"
+        case .chickenSalad:
+            return "Chicken Salad"
+        case .tuna:
+            return "Tuna"
+        case .plantBasedBowls:
+            return "Plant Based Bowls"
+        case .piesAndTarts:
+            return "Pies & Tarts"
+        case .mexican:
+            return "Mexican"
+        case .korean:
+            return "Korean"
+        case .breakfastBakes:
+            return "Breakfast Bakes"
+        case .cookies:
+            return "Cookies"
         case .highProtein:
             return "High Protein"
-        case .snacks:
-            return "Snacks"
-        case .breakfast:
-            return "Breakfast"
-        case .eggBased:
-            return "Egg Based"
-        case .salmon:
-            return "Salmon"
         }
     }
 
@@ -43,14 +49,28 @@ enum HomeShowcaseSection: String, CaseIterable, Identifiable {
         switch self {
         case .featured:
             return "Featured"
-        case .community:
-            return "Community"
-        case .topPicks:
-            return "Top Picks"
-        case .aiRecommended:
-            return "AI Recommend"
-        default:
-            return headerTitle
+        case .beef:
+            return "Beef"
+        case .vegetarian:
+            return "Vegetarian"
+        case .chickenSalad:
+            return "Chicken Salad"
+        case .tuna:
+            return "Tuna"
+        case .plantBasedBowls:
+            return "Plant Based Bowls"
+        case .piesAndTarts:
+            return "Pies & Tarts"
+        case .mexican:
+            return "Mexican"
+        case .korean:
+            return "Korean"
+        case .breakfastBakes:
+            return "Breakfast Bakes"
+        case .cookies:
+            return "Cookies"
+        case .highProtein:
+            return "High Protein"
         }
     }
 
@@ -58,29 +78,46 @@ enum HomeShowcaseSection: String, CaseIterable, Identifiable {
         switch self {
         case .featured:
             return "leaf.fill"
-        case .community:
-            return "person.2.fill"
-        case .worldCuisine:
-            return "globe.americas.fill"
-        case .topPicks:
-            return "star.fill"
-        case .aiRecommended:
-            return "sparkles"
-        case .highProtein:
-            return "bolt.fill"
-        case .snacks:
-            return "takeoutbag.and.cup.and.straw.fill"
-        case .breakfast:
-            return "cup.and.saucer.fill"
-        case .eggBased:
-            return "egg.fill"
-        case .salmon:
+        case .beef:
+            return "fork.knife"
+        case .vegetarian:
+            return "leaf.fill"
+        case .chickenSalad:
+            return "leaf.circle.fill"
+        case .tuna:
             return "fish.fill"
+        case .plantBasedBowls:
+            return "takeoutbag.and.cup.and.straw.fill"
+        case .piesAndTarts:
+            return "birthday.cake.fill"
+        case .mexican:
+            return "taco.fill"
+        case .korean:
+            return "bowl.fill"
+        case .breakfastBakes:
+            return "croissant.fill"
+        case .cookies:
+            return "cookie.fill"
+        case .highProtein:
+            return "dumbbell.fill"
         }
     }
 
     var exploreLaunchContext: ExploreLaunchContext {
-        ExploreLaunchContext(rawValue: rawValue) ?? .featured
+        switch self {
+        case .featured:
+            return .featured
+        case .beef, .tuna, .highProtein:
+            return .highProtein
+        case .vegetarian, .plantBasedBowls:
+            return .highProtein
+        case .chickenSalad:
+            return .highProtein
+        case .piesAndTarts, .cookies, .breakfastBakes:
+            return .breakfast
+        case .mexican, .korean:
+            return .worldCuisine
+        }
     }
 
     var selectorOption: TopSegmentOption {
@@ -88,27 +125,31 @@ enum HomeShowcaseSection: String, CaseIterable, Identifiable {
     }
 
     static let carouselSections: [HomeShowcaseSection] = [
-        .community,
-        .topPicks,
-        .aiRecommended,
-        .worldCuisine,
-        .highProtein,
-        .snacks,
-        .breakfast,
-        .eggBased,
-        .salmon
+        .beef,
+        .vegetarian,
+        .chickenSalad,
+        .tuna,
+        .plantBasedBowls,
+        .piesAndTarts,
+        .mexican,
+        .korean,
+        .breakfastBakes,
+        .cookies,
+        .highProtein
     ]
 
     static let selectorSections: [HomeShowcaseSection] = [
         .featured,
-        .community,
-        .topPicks,
-        .aiRecommended,
-        .worldCuisine,
-        .highProtein,
-        .snacks,
-        .breakfast,
-        .eggBased,
-        .salmon
+        .beef,
+        .vegetarian,
+        .chickenSalad,
+        .tuna,
+        .plantBasedBowls,
+        .piesAndTarts,
+        .mexican,
+        .korean,
+        .breakfastBakes,
+        .cookies,
+        .highProtein
     ]
 }

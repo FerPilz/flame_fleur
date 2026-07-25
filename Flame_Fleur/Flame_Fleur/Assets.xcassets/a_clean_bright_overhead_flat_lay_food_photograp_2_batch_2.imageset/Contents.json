@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "a_clean_bright_overhead_flat_lay_food_photograp_2_batch_2.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

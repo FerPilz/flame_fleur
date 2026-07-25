@@ -3,20 +3,17 @@ import SwiftUI
 struct RecipeListRow: View {
     let recipe: Recipe
     let isFavorite: Bool
-    let communityLikesText: String?
     let onFavoriteTap: () -> Void
     let onTap: () -> Void
 
     init(
         recipe: Recipe,
         isFavorite: Bool,
-        communityLikesText: String? = nil,
         onFavoriteTap: @escaping () -> Void,
         onTap: @escaping () -> Void
     ) {
         self.recipe = recipe
         self.isFavorite = isFavorite
-        self.communityLikesText = communityLikesText
         self.onFavoriteTap = onFavoriteTap
         self.onTap = onTap
     }
@@ -68,14 +65,6 @@ struct RecipeListRow: View {
                         foregroundColor: isFavorite ? AppColors.error : AppColors.burntOrange,
                         action: onFavoriteTap
                     )
-
-                    if let communityLikesText {
-                        Text(communityLikesText)
-                            .font(AppTypography.metadata)
-                            .foregroundStyle(AppColors.secondaryText)
-                            .lineLimit(1)
-                            .allowsHitTesting(false)
-                    }
                 }
                 .frame(width: 36)
             }

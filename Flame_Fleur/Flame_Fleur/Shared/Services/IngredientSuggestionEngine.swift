@@ -3,20 +3,25 @@ import Foundation
 enum IngredientSuggestionEngine {
     static func suggestions(
         for query: String,
-        limit: Int = 6,
+        limit: Int = 20,
         catalog: [ShoppingIngredientCatalogItem] = SampleShoppingIngredientCatalog.all
     ) -> [ShoppingIngredientCatalogItem] {
         let normalizedQuery = normalize(query)
         guard !normalizedQuery.isEmpty else { return [] }
 
         let filtered = catalog.filter { item in
-            let normalizedName = normalize(item.displayName)
-            let catalogName = normalize(item.normalizedName)
-            return normalizedName.contains(normalizedQuery) || catalogName.contains(normalizedQuery)
+            item.normalizedName.contains(normalizedQuery)
         }
 
         let sorted = filtered.sorted { lhs, rhs in
-            score(lhs, query: normalizedQuery) > score(rhs, query: normalizedQuery)
+            let lhsScore = score(lhs, query: normalizedQuery)
+            let rhsScore = score(rhs, query: normalizedQuery)
+
+            if lhsScore != rhsScore {
+                return lhsScore > rhsScore
+            }
+
+            return lhs.displayName.localizedCaseInsensitiveCompare(rhs.displayName) == .orderedAscending
         }
 
         var seen = Set<String>()
@@ -46,18 +51,15 @@ enum IngredientSuggestionEngine {
     }
 
     private static func score(_ item: ShoppingIngredientCatalogItem, query: String) -> Int {
-        let normalizedDisplay = normalize(item.displayName)
-        let normalizedCatalog = normalize(item.normalizedName)
-
-        if normalizedDisplay == query || normalizedCatalog == query {
+        if item.normalizedName == query {
             return 4
         }
 
-        if normalizedDisplay.hasPrefix(query) || normalizedCatalog.hasPrefix(query) {
+        if item.normalizedName.hasPrefix(query) {
             return 3
         }
 
-        if normalizedDisplay.contains(query) || normalizedCatalog.contains(query) {
+        if item.normalizedName.contains(query) {
             return 2
         }
 

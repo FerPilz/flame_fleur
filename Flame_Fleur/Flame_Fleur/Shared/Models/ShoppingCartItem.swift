@@ -50,6 +50,10 @@ struct ShoppingCartItem: Identifiable, Hashable, Codable {
     }
 
     var quantityText: String {
+        quantityUnitText
+    }
+
+    var quantityUnitText: String {
         if let displayQuantity = displayQuantity?.trimmingCharacters(in: .whitespacesAndNewlines),
            !displayQuantity.isEmpty {
             return displayQuantity

@@ -4,6 +4,8 @@ struct HeroRecipeCard: View {
     let recipe: Recipe
     let actionTitle: String
     let isFavorite: Bool
+    let imageWidthScale: CGFloat
+    let cardHeight: CGFloat
     let action: () -> Void
     let favoriteAction: () -> Void
 
@@ -11,12 +13,16 @@ struct HeroRecipeCard: View {
         recipe: Recipe,
         actionTitle: String = "View Recipe",
         isFavorite: Bool = false,
+        imageWidthScale: CGFloat = 1,
+        cardHeight: CGFloat = 155,
         action: @escaping () -> Void = {},
         favoriteAction: @escaping () -> Void = {}
     ) {
         self.recipe = recipe
         self.actionTitle = actionTitle
         self.isFavorite = isFavorite
+        self.imageWidthScale = imageWidthScale
+        self.cardHeight = cardHeight
         self.action = action
         self.favoriteAction = favoriteAction
     }
@@ -30,8 +36,8 @@ struct HeroRecipeCard: View {
             showsShadow: false
         ) {
             GeometryReader { proxy in
-                let imageWidth = min(190, max(138, proxy.size.width * 0.49))
-                let imageHeight = max(132, proxy.size.height - AppSpacing.xs)
+                let imageWidth = min(220, max(148, proxy.size.width * (0.49 * imageWidthScale)))
+                let imageHeight = max(146, proxy.size.height - AppSpacing.xs)
                 let textWidth = max(116, proxy.size.width - imageWidth - AppSpacing.sm)
 
                 ZStack(alignment: .topTrailing) {
@@ -77,7 +83,7 @@ struct HeroRecipeCard: View {
                     .padding(AppSpacing.xs)
                 }
             }
-            .frame(height: 155)
+            .frame(height: cardHeight)
         }
     }
 

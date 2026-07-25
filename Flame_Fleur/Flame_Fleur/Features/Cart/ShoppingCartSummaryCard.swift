@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct ShoppingCartSummaryCard: View {
-    let totalEstimatedCost: Double
     let totalItemCount: Int
     let categoryCount: Int
+    let selectedItemCount: Int
 
     var body: some View {
         SurfaceCard(
@@ -13,17 +13,9 @@ struct ShoppingCartSummaryCard: View {
         ) {
             HStack(spacing: AppSpacing.xs) {
                 metric(
-                    title: "Est. total cost",
-                    value: ShoppingCartStore.currencyString(totalEstimatedCost),
-                    footnote: "USD"
-                )
-
-                verticalDivider
-
-                metric(
                     title: "Total items",
                     value: "\(totalItemCount)",
-                    footnote: "items"
+                    footnote: totalItemCount == 1 ? "item" : "items"
                 )
 
                 verticalDivider
@@ -31,7 +23,15 @@ struct ShoppingCartSummaryCard: View {
                 metric(
                     title: "Categories",
                     value: "\(categoryCount)",
-                    footnote: "groups"
+                    footnote: categoryCount == 1 ? "group" : "groups"
+                )
+
+                verticalDivider
+
+                metric(
+                    title: "Checked",
+                    value: "\(selectedItemCount)",
+                    footnote: selectedItemCount == 1 ? "item" : "items"
                 )
             }
         }
@@ -46,7 +46,7 @@ struct ShoppingCartSummaryCard: View {
                 .minimumScaleFactor(0.82)
 
             Text(value)
-                .font(title == "Est. total cost" ? AppTypography.sectionTitle : AppTypography.bodyEmphasis)
+                .font(AppTypography.bodyEmphasis)
                 .foregroundStyle(AppColors.olive)
                 .lineLimit(1)
                 .minimumScaleFactor(0.78)
@@ -67,7 +67,7 @@ struct ShoppingCartSummaryCard: View {
 }
 
 #Preview {
-    ShoppingCartSummaryCard(totalEstimatedCost: 68.47, totalItemCount: 24, categoryCount: 6)
+    ShoppingCartSummaryCard(totalItemCount: 24, categoryCount: 6, selectedItemCount: 3)
         .padding()
         .background(AppColors.appBackground)
 }

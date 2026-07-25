@@ -1,23 +1,40 @@
 import SwiftUI
 
+#if canImport(UIKit)
+import UIKit
+#endif
+
 struct ShoppingCartView: View {
     let onClose: (() -> Void)?
+    @Binding private var pendingSharedCartImport: SharedCartPayload?
+    @Binding private var sharedCartImportError: String?
 
     @EnvironmentObject private var cartStore: ShoppingCartStore
     @Environment(\.dismiss) private var dismiss
 
     @State private var isAddItemSheetPresented = false
     @State private var isSaveCartSheetPresented = false
+    @State private var isShareSheetPresented = false
     @State private var isSavedCartsSheetPresented = false
     @State private var isDeleteSelectedAlertPresented = false
+    @State private var isClearCartAlertPresented = false
+    @State private var pendingSavedCartToDelete: SavedShoppingCart?
+    @State private var cartShareError: String?
     @State private var collapsedCategories: Set<ShoppingCartCategory> = []
     @State private var didSaveCart = false
     @State private var draftCartName = "Weekly groceries"
+    @State private var shareSheetItems: [Any] = []
 
     private let cartHorizontalPadding = AppSpacing.md
 
-    init(onClose: (() -> Void)? = nil) {
+    init(
+        onClose: (() -> Void)? = nil,
+        pendingSharedCartImport: Binding<SharedCartPayload?> = .constant(nil),
+        sharedCartImportError: Binding<String?> = .constant(nil)
+    ) {
         self.onClose = onClose
+        self._pendingSharedCartImport = pendingSharedCartImport
+        self._sharedCartImportError = sharedCartImportError
     }
 
     var body: some View {
@@ -67,6 +84,22 @@ struct ShoppingCartView: View {
                 .presentationDragIndicator(.visible)
                 .presentationCornerRadius(AppRadius.hero)
         }
+        .alert("Delete saved cart?", isPresented: Binding(
+            get: { pendingSavedCartToDelete != nil },
+            set: { if !$0 { pendingSavedCartToDelete = nil } }
+        )) {
+            Button("Cancel", role: .cancel) {
+                pendingSavedCartToDelete = nil
+            }
+            Button("Delete", role: .destructive) {
+                if let savedCart = pendingSavedCartToDelete {
+                    cartStore.deleteSavedCart(id: savedCart.id)
+                }
+                pendingSavedCartToDelete = nil
+            }
+        } message: {
+            Text("This permanently removes the saved cart.")
+        }
         .alert("Remove selected items?", isPresented: $isDeleteSelectedAlertPresented) {
             Button("Cancel", role: .cancel) {}
             Button("Remove", role: .destructive) {
@@ -75,30 +108,70 @@ struct ShoppingCartView: View {
         } message: {
             Text("This removes all selected ingredients from the cart.")
         }
+        .alert("Clear Cart?", isPresented: $isClearCartAlertPresented) {
+            Button("Cancel", role: .cancel) {}
+            Button("Clear Cart", role: .destructive) {
+                cartStore.clearCart()
+            }
+        } message: {
+            Text("This removes every item from the current cart.")
+        }
+        .alert(
+            "Couldn’t Share Cart",
+            isPresented: Binding(
+                get: { cartShareError != nil },
+                set: { if !$0 { cartShareError = nil } }
+            )
+        ) {
+            Button("OK", role: .cancel) {
+                cartShareError = nil
+            }
+        } message: {
+            Text(cartShareError ?? "The cart share file could not be created.")
+        }
+        .confirmationDialog(
+            "Import shared cart?",
+            isPresented: Binding(
+                get: { pendingSharedCartImport != nil },
+                set: { if !$0 { pendingSharedCartImport = nil } }
+            ),
+            titleVisibility: .visible
+        ) {
+            Button("Import") {
+                importSharedCart()
+            }
+
+            Button("Cancel", role: .cancel) {
+                pendingSharedCartImport = nil
+            }
+        } message: {
+            Text("This will replace your current cart.")
+        }
+        .alert(
+            "Couldn’t Import Cart",
+            isPresented: Binding(
+                get: { sharedCartImportError != nil },
+                set: { if !$0 { sharedCartImportError = nil } }
+            )
+        ) {
+            Button("OK", role: .cancel) {
+                sharedCartImportError = nil
+            }
+        } message: {
+            Text(sharedCartImportError ?? "The selected file could not be imported.")
+        }
+        .sheet(isPresented: $isShareSheetPresented, onDismiss: cleanupShareSheet) {
+            if !shareSheetItems.isEmpty {
+                ActivityView(activityItems: shareSheetItems)
+            }
+        }
         .toolbar(.hidden, for: .navigationBar)
     }
 
     private var fixedHeader: some View {
         VStack(alignment: .leading, spacing: AppSpacing.sm) {
             ZStack {
-                VStack(alignment: .center, spacing: 2) {
-                    Text("Flame & Fleur")
-                        .font(AppTypography.brandTitle)
-                        .foregroundStyle(AppColors.olive)
-                        .lineLimit(1)
-                        .allowsTightening(true)
-                        .padding(.horizontal, AppTopActionMetrics.centeredTitleInset)
-                        .frame(maxWidth: .infinity, alignment: .center)
-
-                    Text("Shopping Cart")
-                        .font(.system(size: 21, weight: .semibold, design: .default))
-                        .foregroundStyle(AppColors.primaryText)
-                        .lineLimit(1)
-                        .allowsTightening(true)
-                        .accessibilityAddTraits(.isHeader)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
-                .frame(maxWidth: .infinity)
+                AppBrandTitle()
 
                 HStack(alignment: .center, spacing: AppSpacing.sm) {
                     backButton
@@ -106,21 +179,21 @@ struct ShoppingCartView: View {
 
                     Spacer(minLength: 0)
 
-                    HStack(spacing: AppSpacing.xs) {
+                    HStack(spacing: 6) {
+                        clearCartButton
                         savedCartsButton
-                        shareButton
                     }
-                    .frame(width: AppTopActionMetrics.actionGroupWidth, alignment: .trailing)
+                    .frame(width: ShoppingCartLayoutMetrics.trailingActionWidth, alignment: .trailing)
                 }
             }
-            .frame(minHeight: 44)
+            .frame(height: 44)
 
             VStack(spacing: AppSpacing.sm) {
                 addItemRow
                 ShoppingCartSummaryCard(
-                    totalEstimatedCost: cartStore.totalEstimatedCost,
                     totalItemCount: cartStore.totalItemCount,
-                    categoryCount: cartStore.categoryCount
+                    categoryCount: cartStore.categoryCount,
+                    selectedItemCount: cartStore.selectedItemCount
                 )
 
                 if cartStore.hasSelectedItems {
@@ -146,7 +219,7 @@ struct ShoppingCartView: View {
         IconCircleButton(
             systemName: "tray.full",
             accessibilityLabel: "Saved carts",
-            size: AppTopActionMetrics.compactButtonSize,
+            size: ShoppingCartLayoutMetrics.actionButtonSize,
             backgroundColor: AppColors.elevatedCardBackground,
             foregroundColor: AppColors.darkOlive
         ) {
@@ -154,63 +227,56 @@ struct ShoppingCartView: View {
         }
     }
 
-    private var shareButton: some View {
-        ShareLink(item: cartStore.cartSummaryText) {
-            ZStack {
-                Circle()
-                    .fill(AppColors.elevatedCardBackground)
-                    .overlay(
-                        Circle()
-                            .stroke(AppColors.warmBorder.opacity(0.78), lineWidth: 1)
-                    )
-                    .frame(width: AppTopActionMetrics.compactButtonSize, height: AppTopActionMetrics.compactButtonSize)
-
-                Image(systemName: "square.and.arrow.up")
-                    .font(.system(size: AppTopActionMetrics.compactButtonSize * 0.42, weight: .medium))
-                    .foregroundStyle(AppColors.darkOlive)
-                    .frame(width: AppTopActionMetrics.compactButtonSize, height: AppTopActionMetrics.compactButtonSize)
+    private var clearCartButton: some View {
+        IconCircleButton(
+            systemName: "trash",
+            accessibilityLabel: "Clear cart",
+            size: ShoppingCartLayoutMetrics.actionButtonSize,
+            backgroundColor: AppColors.elevatedCardBackground,
+            foregroundColor: AppColors.darkOlive
+        ) {
+            if !cartStore.items.isEmpty {
+                isClearCartAlertPresented = true
             }
         }
-        .buttonStyle(.plain)
-        .accessibilityLabel(Text("Share cart"))
     }
 
     private var addItemRow: some View {
         Button {
             isAddItemSheetPresented = true
         } label: {
-            HStack(spacing: AppSpacing.sm) {
-                ZStack {
-                    Circle()
-                        .fill(AppColors.olive)
-                        .frame(width: 26, height: 26)
+                HStack(spacing: AppSpacing.sm) {
+                    ZStack {
+                        Circle()
+                            .strokeBorder(AppColors.deepBasil, lineWidth: 1.4)
+                            .frame(width: 26, height: 26)
 
-                    Image(systemName: "plus")
+                        Image(systemName: "plus")
                         .font(AppTypography.caption)
-                        .foregroundStyle(AppColors.elevatedCardBackground)
+                        .foregroundStyle(AppColors.deepBasil)
+                    }
+
+                    Text("Add Item")
+                        .font(AppTypography.bodyEmphasis)
+                        .foregroundStyle(AppColors.deepBasil)
+
+                    Spacer()
+
+                    Image(systemName: "basket")
+                        .font(AppTypography.caption)
+                        .foregroundStyle(AppColors.deepBasil)
                 }
-
-                Text("Add Item")
-                    .font(AppTypography.bodyEmphasis)
-                    .foregroundStyle(AppColors.olive)
-
-                Spacer()
-
-                Image(systemName: "basket")
-                    .font(AppTypography.caption)
-                    .foregroundStyle(AppColors.olive)
+                .padding(.horizontal, AppSpacing.sm)
+                .frame(height: 42)
+                .background(
+                    RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
+                        .fill(AppColors.deepBasil.opacity(0.10))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
+                        .stroke(AppColors.deepBasil, lineWidth: 1)
+                )
             }
-            .padding(.horizontal, AppSpacing.sm)
-            .frame(height: 42)
-            .background(
-                RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
-                    .fill(AppColors.softOlive)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
-                    .stroke(AppColors.warmBorder, lineWidth: 1)
-            )
-        }
         .buttonStyle(.plain)
     }
 
@@ -287,11 +353,11 @@ struct ShoppingCartView: View {
     private var bottomActionBar: some View {
         HStack(spacing: AppSpacing.md) {
             VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-                Text("Est. total")
+                Text("Cart")
                     .font(AppTypography.metadata)
                     .foregroundStyle(AppColors.secondaryText)
 
-                Text(ShoppingCartStore.currencyString(cartStore.totalEstimatedCost))
+                Text("\(cartStore.totalItemCount) items")
                     .font(AppTypography.sectionTitle)
                     .foregroundStyle(AppColors.olive)
                     .lineLimit(1)
@@ -299,15 +365,41 @@ struct ShoppingCartView: View {
 
             Spacer(minLength: AppSpacing.xs)
 
-            PrimaryButton(
-                didSaveCart ? "Saved" : "Save Cart",
-                systemImage: didSaveCart ? "checkmark" : "chevron.right",
-                style: .olive,
-                isFullWidth: false,
-                height: 40,
-                horizontalPadding: AppSpacing.md,
-                action: { isSaveCartSheetPresented = true }
-            )
+            HStack(spacing: AppSpacing.xs) {
+                PrimaryButton(
+                    "Share Cart",
+                    systemImage: "square.and.arrow.up",
+                    style: .olive,
+                    backgroundColor: AppColors.elevatedCardBackground,
+                    foregroundColor: AppColors.deepBasil,
+                    borderColor: AppColors.deepBasil,
+                    isFullWidth: true,
+                    height: 42,
+                    font: AppTypography.callout,
+                    horizontalPadding: AppSpacing.sm,
+                    textLineLimit: 1,
+                    minimumScaleFactor: 0.75,
+                    allowsTightening: true,
+                    action: presentShareCart
+                )
+                .frame(maxWidth: .infinity)
+
+                PrimaryButton(
+                    didSaveCart ? "Saved" : "Save Cart",
+                    systemImage: didSaveCart ? "checkmark" : "chevron.right",
+                    style: .olive,
+                    backgroundColor: AppColors.deepBasil,
+                    isFullWidth: true,
+                    height: 42,
+                    font: AppTypography.callout,
+                    horizontalPadding: AppSpacing.sm,
+                    textLineLimit: 1,
+                    minimumScaleFactor: 0.75,
+                    allowsTightening: true,
+                    action: { isSaveCartSheetPresented = true }
+                )
+                .frame(maxWidth: .infinity)
+            }
         }
         .padding(AppSpacing.xs)
         .background(
@@ -329,6 +421,63 @@ struct ShoppingCartView: View {
         } else {
             dismiss()
         }
+    }
+
+    private func presentShareCart() {
+        do {
+            let shareURL = try CartSharingService.exportTextFileURL(for: cartStore.cartSummaryText)
+            let nutrition = cartStore.recipeNutritionSummary
+            var activityItems: [Any] = [shareURL]
+
+            #if canImport(UIKit)
+            if #available(iOS 16.0, *) {
+                guard let screenshot = cartShareSnapshotImage() else {
+                    throw CartShareError.snapshotUnavailable
+                }
+                activityItems.append(screenshot)
+            }
+            #endif
+
+            UsageTrackingStore.shared.record(
+                type: .cartShared,
+                recipeTitle: "Current Cart",
+                ingredientNames: cartStore.items.map(\.normalizedName),
+                calories: nutrition.calories,
+                proteinGrams: nutrition.proteinGrams,
+                carbGrams: nutrition.carbohydrateGrams,
+                fatGrams: nutrition.fatGrams
+            )
+            shareSheetItems = activityItems
+            isShareSheetPresented = true
+        } catch {
+            cartShareError = "Couldn’t prepare the cart text file and screenshot."
+        }
+    }
+
+    #if canImport(UIKit)
+    @available(iOS 16.0, *)
+    private func cartShareSnapshotImage() -> UIImage? {
+        let renderer = ImageRenderer(
+            content: ShoppingCartShareSnapshotView(items: cartStore.items)
+                .frame(width: 390)
+        )
+        renderer.scale = 3
+        return renderer.uiImage
+    }
+    #endif
+
+    private func importSharedCart() {
+        guard let payload = pendingSharedCartImport else {
+            return
+        }
+
+        let summary = cartStore.replaceCart(with: payload)
+        pendingSharedCartImport = nil
+        _ = summary
+    }
+
+    private func cleanupShareSheet() {
+        shareSheetItems = []
     }
 
     private var saveCartSheet: some View {
@@ -407,13 +556,25 @@ struct ShoppingCartView: View {
                     ScrollView(showsIndicators: false) {
                         VStack(alignment: .leading, spacing: AppSpacing.sm) {
                             ForEach(cartStore.savedCarts) { savedCart in
-                                Button {
-                                    cartStore.restoreCart(savedCart)
-                                    isSavedCartsSheetPresented = false
-                                } label: {
-                                    savedCartRow(savedCart)
+                                HStack(spacing: AppSpacing.xxs) {
+                                    Button {
+                                        cartStore.restoreCart(savedCart)
+                                        isSavedCartsSheetPresented = false
+                                    } label: {
+                                        savedCartRow(savedCart)
+                                    }
+                                    .buttonStyle(.plain)
+
+                                    IconCircleButton(
+                                        systemName: "trash",
+                                        accessibilityLabel: "Delete saved cart",
+                                        size: 32,
+                                        backgroundColor: AppColors.elevatedCardBackground,
+                                        foregroundColor: AppColors.burntOrange
+                                    ) {
+                                        pendingSavedCartToDelete = savedCart
+                                    }
                                 }
-                                .buttonStyle(.plain)
                             }
                         }
                         .padding(.horizontal, AppSpacing.screenHorizontal)
@@ -476,11 +637,11 @@ struct ShoppingCartView: View {
                 Spacer(minLength: AppSpacing.sm)
 
                 VStack(alignment: .trailing, spacing: AppSpacing.xxs) {
-                    Text(ShoppingCartStore.currencyString(savedCart.estimatedTotal))
+                    Text("\(savedCart.itemCount) items")
                         .font(AppTypography.bodyEmphasis)
                         .foregroundStyle(AppColors.olive)
 
-                    Text("\(savedCart.itemCount) items")
+                    Text("\(savedCartCategoryCount(savedCart)) groups")
                         .font(AppTypography.metadata)
                         .foregroundStyle(AppColors.secondaryText)
                 }
@@ -497,6 +658,19 @@ struct ShoppingCartView: View {
     }
 
     private func placeholderUpgrade() {}
+
+    private func savedCartCategoryCount(_ savedCart: SavedShoppingCart) -> Int {
+        Set(savedCart.items.map(\.category)).count
+    }
+}
+
+private enum CartShareError: Error {
+    case snapshotUnavailable
+}
+
+private enum ShoppingCartLayoutMetrics {
+    static let actionButtonSize: CGFloat = 30
+    static let trailingActionWidth: CGFloat = 138
 }
 
 #Preview {

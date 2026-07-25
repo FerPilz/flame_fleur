@@ -5,10 +5,33 @@ struct RecipeHeroHeader: View {
     let isFavorite: Bool
     let shareText: String
     let showsBackButton: Bool
+    let showsBrandTitle: Bool
     let onCartTap: (() -> Void)?
     let cartBadgeValue: Int?
     let onBack: () -> Void
     let onFavoriteTap: () -> Void
+
+    init(
+        recipe: Recipe,
+        isFavorite: Bool,
+        shareText: String,
+        showsBackButton: Bool,
+        showsBrandTitle: Bool = true,
+        onCartTap: (() -> Void)?,
+        cartBadgeValue: Int?,
+        onBack: @escaping () -> Void,
+        onFavoriteTap: @escaping () -> Void
+    ) {
+        self.recipe = recipe
+        self.isFavorite = isFavorite
+        self.shareText = shareText
+        self.showsBackButton = showsBackButton
+        self.showsBrandTitle = showsBrandTitle
+        self.onCartTap = onCartTap
+        self.cartBadgeValue = cartBadgeValue
+        self.onBack = onBack
+        self.onFavoriteTap = onFavoriteTap
+    }
 
     var body: some View {
         GeometryReader { proxy in
@@ -25,42 +48,52 @@ struct RecipeHeroHeader: View {
                     endPoint: .bottom
                 )
 
-                HStack(spacing: AppSpacing.sm) {
-                    if showsBackButton {
-                        Button(action: onBack) {
-                            RecipeHeroActionIcon(systemName: "chevron.left")
+                VStack(spacing: showsBrandTitle ? AppSpacing.xs : 0) {
+                    if showsBrandTitle {
+                        AppBrandTitle()
+                            .frame(height: 44)
+                    }
+
+                    HStack(spacing: AppSpacing.sm) {
+                        if showsBackButton {
+                            Button(action: onBack) {
+                                RecipeHeroActionIcon(systemName: "chevron.left")
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel(Text("Back"))
+                        }
+
+                        Spacer()
+
+                        ShareLink(item: shareText) {
+                            RecipeHeroActionIcon(systemName: "square.and.arrow.up")
                         }
                         .buttonStyle(.plain)
-                        .accessibilityLabel(Text("Back"))
-                    }
+                        .accessibilityLabel(Text("Share recipe"))
 
-                    Spacer()
-
-                    ShareLink(item: shareText) {
-                        RecipeHeroActionIcon(systemName: "square.and.arrow.up")
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel(Text("Share recipe"))
-
-                    Button(action: onFavoriteTap) {
-                        RecipeHeroActionIcon(
-                            systemName: isFavorite ? "heart.fill" : "heart",
-                            foregroundColor: isFavorite ? AppColors.error : AppColors.olive
-                        )
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel(Text(isFavorite ? "Unsave recipe" : "Save recipe"))
-
-                    if let onCartTap {
-                        Button(action: onCartTap) {
-                            RecipeHeroActionIcon(systemName: cartBadgeValue == nil ? "cart" : "cart.fill")
+                        Button(action: onFavoriteTap) {
+                            RecipeHeroActionIcon(
+                                systemName: isFavorite ? "heart.fill" : "heart",
+                                foregroundColor: isFavorite ? AppColors.error : AppColors.olive
+                            )
                         }
                         .buttonStyle(.plain)
-                        .accessibilityLabel(Text("Open shopping cart"))
+                        .accessibilityLabel(Text(isFavorite ? "Unsave recipe" : "Save recipe"))
+
+                        if let onCartTap {
+                            Button(action: onCartTap) {
+                                RecipeHeroActionIcon(
+                                    systemName: cartBadgeValue == nil ? "cart" : "cart.fill",
+                                    badgeValue: cartBadgeValue
+                                )
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel(Text("Open shopping cart"))
+                        }
                     }
                 }
                 .padding(.horizontal, AppSpacing.lg)
-                .padding(.top, max(proxy.safeAreaInsets.top + AppSpacing.sm, AppTopActionMetrics.minimumTopOffset))
+                .padding(.top, max(proxy.safeAreaInsets.top + AppSpacing.xxs, AppTopActionMetrics.minimumTopOffset))
             }
         }
     }
@@ -78,13 +111,14 @@ struct RecipeHeroHeader: View {
             )
 
             FoodImagePlaceholder(imageName: recipe.imageName, style: .hero)
-                .frame(width: proxy.size.width * 1.12, height: proxy.size.height * 1.02)
+                .frame(width: proxy.size.width + 8, height: proxy.size.height + 8)
                 .blur(radius: 18)
                 .opacity(0.42)
-                .scaleEffect(1.05)
+                .offset(x: -4, y: -4)
 
             FoodImagePlaceholder(imageName: recipe.imageName, style: .hero)
-                .frame(width: proxy.size.width, height: proxy.size.height)
+                .frame(width: proxy.size.width + 8, height: proxy.size.height + 8)
+                .offset(x: -4, y: -4)
                 .clipShape(RoundedRectangle(cornerRadius: AppRadius.hero, style: .continuous))
                 .overlay(
                     RoundedRectangle(cornerRadius: AppRadius.hero, style: .continuous)
@@ -109,29 +143,70 @@ struct RecipeHeroHeader: View {
 private struct RecipeHeroActionIcon: View {
     let systemName: String
     let foregroundColor: Color
+    let badgeValue: Int?
 
     init(
         systemName: String,
-        foregroundColor: Color = AppColors.olive
+        foregroundColor: Color = AppColors.olive,
+        badgeValue: Int? = nil
     ) {
         self.systemName = systemName
         self.foregroundColor = foregroundColor
+        self.badgeValue = badgeValue
     }
 
     var body: some View {
-        Circle()
-            .fill(AppColors.elevatedCardBackground.opacity(0.94))
-            .overlay(
-                Circle()
-                    .stroke(AppColors.warmBorder.opacity(0.76), lineWidth: 1)
+        ZStack(alignment: .topTrailing) {
+            Circle()
+                .fill(AppColors.elevatedCardBackground.opacity(0.94))
+                .overlay(
+                    Circle()
+                        .stroke(AppColors.warmBorder.opacity(0.76), lineWidth: 1)
+                )
+                .frame(width: AppTopActionMetrics.buttonSize, height: AppTopActionMetrics.buttonSize)
+                .overlay(
+                    Image(systemName: systemName)
+                        .font(AppTypography.callout)
+                        .foregroundStyle(foregroundColor)
+                )
+                .shadow(color: AppShadow.cardColor, radius: AppShadow.cardRadius, x: 0, y: AppShadow.cardYOffset)
+
+            if let badgeValue, badgeValue > 0 {
+                badgeLabel(for: badgeValue)
+                    .offset(x: 4, y: -4)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func badgeLabel(for badgeValue: Int) -> some View {
+        let text = formattedBadgeValue(badgeValue)
+
+        Text(text)
+            .font(.system(size: 8.5, weight: .bold))
+            .foregroundStyle(AppColors.elevatedCardBackground)
+            .padding(.horizontal, text.count > 1 ? 5 : 3)
+            .frame(minWidth: badgeWidth(for: text), minHeight: 15)
+            .background(
+                Capsule(style: .continuous)
+                    .fill(AppColors.burntOrange)
             )
-            .frame(width: AppTopActionMetrics.buttonSize, height: AppTopActionMetrics.buttonSize)
-            .overlay(
-                Image(systemName: systemName)
-                    .font(AppTypography.callout)
-                    .foregroundStyle(foregroundColor)
-            )
-            .shadow(color: AppShadow.cardColor, radius: AppShadow.cardRadius, x: 0, y: AppShadow.cardYOffset)
+    }
+
+    private func formattedBadgeValue(_ badgeValue: Int) -> String {
+        guard badgeValue < 100 else { return "99+" }
+        return "\(badgeValue)"
+    }
+
+    private func badgeWidth(for text: String) -> CGFloat {
+        switch text.count {
+        case 1:
+            return 15
+        case 2:
+            return 23
+        default:
+            return 28
+        }
     }
 }
 
@@ -139,7 +214,7 @@ private struct RecipeHeroActionIcon: View {
     RecipeHeroHeader(
         recipe: RecipeRepository.shared.allRecipes[0],
         isFavorite: true,
-        shareText: "Check out this recipe in Flame & Fleur.",
+        shareText: "Check out this recipe in ALLSPICED.",
         showsBackButton: true,
         onCartTap: {},
         cartBadgeValue: 2,

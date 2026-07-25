@@ -2,7 +2,6 @@ import SwiftUI
 
 struct SettingsAccountSheet: View {
     let profile: UserProfile
-    let email: String
 
     @Environment(\.dismiss) private var dismiss
 
@@ -24,10 +23,6 @@ struct SettingsAccountSheet: View {
                             Text(profile.name)
                                 .font(AppTypography.sectionTitle)
                                 .foregroundStyle(AppColors.primaryText)
-
-                            Text(email)
-                                .font(AppTypography.callout)
-                                .foregroundStyle(AppColors.secondaryText)
 
                             Text(profile.location)
                                 .font(AppTypography.metadata)
@@ -87,7 +82,6 @@ struct SettingsAccountSheet: View {
 
 #Preview {
     SettingsAccountSheet(
-        profile: SampleUserProfile.profile,
-        email: "julia.martinez@example.com"
+        profile: SampleUserProfile.profile
     )
 }

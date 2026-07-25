@@ -4,19 +4,22 @@ struct CategoryCircleCard: View {
     let title: String
     let imageName: String?
     let diameter: CGFloat
+    let titleFont: Font
     let isSelected: Bool
     let action: () -> Void
 
     init(
         title: String,
         imageName: String?,
-        diameter: CGFloat = 95,
+        diameter: CGFloat = 102,
+        titleFont: Font = AppTypography.categoryCircleLabel,
         isSelected: Bool = false,
         action: @escaping () -> Void = {}
     ) {
         self.title = title
         self.imageName = imageName
         self.diameter = diameter
+        self.titleFont = titleFont
         self.isSelected = isSelected
         self.action = action
     }
@@ -25,14 +28,14 @@ struct CategoryCircleCard: View {
         Button(action: action) {
             VStack(spacing: AppSpacing.xxs) {
                 FoodImagePlaceholder(imageName: imageName, style: .circle)
-                    .frame(width: diameter, height: diameter)
+                    .frame(width: diameter * 0.86, height: diameter * 0.86)
                     .overlay(
                         Circle()
                             .stroke(isSelected ? AppColors.burntOrange : AppColors.warmBorder, lineWidth: isSelected ? 2 : 1)
                     )
 
                 Text(title)
-                    .font(AppTypography.categoryCircleLabel)
+                    .font(titleFont)
                     .foregroundStyle(isSelected ? AppColors.burntOrange : AppColors.primaryText)
                     .lineLimit(1)
                     .minimumScaleFactor(0.78)

@@ -10,8 +10,8 @@ struct SmartSuggestionsCarousel: View {
 
             HorizontalCarousel(
                 items: recipes,
-                visibleItemCount: 1.88,
-                cardHeight: 70,
+                visibleItemCount: 3,
+                cardHeight: 180,
                 edgePadding: 1
             ) { recipe in
                 suggestionCard(recipe)
@@ -22,38 +22,58 @@ struct SmartSuggestionsCarousel: View {
     private func suggestionCard(_ recipe: Recipe) -> some View {
         SurfaceCard(
             backgroundColor: AppColors.elevatedCardBackground,
-            cornerRadius: AppRadius.large,
-            contentPadding: AppSpacing.xs
+            cornerRadius: AppRadius.medium,
+            contentPadding: 0
         ) {
-            HStack(spacing: AppSpacing.xs) {
-                FoodImagePlaceholder(imageName: recipe.imageName, style: .thumbnail)
-                    .frame(width: 42, height: 42)
+            ZStack(alignment: .topTrailing) {
+                VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                    FoodImagePlaceholder(imageName: recipe.imageName, style: .card)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 114)
+                        .clipped()
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(recipe.title)
-                        .font(AppTypography.compactRecipeTitle)
-                        .foregroundStyle(AppColors.primaryText)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.78)
+                    VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                        Text(recipe.title)
+                            .font(AppTypography.compactRecipeTitle)
+                            .foregroundStyle(AppColors.primaryText)
+                            .lineLimit(2)
+                            .truncationMode(.tail)
 
-                    Text("\(recipe.caloriesText) · \(recipe.totalTimeText)")
-                        .font(AppTypography.metadata)
-                        .foregroundStyle(AppColors.secondaryText)
-                        .lineLimit(1)
+                        HStack(spacing: AppSpacing.xxs) {
+                            Image(systemName: "clock")
+                                .font(AppTypography.metadata)
+
+                            Text("\(recipe.cookingTimeText)  \(recipe.caloriesText)")
+                                .font(AppTypography.metadata)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                                .minimumScaleFactor(0.76)
+                        }
+                        .foregroundStyle(AppColors.tertiaryText)
+                    }
+                    .padding(.horizontal, AppSpacing.xs)
+                    .padding(.bottom, AppSpacing.xs)
                 }
-
-                Spacer(minLength: 0)
 
                 IconCircleButton(
                     systemName: "plus",
                     accessibilityLabel: "Add \(recipe.title) to planner",
-                    size: 26,
+                    size: 24,
                     backgroundColor: AppColors.softOlive,
                     foregroundColor: AppColors.olive,
                     action: { onAdd(recipe) }
                 )
+                .padding(5)
             }
         }
+        .background(
+            RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous)
+                .fill(AppColors.elevatedCardBackground)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous)
+                .stroke(AppColors.warmBorder, lineWidth: 1)
+        )
     }
 }
 

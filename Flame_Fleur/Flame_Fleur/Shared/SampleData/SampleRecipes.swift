@@ -1,7 +1,7 @@
 import Foundation
 
 enum SampleRecipes {
-    static let all: [Recipe] = uniqueRecipes(loadSeedRecipes() + CookflowSnacksBreakfastSeed.recipes)
+    static let all: [Recipe] = RecipeSeedLoader.loadRecipes(fallbackRecipes: previewFallbackRecipes)
     static let seedCoverage = RecipeSeedCoverage(
         recipes: all,
         expectedRecipeCountsBySubcategoryID: Dictionary(
@@ -19,30 +19,7 @@ enum SampleRecipes {
         )
     )
 
-    private static func loadSeedRecipes(bundle: Bundle = .main) -> [Recipe] {
-        let candidateURLs = [
-            bundle.url(forResource: "recipes.seed.enriched.full", withExtension: "json"),
-            bundle.url(forResource: "recipes.seed", withExtension: "json"),
-            bundle.url(forResource: "recipes.seed.enriched.full", withExtension: "json", subdirectory: "Resources"),
-            bundle.url(forResource: "recipes.seed", withExtension: "json", subdirectory: "Resources")
-        ]
-
-        guard let url = candidateURLs.compactMap({ $0 }).first,
-              let data = try? Data(contentsOf: url),
-              let recipes = try? JSONDecoder().decode([Recipe].self, from: data),
-              !recipes.isEmpty else {
-            return fallbackRecipes
-        }
-
-        return recipes
-    }
-
-    private static func uniqueRecipes(_ recipes: [Recipe]) -> [Recipe] {
-        var seenIDs = Set<String>()
-        return recipes.filter { seenIDs.insert($0.id).inserted }
-    }
-
-    private static let fallbackRecipes: [Recipe] = [
+    static let previewFallbackRecipes: [Recipe] = [
         Recipe(
             id: "recipe-fallback-featured-salmon",
             title: "Creamy Lemon Herb Salmon",
@@ -57,7 +34,7 @@ enum SampleRecipes {
             servings: 2,
             difficulty: .easy,
             tags: ["easy", "quick", "highProtein"],
-            imageName: "ff_home_recipe_meat_seafood_fish_honey_garlic_salmon",
+            imageName: "world_greek_creamy_lemon_herb_salmon",
             ingredients: ["salmon", "lemon", "olive oil", "fresh herbs", "garlic"],
             instructions: ["Season the salmon.", "Cook until tender.", "Finish with herbs and lemon."]
         ),
@@ -77,7 +54,7 @@ enum SampleRecipes {
             servings: 4,
             difficulty: .easy,
             tags: ["community", "easy", "vegetarian"],
-            imageName: "bowl",
+            imageName: "world_greek_hearty_lentil_soup",
             isCommunityRecipe: true,
             ingredients: ["lentils", "vegetable stock", "carrots", "garlic", "fresh herbs"],
             instructions: ["Soften the vegetables.", "Simmer with lentils and stock.", "Season and serve warm."]
@@ -96,7 +73,7 @@ enum SampleRecipes {
             servings: 3,
             difficulty: .moderate,
             tags: ["familyFriendly", "highProtein"],
-            imageName: "bowl",
+            imageName: "world_indian_butter_chicken",
             ingredients: ["chicken", "tomatoes", "Greek yogurt", "garlic", "ginger"],
             instructions: ["Brown the chicken.", "Simmer the sauce.", "Fold together and serve."]
         ),
@@ -114,7 +91,7 @@ enum SampleRecipes {
             servings: 2,
             difficulty: .easy,
             tags: ["easy", "quick"],
-            imageName: "ff_home_recipe_world_cuisine_italian_spicy_tomato_basil_pasta",
+            imageName: "world_italian_pantry_pasta",
             ingredients: ["pasta", "olive oil", "garlic", "parmesan", "fresh herbs"],
             instructions: ["Boil the pasta.", "Make a quick sauce.", "Toss together and serve."]
         )

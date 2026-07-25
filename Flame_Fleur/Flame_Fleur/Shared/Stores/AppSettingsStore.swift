@@ -60,4 +60,44 @@ final class AppSettingsStore: ObservableObject {
     func setLanguage(_ language: String) {
         settings.language = language
     }
+
+    func applyOnboardingSelections(cuisines: [String], goals: [String]) {
+        if let primaryCuisine = cuisines.first {
+            settings.cuisineStyle = primaryCuisine
+        }
+
+        let mappedDietaryPreferences = Self.mappedDietaryPreferences(from: cuisines + goals)
+        if !mappedDietaryPreferences.isEmpty {
+            settings.dietaryPreferences = mappedDietaryPreferences
+        }
+    }
+
+    private static func mappedDietaryPreferences(from values: [String]) -> [String] {
+        let mappings: [(needle: String, preference: String)] = [
+            ("vegetarian", "Vegetarian"),
+            ("vegan", "Vegan"),
+            ("low carb", "Low-carb"),
+            ("low-carb", "Low-carb"),
+            ("high protein", "High-protein"),
+            ("high-protein", "High-protein"),
+            ("family meals", "Family-friendly"),
+            ("quick meals", "Quick & Easy")
+        ]
+
+        var results: [String] = []
+        var seen = Set<String>()
+
+        for value in values {
+            let normalized = value.lowercased()
+
+            for mapping in mappings where normalized.contains(mapping.needle) {
+                guard seen.insert(mapping.preference).inserted else {
+                    continue
+                }
+                results.append(mapping.preference)
+            }
+        }
+
+        return results
+    }
 }

@@ -9,7 +9,7 @@ enum SampleShoppingCartItems {
             category: .produce,
             price: 3.49,
             storeName: ShoppingStoreOption.wholeFoods.displayName,
-            imageName: "bowl"
+            imageName: "world_italian_spicy_tomato_basil_pasta"
         ),
         ShoppingCartItem(
             name: "Baby Spinach",
@@ -18,7 +18,7 @@ enum SampleShoppingCartItems {
             category: .produce,
             price: 2.99,
             storeName: ShoppingStoreOption.traderJoes.displayName,
-            imageName: "salad"
+            imageName: "world_greek_hearty_lentil_soup"
         ),
         ShoppingCartItem(
             name: "Bell Peppers",
@@ -27,7 +27,7 @@ enum SampleShoppingCartItems {
             category: .produce,
             price: 1.49,
             storeName: ShoppingStoreOption.costco.displayName,
-            imageName: "bowl"
+            imageName: "world_mexican_charred_corn_tacos"
         ),
         ShoppingCartItem(
             name: "Greek Yogurt",
@@ -45,7 +45,7 @@ enum SampleShoppingCartItems {
             category: .dairy,
             price: 5.49,
             storeName: ShoppingStoreOption.traderJoes.displayName,
-            imageName: "pasta"
+            imageName: "world_italian_creamy_mushroom_risotto"
         ),
         ShoppingCartItem(
             name: "Unsalted Butter",
@@ -63,7 +63,7 @@ enum SampleShoppingCartItems {
             category: .protein,
             price: 9.98,
             storeName: ShoppingStoreOption.costco.displayName,
-            imageName: "salmon"
+            imageName: "world_japanese_chicken_yakitori_plate"
         ),
         ShoppingCartItem(
             name: "Salmon Fillet",
@@ -72,7 +72,7 @@ enum SampleShoppingCartItems {
             category: .protein,
             price: 12.99,
             storeName: ShoppingStoreOption.wholeFoods.displayName,
-            imageName: "salmon"
+            imageName: "world_japanese_miso_salmon_rice_bowl"
         ),
         ShoppingCartItem(
             name: "Sourdough",
@@ -81,19 +81,39 @@ enum SampleShoppingCartItems {
             category: .bakery,
             price: 5.99,
             storeName: ShoppingStoreOption.localMarket.displayName,
-            imageName: "dessert"
+            imageName: "world_greek_lemon_ricotta_toast"
+        ),
+        ShoppingCartItem(
+            name: "Sparkling Water",
+            quantity: 2,
+            unit: "packs",
+            category: .beverages,
+            price: 4.99,
+            storeName: ShoppingStoreOption.wholeFoods.displayName,
+            imageName: nil
+        ),
+        ShoppingCartItem(
+            name: "Paper Towels",
+            quantity: 1,
+            unit: "pack",
+            category: .household,
+            price: 8.49,
+            storeName: ShoppingStoreOption.costco.displayName,
+            imageName: nil
         )
     ]
 
     private static let baseSuggestedItems: [ShoppingCartItem] = [
-        ShoppingCartItem(name: "Avocado", unit: "each", category: .produce, price: 1.79, storeName: ShoppingStoreOption.wholeFoods.displayName, imageName: "salad"),
-        ShoppingCartItem(name: "Cherry Tomatoes", unit: "pint", category: .produce, price: 3.49, storeName: ShoppingStoreOption.traderJoes.displayName, imageName: "bowl"),
+        ShoppingCartItem(name: "Avocado", unit: "each", category: .produce, price: 1.79, storeName: ShoppingStoreOption.wholeFoods.displayName, imageName: "world_greek_lemon_ricotta_toast"),
+        ShoppingCartItem(name: "Cherry Tomatoes", unit: "pint", category: .produce, price: 3.49, storeName: ShoppingStoreOption.traderJoes.displayName, imageName: "world_italian_spicy_tomato_basil_pasta"),
         ShoppingCartItem(name: "Greek Yogurt", unit: "cup", category: .dairy, price: 2.39, storeName: ShoppingStoreOption.wholeFoods.displayName, imageName: "citrus"),
-        ShoppingCartItem(name: "Garlic", unit: "bulb", category: .pantry, price: 0.89, storeName: ShoppingStoreOption.costco.displayName, imageName: "pasta"),
-        ShoppingCartItem(name: "Chicken Breast", unit: "lb", category: .protein, price: 4.99, storeName: ShoppingStoreOption.costco.displayName, imageName: "salmon"),
-        ShoppingCartItem(name: "Baby Spinach", unit: "bag", category: .produce, price: 2.99, storeName: ShoppingStoreOption.traderJoes.displayName, imageName: "salad"),
-        ShoppingCartItem(name: "Salmon Fillet", unit: "lb", category: .protein, price: 12.99, storeName: ShoppingStoreOption.wholeFoods.displayName, imageName: "salmon"),
-        ShoppingCartItem(name: "Mozzarella", unit: "ball", category: .dairy, price: 4.49, storeName: ShoppingStoreOption.localMarket.displayName, imageName: "pasta")
+        ShoppingCartItem(name: "Garlic", unit: "bulb", category: .pantry, price: 0.89, storeName: ShoppingStoreOption.costco.displayName, imageName: "world_italian_creamy_mushroom_risotto"),
+        ShoppingCartItem(name: "Chicken Breast", unit: "lb", category: .protein, price: 4.99, storeName: ShoppingStoreOption.costco.displayName, imageName: "world_korean_sesame_beef_bulgogi"),
+        ShoppingCartItem(name: "Baby Spinach", unit: "bag", category: .produce, price: 2.99, storeName: ShoppingStoreOption.traderJoes.displayName, imageName: "world_greek_hearty_lentil_soup"),
+        ShoppingCartItem(name: "Salmon Fillet", unit: "lb", category: .protein, price: 12.99, storeName: ShoppingStoreOption.wholeFoods.displayName, imageName: "world_japanese_miso_salmon_rice_bowl"),
+        ShoppingCartItem(name: "Mozzarella", unit: "ball", category: .dairy, price: 4.49, storeName: ShoppingStoreOption.localMarket.displayName, imageName: "world_italian_creamy_mushroom_risotto"),
+        ShoppingCartItem(name: "Oat Milk", unit: "carton", category: .beverages, price: 3.79, storeName: ShoppingStoreOption.wholeFoods.displayName, imageName: nil),
+        ShoppingCartItem(name: "Dish Soap", unit: "bottle", category: .household, price: 2.99, storeName: ShoppingStoreOption.marketBasket.displayName, imageName: nil)
     ]
 
     static let suggestedItems: [ShoppingCartItem] = {
@@ -209,6 +229,14 @@ enum SampleShoppingCartItems {
             return .bakery
         }
 
+        if ["water", "sparkling", "soda", "juice", "tea", "coffee", "kombucha", "drink", "beverage", "smoothie"].contains(where: key.contains) {
+            return .beverages
+        }
+
+        if ["soap", "detergent", "paper towel", "paper towels", "napkin", "cleaner", "sponge", "foil", "wrap", "trash bag", "trash bags", "baggie", "storage"].contains(where: key.contains) {
+            return .household
+        }
+
         if ["avocado", "spinach", "kale", "greens", "tomato", "pepper", "onion", "garlic", "lemon", "lime", "herb", "herbs", "basil", "parsley", "cilantro", "mushroom", "cauliflower", "eggplant", "broccoli", "carrot", "potato", "sweet potato", "cucumber", "celery", "zucchini", "beans", "peas", "lettuce", "salad", "berry", "berries", "fruit", "apple", "orange"].contains(where: key.contains) {
             return .produce
         }
@@ -230,6 +258,10 @@ enum SampleShoppingCartItems {
             return "item"
         case .bakery:
             return "item"
+        case .beverages:
+            return "item"
+        case .household:
+            return "item"
         case .other:
             return "item"
         }
@@ -249,6 +281,10 @@ enum SampleShoppingCartItems {
             return 4.99
         case .bakery:
             return 4.49
+        case .beverages:
+            return 2.89
+        case .household:
+            return 3.49
         case .other:
             return 2.19
         }
@@ -266,6 +302,10 @@ enum SampleShoppingCartItems {
             return .traderJoes
         case .frozen:
             return .costco
+        case .beverages:
+            return .wholeFoods
+        case .household:
+            return .marketBasket
         case .produce, .other:
             return .wholeFoods
         }
@@ -274,36 +314,46 @@ enum SampleShoppingCartItems {
     private static func defaultImageName(for category: ShoppingCartCategory) -> String? {
         switch category {
         case .produce:
-            return "salad"
+            return nil
         case .dairy:
-            return "citrus"
+            return nil
         case .protein:
-            return "salmon"
+            return nil
         case .pantry:
-            return "pasta"
+            return nil
         case .frozen:
-            return "bowl"
+            return nil
         case .bakery:
-            return "dessert"
+            return nil
+        case .beverages:
+            return nil
+        case .household:
+            return nil
         case .other:
             return nil
         }
     }
 
     private static func shoppingCategory(from name: String) -> ShoppingCartCategory {
-        switch name.lowercased() {
+        let normalized = name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+
+        switch normalized {
         case "produce":
             return .produce
-        case "dairy":
+        case "dairy", "dairy & eggs", "dairy eggs", "dairy_eggs", "eggs":
             return .dairy
-        case "protein":
+        case "protein", "meat", "meat & seafood", "meat seafood", "meat_seafood", "seafood", "fish", "shellfish":
             return .protein
         case "pantry":
             return .pantry
-        case "frozen":
-            return .frozen
         case "bakery":
             return .bakery
+        case "frozen":
+            return .frozen
+        case "beverages", "beverage", "drink", "drinks":
+            return .beverages
+        case "household", "household goods", "home":
+            return .household
         default:
             return .other
         }

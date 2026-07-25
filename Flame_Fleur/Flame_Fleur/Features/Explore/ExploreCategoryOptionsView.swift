@@ -41,9 +41,6 @@ struct ExploreCategoryOptionsView: View {
                 trailingActions: [
                     AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: shoppingCartStore.totalItemCount) {
                         onCartSelected()
-                    },
-                    AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile") {
-                        onProfileSelected()
                     }
                 ]
             )
@@ -59,6 +56,8 @@ struct ExploreCategoryOptionsView: View {
                         CategoryCircleCard(
                             title: subcategory.title,
                             imageName: subcategory.imageName,
+                            diameter: ExploreCategoryOptionsLayoutMetrics.subcategoryCircleDiameter,
+                            titleFont: AppTypography.exploreSubcategoryCircleLabel,
                             isSelected: selectedSubcategoryID == subcategory.id
                         ) {
                             selectedSubcategoryID = selectedSubcategoryID == subcategory.id ? nil : subcategory.id
@@ -143,6 +142,10 @@ struct ExploreCategoryOptionsView: View {
             || subcategory.category?.title.localizedCaseInsensitiveContains(trimmedSearch) == true
         }
     }
+}
+
+private enum ExploreCategoryOptionsLayoutMetrics {
+    static let subcategoryCircleDiameter: CGFloat = 112.2
 }
 
 #Preview {

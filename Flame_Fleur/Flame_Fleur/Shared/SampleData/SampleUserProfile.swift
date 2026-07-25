@@ -4,7 +4,7 @@ enum SampleUserProfile {
     static let profile = UserProfile(
         name: "Julia Martinez",
         location: "Zurich, Switzerland",
-        tagline: "Passionate home cook",
+        tagline: "",
         profileImageName: "salad",
         cuisineStyle: "Mediterranean",
         favoriteMealsCount: 32,
@@ -16,13 +16,13 @@ enum SampleUserProfile {
             ProfilePreference(id: "family-friendly", title: "Family Friendly", systemImage: "person.3.fill")
         ],
         favoriteCuisines: [
-            FavoriteCuisine(id: "mediterranean", title: "Mediterranean", imageName: "salad", isSelected: true),
-            FavoriteCuisine(id: "asian", title: "Asian", imageName: "bowl"),
-            FavoriteCuisine(id: "mexican", title: "Mexican", imageName: "bowl"),
-            FavoriteCuisine(id: "italian", title: "Italian", imageName: "pasta", isSelected: true),
-            FavoriteCuisine(id: "japanese", title: "Japanese", imageName: "salmon"),
-            FavoriteCuisine(id: "indian", title: "Indian", imageName: "citrus"),
-            FavoriteCuisine(id: "french", title: "French", imageName: "dessert")
+            FavoriteCuisine(id: "mediterranean", title: "Mediterranean", imageName: "ff_subcat_world_cuisine_greek", isSelected: true),
+            FavoriteCuisine(id: "asian", title: "Asian", imageName: "ff_subcat_world_cuisine_chinese"),
+            FavoriteCuisine(id: "mexican", title: "Mexican", imageName: "world_mexican_charred_corn_tacos"),
+            FavoriteCuisine(id: "italian", title: "Italian", imageName: "ff_subcat_world_cuisine_italian", isSelected: true),
+            FavoriteCuisine(id: "japanese", title: "Japanese", imageName: "ff_subcat_world_cuisine_japanese"),
+            FavoriteCuisine(id: "indian", title: "Indian", imageName: "ff_subcat_world_cuisine_indian"),
+            FavoriteCuisine(id: "french", title: "French", imageName: "ff_subcat_world_cuisine_french")
         ],
         achievements: [
             ProfileAchievement(

@@ -1,3 +1,4 @@
+import Combine
 import SwiftUI
 
 struct HorizontalCarousel<Item: Identifiable, Content: View>: View {
@@ -7,6 +8,7 @@ struct HorizontalCarousel<Item: Identifiable, Content: View>: View {
     let cardWidth: CGFloat?
     let cardHeight: CGFloat
     let edgePadding: CGFloat
+    let autoScrollInterval: TimeInterval?
     let content: (Item) -> Content
 
     init(
@@ -16,6 +18,7 @@ struct HorizontalCarousel<Item: Identifiable, Content: View>: View {
         cardWidth: CGFloat? = nil,
         cardHeight: CGFloat = 150,
         edgePadding: CGFloat = 1,
+        autoScrollInterval: TimeInterval? = nil,
         @ViewBuilder content: @escaping (Item) -> Content
     ) {
         self.items = items
@@ -24,6 +27,7 @@ struct HorizontalCarousel<Item: Identifiable, Content: View>: View {
         self.cardWidth = cardWidth
         self.cardHeight = cardHeight
         self.edgePadding = edgePadding
+        self.autoScrollInterval = autoScrollInterval
         self.content = content
     }
 
@@ -31,19 +35,55 @@ struct HorizontalCarousel<Item: Identifiable, Content: View>: View {
         GeometryReader { proxy in
             let resolvedWidth = cardWidth ?? defaultCardWidth(containerWidth: proxy.size.width)
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(alignment: .top, spacing: itemSpacing) {
-                    ForEach(items) { item in
-                        content(item)
-                            .frame(width: resolvedWidth)
+            ScrollViewReader { scrollProxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(alignment: .top, spacing: itemSpacing) {
+                        ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                            content(item)
+                                .frame(width: resolvedWidth)
+                                .id(item.id)
+                                .onAppear {
+                                    if currentIndex == nil {
+                                        currentIndex = min(index, max(items.count - 1, 0))
+                                    }
+                                }
+                        }
                     }
+                    .padding(.vertical, 1)
+                    .padding(.horizontal, edgePadding)
                 }
-                .padding(.vertical, 1)
-                .padding(.horizontal, edgePadding)
+                .scrollClipDisabled()
+                .onReceive(autoScrollTimer) { _ in
+                    guard let autoScrollInterval, items.count > 1 else { return }
+                    guard autoScrollInterval > 0 else { return }
+                    advanceCarousel(using: scrollProxy)
+                }
             }
-            .scrollClipDisabled()
         }
         .frame(height: cardHeight)
+    }
+
+    @State private var currentIndex: Int?
+
+    private var autoScrollTimer: Publishers.Autoconnect<Timer.TimerPublisher> {
+        Timer.publish(every: autoScrollInterval ?? .greatestFiniteMagnitude, on: .main, in: .common).autoconnect()
+    }
+
+    private func advanceCarousel(using proxy: ScrollViewProxy) {
+        guard !items.isEmpty else { return }
+
+        let nextIndex: Int
+        if let currentIndex {
+            nextIndex = (currentIndex + 1) % items.count
+        } else {
+            nextIndex = 0
+        }
+
+        currentIndex = nextIndex
+
+        withAnimation(.easeInOut(duration: 0.55)) {
+            proxy.scrollTo(items[nextIndex].id, anchor: .center)
+        }
     }
 
     private func defaultCardWidth(containerWidth: CGFloat) -> CGFloat {

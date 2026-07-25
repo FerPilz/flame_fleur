@@ -8,9 +8,9 @@ enum SampleExploreCategories {
             subtitle: "Explore cuisines from around the world",
             subcategories: [
                 SubcategorySeed("Italian", imageName: "ff_subcat_world_cuisine_italian", category: .italian),
-                SubcategorySeed("Mexican", imageName: "ff_subcat_world_cuisine_mexican", category: .mexican),
-                SubcategorySeed("Korean", imageName: "ff_subcat_world_cuisine_korean", category: .korean),
-                SubcategorySeed("German", imageName: "ff_subcat_world_cuisine_german"),
+                SubcategorySeed("Mexican", imageName: "world_mexican_charred_corn_tacos", category: .mexican),
+                SubcategorySeed("Korean", imageName: "world_korean_sesame_beef_bulgogi", category: .korean),
+                SubcategorySeed("German", imageName: "world_german_herbed_bratwurst_plate"),
                 SubcategorySeed("Japanese", imageName: "ff_subcat_world_cuisine_japanese"),
                 SubcategorySeed("Thai", imageName: "ff_subcat_world_cuisine_thai"),
                 SubcategorySeed("Indian", imageName: "ff_subcat_world_cuisine_indian"),
@@ -21,21 +21,27 @@ enum SampleExploreCategories {
                 SubcategorySeed("Middle Eastern", imageName: "ff_subcat_world_cuisine_middle_eastern")
             ]
         ),
-    ] + CookflowSnacksBreakfastSeed.groups + [
         makeGroup(
-            id: "meat-seafood",
-            title: "Meat & Seafood",
-            subtitle: "Browse savory proteins, fish, and shellfish",
+            id: "meat",
+            title: "Meat",
+            subtitle: "Browse beef, pork, lamb, and turkey",
             subcategories: [
-                SubcategorySeed("Fish", imageName: "ff_subcat_meat_seafood_fish", category: .fish),
-                SubcategorySeed("Shrimp", imageName: "ff_subcat_meat_seafood_shrimp", category: .seafood),
-                SubcategorySeed("Salmon", imageName: "ff_subcat_meat_seafood_salmon", category: .fish),
-                SubcategorySeed("Tuna", imageName: "ff_subcat_meat_seafood_tuna", category: .fish),
-                SubcategorySeed("Beef", imageName: "ff_subcat_meat_seafood_beef", category: .meat),
-                SubcategorySeed("Pork", imageName: "ff_subcat_meat_seafood_pork", category: .meat),
-                SubcategorySeed("Lamb", imageName: "ff_subcat_meat_seafood_lamb", category: .meat),
-                SubcategorySeed("Turkey", imageName: "ff_subcat_meat_seafood_turkey", category: .meat),
-                SubcategorySeed("Shellfish", imageName: "ff_subcat_meat_seafood_shellfish", category: .seafood)
+                SubcategorySeed("Beef", id: "meat-seafood-beef", imageName: "ff_subcat_meat_seafood_beef", category: .meat),
+                SubcategorySeed("Pork", id: "meat-seafood-pork", imageName: "ff_subcat_meat_seafood_pork", category: .meat),
+                SubcategorySeed("Lamb", id: "meat-seafood-lamb", imageName: "ff_subcat_meat_seafood_lamb", category: .meat),
+                SubcategorySeed("Turkey", id: "meat-seafood-turkey", imageName: "ff_subcat_meat_seafood_turkey", category: .meat)
+            ]
+        ),
+        makeGroup(
+            id: "seafood",
+            title: "Seafood",
+            subtitle: "Browse fish, shrimp, salmon, tuna, and shellfish",
+            subcategories: [
+                SubcategorySeed("Fish", id: "meat-seafood-fish", imageName: "ff_subcat_meat_seafood_fish", category: .fish),
+                SubcategorySeed("Shrimp", id: "meat-seafood-shrimp", imageName: "ff_subcat_meat_seafood_shrimp", category: .seafood),
+                SubcategorySeed("Salmon", id: "meat-seafood-salmon", imageName: "ff_subcat_meat_seafood_salmon", category: .fish),
+                SubcategorySeed("Tuna", id: "meat-seafood-tuna", imageName: "ff_subcat_meat_seafood_tuna", category: .fish),
+                SubcategorySeed("Shellfish", id: "meat-seafood-shellfish", imageName: "ff_subcat_meat_seafood_shellfish", category: .seafood)
             ]
         ),
         makeGroup(
@@ -87,19 +93,24 @@ enum SampleExploreCategories {
             ]
         ),
         makeGroup(
-            id: "high-protein",
-            title: "High Protein",
-            subtitle: "Balanced meals with satisfying protein",
+            id: "lean-meals",
+            title: "Lean Meals",
+            subtitle: "Protein-forward meals with lighter balance",
             subcategories: [
-                SubcategorySeed("Protein Bowls", imageName: "ff_subcat_high_protein_protein_bowls", category: .proteinBowls),
-                SubcategorySeed("Lean Chicken", imageName: "ff_subcat_high_protein_lean_chicken", category: .leanMeals),
-                SubcategorySeed("Egg-Based Meals", imageName: "ff_subcat_high_protein_egg_based_meals", category: .highProtein),
-                SubcategorySeed("Greek Yogurt", imageName: "ff_subcat_high_protein_greek_yogurt", category: .highProtein),
-                SubcategorySeed("Seafood Protein", imageName: "ff_subcat_high_protein_seafood_protein", category: .seafood),
-                SubcategorySeed("Legume Protein", imageName: "ff_subcat_high_protein_legume_protein", category: .beansLentils),
-                SubcategorySeed("Post-Workout Meals", imageName: "ff_subcat_high_protein_post_workout_meals", category: .fitnessMeals),
-                SubcategorySeed("Low-Carb Protein", imageName: "ff_subcat_high_protein_low_carb_protein", category: .leanMeals),
-                SubcategorySeed("High-Protein Breakfast", imageName: "ff_subcat_high_protein_high_protein_breakfast", category: .breakfast)
+                SubcategorySeed("Protein Bowls", id: "high-protein-protein-bowls", imageName: "ff_subcat_high_protein_protein_bowls", category: .proteinBowls),
+                SubcategorySeed("Lean Chicken", id: "high-protein-lean-chicken", imageName: "ff_subcat_high_protein_lean_chicken", category: .leanMeals),
+                SubcategorySeed("Post-Workout Meals", id: "high-protein-post-workout-meals", imageName: "ff_subcat_high_protein_post_workout_meals", category: .fitnessMeals),
+                SubcategorySeed("Legume Protein", id: "high-protein-legume-protein", imageName: "ff_subcat_high_protein_legume_protein", category: .beansLentils)
+            ]
+        ),
+        makeGroup(
+            id: "breakfast-category",
+            title: "Breakfast",
+            subtitle: "Greek yogurt bowls and egg-centered meals",
+            subcategories: [
+                SubcategorySeed("Greek Yogurt", id: "high-protein-greek-yogurt", imageName: "ff_subcat_high_protein_greek_yogurt", category: .breakfast),
+                SubcategorySeed("Egg-Based Meals", id: "high-protein-egg-based-meals", imageName: "ff_subcat_high_protein_egg_based_meals", category: .breakfast),
+                SubcategorySeed("High-Protein Breakfast", id: "high-protein-high-protein-breakfast", imageName: "ff_subcat_high_protein_high_protein_breakfast", category: .breakfast)
             ]
         )
     ]
@@ -108,15 +119,17 @@ enum SampleExploreCategories {
         id: String,
         title: String,
         subtitle: String,
+        bubbleDisplayMode: ExploreCategoryBubbleDisplayMode = .subcategories,
         subcategories: [SubcategorySeed]
     ) -> ExploreCategoryGroup {
         ExploreCategoryGroup(
             id: id,
             title: title,
             subtitle: subtitle,
+            bubbleDisplayMode: bubbleDisplayMode,
             subcategories: subcategories.map { seed in
                 ExploreSubcategory(
-                    id: "\(id)-\(slug(seed.title))",
+                    id: seed.id ?? "\(id)-\(slug(seed.title))",
                     title: seed.title,
                     parentGroupID: id,
                     imageName: seed.imageName,
@@ -137,11 +150,13 @@ enum SampleExploreCategories {
 
 private struct SubcategorySeed {
     let title: String
+    let id: String?
     let imageName: String?
     let category: RecipeCategory?
 
-    init(_ title: String, imageName: String?, category: RecipeCategory? = nil) {
+    init(_ title: String, id: String? = nil, imageName: String?, category: RecipeCategory? = nil) {
         self.title = title
+        self.id = id
         self.imageName = imageName
         self.category = category
     }

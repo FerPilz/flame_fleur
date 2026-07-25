@@ -60,7 +60,6 @@ struct AppScreen<Header: View, Content: View>: View {
 #Preview {
     AppScreen {
         AppHeader(
-            title: "Flame & Fleur",
             leadingActions: [AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Menu")],
             trailingActions: [AppHeaderAction(systemName: "cart", accessibilityLabel: "Cart")]
         )

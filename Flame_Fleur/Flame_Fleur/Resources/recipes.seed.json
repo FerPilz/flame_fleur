@@ -8,7 +8,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-italian-1",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_1",
+    "imageName": "world_italian_spicy_tomato_basil_pasta",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -70,7 +70,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-italian-2",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_2",
+    "imageName": "world_italian_creamy_mushroom_risotto",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -134,7 +134,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-italian-3",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_3",
+    "imageName": "world_italian_tuscan_white_bean_soup",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -192,7 +192,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-italian-4",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_4",
+    "imageName": "world_italian_lemon_ricotta_gnocchi",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -250,7 +250,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-italian-5",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_5",
+    "imageName": "world_italian_eggplant_parmesan_bake",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -313,7 +313,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-italian-6",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_italian_6",
+    "imageName": "world_italian_garlic_shrimp_linguine",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -371,7 +371,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-mexican-1",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_1",
+    "imageName": "world_mexican_charred_corn_tacos",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -431,7 +431,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-mexican-2",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_2",
+    "imageName": "world_mexican_chicken_tinga_bowls",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -493,7 +493,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-mexican-3",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_3",
+    "imageName": "world_mexican_roasted_poblano_enchiladas",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -551,7 +551,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-mexican-4",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_4",
+    "imageName": "world_mexican_citrus_shrimp_tostadas",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -609,7 +609,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-mexican-5",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_5",
+    "imageName": "world_mexican_black_bean_chilaquiles",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -672,7 +672,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-mexican-6",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_mexican_6",
+    "imageName": "world_mexican_mushroom_quesadillas",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -730,7 +730,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-korean-1",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_korean_1",
+    "imageName": "world_korean_sesame_beef_bulgogi",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -790,7 +790,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-korean-2",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_korean_2",
+    "imageName": "world_korean_kimchi_fried_rice",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -852,7 +852,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-korean-3",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_korean_3",
+    "imageName": "world_korean_gochujang_tofu_bowls",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -910,7 +910,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-korean-4",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_korean_4",
+    "imageName": "world_korean_korean_chicken_lettuce_cups",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -968,7 +968,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-korean-5",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_korean_5",
+    "imageName": "world_korean_japchae_noodle_stir_fry",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -1031,7 +1031,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-korean-6",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_korean_6",
+    "imageName": "world_japanese_miso_kimchi_soup",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -1089,7 +1089,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-german-1",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_german_1",
+    "imageName": "world_german_herbed_bratwurst_plate",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -1149,7 +1149,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-german-2",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_german_2",
+    "imageName": "world_german_bavarian_mushroom_spaetzle",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -1212,7 +1212,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-german-3",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_german_3",
+    "imageName": "world_german_mustard_pork_schnitzel",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -1270,7 +1270,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-german-4",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_german_4",
+    "imageName": "world_german_warm_potato_cabbage_skillet",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -1328,7 +1328,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-german-5",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_german_5",
+    "imageName": "world_german_apple_caraway_roast",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -1391,7 +1391,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-german-6",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_german_6",
+    "imageName": "world_german_black_forest_grain_bowl",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -1449,7 +1449,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-japanese-1",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_japanese_1",
+    "imageName": "world_japanese_miso_salmon_rice_bowl",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -1509,7 +1509,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-japanese-2",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_japanese_2",
+    "imageName": "world_japanese_chicken_yakitori_plate",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -1572,7 +1572,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-japanese-3",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_japanese_3",
+    "imageName": "world_japanese_soba_noodle_salad",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -1630,7 +1630,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-japanese-4",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_japanese_4",
+    "imageName": "world_japanese_tofu_katsu_curry",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -1688,7 +1688,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-japanese-5",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_japanese_5",
+    "imageName": "world_japanese_ginger_tuna_onigiri",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -1751,7 +1751,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-japanese-6",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_japanese_6",
+    "imageName": "world_japanese_vegetable_tempura_bowl",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -1809,7 +1809,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-thai-1",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_thai_1",
+    "imageName": "world_thai_20_minute_green_curry",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -1869,7 +1869,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-thai-2",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_thai_2",
+    "imageName": "world_thai_thai_basil_chicken",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -1932,7 +1932,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-thai-3",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_thai_3",
+    "imageName": "world_thai_coconut_lemongrass_soup",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -1990,7 +1990,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-thai-4",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_thai_4",
+    "imageName": "world_thai_peanut_noodle_salad",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -2048,7 +2048,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-thai-5",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_thai_5",
+    "imageName": "world_thai_mango_shrimp_lettuce_cups",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -2110,7 +2110,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-thai-6",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_thai_6",
+    "imageName": "world_thai_red_curry_tofu_bowls",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -2169,7 +2169,7 @@
     "creatorName": "@homechef.anna",
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-indian-1",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_indian_1",
+    "imageName": "world_indian_cozy_lentil_dal",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -2229,7 +2229,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-indian-2",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_indian_2",
+    "imageName": "world_indian_butter_cauliflower_curry",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -2292,7 +2292,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-indian-3",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_indian_3",
+    "imageName": "world_indian_tandoori_chicken_bowls",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -2350,7 +2350,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-indian-4",
-    "imageName": "bowl",
+    "imageName": "world_indian_chickpea_masala_skillet",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -2408,7 +2408,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-indian-5",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_indian_5",
+    "imageName": "world_italian_paneer_tomato_rice",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -2470,7 +2470,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-indian-6",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_indian_6",
+    "imageName": "world_indian_cardamom_vegetable_korma",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -2529,7 +2529,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-chinese-1",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_chinese_1",
+    "imageName": "world_chinese_ginger_scallion_noodles",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -2587,7 +2587,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-chinese-2",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_chinese_2",
+    "imageName": "world_italian_sesame_orange_chicken",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -2650,7 +2650,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-chinese-3",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_chinese_3",
+    "imageName": "world_chinese_garlic_bok_choy_rice",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -2708,7 +2708,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-chinese-4",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_chinese_4",
+    "imageName": "world_greek_mapo_tofu_bowls",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -2766,7 +2766,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-chinese-5",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_chinese_5",
+    "imageName": "world_greek_mushroom_fried_rice",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -2828,7 +2828,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-chinese-6",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_chinese_6",
+    "imageName": "world_greek_five_spice_beef_lettuce_cups",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -2887,7 +2887,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-french-1",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_french_1",
+    "imageName": "world_greek_herbed_chicken_fricassee",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -2945,7 +2945,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-french-2",
-    "imageName": "dessert",
+    "imageName": "world_greek_ratatouille_tart",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -3008,7 +3008,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-french-3",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_french_3",
+    "imageName": "world_greek_lemon_dijon_cod",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -3067,7 +3067,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-french-4",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_french_4",
+    "imageName": "world_greek_mushroom_lentil_cassoulet",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -3125,7 +3125,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-french-5",
-    "imageName": "dessert",
+    "imageName": "bakery_pies_tarts_pear_almond_galette",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -3187,7 +3187,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-french-6",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_french_6",
+    "imageName": "breakfast_toasts_provence_vegetable_soup",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -3246,7 +3246,7 @@
     "creatorName": "@homechef.anna",
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-greek-1",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_greek_1",
+    "imageName": "world_greek_lemon_ricotta_toast",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -3307,7 +3307,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-greek-2",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_greek_2",
+    "imageName": "world_greek_greek_chicken_souvlaki",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -3371,7 +3371,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-greek-3",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_greek_3",
+    "imageName": "world_greek_tomato_feta_orzo",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -3431,7 +3431,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-greek-4",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_greek_4",
+    "imageName": "world_greek_herbed_lentil_pita_bowl",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -3492,7 +3492,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-greek-5",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_greek_5",
+    "imageName": "world_greek_cucumber_yogurt_salmon",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -3555,7 +3555,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-greek-6",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_greek_6",
+    "imageName": "world_greek_roasted_eggplant_mezze",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -3614,7 +3614,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-spanish-1",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_spanish_1",
+    "imageName": "world_italian_smoky_seafood_paella",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -3672,7 +3672,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-spanish-2",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_spanish_2",
+    "imageName": "meat_seafood_shrimp_garlic_shrimp_tapas",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -3735,7 +3735,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-spanish-3",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_spanish_3",
+    "imageName": "breakfast_toasts_patatas_bravas_bowl",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -3794,7 +3794,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-spanish-4",
-    "imageName": "citrus",
+    "imageName": "world_greek_chorizo_white_bean_stew",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -3852,7 +3852,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-spanish-5",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_spanish_5",
+    "imageName": "world_greek_saffron_chicken_rice",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -3914,7 +3914,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-spanish-6",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_spanish_6",
+    "imageName": "world_greek_tomato_manchego_toast",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -3972,7 +3972,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-middle-eastern-1",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_middle_eastern_1",
+    "imageName": "world_greek_sumac_chicken_bowl",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -4030,7 +4030,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-middle-eastern-2",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_middle_eastern_2",
+    "imageName": "world_greek_tahini_chickpea_plate",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -4092,7 +4092,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-middle-eastern-3",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_middle_eastern_3",
+    "imageName": "world_greek_herbed_lamb_kofta",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -4151,7 +4151,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-middle-eastern-4",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_middle_eastern_4",
+    "imageName": "vegetarian_cauliflower_za_atar_roasted_cauliflower",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -4209,7 +4209,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-world-cuisine-middle-eastern-5",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_middle_eastern_5",
+    "imageName": "world_italian_warm_lentil_mujadara",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -4271,7 +4271,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-world-cuisine-middle-eastern-6",
-    "imageName": "ff_recipe_recipe_seed_world_cuisine_middle_eastern_6",
+    "imageName": "world_greek_pistachio_date_yogurt",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -4329,7 +4329,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-fish-1",
-    "imageName": "ff_recipe_recipe_seed_meat_seafood_fish_1",
+    "imageName": "meat_seafood_fish_honey_garlic_salmon",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -4391,7 +4391,7 @@
     "creatorName": "@bakewithleo",
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-fish-2",
-    "imageName": "ff_recipe_recipe_seed_meat_seafood_fish_2",
+    "imageName": "world_italian_lemon_butter_cod",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -4455,7 +4455,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-fish-3",
-    "imageName": "ff_recipe_recipe_seed_meat_seafood_fish_3",
+    "imageName": "world_mexican_spicy_fish_tacos",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -4515,7 +4515,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-fish-4",
-    "imageName": "ff_recipe_recipe_seed_meat_seafood_fish_4",
+    "imageName": "meat_seafood_fish_crispy_baked_haddock",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -4575,7 +4575,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-fish-5",
-    "imageName": "ff_recipe_recipe_seed_meat_seafood_fish_5",
+    "imageName": "world_greek_mediterranean_fish_stew",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -4638,7 +4638,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-fish-6",
-    "imageName": "ff_recipe_recipe_seed_meat_seafood_fish_6",
+    "imageName": "world_greek_herb_crusted_tilapia",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -4697,7 +4697,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-shrimp-1",
-    "imageName": "ff_recipe_recipe_seed_meat_seafood_shrimp_1",
+    "imageName": "meat_seafood_shrimp_garlic_butter_shrimp",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -4757,7 +4757,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-shrimp-2",
-    "imageName": "ff_recipe_recipe_seed_meat_seafood_shrimp_2",
+    "imageName": "world_greek_citrus_shrimp_rice_bowl",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -4820,7 +4820,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-shrimp-3",
-    "imageName": "ff_recipe_recipe_seed_meat_seafood_shrimp_3",
+    "imageName": "world_indian_coconut_shrimp_curry",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -4880,7 +4880,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-shrimp-4",
-    "imageName": "ff_recipe_recipe_seed_meat_seafood_shrimp_4",
+    "imageName": "world_greek_shrimp_pesto_orzo",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -4941,7 +4941,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-shrimp-5",
-    "imageName": "salmon",
+    "imageName": "world_greek_spicy_shrimp_lettuce_cups",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -5004,7 +5004,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-shrimp-6",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_lemon_herb_shrimp_skewers",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -5063,7 +5063,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-salmon-1",
-    "imageName": "ff_home_recipe_meat_seafood_fish_honey_garlic_salmon",
+    "imageName": "world_greek_creamy_lemon_herb_salmon",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -5123,7 +5123,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-salmon-2",
-    "imageName": "salmon",
+    "imageName": "world_japanese_miso_glazed_salmon",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -5186,7 +5186,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-salmon-3",
-    "imageName": "ff_home_recipe_meat_seafood_fish_honey_garlic_salmon",
+    "imageName": "meat_seafood_fish_salmon_rice_plate",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -5249,7 +5249,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-salmon-4",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_crispy_sesame_salmon",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -5310,7 +5310,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-salmon-5",
-    "imageName": "salmon",
+    "imageName": "world_italian_cedar_style_salmon_bowl",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -5373,7 +5373,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-salmon-6",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_dill_yogurt_salmon",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -5432,7 +5432,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-tuna-1",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_seared_sesame_tuna",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -5492,7 +5492,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-tuna-2",
-    "imageName": "salmon",
+    "imageName": "world_italian_tuna_crunch_bowl",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -5555,7 +5555,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-tuna-3",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_lemon_tuna_white_bean_salad",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -5615,7 +5615,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-tuna-4",
-    "imageName": "salmon",
+    "imageName": "world_greek_spicy_tuna_rice_stacks",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -5676,7 +5676,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-tuna-5",
-    "imageName": "salmon",
+    "imageName": "world_greek_tuna_nicoise_toasts",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -5739,7 +5739,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-tuna-6",
-    "imageName": "salmon",
+    "imageName": "world_greek_ginger_tuna_cucumber_cups",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -5798,7 +5798,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-beef-1",
-    "imageName": "bowl",
+    "imageName": "world_greek_rosemary_steak_bites",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -5856,7 +5856,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-beef-2",
-    "imageName": "bowl",
+    "imageName": "world_greek_beef_mushroom_skillet",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -5918,7 +5918,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-beef-3",
-    "imageName": "bowl",
+    "imageName": "world_italian_braised_short_rib_ragu",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -5976,7 +5976,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-beef-4",
-    "imageName": "bowl",
+    "imageName": "world_greek_chimichurri_beef_bowl",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -6036,7 +6036,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-beef-5",
-    "imageName": "bowl",
+    "imageName": "meat_beef_garlic_pepper_steak",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -6098,7 +6098,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-beef-6",
-    "imageName": "bowl",
+    "imageName": "meat_beef_warm_beef_farro_salad",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -6156,7 +6156,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-pork-1",
-    "imageName": "bowl",
+    "imageName": "world_greek_apple_pork_tenderloin",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -6214,7 +6214,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-pork-2",
-    "imageName": "bowl",
+    "imageName": "high_protein_protein_bowls_crispy_pork_rice_bowls",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -6276,7 +6276,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-pork-3",
-    "imageName": "bowl",
+    "imageName": "high_protein_protein_bowls_maple_mustard_pork_chops",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -6334,7 +6334,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-pork-4",
-    "imageName": "bowl",
+    "imageName": "world_mexican_pork_carnitas_tacos",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -6394,7 +6394,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-pork-5",
-    "imageName": "bowl",
+    "imageName": "high_protein_protein_bowls_herbed_pork_meatballs",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -6456,7 +6456,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-pork-6",
-    "imageName": "bowl",
+    "imageName": "high_protein_protein_bowls_ginger_pork_lettuce_cups",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -6514,7 +6514,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-lamb-1",
-    "imageName": "bowl",
+    "imageName": "world_italian_lamb_meatball_couscous",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -6572,7 +6572,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-lamb-2",
-    "imageName": "bowl",
+    "imageName": "high_protein_protein_bowls_rosemary_lamb_chops",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -6634,7 +6634,7 @@
     "creatorName": "@freshkitchen",
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-lamb-3",
-    "imageName": "bowl",
+    "imageName": "high_protein_protein_bowls_harissa_lamb_bowls",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -6693,7 +6693,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-lamb-4",
-    "imageName": "bowl",
+    "imageName": "world_greek_minted_lamb_flatbreads",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -6753,7 +6753,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-lamb-5",
-    "imageName": "bowl",
+    "imageName": "world_greek_lamb_lentil_stew",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -6816,7 +6816,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-lamb-6",
-    "imageName": "bowl",
+    "imageName": "world_greek_greek_lamb_salad",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -6874,7 +6874,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-turkey-1",
-    "imageName": "salad",
+    "imageName": "world_greek_herbed_turkey_patties",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -6932,7 +6932,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-turkey-2",
-    "imageName": "salad",
+    "imageName": "world_greek_lean_turkey_chili",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -6995,7 +6995,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-turkey-3",
-    "imageName": "salad",
+    "imageName": "world_mexican_turkey_taco_bowls",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -7053,7 +7053,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-turkey-4",
-    "imageName": "salad",
+    "imageName": "world_italian_turkey_zucchini_skillet",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -7113,7 +7113,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-turkey-5",
-    "imageName": "salad",
+    "imageName": "world_italian_cranberry_turkey_meatballs",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -7176,7 +7176,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-turkey-6",
-    "imageName": "salad",
+    "imageName": "world_italian_turkey_avocado_lettuce_wraps",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -7234,7 +7234,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-shellfish-1",
-    "imageName": "salmon",
+    "imageName": "world_italian_scallop_lemon_risotto",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -7294,7 +7294,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-shellfish-2",
-    "imageName": "salmon",
+    "imageName": "world_italian_coconut_mussel_pot",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -7356,7 +7356,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-shellfish-3",
-    "imageName": "salmon",
+    "imageName": "world_italian_crab_cake_salad",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -7414,7 +7414,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-shellfish-4",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_clam_linguine",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -7474,7 +7474,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-meat-seafood-shellfish-5",
-    "imageName": "salmon",
+    "imageName": "world_greek_lobster_corn_toasts",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -7537,7 +7537,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-meat-seafood-shellfish-6",
-    "imageName": "salmon",
+    "imageName": "world_greek_shellfish_tomato_stew",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -7595,7 +7595,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-tofu-tempeh-1",
-    "imageName": "salad",
+    "imageName": "vegetarian_mushrooms_crispy_sesame_tofu",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -7656,7 +7656,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-tofu-tempeh-2",
-    "imageName": "salad",
+    "imageName": "world_greek_tempeh_satay_bowls",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -7719,7 +7719,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-tofu-tempeh-3",
-    "imageName": "salad",
+    "imageName": "world_japanese_maple_miso_tofu",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -7778,7 +7778,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-tofu-tempeh-4",
-    "imageName": "salad",
+    "imageName": "world_greek_tofu_banh_mi_salad",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -7838,7 +7838,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-tofu-tempeh-5",
-    "imageName": "salad",
+    "imageName": "world_mexican_smoky_tempeh_tacos",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -7902,7 +7902,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-tofu-tempeh-6",
-    "imageName": "salad",
+    "imageName": "vegetarian_mushrooms_ginger_tofu_soup",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -7961,7 +7961,7 @@
     "creatorName": "@homechef.anna",
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-beans-lentils-1",
-    "imageName": "bowl",
+    "imageName": "world_greek_hearty_lentil_soup",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -8023,7 +8023,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-beans-lentils-2",
-    "imageName": "bowl",
+    "imageName": "world_greek_french_lentil_salad",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -8086,7 +8086,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-beans-lentils-3",
-    "imageName": "bowl",
+    "imageName": "vegetarian_mushrooms_creamy_white_bean_stew",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -8145,7 +8145,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-beans-lentils-4",
-    "imageName": "bowl",
+    "imageName": "vegetarian_mushrooms_black_bean_stuffed_peppers",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -8205,7 +8205,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-beans-lentils-5",
-    "imageName": "bowl",
+    "imageName": "world_indian_red_lentil_dal",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -8269,7 +8269,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-beans-lentils-6",
-    "imageName": "bowl",
+    "imageName": "vegetarian_mushrooms_herbed_bean_toasts",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -8328,7 +8328,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-mushrooms-1",
-    "imageName": "ff_home_recipe_vegetarian_mushrooms_creamy_mushroom_risotto",
+    "imageName": "world_italian_wild_mushroom_toast",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -8389,7 +8389,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-mushrooms-2",
-    "imageName": "salad",
+    "imageName": "world_italian_creamy_mushroom_gnocchi",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -8452,7 +8452,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-mushrooms-3",
-    "imageName": "salad",
+    "imageName": "vegetarian_mushrooms_mushroom_barley_soup",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -8511,7 +8511,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-mushrooms-4",
-    "imageName": "salad",
+    "imageName": "world_greek_garlic_portobello_steaks",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -8571,7 +8571,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-mushrooms-5",
-    "imageName": "salad",
+    "imageName": "world_japanese_miso_mushroom_rice",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -8635,7 +8635,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-mushrooms-6",
-    "imageName": "salad",
+    "imageName": "world_greek_crispy_oyster_mushrooms",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -8694,7 +8694,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-eggplant-1",
-    "imageName": "bowl",
+    "imageName": "world_japanese_miso_glazed_eggplant",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -8756,7 +8756,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-eggplant-2",
-    "imageName": "bowl",
+    "imageName": "world_italian_eggplant_parmesan_bake",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -8819,7 +8819,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-eggplant-3",
-    "imageName": "bowl",
+    "imageName": "world_greek_smoky_eggplant_dip_plate",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -8878,7 +8878,7 @@
     "creatorName": "@chef.luna",
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-eggplant-4",
-    "imageName": "bowl",
+    "imageName": "world_greek_tomato_eggplant_stew",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -8939,7 +8939,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-eggplant-5",
-    "imageName": "bowl",
+    "imageName": "world_mexican_crispy_eggplant_tacos",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -9003,7 +9003,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-eggplant-6",
-    "imageName": "bowl",
+    "imageName": "vegetarian_mushrooms_herbed_eggplant_grain_bowl",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -9062,7 +9062,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-cauliflower-1",
-    "imageName": "salad",
+    "imageName": "world_greek_golden_cauliflower_steaks",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -9123,7 +9123,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-cauliflower-2",
-    "imageName": "salad",
+    "imageName": "vegetarian_mushrooms_cauliflower_shawarma_bowls",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -9187,7 +9187,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-cauliflower-3",
-    "imageName": "salad",
+    "imageName": "vegetarian_mushrooms_creamy_cauliflower_soup",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -9246,7 +9246,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-cauliflower-4",
-    "imageName": "salad",
+    "imageName": "world_mexican_buffalo_cauliflower_tacos",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -9306,7 +9306,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-cauliflower-5",
-    "imageName": "salad",
+    "imageName": "vegetarian_mushrooms_lemon_herb_cauliflower_rice",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -9370,7 +9370,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-cauliflower-6",
-    "imageName": "salad",
+    "imageName": "world_italian_roasted_cauliflower_pasta",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -9429,7 +9429,7 @@
     "creatorName": "@homechef.anna",
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-chickpeas-1",
-    "imageName": "bowl",
+    "imageName": "world_italian_spiced_chickpea_stew",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -9491,7 +9491,7 @@
     "creatorName": "@bakewithleo",
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-chickpeas-2",
-    "imageName": "bowl",
+    "imageName": "vegetarian_mushrooms_crispy_chickpea_salad",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -9556,7 +9556,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-chickpeas-3",
-    "imageName": "bowl",
+    "imageName": "vegetarian_mushrooms_chickpea_tomato_skillet",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -9615,7 +9615,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-chickpeas-4",
-    "imageName": "bowl",
+    "imageName": "world_greek_lemon_chickpea_orzo",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -9675,7 +9675,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-chickpeas-5",
-    "imageName": "bowl",
+    "imageName": "world_greek_harissa_chickpea_bowls",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -9738,7 +9738,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-chickpeas-6",
-    "imageName": "bowl",
+    "imageName": "world_greek_chickpea_feta_flatbreads",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -9797,7 +9797,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-leafy-greens-1",
-    "imageName": "salad",
+    "imageName": "world_greek_charred_peach_salad",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -9858,7 +9858,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-leafy-greens-2",
-    "imageName": "salad",
+    "imageName": "world_greek_kale_caesar_bowl",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -9922,7 +9922,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-leafy-greens-3",
-    "imageName": "salad",
+    "imageName": "world_greek_spinach_ricotta_skillet",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -9981,7 +9981,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-leafy-greens-4",
-    "imageName": "salad",
+    "imageName": "vegetarian_mushrooms_swiss_chard_white_beans",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -10041,7 +10041,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-leafy-greens-5",
-    "imageName": "salad",
+    "imageName": "world_italian_arugula_farro_salad",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -10104,7 +10104,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-leafy-greens-6",
-    "imageName": "salad",
+    "imageName": "world_italian_collard_green_soup",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -10164,7 +10164,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-root-vegetables-1",
-    "imageName": "citrus",
+    "imageName": "vegetarian_mushrooms_honey_roasted_carrots",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -10224,7 +10224,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-root-vegetables-2",
-    "imageName": "citrus",
+    "imageName": "world_italian_beet_citrus_salad",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -10288,7 +10288,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-root-vegetables-3",
-    "imageName": "citrus",
+    "imageName": "world_italian_parsnip_potato_mash",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -10347,7 +10347,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-root-vegetables-4",
-    "imageName": "citrus",
+    "imageName": "vegetarian_mushrooms_sweet_potato_grain_bowl",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -10407,7 +10407,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-root-vegetables-5",
-    "imageName": "citrus",
+    "imageName": "world_greek_turnip_herb_gratin",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -10470,7 +10470,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-root-vegetables-6",
-    "imageName": "citrus",
+    "imageName": "world_greek_root_vegetable_tagine",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -10531,7 +10531,7 @@
     "creatorName": "@homechef.anna",
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-plant-based-bowls-1",
-    "imageName": "ff_home_recipe_vegetarian_plant_based_bowls_rainbow_veggie_bowl",
+    "imageName": "vegetarian_mushrooms_roasted_veggie_bowl",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -10594,7 +10594,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-plant-based-bowls-2",
-    "imageName": "bowl",
+    "imageName": "world_greek_quinoa_power_bowl",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -10658,7 +10658,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-plant-based-bowls-3",
-    "imageName": "bowl",
+    "imageName": "world_greek_tahini_lentil_bowl",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -10717,7 +10717,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-plant-based-bowls-4",
-    "imageName": "bowl",
+    "imageName": "world_greek_edamame_sweet_potato_bowl",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -10777,7 +10777,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-vegetarian-plant-based-bowls-5",
-    "imageName": "bowl",
+    "imageName": "world_greek_avocado_bean_power_bowl",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -10840,7 +10840,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-vegetarian-plant-based-bowls-6",
-    "imageName": "bowl",
+    "imageName": "vegetarian_mushrooms_herbed_millet_veggie_bowl",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -10900,7 +10900,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-grilled-chicken-1",
-    "imageName": "salmon",
+    "imageName": "world_greek_grilled_lemon_chicken",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -10958,7 +10958,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-grilled-chicken-2",
-    "imageName": "salmon",
+    "imageName": "world_greek_rosemary_grilled_chicken",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -11021,7 +11021,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-grilled-chicken-3",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_yogurt_marinated_chicken",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -11080,7 +11080,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-grilled-chicken-4",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_smoky_paprika_chicken",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -11138,7 +11138,7 @@
     "creatorName": "@tableandthyme",
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-grilled-chicken-5",
-    "imageName": "salmon",
+    "imageName": "world_italian_peach_glazed_chicken",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -11201,7 +11201,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-grilled-chicken-6",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_chimichurri_chicken",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -11260,7 +11260,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-roast-chicken-1",
-    "imageName": "bowl",
+    "imageName": "world_italian_golden_chicken_risotto",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -11318,7 +11318,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-roast-chicken-2",
-    "imageName": "bowl",
+    "imageName": "world_italian_crisp_herb_roast_chicken",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -11381,7 +11381,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-roast-chicken-3",
-    "imageName": "bowl",
+    "imageName": "meat_chicken_lemon_garlic_roast_chicken",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -11440,7 +11440,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-roast-chicken-4",
-    "imageName": "bowl",
+    "imageName": "world_greek_sunday_chicken_and_roots",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -11498,7 +11498,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-roast-chicken-5",
-    "imageName": "bowl",
+    "imageName": "world_greek_paprika_roast_chicken",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -11560,7 +11560,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-roast-chicken-6",
-    "imageName": "bowl",
+    "imageName": "world_greek_honey_thyme_chicken_tray",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -11618,7 +11618,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-bowls-1",
-    "imageName": "bowl",
+    "imageName": "world_greek_teriyaki_chicken_bowl",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -11678,7 +11678,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-bowls-2",
-    "imageName": "bowl",
+    "imageName": "world_greek_mediterranean_chicken_bowl",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -11742,7 +11742,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-bowls-3",
-    "imageName": "bowl",
+    "imageName": "world_greek_buffalo_chicken_grain_bowl",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -11802,7 +11802,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-bowls-4",
-    "imageName": "bowl",
+    "imageName": "world_greek_tandoori_chicken_bowl",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -11862,7 +11862,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-bowls-5",
-    "imageName": "bowl",
+    "imageName": "meat_chicken_chicken_fajita_bowl",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -11925,7 +11925,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-bowls-6",
-    "imageName": "bowl",
+    "imageName": "meat_chicken_green_goddess_chicken_bowl",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -11984,7 +11984,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-pasta-1",
-    "imageName": "ff_home_recipe_world_cuisine_italian_spicy_tomato_basil_pasta",
+    "imageName": "world_italian_garlic_parmesan_pasta",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -12044,7 +12044,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-pasta-2",
-    "imageName": "pasta",
+    "imageName": "world_italian_chicken_alfredo_twirls",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -12106,7 +12106,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-pasta-3",
-    "imageName": "pasta",
+    "imageName": "world_italian_sun_dried_tomato_chicken_pasta",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -12165,7 +12165,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-pasta-4",
-    "imageName": "pasta",
+    "imageName": "world_italian_chicken_piccata_linguine",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -12223,7 +12223,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-pasta-5",
-    "imageName": "pasta",
+    "imageName": "world_italian_broccoli_chicken_penne",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -12286,7 +12286,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-pasta-6",
-    "imageName": "pasta",
+    "imageName": "world_italian_cajun_chicken_rigatoni",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -12344,7 +12344,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-soup-1",
-    "imageName": "bowl",
+    "imageName": "world_greek_lemon_chicken_orzo_soup",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -12402,7 +12402,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-soup-2",
-    "imageName": "bowl",
+    "imageName": "meat_chicken_chicken_wild_rice_soup",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -12464,7 +12464,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-soup-3",
-    "imageName": "bowl",
+    "imageName": "meat_chicken_ginger_chicken_noodle_soup",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -12523,7 +12523,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-soup-4",
-    "imageName": "bowl",
+    "imageName": "world_greek_chicken_tortilla_soup",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -12581,7 +12581,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-soup-5",
-    "imageName": "bowl",
+    "imageName": "world_greek_creamy_chicken_vegetable_soup",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -12643,7 +12643,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-soup-6",
-    "imageName": "bowl",
+    "imageName": "world_greek_herbed_chicken_bone_broth_bowl",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -12701,7 +12701,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-tacos-1",
-    "imageName": "citrus",
+    "imageName": "world_mexican_citrus_chicken_tacos",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -12759,7 +12759,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-tacos-2",
-    "imageName": "citrus",
+    "imageName": "world_mexican_chipotle_chicken_tacos",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -12821,7 +12821,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-tacos-3",
-    "imageName": "citrus",
+    "imageName": "world_mexican_salsa_verde_chicken_tacos",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -12880,7 +12880,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-tacos-4",
-    "imageName": "citrus",
+    "imageName": "world_mexican_crunchy_chicken_tostadas",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -12940,7 +12940,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-tacos-5",
-    "imageName": "citrus",
+    "imageName": "world_mexican_pineapple_chicken_tacos",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -13002,7 +13002,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-tacos-6",
-    "imageName": "citrus",
+    "imageName": "world_mexican_creamy_avocado_chicken_tacos",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -13060,7 +13060,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-curry-1",
-    "imageName": "bowl",
+    "imageName": "world_indian_butter_chicken",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -13118,7 +13118,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-curry-2",
-    "imageName": "bowl",
+    "imageName": "world_italian_quick_citrus_chicken",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -13180,7 +13180,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-curry-3",
-    "imageName": "bowl",
+    "imageName": "world_indian_coconut_chicken_curry",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -13239,7 +13239,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-curry-4",
-    "imageName": "bowl",
+    "imageName": "world_indian_green_chicken_curry",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -13299,7 +13299,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-curry-5",
-    "imageName": "bowl",
+    "imageName": "world_greek_cardamom_chicken_korma",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -13361,7 +13361,7 @@
     "creatorName": "@marina.cooks",
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-curry-6",
-    "imageName": "bowl",
+    "imageName": "world_indian_tomato_ginger_chicken_curry",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -13420,7 +13420,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-salad-1",
-    "imageName": "salad",
+    "imageName": "meat_chicken_chicken_waldorf_salad",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -13478,7 +13478,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-salad-2",
-    "imageName": "ff_home_recipe_chicken_chicken_salad_herb_chicken_salad",
+    "imageName": "world_greek_lemon_herb_chicken_salad",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -13540,7 +13540,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-salad-3",
-    "imageName": "salad",
+    "imageName": "world_greek_thai_chicken_crunch_salad",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -13599,7 +13599,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-salad-4",
-    "imageName": "salad",
+    "imageName": "world_greek_greek_chicken_chopped_salad",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -13659,7 +13659,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-salad-5",
-    "imageName": "salad",
+    "imageName": "world_greek_avocado_chicken_salad_cups",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -13721,7 +13721,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-salad-6",
-    "imageName": "salad",
+    "imageName": "meat_chicken_sesame_chicken_slaw",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -13779,7 +13779,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-skewers-1",
-    "imageName": "salmon",
+    "imageName": "world_greek_garlic_skewer_chicken",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -13837,7 +13837,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-skewers-2",
-    "imageName": "salmon",
+    "imageName": "world_greek_honey_lime_chicken_skewers",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -13899,7 +13899,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-skewers-3",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_tandoori_chicken_skewers",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -13957,7 +13957,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-skewers-4",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_lemon_oregano_chicken_skewers",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -14018,7 +14018,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-chicken-chicken-skewers-5",
-    "imageName": "salmon",
+    "imageName": "world_korean_gochujang_chicken_skewers",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -14080,7 +14080,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-chicken-chicken-skewers-6",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_citrus_herb_chicken_skewers",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -14138,7 +14138,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-bread-1",
-    "imageName": "dessert",
+    "imageName": "high_protein_protein_bowls_seeded_country_loaf",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -14196,7 +14196,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-bread-2",
-    "imageName": "dessert",
+    "imageName": "world_italian_skillet_cornbread",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -14258,7 +14258,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-bread-3",
-    "imageName": "dessert",
+    "imageName": "high_protein_protein_bowls_milk_bread_rolls",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -14316,7 +14316,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-bread-4",
-    "imageName": "dessert",
+    "imageName": "world_greek_garlic_pull_apart_bread",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -14374,7 +14374,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-bread-5",
-    "imageName": "dessert",
+    "imageName": "world_greek_whole_wheat_pita",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -14436,7 +14436,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-bread-6",
-    "imageName": "dessert",
+    "imageName": "world_italian_parmesan_dinner_rolls",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -14494,7 +14494,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-cakes-1",
-    "imageName": "dessert",
+    "imageName": "world_greek_olive_oil_citrus_cake",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -14552,7 +14552,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-cakes-2",
-    "imageName": "dessert",
+    "imageName": "world_greek_chocolate_espresso_cake",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -14614,7 +14614,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-cakes-3",
-    "imageName": "dessert",
+    "imageName": "world_greek_strawberry_almond_cake",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -14672,7 +14672,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-cakes-4",
-    "imageName": "dessert",
+    "imageName": "world_greek_carrot_spice_cake",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -14730,7 +14730,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-cakes-5",
-    "imageName": "dessert",
+    "imageName": "vegetarian_beans_lentils_vanilla_bean_snack_cake",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -14792,7 +14792,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-cakes-6",
-    "imageName": "dessert",
+    "imageName": "high_protein_protein_bowls_pistachio_honey_cake",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -14850,7 +14850,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-pastries-1",
-    "imageName": "dessert",
+    "imageName": "world_greek_apple_hand_pies",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -14908,7 +14908,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-pastries-2",
-    "imageName": "dessert",
+    "imageName": "high_protein_protein_bowls_raspberry_danish_twists",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -14970,7 +14970,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-pastries-3",
-    "imageName": "dessert",
+    "imageName": "vegetarian_greens_savory_spinach_puffs",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -15028,7 +15028,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-pastries-4",
-    "imageName": "dessert",
+    "imageName": "world_italian_chocolate_hazelnut_palmiers",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -15086,7 +15086,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-pastries-5",
-    "imageName": "dessert",
+    "imageName": "bakery_pies_tarts_pear_frangipane_tartlets",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -15148,7 +15148,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-pastries-6",
-    "imageName": "dessert",
+    "imageName": "bakery_breakfast_bakes_cheddar_chive_biscuits",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -15206,7 +15206,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-cookies-1",
-    "imageName": "dessert",
+    "imageName": "world_italian_chocolate_rye_cookies",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -15264,7 +15264,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-cookies-2",
-    "imageName": "dessert",
+    "imageName": "bakery_cookies_brown_butter_oat_cookies",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -15326,7 +15326,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-cookies-3",
-    "imageName": "dessert",
+    "imageName": "bakery_cookies_lemon_almond_cookies",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -15384,7 +15384,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-cookies-4",
-    "imageName": "dessert",
+    "imageName": "world_greek_tahini_chocolate_cookies",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -15442,7 +15442,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-cookies-5",
-    "imageName": "dessert",
+    "imageName": "world_greek_ginger_molasses_cookies",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -15504,7 +15504,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-cookies-6",
-    "imageName": "dessert",
+    "imageName": "world_greek_pistachio_shortbread",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -15562,7 +15562,7 @@
     "creatorName": "@homechef.anna",
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-muffins-1",
-    "imageName": "dessert",
+    "imageName": "world_greek_blueberry_yogurt_muffins",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -15622,7 +15622,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-muffins-2",
-    "imageName": "dessert",
+    "imageName": "world_greek_morning_glory_muffins",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -15684,7 +15684,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-muffins-3",
-    "imageName": "dessert",
+    "imageName": "world_greek_lemon_poppy_muffins",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -15743,7 +15743,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-muffins-4",
-    "imageName": "dessert",
+    "imageName": "bakery_breakfast_bakes_chocolate_banana_muffins",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -15801,7 +15801,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-muffins-5",
-    "imageName": "dessert",
+    "imageName": "world_italian_apple_cinnamon_muffins",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -15863,7 +15863,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-muffins-6",
-    "imageName": "dessert",
+    "imageName": "world_italian_savory_cheddar_muffins",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -15921,7 +15921,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-pies-tarts-1",
-    "imageName": "dessert",
+    "imageName": "bakery_pies_tarts_pear_almond_tart",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -15979,7 +15979,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-pies-tarts-2",
-    "imageName": "dessert",
+    "imageName": "world_italian_tomato_ricotta_tart",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -16041,7 +16041,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-pies-tarts-3",
-    "imageName": "dessert",
+    "imageName": "world_italian_apple_crumble_pie",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -16099,7 +16099,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-pies-tarts-4",
-    "imageName": "dessert",
+    "imageName": "bakery_pies_tarts_lemon_chess_tart",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -16157,7 +16157,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-pies-tarts-5",
-    "imageName": "dessert",
+    "imageName": "world_greek_berry_galette",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -16219,7 +16219,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-pies-tarts-6",
-    "imageName": "dessert",
+    "imageName": "world_greek_chocolate_silk_tart",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -16277,7 +16277,7 @@
     "creatorName": "@homechef.anna",
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-brownies-1",
-    "imageName": "ff_home_recipe_bakery_brownies_fudgy_brownies",
+    "imageName": "bakery_brownies_fudgy_brownie",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -16339,7 +16339,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-brownies-2",
-    "imageName": "dessert",
+    "imageName": "world_greek_salted_tahini_brownies",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -16401,7 +16401,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-brownies-3",
-    "imageName": "dessert",
+    "imageName": "world_greek_espresso_walnut_brownies",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -16459,7 +16459,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-brownies-4",
-    "imageName": "dessert",
+    "imageName": "world_greek_raspberry_cocoa_brownies",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -16517,7 +16517,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-brownies-5",
-    "imageName": "dessert",
+    "imageName": "world_greek_olive_oil_brownie_bites",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -16579,7 +16579,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-brownies-6",
-    "imageName": "dessert",
+    "imageName": "bakery_brownies_peanut_butter_swirl_brownies",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -16637,7 +16637,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-breakfast-bakes-1",
-    "imageName": "dessert",
+    "imageName": "world_greek_berry_breakfast_scones",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -16695,7 +16695,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-breakfast-bakes-2",
-    "imageName": "dessert",
+    "imageName": "world_greek_spinach_egg_breakfast_bake",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -16757,7 +16757,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-breakfast-bakes-3",
-    "imageName": "dessert",
+    "imageName": "bakery_breakfast_bakes_cinnamon_french_toast_bake",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -16815,7 +16815,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-breakfast-bakes-4",
-    "imageName": "dessert",
+    "imageName": "bakery_breakfast_bakes_savory_oat_breakfast_bars",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -16873,7 +16873,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-breakfast-bakes-5",
-    "imageName": "dessert",
+    "imageName": "world_italian_apple_yogurt_coffee_cake",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -16935,7 +16935,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-breakfast-bakes-6",
-    "imageName": "dessert",
+    "imageName": "bakery_breakfast_bakes_breakfast_biscuit_casserole",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -16993,7 +16993,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-savory-bakes-1",
-    "imageName": "ff_home_recipe_world_cuisine_italian_spicy_tomato_basil_pasta",
+    "imageName": "world_italian_pantry_pasta",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -17053,7 +17053,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-savory-bakes-2",
-    "imageName": "pasta",
+    "imageName": "world_italian_herbed_focaccia",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -17115,7 +17115,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-savory-bakes-3",
-    "imageName": "pasta",
+    "imageName": "world_italian_tomato_goat_cheese_bake",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -17173,7 +17173,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-savory-bakes-4",
-    "imageName": "pasta",
+    "imageName": "world_italian_mushroom_parmesan_strata",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -17231,7 +17231,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-bakery-savory-bakes-5",
-    "imageName": "pasta",
+    "imageName": "world_italian_spinach_artichoke_bake",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -17293,7 +17293,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-bakery-savory-bakes-6",
-    "imageName": "pasta",
+    "imageName": "world_greek_roasted_garlic_chicken_orzo",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -17351,7 +17351,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-protein-bowls-1",
-    "imageName": "ff_home_recipe_high_protein_protein_bowls_grilled_chicken_quinoa_bowl",
+    "imageName": "world_greek_protein_power_bowl",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -17414,7 +17414,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-protein-bowls-2",
-    "imageName": "ff_home_recipe_high_protein_protein_bowls_grilled_chicken_quinoa_bowl",
+    "imageName": "world_greek_quinoa_power_bowl",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -17481,7 +17481,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-protein-bowls-3",
-    "imageName": "salad",
+    "imageName": "world_greek_citrus_salmon_protein_bowl",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -17540,7 +17540,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-protein-bowls-4",
-    "imageName": "salad",
+    "imageName": "world_greek_steak_chimichurri_bowl",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -17600,7 +17600,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-protein-bowls-5",
-    "imageName": "salad",
+    "imageName": "vegetarian_tofu_tempeh_tofu_edamame_bowl",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -17663,7 +17663,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-protein-bowls-6",
-    "imageName": "salad",
+    "imageName": "world_mexican_turkey_taco_protein_bowl",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -17722,7 +17722,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-lean-chicken-1",
-    "imageName": "salmon",
+    "imageName": "world_greek_greek_chicken_meal_prep",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -17784,7 +17784,7 @@
     "creatorName": "@bakewithleo",
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-lean-chicken-2",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_chicken_lettuce_wraps",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -17850,7 +17850,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-lean-chicken-3",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_lemon_cod_with_greens",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -17910,7 +17910,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-lean-chicken-4",
-    "imageName": "salmon",
+    "imageName": "world_italian_turkey_zucchini_skillet",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -17971,7 +17971,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-lean-chicken-5",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_herbed_shrimp_quinoa",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -18035,7 +18035,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-lean-chicken-6",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_lean_beef_rice_bowl",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -18096,7 +18096,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-egg-based-meals-1",
-    "imageName": "bowl",
+    "imageName": "world_italian_high_protein_breakfast_bowl",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -18156,7 +18156,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-egg-based-meals-2",
-    "imageName": "bowl",
+    "imageName": "breakfast_eggs_cottage_cheese_frittata",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -18220,7 +18220,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-egg-based-meals-3",
-    "imageName": "bowl",
+    "imageName": "vegetarian_beans_lentils_jammy_egg_lentil_bowl",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -18279,7 +18279,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-egg-based-meals-4",
-    "imageName": "bowl",
+    "imageName": "world_greek_spinach_egg_skillet",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -18339,7 +18339,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-egg-based-meals-5",
-    "imageName": "bowl",
+    "imageName": "world_mexican_egg_white_breakfast_tacos",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -18402,7 +18402,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-egg-based-meals-6",
-    "imageName": "bowl",
+    "imageName": "world_greek_herbed_omelet_plate",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -18462,7 +18462,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-greek-yogurt-1",
-    "imageName": "dessert",
+    "imageName": "world_greek_pistachio_date_yogurt",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -18522,7 +18522,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-greek-yogurt-2",
-    "imageName": "dessert",
+    "imageName": "world_greek_greek_yogurt_breakfast_bowl",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -18586,7 +18586,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-greek-yogurt-3",
-    "imageName": "dessert",
+    "imageName": "world_greek_savory_yogurt_chicken_plate",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -18645,7 +18645,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-greek-yogurt-4",
-    "imageName": "dessert",
+    "imageName": "world_greek_berry_yogurt_parfait",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -18705,7 +18705,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-greek-yogurt-5",
-    "imageName": "dessert",
+    "imageName": "world_greek_cucumber_yogurt_salmon",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -18768,7 +18768,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-greek-yogurt-6",
-    "imageName": "dessert",
+    "imageName": "world_italian_honey_yogurt_protein_toast",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -18828,7 +18828,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-seafood-protein-1",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_salmon_sweet_potato_tray",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -18889,7 +18889,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-seafood-protein-2",
-    "imageName": "salmon",
+    "imageName": "world_greek_greek_tuna_salad_pitas",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -18954,7 +18954,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-seafood-protein-3",
-    "imageName": "salmon",
+    "imageName": "world_italian_shrimp_quinoa_plate",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -19015,7 +19015,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-seafood-protein-4",
-    "imageName": "salmon",
+    "imageName": "meat_seafood_fish_cod_and_white_bean_bowl",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -19076,7 +19076,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-seafood-protein-5",
-    "imageName": "salmon",
+    "imageName": "world_greek_scallop_protein_salad",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -19140,7 +19140,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-seafood-protein-6",
-    "imageName": "salmon",
+    "imageName": "world_greek_tuna_cucumber_rice_bowl",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -19201,7 +19201,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-legume-protein-1",
-    "imageName": "bowl",
+    "imageName": "vegetarian_tofu_tempeh_tempeh_recovery_bowl",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -19262,7 +19262,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-legume-protein-2",
-    "imageName": "bowl",
+    "imageName": "world_greek_lentil_protein_salad",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -19326,7 +19326,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-legume-protein-3",
-    "imageName": "bowl",
+    "imageName": "world_greek_chickpea_quinoa_bowl",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -19386,7 +19386,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-legume-protein-4",
-    "imageName": "bowl",
+    "imageName": "world_greek_white_bean_chicken_free_chili",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -19446,7 +19446,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-legume-protein-5",
-    "imageName": "bowl",
+    "imageName": "world_greek_edamame_lentil_soup",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -19509,7 +19509,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-legume-protein-6",
-    "imageName": "bowl",
+    "imageName": "world_mexican_black_bean_protein_tacos",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -19568,7 +19568,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-post-workout-meals-1",
-    "imageName": "salad",
+    "imageName": "world_greek_post_workout_chicken_plate",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -19628,7 +19628,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-post-workout-meals-2",
-    "imageName": "salad",
+    "imageName": "world_greek_macro_friendly_burrito_bowl",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -19692,7 +19692,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-post-workout-meals-3",
-    "imageName": "salad",
+    "imageName": "meat_seafood_fish_recovery_salmon_rice",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -19752,7 +19752,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-post-workout-meals-4",
-    "imageName": "salad",
+    "imageName": "vegetarian_tofu_tempeh_peanut_tempeh_recovery_bowl",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -19812,7 +19812,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-post-workout-meals-5",
-    "imageName": "salad",
+    "imageName": "world_italian_turkey_sweet_potato_plate",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -19875,7 +19875,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-post-workout-meals-6",
-    "imageName": "salad",
+    "imageName": "high_protein_protein_bowls_green_protein_smoothie_bowl",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -19934,7 +19934,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-low-carb-protein-1",
-    "imageName": "salad",
+    "imageName": "meat_seafood_fish_low_carb_salmon_salad",
     "ingredients": [
       "tomatoes",
       "cucumber",
@@ -19995,7 +19995,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-low-carb-protein-2",
-    "imageName": "salad",
+    "imageName": "world_italian_chicken_avocado_lettuce_cups",
     "ingredients": [
       "smoked paprika",
       "chili flakes",
@@ -20059,7 +20059,7 @@
     "creatorName": "@freshkitchen",
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-low-carb-protein-3",
-    "imageName": "salad",
+    "imageName": "meat_beef_steak_zucchini_plate",
     "ingredients": [
       "olive oil",
       "sea salt",
@@ -20121,7 +20121,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-low-carb-protein-4",
-    "imageName": "salad",
+    "imageName": "world_greek_shrimp_cauliflower_rice",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -20182,7 +20182,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-low-carb-protein-5",
-    "imageName": "salad",
+    "imageName": "world_greek_turkey_egg_roll_bowl",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -20246,7 +20246,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-low-carb-protein-6",
-    "imageName": "salad",
+    "imageName": "world_greek_tofu_cucumber_protein_plate",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -20306,7 +20306,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-high-protein-breakfast-1",
-    "imageName": "bowl",
+    "imageName": "world_greek_salmon_egg_breakfast_plate",
     "ingredients": [
       "black pepper",
       "garlic",
@@ -20366,7 +20366,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-high-protein-breakfast-2",
-    "imageName": "bowl",
+    "imageName": "world_greek_cottage_cheese_toast_trio",
     "ingredients": [
       "fresh herbs",
       "lemon",
@@ -20429,7 +20429,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-high-protein-breakfast-3",
-    "imageName": "bowl",
+    "imageName": "world_greek_protein_oat_pancakes",
     "ingredients": [
       "shallot",
       "vegetable stock",
@@ -20489,7 +20489,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-high-protein-breakfast-4",
-    "imageName": "bowl",
+    "imageName": "world_greek_egg_and_lentil_power_bowl",
     "ingredients": [
       "Greek yogurt",
       "brown rice",
@@ -20549,7 +20549,7 @@
     "creatorName": null,
     "difficulty": "moderate",
     "id": "recipe-seed-high-protein-high-protein-breakfast-5",
-    "imageName": "bowl",
+    "imageName": "high_protein_protein_bowls_turkey_breakfast_hash",
     "ingredients": [
       "quinoa",
       "baby greens",
@@ -20612,7 +20612,7 @@
     "creatorName": null,
     "difficulty": "easy",
     "id": "recipe-seed-high-protein-high-protein-breakfast-6",
-    "imageName": "bowl",
+    "imageName": "high_protein_protein_bowls_yogurt_chia_protein_bowl",
     "ingredients": [
       "tomatoes",
       "cucumber",

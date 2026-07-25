@@ -45,9 +45,6 @@ struct SubcategoryRecipeListView: View {
                 trailingActions: [
                     AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: shoppingCartStore.totalItemCount) {
                         onCartSelected()
-                    },
-                    AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile") {
-                        onProfileSelected()
                     }
                 ]
             )

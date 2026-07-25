@@ -303,7 +303,7 @@ struct RecipeIngredientsView: View {
     }
 
     private func shareText(for recipe: Recipe) -> String {
-        "Check out this recipe: \(recipe.title) in Flame & Fleur. \(recipe.totalTimeText) total, \(recipe.servingsText)."
+        "Check out this recipe: \(recipe.title) in ALLSPICED. \(recipe.totalTimeText) total, \(recipe.servingsText)."
     }
 
 }

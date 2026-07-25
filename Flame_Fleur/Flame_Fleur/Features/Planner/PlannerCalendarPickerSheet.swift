@@ -73,7 +73,7 @@ struct PlannerCalendarPickerSheet: View {
 
                     Text(monthTitle)
                         .font(AppTypography.cardTitle)
-                        .foregroundStyle(AppColors.olive)
+                        .foregroundStyle(AppColors.basilGreen)
                         .frame(maxWidth: .infinity, alignment: .center)
 
                     IconCircleButton(
@@ -117,11 +117,11 @@ struct PlannerCalendarPickerSheet: View {
                         .frame(maxWidth: .infinity)
                         .background(
                             Circle()
-                                .fill(isSelected ? AppColors.olive : Color.clear)
+                                .fill(isSelected ? AppColors.basilGreen : Color.clear)
                         )
                         .overlay(
                             Circle()
-                                .stroke(isSelected ? AppColors.olive : AppColors.warmBorder.opacity(0.52), lineWidth: isSelected ? 1 : 0)
+                                .stroke(isSelected ? AppColors.basilGreen : AppColors.warmBorder.opacity(0.52), lineWidth: isSelected ? 1 : 0)
                         )
                 }
                 .buttonStyle(.plain)

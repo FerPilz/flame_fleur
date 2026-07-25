@@ -46,6 +46,13 @@ struct RecipeDetailView: View {
             }
             .toolbar(.hidden, for: .tabBar)
         }
+        .onAppear {
+            guard let recipe = recipeRepository.recipe(id: recipeID) else {
+                return
+            }
+
+            UsageTrackingStore.shared.recordRecipeViewIfNeeded(for: recipe)
+        }
     }
 
     private func recipeContent(_ recipe: Recipe) -> some View {
@@ -71,8 +78,9 @@ struct RecipeDetailView: View {
                     isFavorite: favoritesStore.isFavorite(recipe.id),
                     shareText: shareText(for: recipe),
                     showsBackButton: true,
+                    showsBrandTitle: false,
                     onCartTap: { isCartPresented = true },
-                    cartBadgeValue: cartStore.totalItemCount > 0 ? cartStore.totalItemCount : nil,
+                    cartBadgeValue: cartStore.totalItemCount,
                     onBack: { goBack() },
                     onFavoriteTap: { favoritesStore.toggleFavorite(recipe.id) }
                 )
@@ -470,7 +478,7 @@ struct RecipeDetailView: View {
     }
 
     private func shareText(for recipe: Recipe) -> String {
-        "Check out this recipe: \(recipe.title) in Flame & Fleur. \(recipe.totalTimeText) total, \(recipe.servingsText)."
+        "Check out this recipe: \(recipe.title) in ALLSPICED. \(recipe.totalTimeText) total, \(recipe.servingsText)."
     }
 
     private func stepTitle(for stepNumber: Int) -> String {
@@ -494,9 +502,9 @@ struct RecipeDetailView: View {
 }
 
 private enum RecipeDetailLayout {
-    static let minHeroHeight: CGFloat = 232
-    static let maxHeroHeight: CGFloat = 286
-    static let heroHeightRatio: CGFloat = 0.31
+    static let minHeroHeight: CGFloat = 278
+    static let maxHeroHeight: CGFloat = 344
+    static let heroHeightRatio: CGFloat = 0.37
     static let panelOverlap: CGFloat = 72
 }
 

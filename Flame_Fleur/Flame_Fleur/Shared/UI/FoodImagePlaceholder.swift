@@ -1,8 +1,10 @@
 import SwiftUI
 #if canImport(UIKit)
 import UIKit
+typealias PlatformFoodImage = UIImage
 #elseif canImport(AppKit)
 import AppKit
+typealias PlatformFoodImage = NSImage
 #endif
 
 enum FoodImageKind: String {
@@ -32,7 +34,7 @@ enum FoodImagePlaceholderStyle {
     var aspectRatio: CGFloat {
         switch self {
         case .hero:
-            return 1.22
+            return 1.08
         case .card:
             return 1.04
         case .thumbnail:
@@ -107,9 +109,9 @@ struct FoodImagePlaceholder: View {
 
     @ViewBuilder
     private var content: some View {
-        if let imageName = availableImageName {
+        if let imageSource = resolvedImageSource {
             GeometryReader { proxy in
-                resolvedImage(named: imageName)
+                image(from: imageSource)
                     .resizable()
                     .scaledToFill()
                     .frame(width: proxy.size.width, height: proxy.size.height)
@@ -119,29 +121,39 @@ struct FoodImagePlaceholder: View {
         }
     }
 
-    private var availableImageName: String? {
+    private var resolvedImageSource: ResolvedFoodImageSource? {
         guard let imageName = imageName?.trimmingCharacters(in: .whitespacesAndNewlines),
-              !imageName.isEmpty,
-              AssetImageAvailability.exists(named: imageName) || RecipeImageStore.shared.hasLocalImage(named: imageName) else {
+              !imageName.isEmpty else {
             return nil
         }
 
-        return imageName
+        if let bundledImage = BundledRecipeImage.platformImage(named: imageName) {
+            return .bundled(bundledImage)
+        }
+
+        if AssetImageAvailability.isAssetCatalogImage(named: imageName) {
+            return .asset(AssetImageAvailability.assetLookupName(for: imageName))
+        }
+
+        if let localImage = RecipeImageStore.shared.platformImage(named: imageName) {
+            return .local(localImage)
+        }
+
+        return nil
     }
 
-    private func resolvedImage(named imageName: String) -> Image {
-        if AssetImageAvailability.exists(named: imageName) {
-            Image(imageName)
-        } else if let localImage = RecipeImageStore.shared.platformImage(named: imageName) {
+    private func image(from source: ResolvedFoodImageSource) -> Image {
+        switch source {
+        case .asset(let imageName):
+            return Image(imageName)
+        case .bundled(let image), .local(let image):
             #if canImport(UIKit)
-            Image(uiImage: localImage)
+            return Image(uiImage: image)
             #elseif canImport(AppKit)
-            Image(nsImage: localImage)
+            return Image(nsImage: image)
             #else
-            Image(imageName)
+            return Image("")
             #endif
-        } else {
-            Image(imageName)
         }
     }
 
@@ -317,15 +329,102 @@ struct FoodImagePlaceholder: View {
     }
 }
 
+private enum ResolvedFoodImageSource {
+    case asset(String)
+    case bundled(PlatformFoodImage)
+    case local(PlatformFoodImage)
+}
+
 private enum AssetImageAvailability {
+    static func assetLookupName(for imageName: String) -> String {
+        let candidates = candidateNames(for: imageName)
+        return candidates.first(where: isAssetCatalogImage(named:)) ?? imageName
+    }
+
     static func exists(named imageName: String) -> Bool {
+        isAssetCatalogImage(named: imageName) || BundledRecipeImage.exists(named: imageName)
+    }
+
+    static func isAssetCatalogImage(named imageName: String) -> Bool {
+        guard !BundledRecipeImage.exists(named: imageName) else {
+            return false
+        }
+
+        let candidates = candidateNames(for: imageName)
+
         #if canImport(UIKit)
-        return UIImage(named: imageName) != nil
+        return candidates.contains { UIImage(named: $0) != nil }
         #elseif canImport(AppKit)
-        return NSImage(named: NSImage.Name(imageName)) != nil
+        return candidates.contains { NSImage(named: NSImage.Name($0)) != nil }
         #else
         return false
         #endif
+    }
+
+    private static func candidateNames(for imageName: String) -> [String] {
+        let trimmedName = imageName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let stemName = BundledRecipeImage.normalizedStem(for: imageName)
+        if trimmedName.isEmpty {
+            return []
+        }
+
+        if stemName.isEmpty || stemName == trimmedName {
+            return [trimmedName]
+        }
+
+        return [trimmedName, stemName]
+    }
+}
+
+private enum BundledRecipeImage {
+    private static let bundleSubdirectories = [
+        "",
+        "recipe_regen_sample",
+        "GeneratedAssets/Gemini/recipe_regen_sample",
+        "Resources/GeneratedAssets/Gemini/recipe_regen_sample"
+    ]
+
+    static func normalizedStem(for imageName: String) -> String {
+        let trimmedName = imageName.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard trimmedName.lowercased().hasSuffix(".png") else {
+            return trimmedName
+        }
+
+        return String(trimmedName.dropLast(4))
+    }
+
+    static func exists(named imageName: String) -> Bool {
+        url(for: imageName) != nil
+    }
+
+    #if canImport(UIKit)
+    static func platformImage(named imageName: String) -> UIImage? {
+        guard let url = url(for: imageName) else { return nil }
+        return UIImage(contentsOfFile: url.path)
+    }
+    #elseif canImport(AppKit)
+    static func platformImage(named imageName: String) -> NSImage? {
+        guard let url = url(for: imageName) else { return nil }
+        return NSImage(contentsOf: url)
+    }
+    #endif
+
+    static func url(for imageName: String) -> URL? {
+        let stem = normalizedStem(for: imageName)
+        guard !stem.isEmpty else { return nil }
+
+        for subdirectory in bundleSubdirectories {
+            if let url = Bundle.main.url(
+                forResource: stem,
+                withExtension: "png",
+                subdirectory: subdirectory.isEmpty ? nil : subdirectory
+            ) {
+                return url
+            }
+        }
+
+        return nil
     }
 }
 

@@ -42,7 +42,7 @@ enum ExploreLaunchContext: String, Hashable {
         case .featured:
             return "Editorial favorites and dishes worth saving."
         case .community:
-            return "Recipes loved and shared by the Flame & Fleur community."
+            return "Recipes loved and shared by the ALLSPICED community."
         case .worldCuisine:
             return "Browse recipes from around the world."
         case .topPicks:

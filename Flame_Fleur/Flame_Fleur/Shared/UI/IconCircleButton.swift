@@ -50,19 +50,46 @@ struct IconCircleButton: View {
                     .frame(width: size, height: size)
 
                 if let badgeValue, badgeValue > 0 {
-                    Text("\(badgeValue)")
-                        .font(.system(size: 9, weight: .bold))
-                        .foregroundStyle(AppColors.elevatedCardBackground)
-                        .frame(width: 15, height: 15)
-                        .background(Circle().fill(AppColors.burntOrange))
-                        .offset(x: 3, y: -3)
-                    }
+                    badgeLabel(for: badgeValue)
+                        .offset(x: 4, y: -4)
+                }
             }
         }
         .buttonStyle(.plain)
         .frame(width: max(size, 44), height: max(size, 44), alignment: .center)
         .contentShape(Circle())
         .accessibilityLabel(Text(accessibilityLabel))
+    }
+
+    @ViewBuilder
+    private func badgeLabel(for badgeValue: Int) -> some View {
+        let text = formattedBadgeValue(badgeValue)
+
+        Text(text)
+            .font(.system(size: 8.5, weight: .bold))
+            .foregroundStyle(AppColors.elevatedCardBackground)
+            .padding(.horizontal, text.count > 1 ? 5 : 3)
+            .frame(minWidth: badgeWidth(for: text), minHeight: 15)
+            .background(
+                Capsule(style: .continuous)
+                    .fill(AppColors.burntOrange)
+            )
+    }
+
+    private func formattedBadgeValue(_ badgeValue: Int) -> String {
+        guard badgeValue < 100 else { return "99+" }
+        return "\(badgeValue)"
+    }
+
+    private func badgeWidth(for text: String) -> CGFloat {
+        switch text.count {
+        case 1:
+            return 15
+        case 2:
+            return 23
+        default:
+            return 28
+        }
     }
 
     @ViewBuilder

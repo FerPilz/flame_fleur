@@ -1,0 +1,13 @@
+Create a clean, high-quality, app-friendly ingredient illustration.
+
+Subject:
+{promptSubject}
+
+Visual style:
+Polished realistic-illustrative food asset, centered composition, 1:1 square, clean mobile-app thumbnail style, soft studio lighting, gentle shadow, clear recognizable ingredient form.
+
+Background:
+Simple neutral warm background or transparent-feeling clean background. Do not use text, labels, logos, packaging brand names, watermarks, hands, people, plates with full meals, or busy scenes.
+
+Output:
+The ingredient should be the clear focal point and recognizable at small size.

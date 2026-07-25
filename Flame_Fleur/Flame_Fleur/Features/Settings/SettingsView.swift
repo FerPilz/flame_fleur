@@ -2,29 +2,20 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var profileStore: UserProfileStore
     @EnvironmentObject private var settingsStore: AppSettingsStore
 
     @State private var activeSheet: ActiveSettingsSheet?
-
-    private let accountEmail = "julia.martinez@example.com"
-
-    private var profile: UserProfile {
-        profileStore.profile
-    }
-
-    private var displayProfileName: String {
-        let trimmed = profile.name.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? "Profile" : trimmed
-    }
-
-    private var displayLocation: String {
-        let trimmed = settings.location.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? "Not set" : trimmed
-    }
+    @State private var feedbackItems: [Any] = []
+    @State private var isFeedbackSheetPresented = false
 
     private var settings: AppSettings {
         settingsStore.settings
+    }
+
+    private var appVersionText: String {
+        let shortVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0"
+        let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1"
+        return "Version \(shortVersion) (\(buildNumber))"
     }
 
     var body: some View {
@@ -34,12 +25,10 @@ struct SettingsView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: AppSpacing.md) {
                     header
-                    accountSection
                     preferencesSection
-                    privacySection
-                    locationSection
-                    accountSubscriptionSection
-                    appSection
+                    supportSection
+                    legalSection
+                    versionFooter
                 }
                 .padding(.horizontal, AppSpacing.screenHorizontal)
                 .padding(.top, AppSpacing.xs)
@@ -55,67 +44,23 @@ struct SettingsView: View {
                 .presentationDragIndicator(.visible)
                 .presentationCornerRadius(AppRadius.hero)
         }
+        .sheet(isPresented: $isFeedbackSheetPresented, onDismiss: { feedbackItems = [] }) {
+            if !feedbackItems.isEmpty {
+                ActivityView(activityItems: feedbackItems)
+            }
+        }
     }
 
     private var header: some View {
-        ZStack {
-            HStack {
-                IconCircleButton(
+        AppHeader(
+            leadingActions: [
+                AppHeaderAction(
                     systemName: "chevron.left",
                     accessibilityLabel: "Back to profile",
-                    size: AppTopActionMetrics.buttonSize,
                     action: { dismiss() }
                 )
-                .frame(width: 44, alignment: .leading)
-
-                Spacer()
-
-                FoodImagePlaceholder(imageName: "salad", style: .thumbnail)
-                    .frame(width: 70, height: 48)
-                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous))
-            }
-
-            Text("Settings")
-                .font(AppTypography.sectionTitle)
-                .foregroundStyle(AppColors.primaryText)
-                .accessibilityAddTraits(.isHeader)
-        }
-        .frame(height: 50)
-    }
-
-    private var accountSection: some View {
-        SettingsSectionCard(title: "Account") {
-            Button {
-                activeSheet = .account
-            } label: {
-                HStack(spacing: AppSpacing.sm) {
-                        FoodImagePlaceholder(imageName: profile.profileImageName, style: .circle)
-                            .frame(width: 44, height: 44)
-
-                    VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-                        Text(displayProfileName)
-                            .font(AppTypography.bodyEmphasis)
-                            .foregroundStyle(AppColors.primaryText)
-                            .lineLimit(1)
-
-                        Text(accountEmail)
-                            .font(AppTypography.metadata)
-                            .foregroundStyle(AppColors.secondaryText)
-                            .lineLimit(1)
-                    }
-
-                    Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .font(AppTypography.metadata)
-                        .foregroundStyle(AppColors.tertiaryText)
-                }
-                .frame(minHeight: 62)
-                .padding(.horizontal, AppSpacing.sm)
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-        }
+            ]
+        )
     }
 
     private var preferencesSection: some View {
@@ -136,7 +81,7 @@ struct SettingsView: View {
                 systemImage: "flame.fill",
                 iconBackground: AppColors.softOrange,
                 iconForeground: AppColors.burntOrange,
-                title: "Cuisine style",
+                title: "Cuisine Preferences",
                 action: { activeSheet = .cuisineStyle }
             ) {
                 SettingsRowValue(settings.cuisineStyle)
@@ -148,129 +93,71 @@ struct SettingsView: View {
                 systemImage: "leaf.fill",
                 iconBackground: AppColors.softOlive,
                 iconForeground: AppColors.olive,
-                title: "Dietary preferences",
+                title: "Dietary Preferences",
                 action: { activeSheet = .dietaryPreferences }
             ) {
                 SettingsRowValue(settingsStore.dietaryPreferenceSummary)
             }
-
-            SettingsRowDivider()
-
-            SettingsOptionRow(
-                systemImage: "person.2.fill",
-                iconBackground: AppColors.premiumGold.opacity(0.16),
-                iconForeground: AppColors.premiumGold,
-                title: "Default servings",
-                action: { activeSheet = .defaultServings }
-            ) {
-                SettingsRowValue(settingsStore.defaultServingsSummary)
-            }
         }
     }
 
-    private var privacySection: some View {
-        SettingsSectionCard(title: "Privacy") {
+    private var supportSection: some View {
+        SettingsSectionCard(title: "Support") {
             SettingsOptionRow(
-                systemImage: "lock.fill",
-                iconBackground: AppColors.softOlive,
-                iconForeground: AppColors.olive,
-                title: "Profile visibility",
-                subtitle: "Choose who can see your profile"
-            ) {
-                SettingsVisibilityControl(isPrivate: settings.isProfilePrivate) { isPrivate in
-                    settingsStore.setProfilePrivate(isPrivate)
-                }
-            }
-
-            SettingsRowDivider()
-
-            SettingsOptionRow(
-                systemImage: "eye.fill",
+                systemImage: "paperplane.fill",
                 iconBackground: AppColors.softOrange,
                 iconForeground: AppColors.burntOrange,
-                title: "Activity visibility",
-                subtitle: "Show your meal plans and recipes"
+                title: "Send Feedback",
+                action: openFeedbackShareSheet
             ) {
-                SettingsToggleControl(isOn: settings.isActivityVisible) {
-                    settingsStore.setActivityVisible(!settings.isActivityVisible)
-                }
+                rowChevron
             }
         }
     }
 
-    private var locationSection: some View {
-        SettingsSectionCard(title: "Location & Region") {
+    private var legalSection: some View {
+        SettingsSectionCard(title: "Legal") {
             SettingsOptionRow(
-                systemImage: "mappin.circle.fill",
-                iconBackground: AppColors.softOlive,
-                iconForeground: AppColors.olive,
-                title: "Location",
-                action: { activeSheet = .location }
-            ) {
-                SettingsRowValue(displayLocation)
-            }
-        }
-    }
-
-    private var accountSubscriptionSection: some View {
-        SettingsSectionCard(title: "Account & Subscription") {
-            SettingsOptionRow(
-                systemImage: "crown.fill",
-                iconBackground: AppColors.premiumGold.opacity(0.16),
-                iconForeground: AppColors.premiumGold,
-                title: "Manage subscription",
-                action: { activeSheet = .subscription }
-            ) {
-                SettingsRowValue("", badge: "Premium")
-            }
-
-            SettingsRowDivider()
-
-            SettingsOptionRow(
-                systemImage: "creditcard.fill",
-                iconBackground: AppColors.softOlive,
-                iconForeground: AppColors.olive,
-                title: "Payment methods",
-                action: { activeSheet = .payment }
-            ) {
-                SettingsRowValue("Visa **** 4242")
-            }
-        }
-    }
-
-    private var appSection: some View {
-        SettingsSectionCard(title: "App") {
-            SettingsOptionRow(
-                systemImage: "bell.fill",
+                systemImage: "hand.raised.fill",
                 iconBackground: AppColors.softOrange,
                 iconForeground: AppColors.burntOrange,
-                title: "Notifications"
+                title: "Privacy Policy",
+                action: { activeSheet = .privacyPolicy }
             ) {
-                SettingsToggleControl(isOn: settings.notificationsEnabled) {
-                    settingsStore.setNotificationsEnabled(!settings.notificationsEnabled)
-                }
+                rowChevron
             }
 
             SettingsRowDivider()
 
             SettingsOptionRow(
-                systemImage: "globe",
+                systemImage: "doc.text.fill",
                 iconBackground: AppColors.softOlive,
                 iconForeground: AppColors.olive,
-                title: "Language",
-                action: { activeSheet = .language }
+                title: "Terms of Use",
+                action: { activeSheet = .termsOfUse }
             ) {
-                SettingsRowValue(settings.language)
+                rowChevron
             }
         }
+    }
+
+    private var rowChevron: some View {
+        Image(systemName: "chevron.right")
+            .font(AppTypography.metadata)
+            .foregroundStyle(AppColors.tertiaryText)
+    }
+
+    private var versionFooter: some View {
+        Text(appVersionText)
+            .font(AppTypography.metadata)
+            .foregroundStyle(AppColors.secondaryText)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.top, AppSpacing.xxs)
     }
 
     @ViewBuilder
     private func sheetContent(for sheet: ActiveSettingsSheet) -> some View {
         switch sheet {
-        case .account:
-            SettingsAccountSheet(profile: profile, email: accountEmail)
-
         case .units:
             SettingsSelectionSheet(
                 title: "Units",
@@ -287,7 +174,7 @@ struct SettingsView: View {
 
         case .cuisineStyle:
             SettingsSelectionSheet(
-                title: "Cuisine Style",
+                title: "Cuisine Preferences",
                 options: cuisineStyleOptions,
                 selectedIDs: [settings.cuisineStyle],
                 onSelect: { settingsStore.setCuisineStyle($0) }
@@ -308,40 +195,63 @@ struct SettingsView: View {
                 }
             )
 
-        case .defaultServings:
-            SettingsSelectionSheet(
-                title: "Default Servings",
-                options: servingOptions,
-                selectedIDs: [settings.defaultServings],
-                onSelect: { settingsStore.setDefaultServings($0) }
+        case .privacyPolicy:
+            SettingsDocumentSheet(
+                title: "Privacy Policy",
+                systemImage: "hand.raised.fill",
+                sections: [
+                    SettingsDocumentSection(
+                        title: "Local-first data",
+                        body: "Flame & Fleur keeps your recipes, planner activity, favorites, cart actions, and profile preferences on this device unless you explicitly share content."
+                    ),
+                    SettingsDocumentSection(
+                        title: "Usage insights",
+                        body: "Analytics and profile insights are generated from local usage events such as saved recipes, planned meals, viewed recipes, and shopping activity. No cloud analytics or account tracking is used in this MVP."
+                    ),
+                    SettingsDocumentSection(
+                        title: "Shared content",
+                        body: "When you share a cart, plan, or recipe, only the content you choose to export is included in that share action."
+                    )
+                ]
             )
 
-        case .location:
-            SettingsLocationSheet(currentLocation: settings.location)
-                .environmentObject(settingsStore)
-
-        case .subscription:
-            SettingsPlaceholderSheet(
-                title: "Manage Subscription",
-                message: "Subscription management is a placeholder only in this local prototype.",
-                systemImage: "crown.fill"
-            )
-
-        case .payment:
-            SettingsPlaceholderSheet(
-                title: "Payment Methods",
-                message: "Payment method management is a placeholder only. No payment handling is implemented.",
-                systemImage: "creditcard.fill"
-            )
-
-        case .language:
-            SettingsSelectionSheet(
-                title: "Language",
-                options: languageOptions,
-                selectedIDs: [settings.language],
-                onSelect: { settingsStore.setLanguage($0) }
+        case .termsOfUse:
+            SettingsDocumentSheet(
+                title: "Terms of Use",
+                systemImage: "doc.text.fill",
+                sections: [
+                    SettingsDocumentSection(
+                        title: "Personal use",
+                        body: "This MVP is intended as a personal cooking companion for browsing recipes, planning meals, saving favorites, and organizing shopping lists."
+                    ),
+                    SettingsDocumentSection(
+                        title: "Recipe and planning guidance",
+                        body: "Nutrition values, planner insights, and cooking suggestions are informational only and should be reviewed using your own judgment."
+                    ),
+                    SettingsDocumentSection(
+                        title: "Prototype features",
+                        body: "Some areas of the app are still evolving. Features that are not fully implemented may change or be removed in future versions."
+                    )
+                ]
             )
         }
+    }
+
+    private func openFeedbackShareSheet() {
+        feedbackItems = [
+            """
+            Flame & Fleur Feedback
+
+            I’d like to share the following feedback:
+
+            -
+
+            Device:
+            iOS Version:
+            App Version: \(appVersionText)
+            """
+        ]
+        isFeedbackSheetPresented = true
     }
 
     private var cuisineStyleOptions: [SettingsSelectionOption] {
@@ -368,118 +278,37 @@ struct SettingsView: View {
             "Quick & Easy"
         ].map { SettingsSelectionOption(id: $0, title: $0) }
     }
-
-    private var servingOptions: [SettingsSelectionOption] {
-        ["1", "2", "3", "4", "5", "6+"].map { servings in
-            SettingsSelectionOption(
-                id: servings,
-                title: servings == "1" ? "1 serving" : "\(servings) servings"
-            )
-        }
-    }
-
-    private var languageOptions: [SettingsSelectionOption] {
-        ["English", "Spanish", "German", "Polish"].map {
-            SettingsSelectionOption(id: $0, title: $0)
-        }
-    }
 }
 
 private enum ActiveSettingsSheet: String, Identifiable {
-    case account
     case units
     case cuisineStyle
     case dietaryPreferences
-    case defaultServings
-    case location
-    case subscription
-    case payment
-    case language
+    case privacyPolicy
+    case termsOfUse
 
     var id: String { rawValue }
 
     var detents: Set<PresentationDetent> {
         switch self {
-        case .dietaryPreferences:
-            return [.medium, .large]
-        default:
+        case .units, .cuisineStyle, .dietaryPreferences:
+            return [.large]
+        case .privacyPolicy, .termsOfUse:
             return [.medium]
         }
     }
 }
 
-private struct SettingsLocationSheet: View {
-    @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var settingsStore: AppSettingsStore
-
-    @State private var draftLocation: String
-
-    init(currentLocation: String) {
-        _draftLocation = State(initialValue: currentLocation)
-    }
-
-    var body: some View {
-        NavigationStack {
-            VStack(alignment: .leading, spacing: AppSpacing.md) {
-                HStack(alignment: .top, spacing: AppSpacing.sm) {
-                    VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-                        Text("Location")
-                            .font(AppTypography.heroTitle)
-                            .foregroundStyle(AppColors.primaryText)
-
-                        Text("Update the local location label for recipes and profile context.")
-                            .font(AppTypography.callout)
-                            .foregroundStyle(AppColors.secondaryText)
-                            .lineLimit(2)
-                    }
-
-                    Spacer()
-
-                    IconCircleButton(
-                        systemName: "xmark",
-                        accessibilityLabel: "Close location",
-                        size: 30,
-                        action: { dismiss() }
-                    )
-                }
-
-                TextField("Location", text: $draftLocation)
-                    .font(AppTypography.body)
-                    .foregroundStyle(AppColors.primaryText)
-                    .tint(AppColors.olive)
-                    .padding(AppSpacing.sm)
-                    .background(
-                        RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
-                            .fill(AppColors.elevatedCardBackground)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
-                            .stroke(AppColors.warmBorder, lineWidth: 1)
-                    )
-
-                Spacer(minLength: AppSpacing.md)
-
-                PrimaryButton("Save Location", style: .olive, height: 44) {
-                    let trimmedLocation = draftLocation.trimmingCharacters(in: .whitespacesAndNewlines)
-                    if !trimmedLocation.isEmpty {
-                        settingsStore.setLocation(trimmedLocation)
-                    }
-                    dismiss()
-                }
-            }
-            .padding(.horizontal, AppSpacing.screenHorizontal)
-            .padding(.top, AppSpacing.lg)
-            .padding(.bottom, AppSpacing.md)
-            .background(AppColors.appBackground.ignoresSafeArea())
-            .toolbar(.hidden, for: .navigationBar)
-        }
-    }
+private struct SettingsDocumentSection: Identifiable {
+    let id = UUID()
+    let title: String
+    let body: String
 }
 
-private struct SettingsPlaceholderSheet: View {
+private struct SettingsDocumentSheet: View {
     let title: String
-    let message: String
     let systemImage: String
+    let sections: [SettingsDocumentSection]
 
     @Environment(\.dismiss) private var dismiss
 
@@ -504,13 +333,29 @@ private struct SettingsPlaceholderSheet: View {
                     .font(AppTypography.heroTitle)
                     .foregroundStyle(AppColors.primaryText)
 
-                Text(message)
-                    .font(AppTypography.callout)
-                    .foregroundStyle(AppColors.secondaryText)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(3)
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                        ForEach(sections) { section in
+                            SurfaceCard(
+                                backgroundColor: AppColors.elevatedCardBackground,
+                                borderColor: AppColors.warmBorder,
+                                cornerRadius: AppRadius.large,
+                                contentPadding: AppSpacing.md
+                            ) {
+                                VStack(alignment: .leading, spacing: AppSpacing.xs) {
+                                    Text(section.title)
+                                        .font(AppTypography.bodyEmphasis)
+                                        .foregroundStyle(AppColors.primaryText)
 
-                Spacer(minLength: AppSpacing.md)
+                                    Text(section.body)
+                                        .font(AppTypography.callout)
+                                        .foregroundStyle(AppColors.secondaryText)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                            }
+                        }
+                    }
+                }
 
                 PrimaryButton("Done", style: .olive, height: 44) {
                     dismiss()

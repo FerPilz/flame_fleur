@@ -4,6 +4,7 @@ enum AppTypography {
     // MARK: - Brand / Main titles
 
     static let brandTitle = Font.system(size: 18, weight: .medium, design: .serif)
+    static let allSpicedBrandTitle = Font.custom("Copperplate-Bold", size: 25)
     static let screenTitle = Font.system(size: 30, weight: .semibold, design: .serif)
 
     // MARK: - Charter Bold title typography
@@ -25,6 +26,8 @@ enum AppTypography {
     static let compactRecipeTitle = Font.custom("Charter-Bold", size: 12.5)
 
     static let categoryCircleLabel = Font.custom("Charter-Bold", size: 12)
+    static let exploreCategoryCircleLabel = Font.custom("Charter-Bold", size: 15)
+    static let exploreSubcategoryCircleLabel = Font.custom("Charter-Bold", size: 14)
 
     // MARK: - Body / metadata / buttons
 

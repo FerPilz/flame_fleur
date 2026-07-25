@@ -26,11 +26,11 @@ struct MacroBalance: Hashable {
     }
 
     var caloriesText: String {
-        NutritionSummary.wholeNumberText(calories)
+        "\(Int(calories.rounded())) cal"
     }
 
     var calorieTargetText: String {
-        NutritionSummary.wholeNumberText(calorieTarget)
+        "\(Int(calorieTarget.rounded())) cal"
     }
 
     var proteinText: String {

@@ -3,12 +3,12 @@ import SwiftUI
 struct ProfileView: View {
     let onBack: (() -> Void)?
 
+    @EnvironmentObject private var usageTrackingStore: UsageTrackingStore
     @EnvironmentObject private var profileStore: UserProfileStore
     @EnvironmentObject private var favoritesStore: FavoritesStore
-    @EnvironmentObject private var userRecipeStore: UserRecipeStore
+    @EnvironmentObject private var mealPlannerStore: MealPlannerStore
     @Environment(\.dismiss) private var dismiss
 
-    @State private var isPreferencesEditorPresented = false
     @State private var isAchievementsPresented = false
     @State private var navigationPath: [ProfileRoute] = []
 
@@ -23,32 +23,29 @@ struct ProfileView: View {
         return trimmed.isEmpty ? "Profile" : trimmed
     }
 
-    private var displayLocation: String? {
-        let trimmed = profile.location.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? nil : trimmed
-    }
-
-    private var displayTagline: String? {
-        let trimmed = profile.tagline.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? nil : trimmed
-    }
-
-    private var displayCuisineStyle: String {
-        let trimmed = profile.cuisineStyle.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? "Not set" : trimmed
-    }
-
     private var displayMemberSinceText: String? {
         guard profile.memberSince.timeIntervalSince1970 > 0 else { return nil }
         return profile.memberSince.formatted(.dateTime.month(.abbreviated).year())
     }
 
-    private var safePreferences: [ProfilePreference] {
-        profile.preferences
+    private var analyticsSummary: AnalyticsSummary {
+        AnalyticsSummaryBuilder(
+            usageTrackingStore: usageTrackingStore,
+            favoritesStore: favoritesStore,
+            mealPlannerStore: mealPlannerStore,
+            recipeRepository: recipeRepository
+        )
+        .build()
     }
 
-    private var safeFavoriteCuisines: [FavoriteCuisine] {
-        profile.favoriteCuisines
+    private var profileInsights: ProfileInsights {
+        ProfileInsightsBuilder(
+            analyticsSummary: analyticsSummary,
+            usageTrackingStore: usageTrackingStore,
+            mealPlannerStore: mealPlannerStore,
+            recipeRepository: recipeRepository
+        )
+        .build()
     }
 
     private var safeAchievements: [ProfileAchievement] {
@@ -61,34 +58,23 @@ struct ProfileView: View {
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
-            ZStack {
-                AppColors.appBackground.ignoresSafeArea()
-
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: AppSpacing.md) {
-                        header
-                        identityHeader
-                        profileSummaryCard
-                        preferencesSection
-                        favoriteCuisinesSection
-                        savedRecipesSection
-                        achievementsSection
-                    }
-                    .padding(.horizontal, AppSpacing.screenHorizontal)
-                    .padding(.top, AppSpacing.xs)
-                    .padding(.bottom, AppSpacing.xxxl)
-                }
+            AppScreen(
+                contentSpacing: AppSpacing.md,
+                headerTopPadding: AppSpacing.xs,
+                contentTopPadding: AppSpacing.xs,
+                contentBottomPadding: AppSpacing.xxxl
+            ) {
+                header
+            } content: {
+                identityHeader
+                profileSummaryCard
+                planningStyleSection
+                savedRecipesSection
+                achievementsSection
             }
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(.hidden, for: .navigationBar)
-            .sheet(isPresented: $isPreferencesEditorPresented) {
-                PreferencesEditorSheet()
-                    .environmentObject(profileStore)
-                    .presentationDetents([.medium, .large])
-                    .presentationDragIndicator(.visible)
-                    .presentationCornerRadius(AppRadius.hero)
-            }
             .sheet(isPresented: $isAchievementsPresented) {
                 AchievementsSheet(achievements: profile.achievements)
                     .presentationDetents([.medium])
@@ -134,36 +120,14 @@ struct ProfileView: View {
     }
 
     private var header: some View {
-        HStack {
-            IconCircleButton(
-                systemName: "chevron.left",
-                accessibilityLabel: "Back",
-                size: AppTopActionMetrics.buttonSize,
-                backgroundColor: AppColors.elevatedCardBackground,
-                foregroundColor: AppColors.darkOlive,
-                action: goBack
-            )
-            .frame(width: 44, alignment: .leading)
-
-            Spacer()
-
-            Text("Profile")
-                .font(AppTypography.sectionTitle)
-                .foregroundStyle(AppColors.primaryText)
-                .accessibilityAddTraits(.isHeader)
-
-            Spacer()
-
-            IconCircleButton(
-                systemName: "gearshape",
-                accessibilityLabel: "Open settings",
-                size: AppTopActionMetrics.buttonSize,
-                backgroundColor: AppColors.elevatedCardBackground,
-                foregroundColor: AppColors.darkOlive,
-                action: openSettings
-            )
-            .frame(width: 44, alignment: .trailing)
-        }
+        AppHeader(
+            leadingActions: [
+                AppHeaderAction(systemName: "chevron.left", accessibilityLabel: "Back", action: goBack)
+            ],
+            trailingActions: [
+                AppHeaderAction(systemName: "gearshape", accessibilityLabel: "Open settings", action: openSettings)
+            ]
+        )
     }
 
     private var identityHeader: some View {
@@ -176,29 +140,6 @@ struct ProfileView: View {
                     .font(AppTypography.heroTitle)
                     .foregroundStyle(AppColors.primaryText)
                     .lineLimit(1)
-
-                if let displayLocation {
-                    Label(displayLocation, systemImage: "mappin.circle.fill")
-                        .font(AppTypography.metadata)
-                        .foregroundStyle(AppColors.olive)
-                        .lineLimit(1)
-                }
-
-                if let displayTagline {
-                    HStack(spacing: AppSpacing.xxs) {
-                        Text(displayTagline)
-                            .font(AppTypography.metadata)
-                            .foregroundStyle(AppColors.secondaryText)
-
-                        Image(systemName: "checkmark.circle.fill")
-                            .font(AppTypography.metadata)
-                            .foregroundStyle(AppColors.olive)
-                    }
-                    .padding(.horizontal, AppSpacing.sm)
-                    .frame(height: 26)
-                    .background(Capsule(style: .continuous).fill(AppColors.elevatedCardBackground))
-                    .overlay(Capsule(style: .continuous).stroke(AppColors.warmBorder, lineWidth: 1))
-                }
 
                 if let displayMemberSinceText {
                     Text("Member since \(displayMemberSinceText)")
@@ -214,113 +155,114 @@ struct ProfileView: View {
         SurfaceCard(
             backgroundColor: AppColors.elevatedCardBackground,
             cornerRadius: AppRadius.extraLarge,
-            contentPadding: AppSpacing.sm
+            contentPadding: AppSpacing.md
         ) {
-            VStack(spacing: AppSpacing.xs) {
-                HStack(spacing: AppSpacing.xs) {
-                    summaryMetric(
-                        title: "Cuisine style",
-                        value: displayCuisineStyle,
-                        subtitle: nil,
-                        systemImage: "fork.knife"
-                    )
+            LazyVGrid(
+                columns: [
+                    GridItem(.flexible(), spacing: AppSpacing.sm),
+                    GridItem(.flexible(), spacing: AppSpacing.sm)
+                ],
+                spacing: AppSpacing.sm
+            ) {
+                summaryMetric(
+                    title: "Saved Recipes",
+                    value: "\(profileInsights.savedRecipeCount)"
+                )
 
-                    verticalDivider
+                summaryMetric(
+                    title: "Planned This Week",
+                    value: "\(profileInsights.plannedDishesThisWeek)"
+                )
 
-                    summaryMetric(
-                        title: "Favorite meals",
-                        value: "\(favoritesStore.favoriteRecipeIDs.count)",
-                        subtitle: "Saved",
-                        systemImage: "heart.fill"
-                    )
-                }
+                summaryMetric(
+                    title: "Favorite Cuisine",
+                    value: profileInsights.favoriteCuisine?.name ?? "—",
+                    isCompact: true
+                )
 
-                HStack(spacing: AppSpacing.xs) {
-                    summaryMetric(
-                        title: "Saved recipes",
-                        value: "\(userRecipeStore.myRecipes.count)",
-                        subtitle: "My Recipes",
-                        systemImage: "book.closed"
-                    )
-
-                    verticalDivider
-
-                    summaryMetric(
-                        title: "Location",
-                        value: profile.location,
-                        subtitle: nil,
-                        systemImage: "mappin.circle.fill"
-                    )
-                }
+                summaryMetric(
+                    title: "Top Ingredient",
+                    value: profileInsights.favoriteIngredient?.displayName ?? "—",
+                    isCompact: true
+                )
             }
         }
     }
 
-    private var preferencesSection: some View {
+    private var planningStyleSection: some View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
-            sectionHeader(title: "My preferences", actionTitle: "Edit") {
-                isPreferencesEditorPresented = true
-            }
-
-            if safePreferences.isEmpty {
-                Text("No preferences selected yet.")
-                    .font(AppTypography.callout)
-                    .foregroundStyle(AppColors.secondaryText)
-            } else {
-                LazyVGrid(
-                    columns: [
-                        GridItem(.flexible(), spacing: AppSpacing.xs),
-                        GridItem(.flexible(), spacing: AppSpacing.xs)
-                    ],
-                    spacing: AppSpacing.xs
-                ) {
-                    ForEach(safePreferences) { preference in
-                        preferenceCard(preference)
-                    }
-                }
-            }
-        }
-    }
-
-    private var favoriteCuisinesSection: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.xs) {
-            Text("Favorite cuisines")
+            Text("Cooking Profile")
                 .font(AppTypography.cardTitle)
                 .foregroundStyle(AppColors.primaryText)
 
-            if safeFavoriteCuisines.isEmpty {
-                Text("Favorite cuisines will appear here.")
-                    .font(AppTypography.callout)
-                    .foregroundStyle(AppColors.secondaryText)
-            } else {
-                HorizontalCarousel(
-                    items: safeFavoriteCuisines,
-                    visibleItemCount: 3.35,
-                    itemSpacing: AppSpacing.xs,
-                    cardHeight: 106,
-                    edgePadding: 1
-                ) { cuisine in
-                    cuisineCard(cuisine)
+            if let planningStyle = profileInsights.planningStyle {
+                SurfaceCard(
+                    backgroundColor: AppColors.elevatedCardBackground,
+                    cornerRadius: AppRadius.extraLarge,
+                    contentPadding: AppSpacing.md
+                ) {
+                    VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                        HStack(alignment: .center, spacing: AppSpacing.sm) {
+                            ZStack {
+                                Circle()
+                                    .fill(AppColors.softOlive)
+                                    .frame(width: 48, height: 48)
+
+                                Image(systemName: planningStyle.systemImage)
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .foregroundStyle(AppColors.deepBasil)
+                            }
+
+                            VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                                Text(planningStyle.title)
+                                    .font(AppTypography.sectionTitle)
+                                    .foregroundStyle(AppColors.primaryText)
+
+                                Text(planningStyle.detail)
+                                    .font(AppTypography.callout)
+                                    .foregroundStyle(AppColors.secondaryText)
+                                    .lineSpacing(2)
+                            }
+                        }
+
+                        HStack(spacing: AppSpacing.sm) {
+                            insightChip(
+                                title: profileInsights.topMealType?.name ?? "Meal Rhythm",
+                                detail: profileInsights.topMealType?.countText ?? "Not enough data"
+                            )
+
+                            if let favoriteCuisine = profileInsights.favoriteCuisine {
+                                insightChip(
+                                    title: favoriteCuisine.name,
+                                    detail: favoriteCuisine.countText
+                                )
+                            }
+                        }
+                    }
                 }
+            } else {
+                emptyInsightCard(
+                    title: "Insights will sharpen as you cook",
+                    message: "Save recipes, view dishes, and plan a few meals to reveal your cooking style."
+                )
             }
         }
     }
 
     private var savedRecipesSection: some View {
-        let recipes = savedRecipeCarouselItems
+        VStack(alignment: .leading, spacing: AppSpacing.xs) {
+            Text("Saved Recipes")
+                .font(AppTypography.cardTitle)
+                .foregroundStyle(AppColors.primaryText)
 
-        guard !recipes.isEmpty else {
-            return AnyView(EmptyView())
-        }
-
-        return AnyView(
-            VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                Text("Saved Recipes")
-                    .font(AppTypography.cardTitle)
-                    .foregroundStyle(AppColors.primaryText)
-
+            if analyticsSummary.savedRecipes.isEmpty {
+                emptyInsightCard(
+                    title: "No saved recipes yet",
+                    message: "Save recipes from Home, Explore, or Planner to build a more personal cooking profile."
+                )
+            } else {
                 HorizontalCarousel(
-                    items: recipes,
+                    items: analyticsSummary.savedRecipes,
                     visibleItemCount: 3,
                     cardHeight: 166
                 ) { recipe in
@@ -336,7 +278,7 @@ struct ProfileView: View {
                     )
                 }
             }
-        )
+        }
     }
 
     private var achievementsSection: some View {
@@ -362,40 +304,24 @@ struct ProfileView: View {
     private func summaryMetric(
         title: String,
         value: String,
-        subtitle: String?,
-        systemImage: String
+        isCompact: Bool = false
     ) -> some View {
-        VStack(spacing: AppSpacing.xxs) {
-            Image(systemName: systemImage)
-                .font(AppTypography.metadata)
-                .foregroundStyle(AppColors.olive)
+        VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+            Text(value)
+                .font(isCompact ? AppTypography.cardTitle : AppTypography.sectionTitle)
+                .foregroundStyle(AppColors.primaryText)
+                .lineLimit(isCompact ? 2 : 1)
+                .minimumScaleFactor(0.72)
+                .fixedSize(horizontal: false, vertical: true)
 
             Text(title)
                 .font(AppTypography.metadata)
                 .foregroundStyle(AppColors.secondaryText)
                 .lineLimit(1)
                 .minimumScaleFactor(0.78)
-
-            Text(value)
-                .font(AppTypography.bodyEmphasis)
-                .foregroundStyle(AppColors.primaryText)
-                .lineLimit(1)
-                .minimumScaleFactor(0.72)
-
-            if let subtitle {
-                Text(subtitle)
-                    .font(AppTypography.metadata)
-                    .foregroundStyle(AppColors.tertiaryText)
-                    .lineLimit(1)
-            }
         }
         .frame(maxWidth: .infinity)
-    }
-
-    private var verticalDivider: some View {
-        Rectangle()
-            .fill(AppColors.warmBorder)
-            .frame(width: 1, height: 58)
+        .frame(minHeight: 74, alignment: .topLeading)
     }
 
     private func sectionHeader(
@@ -417,74 +343,58 @@ struct ProfileView: View {
         }
     }
 
-    private func preferenceCard(_ preference: ProfilePreference) -> some View {
-        Button {
-            profileStore.togglePreference(id: preference.id)
-        } label: {
-            HStack(spacing: AppSpacing.xs) {
-                Image(systemName: preference.systemImage)
-                    .font(AppTypography.caption)
-                    .foregroundStyle(preference.isSelected ? AppColors.olive : AppColors.tertiaryText)
-                    .frame(width: 28, height: 28)
-                    .background(Circle().fill(preference.isSelected ? AppColors.softOlive : AppColors.cardBackground))
+    private func insightChip(title: String, detail: String) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(title)
+                .font(AppTypography.bodyEmphasis)
+                .foregroundStyle(AppColors.primaryText)
+                .lineLimit(1)
 
-                Text(preference.title)
-                    .font(AppTypography.metadata)
-                    .foregroundStyle(AppColors.primaryText)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.78)
-
-                Spacer(minLength: 0)
-            }
-            .padding(.horizontal, AppSpacing.xs)
-            .frame(height: 52)
-            .background(
-                RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
-                    .fill(AppColors.elevatedCardBackground)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
-                    .stroke(preference.isSelected ? AppColors.olive.opacity(0.42) : AppColors.warmBorder, lineWidth: 1)
-            )
+            Text(detail)
+                .font(AppTypography.metadata)
+                .foregroundStyle(AppColors.secondaryText)
+                .lineLimit(1)
         }
-        .buttonStyle(.plain)
-        .accessibilityAddTraits(preference.isSelected ? .isSelected : [])
+        .padding(.horizontal, AppSpacing.sm)
+        .padding(.vertical, AppSpacing.xs)
+        .background(
+            RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
+                .fill(AppColors.softOlive.opacity(0.58))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
+                .stroke(AppColors.warmBorder, lineWidth: 1)
+        )
     }
 
-    private func cuisineCard(_ cuisine: FavoriteCuisine) -> some View {
-        Button {
-            profileStore.toggleFavoriteCuisine(id: cuisine.id)
-        } label: {
-            SurfaceCard(
-                backgroundColor: AppColors.elevatedCardBackground,
-                borderColor: cuisine.isSelected ? AppColors.olive.opacity(0.62) : AppColors.warmBorder,
-                cornerRadius: AppRadius.large,
-                contentPadding: AppSpacing.xs
-            ) {
-                VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                    ZStack(alignment: .topTrailing) {
-                        FoodImagePlaceholder(imageName: cuisine.imageName, style: .card)
-                            .frame(height: 58)
-
-                        if cuisine.isSelected {
-                            Image(systemName: "checkmark.circle.fill")
-                                .font(AppTypography.caption)
-                                .foregroundStyle(AppColors.olive)
-                                .background(Circle().fill(AppColors.elevatedCardBackground))
-                                .padding(AppSpacing.xxs)
+    private func emptyInsightCard(title: String, message: String) -> some View {
+        SurfaceCard(
+            backgroundColor: AppColors.elevatedCardBackground,
+            cornerRadius: AppRadius.extraLarge,
+            contentPadding: AppSpacing.md
+        ) {
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                HStack(spacing: AppSpacing.sm) {
+                    Circle()
+                        .fill(AppColors.softOlive)
+                        .frame(width: 38, height: 38)
+                        .overlay {
+                            Image(systemName: "chart.bar.fill")
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundStyle(AppColors.deepBasil)
                         }
-                    }
 
-                    Text(cuisine.title)
-                        .font(AppTypography.metadata)
+                    Text(title)
+                        .font(AppTypography.cardTitle)
                         .foregroundStyle(AppColors.primaryText)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.78)
                 }
+
+                Text(message)
+                    .font(AppTypography.callout)
+                    .foregroundStyle(AppColors.secondaryText)
+                    .lineSpacing(2)
             }
         }
-        .buttonStyle(.plain)
-        .accessibilityAddTraits(cuisine.isSelected ? .isSelected : [])
     }
 
     private func achievementCard(_ achievement: ProfileAchievement) -> some View {
@@ -538,15 +448,6 @@ struct ProfileView: View {
             dismiss()
         }
     }
-
-    private var savedRecipeCarouselItems: [Recipe] {
-        let favoriteRecipes = favoritesStore.favoriteRecipeIDs.compactMap { recipeRepository.recipe(id: $0) }
-        if !favoriteRecipes.isEmpty {
-            return Array(favoriteRecipes.prefix(3))
-        }
-
-        return Array(userRecipeStore.myRecipes.prefix(3))
-    }
 }
 
 private enum ProfileRoute: Hashable {
@@ -557,8 +458,9 @@ private enum ProfileRoute: Hashable {
 
 #Preview {
     ProfileView()
+        .environmentObject(UsageTrackingStore.shared)
         .environmentObject(UserProfileStore.shared)
         .environmentObject(FavoritesStore.shared)
-        .environmentObject(UserRecipeStore.shared)
+        .environmentObject(MealPlannerStore.shared)
         .environmentObject(AppSettingsStore.shared)
 }

@@ -2,7 +2,7 @@ import Combine
 import Foundation
 
 final class FavoritesStore: ObservableObject {
-    static let shared = FavoritesStore(seedRecipeIDs: Array(SampleRecipes.all.prefix(10).map(\.id)))
+    static let shared = FavoritesStore()
 
     @Published private(set) var favoriteRecipeIDs: [Recipe.ID]
     @Published private(set) var favoriteDates: [Recipe.ID: Date]
@@ -28,12 +28,17 @@ final class FavoritesStore: ObservableObject {
     }
 
     func toggleFavorite(_ recipeID: Recipe.ID) {
+        let usageTrackingStore = UsageTrackingStore.shared
+        let recipe = RecipeRepository.shared.recipe(id: recipeID)
+
         if let index = favoriteRecipeIDs.firstIndex(of: recipeID) {
             favoriteRecipeIDs.remove(at: index)
             favoriteDates.removeValue(forKey: recipeID)
+            usageTrackingStore.record(type: .recipeUnSaved, recipe: recipe, recipeID: recipeID)
         } else {
             favoriteRecipeIDs.insert(recipeID, at: 0)
             favoriteDates[recipeID] = Date()
+            usageTrackingStore.record(type: .recipeSaved, recipe: recipe, recipeID: recipeID)
         }
     }
 }

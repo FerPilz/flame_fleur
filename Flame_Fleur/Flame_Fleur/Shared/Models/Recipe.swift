@@ -216,9 +216,15 @@ struct Recipe: Identifiable, Hashable, Codable {
         let calories = try container.decodeIfPresent(Int.self, forKey: .caloriesPerServing)
             ?? container.decodeIfPresent(Int.self, forKey: .calories)
             ?? 0
+        let hasExplicitNutrition = container.contains(.nutritionPerServing) || container.contains(.nutrition)
         let nutrition = try container.decodeIfPresent(RecipeNutrition.self, forKey: .nutritionPerServing)
             ?? container.decodeIfPresent(RecipeNutrition.self, forKey: .nutrition)
             ?? RecipeNutrition.estimated(calories: calories, tags: tags)
+        if !hasExplicitNutrition {
+            #if DEBUG
+            print("Recipe: missing nutrition metadata while decoding \(title); using estimated fallback.")
+            #endif
+        }
 
         let structuredIngredients = try container.decodeIfPresent([RecipeIngredient].self, forKey: .ingredients) ?? []
         let instructions = try container.decodeIfPresent([String].self, forKey: .instructions) ?? []

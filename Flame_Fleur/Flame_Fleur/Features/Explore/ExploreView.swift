@@ -5,22 +5,34 @@ struct ExploreView: View {
     @EnvironmentObject private var favoritesStore: FavoritesStore
     @EnvironmentObject private var userRecipeStore: UserRecipeStore
     @EnvironmentObject private var shoppingCartStore: ShoppingCartStore
+    @EnvironmentObject private var mealPlannerStore: MealPlannerStore
 
     @State private var searchText = ""
     @State private var selectedFilter: ExploreFilter = .all
     @State private var selectedSubcategoryID: String?
-    @State private var selectedQuickAction: ExploreQuickAction?
     @State private var isAddRecipeOptionsPresented = false
     @State private var isAddRecipePresented = false
     @State private var isImportRecipePresented = false
     @State private var pendingAddRecipeAction: AddRecipeAction?
     @State private var navigationPath: [ExploreRoute] = []
 
+    @Binding private var plannerSelectionContext: PlannerRecipeSelectionContext?
+    let onPlannerRecipeSelectionCancelled: () -> Void
+    let onPlannerRecipeSelectionCompleted: () -> Void
+
     private let recipeRepository = RecipeRepository.shared
     private let categoryRepository = ExploreCategoryRepository.shared
 
-    init(launchContext: Binding<ExploreLaunchContext?> = .constant(nil)) {
+    init(
+        launchContext: Binding<ExploreLaunchContext?> = .constant(nil),
+        plannerSelectionContext: Binding<PlannerRecipeSelectionContext?> = .constant(nil),
+        onPlannerRecipeSelectionCancelled: @escaping () -> Void = {},
+        onPlannerRecipeSelectionCompleted: @escaping () -> Void = {}
+    ) {
         self._launchContext = launchContext
+        self._plannerSelectionContext = plannerSelectionContext
+        self.onPlannerRecipeSelectionCancelled = onPlannerRecipeSelectionCancelled
+        self.onPlannerRecipeSelectionCompleted = onPlannerRecipeSelectionCompleted
     }
 
     var body: some View {
@@ -32,23 +44,20 @@ struct ExploreView: View {
             ) {
                 AppHeader(
                     leadingActions: [
-                        AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Open menu") {
-                            navigationPath.append(.settings)
-                        }
+                        leadingHeaderAction
                     ],
                     trailingActions: [
                         AppHeaderAction(systemName: "cart", accessibilityLabel: "Shopping cart", badgeValue: shoppingCartStore.totalItemCount) {
                             navigationPath.append(.cart)
-                        },
-                        AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Open profile") {
-                            navigationPath.append(.profile)
                         }
                     ]
                 )
             } content: {
+                titleBlock
+                plannerSelectionBanner
+
                 VStack(alignment: .leading, spacing: AppSpacing.sm) {
                     searchBar
-                    quickActions
                     filterChips
                 }
 
@@ -64,29 +73,9 @@ struct ExploreView: View {
             }
             .navigationDestination(for: ExploreRoute.self) { route in
                 switch route {
-                case .categoryGroup(let groupID):
-                    ExploreCategoryOptionsView(
-                        group: categoryRepository.group(id: groupID) ?? categoryRepository.allGroups[0]
-                    ) { subcategory in
-                        navigationPath.append(.subcategory(subcategory.id))
-                    } onCartSelected: {
-                        navigationPath.append(.cart)
-                    } onProfileSelected: {
-                        navigationPath.append(.profile)
-                    } onSettingsSelected: {
-                        navigationPath.append(.settings)
-                    }
                 case .subcategory(let subcategoryID):
                     if let subcategory = categoryRepository.subcategory(id: subcategoryID) {
-                        SubcategoryRecipeListView(subcategory: subcategory) { recipeID in
-                            navigationPath.append(.recipe(recipeID))
-                        } onCartSelected: {
-                            navigationPath.append(.cart)
-                        } onProfileSelected: {
-                            navigationPath.append(.profile)
-                        } onSettingsSelected: {
-                            navigationPath.append(.settings)
-                        }
+                        subcategoryRecipeList(subcategory)
                     } else {
                         EmptyView()
                     }
@@ -101,6 +90,10 @@ struct ExploreView: View {
                             },
                             onViewIngredients: {
                                 navigationPath.append(.ingredients(recipeID))
+                            },
+                            plannerSelectionContext: plannerSelectionContext,
+                            onAddToPlanner: plannerSelectionContext == nil ? nil : { recipe in
+                                addRecipeToPlanner(recipe)
                             }
                         )
                     } else {
@@ -139,23 +132,21 @@ struct ExploreView: View {
             }
             .onAppear {
                 consumeLaunchContextIfNeeded()
+                applyPlannerSelectionContext(plannerSelectionContext)
             }
             .onChange(of: launchContext) { _, _ in
                 consumeLaunchContextIfNeeded()
             }
-            .sheet(isPresented: $isAddRecipePresented, onDismiss: {
-                selectedQuickAction = nil
-            }) {
+            .onChange(of: plannerSelectionContext) { _, context in
+                applyPlannerSelectionContext(context)
+            }
+            .sheet(isPresented: $isAddRecipePresented) {
                 AddRecipeView()
             }
-            .sheet(isPresented: $isImportRecipePresented, onDismiss: {
-                selectedQuickAction = nil
-            }) {
+            .sheet(isPresented: $isImportRecipePresented) {
                 RecipeImportURLView()
             }
             .sheet(isPresented: $isAddRecipeOptionsPresented, onDismiss: {
-                selectedQuickAction = nil
-
                 switch pendingAddRecipeAction {
                 case .manual:
                     isAddRecipePresented = true
@@ -190,7 +181,6 @@ struct ExploreView: View {
     }
 
     private func applyLaunchContext(_ context: ExploreLaunchContext) {
-        selectedQuickAction = nil
         selectedSubcategoryID = nil
         navigationPath.removeAll()
 
@@ -208,6 +198,63 @@ struct ExploreView: View {
         case .salmon:
             selectedFilter = .carnivore
             searchText = "salmon"
+        }
+    }
+
+    private var leadingHeaderAction: AppHeaderAction {
+        if plannerSelectionContext != nil {
+            AppHeaderAction(systemName: "xmark", accessibilityLabel: "Cancel planner recipe selection") {
+                cancelPlannerRecipeSelection()
+            }
+        } else {
+            AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Open menu") {
+                navigationPath.append(.settings)
+            }
+        }
+    }
+
+    private var titleBlock: some View {
+        VStack(alignment: .center, spacing: AppSpacing.xxs) {
+            Text("The Cookbook")
+                .font(AppTypography.screenTitle)
+                .foregroundStyle(AppColors.olive)
+                .lineLimit(1)
+                .minimumScaleFactor(0.82)
+                .accessibilityAddTraits(.isHeader)
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
+    }
+
+    @ViewBuilder
+    private var plannerSelectionBanner: some View {
+        if let plannerSelectionContext {
+            SurfaceCard(
+                backgroundColor: AppColors.softOlive,
+                borderColor: AppColors.basilGreen.opacity(0.42),
+                cornerRadius: AppRadius.large,
+                contentPadding: AppSpacing.sm
+            ) {
+                HStack(spacing: AppSpacing.sm) {
+                    Image(systemName: "calendar.badge.plus")
+                        .font(AppTypography.caption)
+                        .foregroundStyle(AppColors.deepBasil)
+                        .frame(width: 30, height: 30)
+                        .background(Circle().fill(AppColors.elevatedCardBackground.opacity(0.72)))
+
+                    VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                        Text(plannerSelectionContext.subtitle)
+                            .font(AppTypography.bodyEmphasis)
+                            .foregroundStyle(AppColors.darkOlive)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.82)
+
+                        Text("Choose a recipe, then confirm from the recipe detail.")
+                            .font(AppTypography.metadata)
+                            .foregroundStyle(AppColors.secondaryText)
+                            .lineLimit(2)
+                    }
+                }
+            }
         }
     }
 
@@ -238,47 +285,6 @@ struct ExploreView: View {
             RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous)
                 .stroke(AppColors.warmBorder, lineWidth: 1)
         )
-    }
-
-    private var quickActions: some View {
-        HStack(spacing: AppSpacing.xs) {
-            quickActionButton(.importRecipe)
-            quickActionButton(.addRecipe)
-        }
-    }
-
-    private func quickActionButton(_ quickAction: ExploreQuickAction) -> some View {
-        Button {
-            selectedQuickAction = quickAction
-            switch quickAction {
-            case .addRecipe:
-                isAddRecipeOptionsPresented = true
-            case .importRecipe:
-                isImportRecipePresented = true
-            }
-        } label: {
-            HStack(spacing: AppSpacing.xxs) {
-                Image(systemName: quickAction.systemImage)
-                    .font(AppTypography.tabLabel)
-
-                Text(quickAction.title)
-                    .font(AppTypography.smallButton)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
-            }
-            .foregroundStyle(AppColors.olive)
-            .frame(maxWidth: .infinity, minHeight: 30)
-            .padding(.horizontal, AppSpacing.xs)
-            .background(
-                Capsule(style: .continuous)
-                    .fill(selectedQuickAction == quickAction ? AppColors.softOlive : AppColors.elevatedCardBackground)
-            )
-            .overlay(
-                Capsule(style: .continuous)
-                    .stroke(AppColors.warmBorder, lineWidth: 1)
-            )
-        }
-        .buttonStyle(.plain)
     }
 
     private var filterChips: some View {
@@ -368,22 +374,34 @@ struct ExploreView: View {
 
     private func categorySection(_ group: ExploreCategoryGroup) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.xl) {
-            SectionHeaderView(group.title, actionTitle: "See all", style: .explore) {
-                navigationPath.append(.categoryGroup(group.id))
-            }
+            SectionHeaderView(group.title, style: .explore)
 
             LazyVGrid(columns: categoryColumns, spacing: AppSpacing.xl) {
-                ForEach(group.subcategories) { subcategory in
+                ForEach(bubbleItems(for: group)) { bubble in
                     CategoryCircleCard(
-                        title: subcategory.title,
-                        imageName: subcategory.imageName,
-                        isSelected: selectedSubcategoryID == subcategory.id
+                        title: bubble.title,
+                        imageName: bubble.imageName,
+                        diameter: ExploreLayoutMetrics.categoryCircleDiameter,
+                        titleFont: AppTypography.exploreCategoryCircleLabel,
+                        isSelected: bubble.isSelectable && bubble.selectionID == selectedSubcategoryID
                     ) {
-                        selectedSubcategoryID = subcategory.id
-                        navigationPath.append(.subcategory(subcategory.id))
+                        handleBubbleTap(bubble)
                     }
                 }
             }
+        }
+    }
+
+    @ViewBuilder
+    private func subcategoryRecipeList(_ subcategory: ExploreSubcategory) -> some View {
+        SubcategoryRecipeListView(subcategory: subcategory) { recipeID in
+            navigationPath.append(.recipe(recipeID))
+        } onCartSelected: {
+            navigationPath.append(.cart)
+        } onProfileSelected: {
+            navigationPath.append(.profile)
+        } onSettingsSelected: {
+            navigationPath.append(.settings)
         }
     }
 
@@ -432,27 +450,28 @@ struct ExploreView: View {
                 return nil
             }
 
-            let filteredSubcategories = searchMatchedSubcategories.filter { subcategory in
-                selectedFilter.matches(subcategory)
+            let visibleSubcategories: [ExploreSubcategory]
+            if selectedFilter == .all {
+                visibleSubcategories = searchMatchedSubcategories
+            } else {
+                visibleSubcategories = searchMatchedSubcategories.filter { subcategory in
+                    selectedFilter.matches(subcategory)
+                }
             }
-            let previewSubcategories = filteredSubcategories.isEmpty
-                ? searchMatchedSubcategories
-                : filteredSubcategories
+
+            guard !visibleSubcategories.isEmpty else {
+                return nil
+            }
 
             return ExploreCategoryGroup(
                 id: group.id,
                 title: group.title,
                 subtitle: group.subtitle,
                 imageName: group.imageName,
-                subcategories: shouldShowPreviewOnly(searchText: trimmedSearch)
-                    ? Array(previewSubcategories.prefix(3))
-                    : previewSubcategories
+                bubbleDisplayMode: group.bubbleDisplayMode,
+                subcategories: visibleSubcategories
             )
         }
-    }
-
-    private func shouldShowPreviewOnly(searchText: String) -> Bool {
-        searchText.isEmpty && selectedFilter == .all
     }
 
     private func matchesSearch(_ subcategory: ExploreSubcategory, group: ExploreCategoryGroup, searchText: String) -> Bool {
@@ -476,29 +495,79 @@ struct ExploreView: View {
             || recipe.subtitle.localizedCaseInsensitiveContains(searchText)
         }
     }
+
+    private func bubbleItems(for group: ExploreCategoryGroup) -> [ExploreBubbleItem] {
+        group.subcategories.map { subcategory in
+            ExploreBubbleItem(
+                id: subcategory.id,
+                title: subcategory.title,
+                imageName: subcategory.imageName,
+                selectionID: subcategory.id,
+                isSelectable: true,
+                destination: .subcategory(subcategory)
+            )
+        }
+    }
+
+    private func handleBubbleTap(_ bubble: ExploreBubbleItem) {
+        switch bubble.destination {
+        case .subcategory(let subcategory):
+            selectedSubcategoryID = subcategory.id
+            navigationPath.append(.subcategory(subcategory.id))
+        }
+    }
+
+    private func applyPlannerSelectionContext(_ context: PlannerRecipeSelectionContext?) {
+        guard context != nil else {
+            return
+        }
+
+        selectedSubcategoryID = nil
+        selectedFilter = .all
+        searchText = ""
+        navigationPath.removeAll()
+    }
+
+    private func addRecipeToPlanner(_ recipe: Recipe) {
+        guard let plannerSelectionContext else {
+            return
+        }
+
+        let didAdd = mealPlannerStore.addRecipeToPlannerSlot(
+            recipeID: recipe.id,
+            date: plannerSelectionContext.date,
+            mealType: plannerSelectionContext.mealType,
+            slotID: plannerSelectionContext.slotID,
+            mode: plannerSelectionContext.mode
+        )
+
+        guard didAdd else {
+            return
+        }
+
+        self.plannerSelectionContext = nil
+        navigationPath.removeAll()
+        onPlannerRecipeSelectionCompleted()
+    }
+
+    private func cancelPlannerRecipeSelection() {
+        plannerSelectionContext = nil
+        navigationPath.removeAll()
+        onPlannerRecipeSelectionCancelled()
+    }
 }
 
-private enum ExploreQuickAction: Equatable {
-    case importRecipe
-    case addRecipe
+private struct ExploreBubbleItem: Identifiable {
+    let id: String
+    let title: String
+    let imageName: String?
+    let selectionID: String?
+    let isSelectable: Bool
+    let destination: ExploreBubbleDestination
+}
 
-    var title: String {
-        switch self {
-        case .importRecipe:
-            return "Import Recipe"
-        case .addRecipe:
-            return "Add Recipe"
-        }
-    }
-
-    var systemImage: String {
-        switch self {
-        case .importRecipe:
-            return "square.and.arrow.down"
-        case .addRecipe:
-            return "plus"
-        }
-    }
+private enum ExploreBubbleDestination {
+    case subcategory(ExploreSubcategory)
 }
 
 private enum AddRecipeAction {
@@ -506,8 +575,11 @@ private enum AddRecipeAction {
     case importWebsite
 }
 
+private enum ExploreLayoutMetrics {
+    static let categoryCircleDiameter: CGFloat = 112.2
+}
+
 private enum ExploreRoute: Hashable {
-    case categoryGroup(String)
     case subcategory(String)
     case recipe(String)
     case ingredients(String)
@@ -591,7 +663,7 @@ private enum ExploreFilter: String, CaseIterable, Identifiable {
         case .budget:
             return matches(subcategory, categories: budgetCategories, keywords: ["budget", "pantry", "quick", "simple", "everyday", "weekly"])
         case .carnivore:
-            return matches(subcategory, categories: carnivoreCategories, keywords: ["meat", "seafood", "fish", "chicken", "protein", "grill"])
+            return matches(subcategory, categories: carnivoreCategories, keywords: ["meat", "seafood", "fish", "chicken", "grill"])
         case .quickMeals:
             return matches(subcategory, categories: quickMealCategories, keywords: ["bowl", "taco", "salad", "skewer", "protein"])
         }
@@ -618,7 +690,6 @@ private enum ExploreFilter: String, CaseIterable, Identifiable {
             .proteinBowls,
             .leanMeals,
             .fitnessMeals,
-            .breakfast,
             .beansLentils
         ]
     }
@@ -695,4 +766,5 @@ private enum ExploreFilter: String, CaseIterable, Identifiable {
         .environmentObject(FavoritesStore.shared)
         .environmentObject(UserRecipeStore.shared)
         .environmentObject(ShoppingCartStore.shared)
+        .environmentObject(MealPlannerStore.shared)
 }

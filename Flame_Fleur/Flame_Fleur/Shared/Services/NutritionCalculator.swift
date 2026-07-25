@@ -32,9 +32,36 @@ enum NutritionCalculator {
         )
     }
 
+    static func summary(
+        from plannedMeal: PlannedMeal,
+        resolvingRecipeByID recipeLookup: (String) -> Recipe?
+    ) -> NutritionSummary {
+        guard let recipeID = plannedMeal.recipeID else {
+            return summary(from: plannedMeal)
+        }
+
+        guard let recipe = recipeLookup(recipeID) else {
+            #if DEBUG
+            print("NutritionCalculator: missing recipe for planned meal \(plannedMeal.id) (recipeID: \(recipeID)); using stored nutrition snapshot.")
+            #endif
+            return summary(from: plannedMeal)
+        }
+
+        return summary(from: recipe)
+    }
+
     static func summary(from plannedMeals: [PlannedMeal]) -> NutritionSummary {
         plannedMeals
             .map(summary(from:))
+            .reduce(.zero, +)
+    }
+
+    static func summary(
+        from plannedMeals: [PlannedMeal],
+        resolvingRecipesByID recipeLookup: (String) -> Recipe?
+    ) -> NutritionSummary {
+        plannedMeals
+            .map { summary(from: $0, resolvingRecipeByID: recipeLookup) }
             .reduce(.zero, +)
     }
 

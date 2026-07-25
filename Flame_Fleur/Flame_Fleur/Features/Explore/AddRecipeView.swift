@@ -148,21 +148,26 @@ struct AddRecipeView: View {
 
     private var fallbackImagePreview: some View {
         ZStack {
-            FoodImagePlaceholder(kind: .bowl, style: .hero)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            LinearGradient(
+                colors: [
+                    AppColors.warmCream,
+                    AppColors.softOrange.opacity(0.72),
+                    AppColors.olive.opacity(0.20)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
 
             VStack(spacing: AppSpacing.xxs) {
-                Image(systemName: "book.closed")
+                Image(systemName: "plus")
                     .font(.system(size: 28, weight: .semibold))
-                    .foregroundStyle(AppColors.elevatedCardBackground)
+                    .foregroundStyle(AppColors.darkOlive)
 
-                Text("Optional")
+                Text("photo")
                     .font(AppTypography.metadata)
-                    .foregroundStyle(AppColors.elevatedCardBackground)
+                    .foregroundStyle(AppColors.darkOlive)
             }
-            .padding(.horizontal, AppSpacing.md)
-            .padding(.vertical, AppSpacing.xs)
-            .background(Capsule(style: .continuous).fill(AppColors.darkOlive.opacity(0.84)))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 
@@ -625,7 +630,7 @@ struct AddRecipeView: View {
 
         let recipe = Recipe.userCreated(
             title: trimmedTitle,
-            description: "Created in Flame & Fleur",
+            description: "Created in ALLSPICED",
             categoryGroupID: "my-recipes",
             subcategoryID: subcategoryID,
             subcategoryTitle: trimmedSubcategory.isEmpty ? "My Recipes" : trimmedSubcategory,

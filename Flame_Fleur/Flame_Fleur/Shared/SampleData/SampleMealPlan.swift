@@ -58,7 +58,7 @@ enum SampleMealPlan {
             proteinGrams: 24,
             carbsGrams: 42,
             fatGrams: 16,
-            imageName: "bowl"
+            imageName: "world_italian_spicy_tomato_basil_pasta"
         )
     }
 

@@ -3,14 +3,14 @@ import Foundation
 struct RecipeRepository {
     static let shared = RecipeRepository()
 
-    private let sampleRecipes: [Recipe]
+    private let seededRecipes: [Recipe]
 
-    init(allRecipes: [Recipe] = SampleRecipes.all) {
-        self.sampleRecipes = allRecipes
+    init(allRecipes: [Recipe] = RecipeSeedLoader.loadRecipes(fallbackRecipes: SampleRecipes.previewFallbackRecipes)) {
+        self.seededRecipes = allRecipes
     }
 
     var allRecipes: [Recipe] {
-        sampleRecipes + UserRecipeStore.shared.myRecipes
+        mergedRecipes(seededRecipes, UserRecipeStore.shared.myRecipes)
     }
 
     var myRecipes: [Recipe] {
@@ -61,24 +61,31 @@ struct RecipeRepository {
         switch section {
         case .featured:
             return uniqueLimited(featuredRecipes, limit: 6)
-        case .community:
-            return uniqueLimited(communityRecipes, limit: 6)
-        case .worldCuisine:
-            return uniqueLimited(recipes(forCategoryGroupID: "world-cuisine"), limit: 6)
-        case .topPicks:
-            return uniqueLimited(topPickCarouselRecipes(), limit: 6)
-        case .aiRecommended:
-            return uniqueLimited(aiRecommendedRecipes, limit: 6)
+        case .beef:
+            return uniqueLimited(beefRecipes(), limit: 6)
+        case .vegetarian:
+            return uniqueLimited(vegetarianHomeRecipes(), limit: 6)
+        case .chickenSalad:
+            return uniqueLimited(chickenSaladRecipes(), limit: 6)
+        case .tuna:
+            return uniqueLimited(tunaRecipes(), limit: 6)
+        case .plantBasedBowls:
+            return uniqueLimited(plantBasedBowlsRecipes(), limit: 6)
+        case .piesAndTarts:
+            return uniqueLimited(piesAndTartsRecipes(), limit: 6)
+        case .mexican:
+            return uniqueLimited(recipes(forSubcategoryID: "world-cuisine-mexican"), limit: 6)
+        case .korean:
+            return uniqueLimited(recipes(forSubcategoryID: "world-cuisine-korean"), limit: 6)
+        case .breakfastBakes:
+            return uniqueLimited(recipes(forSubcategoryID: "bakery-breakfast-bakes"), limit: 6)
+        case .cookies:
+            return uniqueLimited(recipes(forSubcategoryID: "bakery-cookies"), limit: 6)
         case .highProtein:
-            return uniqueLimited(recipes(forCategoryGroupID: "high-protein"), limit: 6)
-        case .snacks:
-            return uniqueLimited(recipes(forCategoryGroupID: "snacks"), limit: 6)
-        case .breakfast:
-            return uniqueLimited(recipes(forCategoryGroupID: "breakfast"), limit: 6)
-        case .eggBased:
-            return uniqueLimited(recipes(forSubcategoryID: "breakfast-egg-based"), limit: 6)
-        case .salmon:
-            return uniqueLimited(salmonRecipes(), limit: 6)
+            return uniqueLimited(
+                recipes(forSubcategoryID: "high-protein-high-protein-breakfast") + recipes(forCategoryGroupID: "high-protein"),
+                limit: 6
+            )
         }
     }
 
@@ -181,6 +188,64 @@ struct RecipeRepository {
         return picks
     }
 
+    private func beefRecipes() -> [Recipe] {
+        allRecipes.filter { recipe in
+            searchableText(for: recipe).contains("beef")
+                || recipe.subcategoryTitle?.localizedCaseInsensitiveContains("beef") == true
+                || searchableText(for: recipe).contains("steak")
+        }
+    }
+
+    private func vegetarianHomeRecipes() -> [Recipe] {
+        allRecipes.filter { recipe in
+            isVegetarian(recipe)
+                || searchableText(for: recipe).contains("vegetarian")
+                || searchableText(for: recipe).contains("plant based")
+                || searchableText(for: recipe).contains("plant-based")
+        }
+    }
+
+    private func chickenSaladRecipes() -> [Recipe] {
+        allRecipes.filter { recipe in
+            let text = searchableText(for: recipe)
+            return text.contains("chicken") && text.contains("salad")
+        }
+    }
+
+    private func tunaRecipes() -> [Recipe] {
+        allRecipes.filter { recipe in
+            searchableText(for: recipe).contains("tuna")
+        }
+    }
+
+    private func plantBasedBowlsRecipes() -> [Recipe] {
+        allRecipes.filter { recipe in
+            let text = searchableText(for: recipe)
+            return text.contains("bowl")
+                && (isVegetarian(recipe) || text.contains("plant"))
+        }
+    }
+
+    private func piesAndTartsRecipes() -> [Recipe] {
+        allRecipes.filter { recipe in
+            let text = searchableText(for: recipe)
+            return text.contains("pie") || text.contains("tart")
+        }
+    }
+
+    private func searchableText(for recipe: Recipe) -> String {
+        [
+            recipe.title,
+            recipe.subtitle,
+            recipe.description,
+            recipe.subcategoryTitle ?? "",
+            recipe.sourceHost ?? "",
+            recipe.ingredients.joined(separator: " ")
+        ]
+        .joined(separator: " ")
+        .lowercased()
+    }
+
     private func salmonRecipes() -> [Recipe] {
         allRecipes.filter { recipe in
             let searchableText = [
@@ -266,5 +331,10 @@ struct RecipeRepository {
         }
 
         return results
+    }
+
+    private func mergedRecipes(_ baseRecipes: [Recipe], _ appendedRecipes: [Recipe]) -> [Recipe] {
+        var seenIDs = Set<String>()
+        return (baseRecipes + appendedRecipes).filter { seenIDs.insert($0.id).inserted }
     }
 }

@@ -2,131 +2,78 @@ import SwiftUI
 
 struct AddShoppingSuggestedItemRow: View {
     let item: ShoppingCartItem
-    let selectedQuantity: Int
-    let selectedStore: ShoppingStoreOption
-    let onIncrement: () -> Void
-    let onDecrement: () -> Void
-    let onUpdateStore: (ShoppingStoreOption) -> Void
+    @Binding var quantity: Int
+    let isAdded: Bool
+    let onAdd: () -> Void
 
     var body: some View {
-        HStack(spacing: AppSpacing.xxs) {
-            FoodImagePlaceholder(imageName: item.imageName, style: .thumbnail)
-                .frame(width: 32, height: 32)
+        HStack(spacing: AppSpacing.xs) {
+            ShoppingCartIngredientImageView(item: item, size: 44)
 
             VStack(alignment: .leading, spacing: AppSpacing.xxs) {
                 Text(item.name)
-                    .font(AppTypography.caption)
+                    .font(AppTypography.callout)
                     .foregroundStyle(AppColors.primaryText)
-                    .lineLimit(1)
+                    .lineLimit(2)
                     .truncationMode(.tail)
+                    .fixedSize(horizontal: false, vertical: true)
                     .layoutPriority(3)
 
-                Text(item.unit)
+                Text(itemDetailText)
                     .font(AppTypography.metadata)
                     .foregroundStyle(AppColors.secondaryText)
                     .lineLimit(1)
             }
-            .frame(minWidth: 82, maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .layoutPriority(2)
 
-            categoryBadge
-
-            quantityControl
-
-            storeMenu
-        }
-        .frame(minHeight: 44)
-    }
-
-    private var categoryBadge: some View {
-        Text(item.category.title)
-            .font(AppTypography.metadata)
-            .foregroundStyle(AppColors.olive)
-            .lineLimit(1)
-            .minimumScaleFactor(0.78)
-            .padding(.horizontal, AppSpacing.xxs)
-            .frame(width: 50, height: 22)
-            .background(
-                Capsule(style: .continuous)
-                    .fill(categoryBadgeColor)
-            )
-    }
-
-    private var categoryBadgeColor: Color {
-        switch item.category {
-        case .produce:
-            return AppColors.softOlive
-        case .dairy:
-            return AppColors.softOrange
-        case .protein:
-            return AppColors.softOrange.opacity(0.72)
-        case .pantry, .frozen, .bakery, .other:
-            return AppColors.cardBackground
-        }
-    }
-
-    private var quantityControl: some View {
-        HStack(spacing: AppSpacing.xxs) {
-            Button(action: onDecrement) {
-                Image(systemName: "minus")
-                    .font(AppTypography.metadata)
-                    .frame(width: 15, height: 18)
-            }
-
-            Text("\(selectedQuantity)")
-                .font(AppTypography.metadata)
-                .foregroundStyle(AppColors.primaryText)
-                .frame(width: 12)
-
-            Button(action: onIncrement) {
-                Image(systemName: "plus")
-                    .font(AppTypography.metadata)
-                    .frame(width: 15, height: 18)
-            }
-        }
-        .foregroundStyle(AppColors.olive)
-        .padding(.horizontal, AppSpacing.xxs)
-        .frame(width: 50, height: 24)
-        .background(Capsule(style: .continuous).fill(AppColors.elevatedCardBackground))
-        .overlay(Capsule(style: .continuous).stroke(AppColors.warmBorder, lineWidth: 1))
-        .buttonStyle(.plain)
-    }
-
-    private var storeMenu: some View {
-        Menu {
-            ForEach(ShoppingStoreOption.allCases) { option in
-                Button(option.displayName) {
-                    onUpdateStore(option)
+            Menu {
+                ForEach(1...10, id: \.self) { value in
+                    Button("\(value)") {
+                        quantity = value
+                    }
                 }
+            } label: {
+                Text("\(quantity)")
+                    .font(AppTypography.smallButton)
+                    .foregroundStyle(AppColors.deepBasil)
+                    .frame(width: 28, height: 34)
+                    .background(
+                        RoundedRectangle(cornerRadius: AppRadius.small, style: .continuous)
+                            .fill(AppColors.softOlive)
+                    )
             }
-        } label: {
-            HStack(spacing: AppSpacing.xxs) {
-                Text(selectedStore.compactDisplayName)
-                    .font(AppTypography.metadata)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
+            .accessibilityLabel("Quantity")
+            .accessibilityValue("\(quantity)")
 
-                Image(systemName: "chevron.down")
-                    .font(AppTypography.metadata)
-            }
-            .foregroundStyle(AppColors.secondaryText)
-            .padding(.horizontal, AppSpacing.xxs)
-            .frame(width: 66, height: 24)
-            .background(Capsule(style: .continuous).fill(AppColors.elevatedCardBackground))
-            .overlay(Capsule(style: .continuous).stroke(AppColors.warmBorder, lineWidth: 1))
+            PrimaryButton(
+                isAdded ? "Added" : "Add",
+                style: .olive,
+                isFullWidth: false,
+                height: 34,
+                font: AppTypography.smallButton,
+                horizontalPadding: AppSpacing.md,
+                action: onAdd
+            )
         }
-        .tint(AppColors.olive)
+        .frame(minHeight: 58)
+    }
+
+    private var itemDetailText: String {
+        if item.unit.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return item.category.title
+        }
+
+        return "\(item.unit) - \(item.category.title)"
     }
 }
 
 #Preview {
     AddShoppingSuggestedItemRow(
         item: SampleShoppingCartItems.suggestedItems[0],
-        selectedQuantity: 1,
-        selectedStore: .wholeFoods,
-        onIncrement: {},
-        onDecrement: {},
-        onUpdateStore: { _ in }
+        quantity: .constant(1),
+        isAdded: false,
+        onAdd: {}
     )
     .padding()
     .background(AppColors.appBackground)

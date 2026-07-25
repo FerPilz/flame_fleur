@@ -30,32 +30,28 @@ struct WeeklyMacroBalanceCard: View {
                     title: "Calories",
                     valueText: balance.caloriesText,
                     targetText: balance.calorieTargetText,
-                    progress: balance.calorieProgress,
-                    status: balance.status(for: balance.calories, target: balance.calorieTarget)
+                    progress: balance.calorieProgress
                 )
 
                 progressRow(
                     title: "Protein",
                     valueText: balance.proteinText,
                     targetText: balance.proteinTargetText,
-                    progress: balance.proteinProgress,
-                    status: balance.status(for: Double(balance.proteinGrams), target: balance.proteinTargetGrams)
+                    progress: balance.proteinProgress
                 )
 
                 progressRow(
                     title: "Carbs",
                     valueText: balance.carbsText,
                     targetText: balance.carbsTargetText,
-                    progress: balance.carbsProgress,
-                    status: balance.status(for: Double(balance.carbsGrams), target: balance.carbsTargetGrams)
+                    progress: balance.carbsProgress
                 )
 
                 progressRow(
                     title: "Fat",
                     valueText: balance.fatText,
                     targetText: balance.fatTargetText,
-                    progress: balance.fatProgress,
-                    status: balance.status(for: Double(balance.fatGrams), target: balance.fatTargetGrams)
+                    progress: balance.fatProgress
                 )
             }
         }
@@ -65,8 +61,7 @@ struct WeeklyMacroBalanceCard: View {
         title: String,
         valueText: String,
         targetText: String,
-        progress: Double,
-        status: MacroTrendState
+        progress: Double
     ) -> some View {
         VStack(alignment: .leading, spacing: 5) {
             HStack {
@@ -87,7 +82,7 @@ struct WeeklyMacroBalanceCard: View {
                         .fill(AppColors.cardBackground.opacity(0.72))
 
                     Capsule(style: .continuous)
-                        .fill(tint(for: status))
+                        .fill(tint(for: title))
                         .frame(width: proxy.size.width * progress)
                 }
                 .overlay(Capsule(style: .continuous).stroke(AppColors.warmBorder, lineWidth: 1))
@@ -101,23 +96,25 @@ struct WeeklyMacroBalanceCard: View {
 
         return Text(status.title)
             .font(AppTypography.metadata)
-            .foregroundStyle(tint(for: status))
+            .foregroundStyle(tint(for: "Calories"))
             .padding(.horizontal, AppSpacing.sm)
             .frame(height: 24)
             .background(Capsule(style: .continuous).fill(AppColors.softOlive))
             .overlay(Capsule(style: .continuous).stroke(AppColors.warmBorder, lineWidth: 1))
     }
 
-    private func tint(for status: MacroTrendState) -> Color {
-        switch status {
-        case .low:
-            return AppColors.olive
-        case .onTrack:
-            return AppColors.success
-        case .warning:
-            return AppColors.premiumGold
-        case .overTarget:
+    private func tint(for title: String) -> Color {
+        switch title {
+        case "Calories":
+            return AppColors.basilGreen
+        case "Protein":
             return AppColors.burntOrange
+        case "Carbs":
+            return AppColors.premiumGold
+        case "Fat":
+            return AppColors.darkOlive
+        default:
+            return AppColors.olive
         }
     }
 }

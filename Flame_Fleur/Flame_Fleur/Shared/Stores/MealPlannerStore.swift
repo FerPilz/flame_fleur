@@ -2,10 +2,7 @@ import Combine
 import Foundation
 
 final class MealPlannerStore: ObservableObject {
-    static let shared = MealPlannerStore(
-        selectedDate: SampleMealPlan.anchorDate,
-        plannedMeals: SampleMealPlan.meals
-    )
+    static let shared = MealPlannerStore()
 
     @Published var selectedDate: Date
     @Published var visibleMonth: Date
@@ -14,6 +11,7 @@ final class MealPlannerStore: ObservableObject {
 
     private let calendar: Calendar
     private let recipeRepository = RecipeRepository.shared
+    private var cancellables = Set<AnyCancellable>()
 
     init(
         selectedDate: Date = Date(),
@@ -29,6 +27,12 @@ final class MealPlannerStore: ObservableObject {
             normalizedMeal.date = calendar.startOfDay(for: meal.date)
             return normalizedMeal
         }
+
+        UserRecipeStore.shared.$recipes
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &cancellables)
     }
 
     var weekDates: [Date] {
@@ -55,12 +59,20 @@ final class MealPlannerStore: ObservableObject {
         var normalizedMeal = meal
         normalizedMeal.date = calendar.startOfDay(for: meal.date)
 
+        let replacedMeals = plannedMeals.filter { existingMeal in
+            calendar.isDate(existingMeal.date, inSameDayAs: normalizedMeal.date)
+            && existingMeal.slot == normalizedMeal.slot
+        }
+
         plannedMeals.removeAll { existingMeal in
             calendar.isDate(existingMeal.date, inSameDayAs: normalizedMeal.date)
             && existingMeal.slot == normalizedMeal.slot
         }
 
+        recordRemovedPlannerEvents(for: replacedMeals)
+
         plannedMeals.append(normalizedMeal)
+        recordPlannedEvent(for: normalizedMeal)
     }
 
     @discardableResult
@@ -117,7 +129,125 @@ final class MealPlannerStore: ObservableObject {
     }
 
     func removeMeal(_ meal: PlannedMeal) {
-        plannedMeals.removeAll { $0.id == meal.id }
+        removeMeal(on: meal.date, slot: meal.slot)
+    }
+
+    func removeMeal(on date: Date, slot: MealSlot) {
+        let removedMeals = plannedMeals.filter { meal in
+            calendar.isDate(meal.date, inSameDayAs: date) && meal.slot == slot
+        }
+
+        plannedMeals.removeAll { meal in
+            calendar.isDate(meal.date, inSameDayAs: date) && meal.slot == slot
+        }
+
+        recordRemovedPlannerEvents(for: removedMeals)
+    }
+
+    func clearPlannerDay(_ date: Date) {
+        let removedMeals = plannedMeals.filter { meal in
+            calendar.isDate(meal.date, inSameDayAs: date)
+        }
+
+        plannedMeals.removeAll { meal in
+            calendar.isDate(meal.date, inSameDayAs: date)
+        }
+
+        recordRemovedPlannerEvents(for: removedMeals)
+    }
+
+    func clearPlanner() {
+        let removedMeals = plannedMeals
+        plannedMeals.removeAll()
+        recordRemovedPlannerEvents(for: removedMeals)
+    }
+
+    func sharedMealPlanPayload() -> SharedMealPlanPayload {
+        let calendar = self.calendar
+        let groupedMeals = Dictionary(grouping: plannedMeals) { meal in
+            calendar.startOfDay(for: meal.date)
+        }
+
+        let orderedDates = groupedMeals.keys.sorted()
+        let days = orderedDates.map { date in
+            let meals = (groupedMeals[date] ?? []).sorted { lhs, rhs in
+                lhs.slot.sortOrder < rhs.slot.sortOrder
+            }.map { meal in
+                SharedMealPlanItem(
+                    mealSlot: meal.slot,
+                    recipeID: meal.recipeID,
+                    title: meal.title,
+                    imageName: meal.imageName,
+                    calories: meal.calories,
+                    proteinGrams: meal.proteinGrams,
+                    carbsGrams: meal.carbsGrams,
+                    fatGrams: meal.fatGrams,
+                    servings: 1
+                )
+            }
+
+            return SharedMealPlanDay(date: date, meals: meals)
+        }
+
+        let weekStartDate = orderedDates.first ?? startOfWeek(for: selectedDate)
+        let weekEndDate = orderedDates.last ?? calendar.date(byAdding: .day, value: 6, to: weekStartDate)
+
+        return SharedMealPlanPayload(
+            exportedAt: Date(),
+            weekStartDate: weekStartDate,
+            weekEndDate: weekEndDate,
+            days: days
+        )
+    }
+
+    func replacePlanner(with payload: SharedMealPlanPayload) -> MealPlanImportSummary {
+        let importedMeals: [PlannedMeal] = payload.days.flatMap { sharedDay in
+            sharedDay.meals.map { sharedMeal in
+                if let recipeID = sharedMeal.recipeID, let recipe = recipeRepository.recipe(id: recipeID) {
+                    var plannedMeal = plannedMeal(from: recipe, date: sharedDay.date, slot: sharedMeal.mealSlot)
+                    plannedMeal.date = calendar.startOfDay(for: sharedDay.date)
+                    return plannedMeal
+                }
+
+                return PlannedMeal(
+                    date: sharedDay.date,
+                    slot: sharedMeal.mealSlot,
+                    recipeID: sharedMeal.recipeID,
+                    title: sharedMeal.title,
+                    calories: sharedMeal.calories,
+                    proteinGrams: sharedMeal.proteinGrams,
+                    carbsGrams: sharedMeal.carbsGrams,
+                    fatGrams: sharedMeal.fatGrams,
+                    imageName: sharedMeal.imageName
+                )
+            }
+        }
+
+        plannedMeals = importedMeals.map { meal in
+            var normalizedMeal = meal
+            normalizedMeal.date = calendar.startOfDay(for: meal.date)
+            return normalizedMeal
+        }
+
+        let selectedImportDate = payload.weekStartDate
+            ?? importedMeals.map(\.date).min()
+            ?? selectedDate
+        selectDate(selectedImportDate)
+
+        let unresolvedCount = payload.days.reduce(0) { runningTotal, sharedDay in
+            runningTotal + sharedDay.meals.filter { meal in
+                guard let recipeID = meal.recipeID else {
+                    return true
+                }
+
+                return recipeRepository.recipe(id: recipeID) == nil
+            }.count
+        }
+
+        return MealPlanImportSummary(
+            importedMealCount: importedMeals.count,
+            unresolvedMealCount: unresolvedCount
+        )
     }
 
     func selectDate(_ date: Date) {
@@ -147,7 +277,7 @@ final class MealPlannerStore: ObservableObject {
     var weeklySummary: MealPlanSummary {
         let weeklyMeals = mealsInVisibleWeek
         let caloriesByDay = weekDates.map { date in
-            Int(NutritionCalculator.summary(from: meals(for: date)).calories.rounded())
+            Int(nutritionSummary(for: date).calories.rounded())
         }
         let averageCalories = caloriesByDay.isEmpty ? 0 : caloriesByDay.reduce(0, +) / caloriesByDay.count
         let mealsPlanned = weeklyMeals.count
@@ -166,7 +296,7 @@ final class MealPlannerStore: ObservableObject {
     }
 
     var selectedDayNutritionSummary: NutritionSummary {
-        NutritionCalculator.summary(from: meals(for: selectedDate))
+        nutritionSummary(for: selectedDate)
     }
 
     var selectedDayMacroBalance: MacroBalance {
@@ -174,7 +304,7 @@ final class MealPlannerStore: ObservableObject {
     }
 
     func totalCalories(for date: Date) -> Int {
-        Int(NutritionCalculator.summary(from: meals(for: date)).calories.rounded())
+        Int(nutritionSummary(for: date).calories.rounded())
     }
 
     var mealsInSelectedWeek: [PlannedMeal] {
@@ -182,7 +312,10 @@ final class MealPlannerStore: ObservableObject {
     }
 
     var weeklyNutritionSummary: NutritionSummary {
-        NutritionCalculator.summary(from: mealsInVisibleWeek)
+        NutritionCalculator.summary(
+            from: mealsInVisibleWeek,
+            resolvingRecipesByID: recipeRepository.recipe(id:)
+        )
     }
 
     private var mealsInVisibleWeek: [PlannedMeal] {
@@ -213,8 +346,69 @@ final class MealPlannerStore: ObservableObject {
         )
     }
 
+    private func nutritionSummary(for date: Date) -> NutritionSummary {
+        NutritionCalculator.summary(
+            from: meals(for: date),
+            resolvingRecipesByID: recipeRepository.recipe(id:)
+        )
+    }
+
+    private func recordPlannedEvent(for meal: PlannedMeal) {
+        let resolvedRecipe = meal.recipeID.flatMap(recipeRepository.recipe(id:))
+
+        UsageTrackingStore.shared.record(
+            type: .recipePlanned,
+            recipe: resolvedRecipe,
+            recipeID: meal.recipeID,
+            recipeTitle: meal.title,
+            mealType: meal.slot.title,
+            calories: Double(meal.calories),
+            proteinGrams: Double(meal.proteinGrams),
+            carbGrams: Double(meal.carbsGrams),
+            fatGrams: Double(meal.fatGrams)
+        )
+    }
+
+    private func recordRemovedPlannerEvents(for meals: [PlannedMeal]) {
+        for meal in meals {
+            let resolvedRecipe = meal.recipeID.flatMap(recipeRepository.recipe(id:))
+
+            UsageTrackingStore.shared.record(
+                type: .recipeRemovedFromPlanner,
+                recipe: resolvedRecipe,
+                recipeID: meal.recipeID,
+                recipeTitle: meal.title,
+                mealType: meal.slot.title,
+                calories: Double(meal.calories),
+                proteinGrams: Double(meal.proteinGrams),
+                carbGrams: Double(meal.carbsGrams),
+                fatGrams: Double(meal.fatGrams)
+            )
+        }
+    }
+
     private func startOfWeek(for date: Date) -> Date {
         let components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)
         return calendar.date(from: components).map { calendar.startOfDay(for: $0) } ?? calendar.startOfDay(for: date)
+    }
+}
+
+struct MealPlanImportSummary {
+    let importedMealCount: Int
+    let unresolvedMealCount: Int
+}
+
+private extension MealSlot {
+    var sortOrder: Int {
+        switch self {
+        case .breakfast:
+            return 0
+        case .lunch:
+            return 1
+        case .snack:
+            return 2
+        case .dinner:
+            return 3
+        }
     }
 }

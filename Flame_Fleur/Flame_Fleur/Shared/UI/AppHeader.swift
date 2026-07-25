@@ -27,8 +27,8 @@ struct AppHeader: View {
     let trailingActions: [AppHeaderAction]
 
     init(
-        title: String = "Flame & Fleur",
-        titleFont: Font = AppTypography.brandTitle,
+        title: String = AppBrandTitle.defaultTitle,
+        titleFont: Font = AppTypography.allSpicedBrandTitle,
         leadingActions: [AppHeaderAction] = [],
         trailingActions: [AppHeaderAction] = []
     ) {
@@ -40,14 +40,7 @@ struct AppHeader: View {
 
     var body: some View {
         ZStack {
-            Text(title)
-                .font(titleFont)
-                .foregroundStyle(AppColors.olive)
-                .lineLimit(1)
-                .allowsTightening(true)
-                .padding(.horizontal, AppTopActionMetrics.centeredTitleInset)
-                .frame(maxWidth: .infinity)
-                .accessibilityAddTraits(.isHeader)
+            AppBrandTitle(title: title, titleFont: titleFont)
 
             HStack(spacing: AppSpacing.sm) {
                 actionGroup(leadingActions, isLeading: true)
@@ -80,8 +73,7 @@ struct AppHeader: View {
     AppHeader(
         leadingActions: [AppHeaderAction(systemName: "line.3.horizontal", accessibilityLabel: "Menu")],
         trailingActions: [
-            AppHeaderAction(systemName: "cart", accessibilityLabel: "Cart", badgeValue: 4),
-            AppHeaderAction(systemName: "person.crop.circle", accessibilityLabel: "Profile")
+            AppHeaderAction(systemName: "cart", accessibilityLabel: "Cart", badgeValue: 4)
         ]
     )
     .padding()

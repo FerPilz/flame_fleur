@@ -19,10 +19,14 @@ struct PrimaryButton: View {
     let systemImage: String?
     let backgroundColor: Color
     let foregroundColor: Color
+    let borderColor: Color?
     let isFullWidth: Bool
     let height: CGFloat?
     let font: Font
     let horizontalPadding: CGFloat
+    let textLineLimit: Int?
+    let minimumScaleFactor: CGFloat?
+    let allowsTightening: Bool
     let action: () -> Void
 
     init(
@@ -31,20 +35,28 @@ struct PrimaryButton: View {
         style: Style = .olive,
         backgroundColor: Color? = nil,
         foregroundColor: Color = AppColors.elevatedCardBackground,
+        borderColor: Color? = nil,
         isFullWidth: Bool = true,
         height: CGFloat? = 48,
         font: Font = AppTypography.button,
         horizontalPadding: CGFloat = AppSpacing.lg,
+        textLineLimit: Int? = nil,
+        minimumScaleFactor: CGFloat? = nil,
+        allowsTightening: Bool = false,
         action: @escaping () -> Void
     ) {
         self.title = title
         self.systemImage = systemImage
         self.backgroundColor = backgroundColor ?? style.backgroundColor
         self.foregroundColor = foregroundColor
+        self.borderColor = borderColor
         self.isFullWidth = isFullWidth
         self.height = height
         self.font = font
         self.horizontalPadding = horizontalPadding
+        self.textLineLimit = textLineLimit
+        self.minimumScaleFactor = minimumScaleFactor
+        self.allowsTightening = allowsTightening
         self.action = action
     }
 
@@ -58,6 +70,9 @@ struct PrimaryButton: View {
 
                 Text(title)
                     .font(font)
+                    .lineLimit(textLineLimit)
+                    .minimumScaleFactor(minimumScaleFactor ?? 1)
+                    .allowsTightening(allowsTightening)
             }
             .foregroundStyle(foregroundColor)
             .frame(maxWidth: isFullWidth ? .infinity : nil, minHeight: height)
@@ -65,6 +80,14 @@ struct PrimaryButton: View {
             .background(
                 Capsule(style: .continuous)
                     .fill(backgroundColor)
+            )
+            .overlay(
+                Group {
+                    if let borderColor {
+                        Capsule(style: .continuous)
+                            .stroke(borderColor, lineWidth: 1)
+                    }
+                }
             )
             .shadow(color: AppShadow.buttonColor, radius: AppShadow.buttonRadius, x: 0, y: AppShadow.buttonYOffset)
         }

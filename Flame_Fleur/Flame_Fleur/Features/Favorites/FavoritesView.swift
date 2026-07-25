@@ -32,7 +32,6 @@ struct FavoritesView: View {
                         ]
                     )
                 } content: {
-                    titleBlock
                     filterCarousel
                     favoritesListHeader
 
@@ -44,7 +43,6 @@ struct FavoritesView: View {
                                 RecipeListRow(
                                     recipe: recipe,
                                     isFavorite: true,
-                                    communityLikesText: likesText(for: recipe),
                                     onFavoriteTap: {
                                         favoritesStore.toggleFavorite(recipe.id)
                                     },
@@ -103,22 +101,6 @@ struct FavoritesView: View {
             }
             .toolbar(.hidden, for: .navigationBar)
         }
-    }
-
-    private var titleBlock: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-            Text("Favorites")
-                .font(AppTypography.heroTitle)
-                .foregroundStyle(AppColors.olive)
-                .lineLimit(1)
-                .accessibilityAddTraits(.isHeader)
-
-            Text("Your saved dishes")
-                .font(AppTypography.caption)
-                .foregroundStyle(AppColors.secondaryText)
-                .lineLimit(1)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var filterCarousel: some View {
@@ -223,16 +205,6 @@ struct FavoritesView: View {
         let creatorBoost = recipe.creatorName == nil ? 0 : 350
 
         return 180 + seed % 3_700 + sectionBoost + creatorBoost
-    }
-
-    private func likesText(for recipe: Recipe) -> String {
-        let count = communityLikes(for: recipe)
-
-        guard count >= 1_000 else {
-            return "\(count)"
-        }
-
-        return String(format: "%.1fk", Double(count) / 1_000)
     }
 
     private func showToast(_ message: String) {

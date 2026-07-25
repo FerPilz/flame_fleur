@@ -11,44 +11,36 @@ struct ShoppingCartItemRow: View {
         HStack(alignment: .top, spacing: AppSpacing.xxs) {
             Button(action: onToggleSelection) {
                 Image(systemName: item.isChecked ? "checkmark.circle.fill" : "circle")
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.system(size: 19, weight: .semibold))
                     .foregroundStyle(item.isChecked ? AppColors.olive : AppColors.tertiaryText)
-                    .frame(width: 24, height: 24)
+                    .frame(width: 28, height: 28)
                     .padding(.top, 2)
             }
             .buttonStyle(.plain)
             .accessibilityLabel(Text(item.isChecked ? "Deselect \(item.name)" : "Select \(item.name)"))
 
-            FoodImagePlaceholder(imageName: item.imageName, style: .thumbnail)
-                .frame(width: 34, height: 34)
+            ShoppingCartIngredientImageView(item: item)
+                .padding(.top, 1)
 
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text(item.name)
                     .font(AppTypography.callout)
                     .foregroundStyle(AppColors.primaryText)
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
 
-                Text("\(item.quantityText) · \(item.category.title)")
+                Text(item.quantityUnitText)
                     .font(AppTypography.metadata)
                     .foregroundStyle(AppColors.secondaryText)
                     .lineLimit(1)
-                    .minimumScaleFactor(0.86)
+                    .minimumScaleFactor(0.82)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .layoutPriority(1)
 
-            VStack(alignment: .trailing, spacing: AppSpacing.xxs) {
-                Text(ShoppingCartStore.currencyString(item.estimatedLineCost))
-                    .font(AppTypography.metadata)
-                    .foregroundStyle(AppColors.primaryText)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.82)
-
-                HStack(spacing: AppSpacing.xxs) {
-                    quantityControl
-                    storeMenu
-                }
+            HStack(spacing: AppSpacing.xxs) {
+                quantityControl
+                storeMenu
             }
         }
         .padding(.horizontal, AppSpacing.xxs)
@@ -64,24 +56,26 @@ struct ShoppingCartItemRow: View {
         HStack(spacing: AppSpacing.xxs) {
             Button(action: onDecrement) {
                 Image(systemName: "minus")
-                    .font(AppTypography.metadata)
-                    .frame(width: 16, height: 20)
+                    .font(.system(size: 13, weight: .semibold))
+                    .frame(width: 22, height: 22)
             }
+            .contentShape(Rectangle())
 
             Text("\(item.quantity)")
-                .font(AppTypography.metadata)
+                .font(AppTypography.callout)
                 .foregroundStyle(AppColors.primaryText)
-                .frame(width: 12)
+                .frame(width: 18)
 
             Button(action: onIncrement) {
                 Image(systemName: "plus")
-                    .font(AppTypography.metadata)
-                    .frame(width: 16, height: 20)
+                    .font(.system(size: 13, weight: .semibold))
+                    .frame(width: 22, height: 22)
             }
+            .contentShape(Rectangle())
         }
         .foregroundStyle(AppColors.olive)
-        .padding(.horizontal, 3)
-        .frame(width: 56, height: 24)
+        .padding(.horizontal, 4)
+        .frame(width: 74, height: 32)
         .background(
             Capsule(style: .continuous)
                 .fill(AppColors.elevatedCardBackground)
@@ -103,16 +97,17 @@ struct ShoppingCartItemRow: View {
         } label: {
             HStack(spacing: AppSpacing.xxs) {
                 Text(shortStoreName)
-                    .font(AppTypography.metadata)
+                    .font(AppTypography.callout)
                     .lineLimit(1)
                     .truncationMode(.tail)
+                    .minimumScaleFactor(0.82)
 
                 Image(systemName: "chevron.down")
                     .font(AppTypography.metadata)
             }
             .foregroundStyle(AppColors.secondaryText)
-            .padding(.horizontal, AppSpacing.xxs)
-            .frame(width: 72, height: 24)
+            .padding(.horizontal, AppSpacing.xs)
+            .frame(width: 94, height: 32)
             .background(
                 Capsule(style: .continuous)
                     .fill(AppColors.elevatedCardBackground)

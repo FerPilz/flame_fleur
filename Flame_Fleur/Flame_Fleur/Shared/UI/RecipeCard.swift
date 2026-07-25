@@ -4,6 +4,7 @@ struct RecipeCard: View {
     let recipe: Recipe
     let showsCreator: Bool
     let isFavorite: Bool
+    let imageHeight: CGFloat
     let action: () -> Void
     let favoriteAction: () -> Void
 
@@ -11,12 +12,14 @@ struct RecipeCard: View {
         recipe: Recipe,
         showsCreator: Bool = false,
         isFavorite: Bool = false,
+        imageHeight: CGFloat = 102,
         action: @escaping () -> Void = {},
         favoriteAction: @escaping () -> Void = {}
     ) {
         self.recipe = recipe
         self.showsCreator = showsCreator
         self.isFavorite = isFavorite
+        self.imageHeight = imageHeight
         self.action = action
         self.favoriteAction = favoriteAction
     }
@@ -28,7 +31,7 @@ struct RecipeCard: View {
                     VStack(alignment: .leading, spacing: AppSpacing.xs) {
                         FoodImagePlaceholder(imageName: recipe.imageName, style: .card)
                             .frame(maxWidth: .infinity)
-                            .frame(height: 102)
+                            .frame(height: imageHeight)
                             .clipped()
                             .overlay(alignment: .bottomLeading) {
                                 if showsCreator, let creatorName = recipe.creatorName {
