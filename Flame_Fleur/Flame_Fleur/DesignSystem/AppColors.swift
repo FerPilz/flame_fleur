@@ -1,12 +1,14 @@
 import SwiftUI
 
 enum AppColors {
-    static let porcelainCream = Color(red: 252.0 / 255.0, green: 250.0 / 255.0, blue: 240.0 / 255.0)
+    static let porcelainCream = Color(red: 255 / 255, green: 254 / 255, blue: 252 / 255)
     static let appBackground = Color(red: 1.000, green: 0.992, blue: 0.973)
     static let cardBackground = Color(red: 0.973, green: 0.945, blue: 0.906)
     static let elevatedCardBackground = Color(red: 1.000, green: 0.996, blue: 0.984)
     static let softOrange = Color(red: 0.969, green: 0.882, blue: 0.827)
     static let warmCream = Color(red: 0.949, green: 0.902, blue: 0.820)
+    static let nutritionbackground = Color(red: 239.0 / 255.0, green: 243.0 / 255.0, blue: 233.0 / 255.0)
+    static let lightbrown = Color(red: 242 / 255, green: 243 / 255, blue: 239 / 255)
 
     static let primaryText = Color(red: 0.114, green: 0.102, blue: 0.082)
     static let secondaryText = Color(red: 0.486, green: 0.455, blue: 0.400)
@@ -28,6 +30,8 @@ enum AppColors {
     static let lemon = Color(red: 0.925, green: 0.753, blue: 0.302)
     static let salmon = Color(red: 0.867, green: 0.420, blue: 0.282)
     static let basil = Color(red: 0.255, green: 0.404, blue: 0.192)
+    static let basil2 = Color(red: 0.373, green: 0.624, blue: 0.271)
+    static let allspicedolive = Color(red: 0.302, green: 0.455, blue: 0.0157)
     static let tomato = Color(red: 0.682, green: 0.204, blue: 0.129)
     static let pasta = Color(red: 0.894, green: 0.698, blue: 0.400)
     static let cocoa = Color(red: 0.271, green: 0.141, blue: 0.090)

@@ -10,7 +10,7 @@ struct RecipeDetailView: View {
     @EnvironmentObject private var favoritesStore: FavoritesStore
     @EnvironmentObject private var cartStore: ShoppingCartStore
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var chefPilotController = ChefPilotController()
+    @State private var isChefPilotEnabled = false
     @State private var isCartPresented = false
     @State private var isNutritionExpanded = false
     @State private var expandedStepID: Int?
@@ -41,21 +41,11 @@ struct RecipeDetailView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
-        .alert(item: $chefPilotController.presentedAlert) { alert in
-            Alert(
-                title: Text(alert.title),
-                message: Text(alert.message),
-                dismissButton: .default(Text("OK"))
-            )
-        }
         .navigationDestination(isPresented: $isCartPresented) {
             ShoppingCartView {
                 isCartPresented = false
             }
             .toolbar(.hidden, for: .tabBar)
-        }
-        .onDisappear {
-            chefPilotController.deactivate(resetStepIndex: true)
         }
     }
 
@@ -95,12 +85,6 @@ struct RecipeDetailView: View {
             .safeAreaInset(edge: .bottom) {
                 bottomActionBar(recipe)
             }
-            .onAppear {
-                chefPilotController.updateSteps(recipe.instructions)
-            }
-            .onChange(of: recipe.instructions) { _, newValue in
-                chefPilotController.updateSteps(newValue)
-            }
         }
     }
 
@@ -121,13 +105,7 @@ struct RecipeDetailView: View {
             notesPreview(recipe)
             nutritionPreview(recipe)
                 .padding(.top,-8)
-            ChefPilotCard(
-                state: chefPilotController.state,
-                currentStepIndex: chefPilotController.currentStepIndex,
-                action: {
-                    chefPilotController.toggle()
-                }
-            )
+            ChefPilotCard(isEnabled: $isChefPilotEnabled)
             ingredientsPreview(recipe)
             cookingSteps(recipe)
             equipmentPreview(recipe)
@@ -155,6 +133,7 @@ struct RecipeDetailView: View {
             Text(recipe.title)
                 .font(AppTypography.recipeDetailTitle)
                 .foregroundStyle(AppColors.primaryText)
+                .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .lineSpacing(2)
                 .fixedSize(horizontal: false, vertical: true)
@@ -194,7 +173,7 @@ struct RecipeDetailView: View {
 
             SurfaceCard(
                 backgroundColor: AppColors.elevatedCardBackground,
-                borderColor: AppColors.warmBorder,
+                borderColor: AppColors.basil,
                 cornerRadius: AppRadius.large,
                 contentPadding: AppSpacing.sm,
                 showsShadow: false
@@ -212,8 +191,8 @@ struct RecipeDetailView: View {
         let nutrition = recipe.nutritionPerServing
 
         return SurfaceCard(
-            backgroundColor: AppColors.elevatedCardBackground,
-            borderColor: AppColors.warmBorder,
+            backgroundColor: Color(red: 220 / 255, green: 207 / 255, blue: 194 / 255).opacity(0.30),
+            borderColor: .clear,
             cornerRadius: AppRadius.large,
             contentPadding: AppSpacing.sm,
             showsShadow: false
@@ -227,13 +206,12 @@ struct RecipeDetailView: View {
                     HStack(spacing: AppSpacing.sm) {
                         Text("Nutrition Info")
                             .font(.system(size: 20, weight: .semibold, design: .serif))
-                            .foregroundStyle(Color("DeepBasil"))
 
                         Spacer(minLength: 0)
 
                         Image(systemName: isNutritionExpanded ? "chevron.up" : "chevron.down")
-                            .font(AppTypography.metadata)
-                            .foregroundStyle(Color("DeepBasil"))
+                            .font(.system(size: 15, weight: .semibold,))
+                            .foregroundStyle(AppColors.basil)
                     }
                 }
                 .buttonStyle(.plain)
@@ -270,6 +248,7 @@ struct RecipeDetailView: View {
                     HStack(alignment: .firstTextBaseline, spacing: AppSpacing.sm) {
                             Text("Protein: \(nutrition.proteinGrams)g • Carbs: \(nutrition.carbsGrams)g • Fat: \(nutrition.fatGrams)g")
                                 .font(AppTypography.body)
+                                .foregroundStyle(AppColors.secondaryText)
                                 .foregroundStyle(AppColors.primaryText)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.8)
@@ -385,7 +364,9 @@ struct RecipeDetailView: View {
                         title: stepTitle(for: stepNumber),
                         detail: instruction,
                         durationText: stepDurationText(for: recipe, stepNumber: stepNumber),
-                        isExpanded: expandedStepID == stepNumber
+                        isExpanded: expandedStepID == stepNumber,
+                        showsTopConnector: index > 0,
+                        showsBottomConnector: index < recipe.instructions.count - 1
                     ) {
                         withAnimation(.easeInOut) {
                             expandedStepID = expandedStepID == stepNumber ? nil : stepNumber

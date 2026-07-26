@@ -15,7 +15,7 @@ enum AppTypography {
     // UIKit reference:
     // UIFont(name: "Charter-Bold", size: SIZE)
 
-    static let recipeDetailTitle = Font.custom("Charter-Bold", size: 28)
+    static let recipeDetailTitle = Font.system(size: 29, weight: .semibold, design: .serif)
     static let heroTitle = Font.custom("Charter-Bold", size: 24)
 
     static let sectionTitle = Font.custom("Charter-Bold", size: 20)
