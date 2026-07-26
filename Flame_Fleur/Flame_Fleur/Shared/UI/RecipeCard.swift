@@ -29,10 +29,15 @@ struct RecipeCard: View {
             ZStack(alignment: .topTrailing) {
                 Button(action: action) {
                     VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                        FoodImagePlaceholder(imageName: recipe.imageName, style: .card)
+                        FoodImagePlaceholder(imageName: recipe.imageName, style: .cardTop)
                             .frame(maxWidth: .infinity)
                             .frame(height: imageHeight)
                             .clipped()
+                            .clipShape(imageTopShape)
+                            .overlay(
+                                imageTopShape
+                                    .stroke(AppColors.warmBorder.opacity(0.70), lineWidth: 1)
+                            )
                             .overlay(alignment: .bottomLeading) {
                                 if showsCreator, let creatorName = recipe.creatorName {
                                     creatorOverlay(creatorName)
@@ -57,23 +62,22 @@ struct RecipeCard: View {
                 .buttonStyle(.plain)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                IconCircleButton(
-                    systemName: isFavorite ? "heart.fill" : "heart",
+                FavoriteHeartButton(
+                    isFavorite: isFavorite,
                     accessibilityLabel: isFavorite ? "Unsave \(recipe.title)" : "Save \(recipe.title)",
-                    size: 24,
-                    backgroundColor: AppColors.elevatedCardBackground.opacity(0.92),
-                    foregroundColor: isFavorite ? AppColors.error : AppColors.darkOlive,
                     action: favoriteAction
                 )
-                .padding(5)
+                .padding(.top, 3)
+                .padding(.trailing, 3)
             }
         }
         .background(
-            RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous)
+            cardShape
                 .fill(AppColors.elevatedCardBackground)
         )
+        .clipShape(cardShape)
         .overlay(
-            RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous)
+            cardShape
                 .stroke(AppColors.warmBorder, lineWidth: 1)
         )
     }
@@ -117,6 +121,24 @@ struct RecipeCard: View {
         .overlay(
             Capsule(style: .continuous)
                 .stroke(AppColors.warmBorder.opacity(0.72), lineWidth: 1)
+        )
+    }
+
+    private var cardCornerRadius: CGFloat {
+        AppRadius.medium
+    }
+
+    private var cardShape: RoundedRectangle {
+        RoundedRectangle(cornerRadius: cardCornerRadius, style: .continuous)
+    }
+
+    private var imageTopShape: UnevenRoundedRectangle {
+        UnevenRoundedRectangle(
+            topLeadingRadius: cardCornerRadius,
+            bottomLeadingRadius: 0,
+            bottomTrailingRadius: 0,
+            topTrailingRadius: cardCornerRadius,
+            style: .continuous
         )
     }
 }

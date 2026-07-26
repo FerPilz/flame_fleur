@@ -15,11 +15,13 @@ struct TypographyPreview: View {
             Text("Top Picks for You")
                 .font(AppTypography.sectionTitle)
 
-            Text("Spicy Tomato Basil Pasta")
+            Text("Spicy Tomato & Basil Pasta")
                 .font(AppTypography.cardTitle)
 
             Text("Breakfast")
                 .font(AppTypography.categoryCircleLabel)
+            Text("Spicy Tomato & Basil Pasta")
+                .font(AppTypography.heroTitle)
         }
         .padding(24)
         .background(AppColors.porcelainCream)

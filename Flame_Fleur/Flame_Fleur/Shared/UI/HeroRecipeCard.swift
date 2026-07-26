@@ -28,63 +28,43 @@ struct HeroRecipeCard: View {
     }
 
     var body: some View {
-        SurfaceCard(
-            backgroundColor: AppColors.cardBackground,
-            borderColor: AppColors.warmBorder,
-            cornerRadius: AppRadius.extraLarge,
-            contentPadding: AppSpacing.xs,
-            showsShadow: false
-        ) {
-            GeometryReader { proxy in
-                let imageWidth = min(220, max(148, proxy.size.width * (0.49 * imageWidthScale)))
-                let imageHeight = max(146, proxy.size.height - AppSpacing.xs)
-                let textWidth = max(116, proxy.size.width - imageWidth - AppSpacing.sm)
+        GeometryReader { proxy in
+            let sectionWidth = proxy.size.width * 0.5
 
-                ZStack(alignment: .topTrailing) {
-                    Button(action: action) {
-                        HStack(alignment: .center, spacing: AppSpacing.sm) {
-                            VStack(alignment: .leading, spacing: AppSpacing.xs) {
-                                Text(recipe.title)
-                                    .font(AppTypography.heroTitle)
-                                    .foregroundStyle(AppColors.primaryText)
-                                    .lineLimit(2)
-                                    .fixedSize(horizontal: false, vertical: true)
+            ZStack(alignment: .topTrailing) {
+                Button(action: action) {
+                    HStack(spacing: 0) {
+                        textContent
+                            .frame(width: sectionWidth, height: cardHeight, alignment: .leading)
+                            .background(AppColors.elevatedCardBackground)
 
-                                Text(recipe.subtitle)
-                                    .font(AppTypography.metadata)
-                                    .foregroundStyle(AppColors.secondaryText)
-                                    .lineLimit(1)
-
-                                metadataRow
-                                    .padding(.top, 1)
-
-                                ctaLabel
-                                    .padding(.top, AppSpacing.xs)
-                            }
-                            .frame(width: textWidth, alignment: .leading)
-
-                            FoodImagePlaceholder(imageName: recipe.imageName, style: .hero)
-                                .frame(width: imageWidth, height: imageHeight)
-                                .clipped()
-                        }
-                        .contentShape(Rectangle())
+                        FoodImagePlaceholder(imageName: recipe.imageName, style: .cardTop)
+                            .frame(width: sectionWidth, height: cardHeight)
+                            .clipped()
                     }
-                    .buttonStyle(.plain)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                    IconCircleButton(
-                        systemName: isFavorite ? "heart.fill" : "heart",
-                        accessibilityLabel: isFavorite ? "Unsave \(recipe.title)" : "Save \(recipe.title)",
-                        size: 28,
-                        backgroundColor: AppColors.elevatedCardBackground.opacity(0.92),
-                        foregroundColor: isFavorite ? AppColors.error : AppColors.darkOlive,
-                        action: favoriteAction
-                    )
-                    .padding(AppSpacing.xs)
+                    .frame(width: proxy.size.width, height: cardHeight)
+                    .contentShape(cardShape)
                 }
+                .buttonStyle(.plain)
+
+                FavoriteHeartButton(
+                    isFavorite: isFavorite,
+                    accessibilityLabel: isFavorite ? "Unsave \(recipe.title)" : "Save \(recipe.title)",
+                    action: favoriteAction
+                )
+                .padding(.top, 3)
+                .padding(.trailing, 3)
             }
-            .frame(height: cardHeight)
+            .frame(width: proxy.size.width, height: cardHeight)
+            .background(AppColors.cardBackground)
+            .clipShape(cardShape)
+            .overlay(
+                cardShape
+                    .stroke(AppColors.warmBorder, lineWidth: 1)
+            )
         }
+        .frame(maxWidth: .infinity)
+        .frame(height: cardHeight)
     }
 
     private var ctaLabel: some View {
@@ -112,6 +92,33 @@ struct HeroRecipeCard: View {
         }
     }
 
+    private var textContent: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.xs) {
+            Text(recipe.title)
+                .font(AppTypography.heroTitle)
+                .foregroundStyle(AppColors.primaryText)
+                .lineLimit(2)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(recipe.subtitle)
+                .font(AppTypography.metadata)
+                .foregroundStyle(AppColors.primaryText.opacity(0.68))
+                .lineLimit(1)
+
+            metadataRow
+                .padding(.top, 1)
+
+            Spacer(minLength: AppSpacing.xxs)
+
+            ctaLabel
+        }
+        .padding(AppSpacing.md)
+    }
+
+    private var cardShape: RoundedRectangle {
+        RoundedRectangle(cornerRadius: AppRadius.extraLarge, style: .continuous)
+    }
+
     private func metadataItem(systemName: String, text: String) -> some View {
         HStack(spacing: 2) {
             Image(systemName: systemName)
@@ -122,7 +129,7 @@ struct HeroRecipeCard: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.72)
         }
-        .foregroundStyle(AppColors.tertiaryText)
+        .foregroundStyle(AppColors.primaryText.opacity(0.70))
     }
 }
 

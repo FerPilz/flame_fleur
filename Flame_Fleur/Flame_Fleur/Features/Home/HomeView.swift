@@ -8,6 +8,7 @@ struct HomeView: View {
 
     @State private var navigationPath: [HomeRoute] = []
     @State private var selectedSegment = HomeShowcaseSection.featured.id
+    @State private var programmaticCategoryScrollTargetID: String?
 
     private let recipeRepository = RecipeRepository.shared
 
@@ -45,22 +46,6 @@ struct HomeView: View {
                 }
                 .navigationDestination(for: HomeRoute.self) { route in
                     switch route {
-                    case .recipeIntro(let recipeID):
-                        if let recipe = recipeRepository.recipe(id: recipeID) {
-                            RecipeIntroView(
-                                recipe: recipe,
-                                onBack: {
-                                    if !navigationPath.isEmpty {
-                                        navigationPath.removeLast()
-                                    }
-                                },
-                                onStartCooking: {
-                                    startCooking(from: recipeID)
-                                }
-                            )
-                        } else {
-                            EmptyView()
-                        }
                     case .recipe(let recipeID):
                         if recipeRepository.recipe(id: recipeID) != nil {
                             RecipeDetailView(
@@ -147,7 +132,7 @@ struct HomeView: View {
                 items: featuredRecipes,
                 visibleItemCount: 1,
                 cardHeight: HomeLayoutMetrics.featuredCardHeight,
-                autoScrollInterval: 7
+                autoScrollInterval: HomeLayoutMetrics.carouselAutoScrollInterval
                     ) { recipe in
                         HeroRecipeCard(
                             recipe: recipe,
@@ -155,7 +140,7 @@ struct HomeView: View {
                             imageWidthScale: HomeLayoutMetrics.heroImageWidthScale,
                             cardHeight: HomeLayoutMetrics.featuredCardHeight,
                             action: {
-                                navigationPath.append(.recipeIntro(recipe.id))
+                                navigationPath.append(.recipe(recipe.id))
                             },
                             favoriteAction: {
                                 favoritesStore.toggleFavorite(recipe.id)
@@ -185,14 +170,14 @@ struct HomeView: View {
                     visibleItemCount: HomeLayoutMetrics.carouselVisibleItemCount,
                     cardHeight: HomeLayoutMetrics.carouselCardHeight,
                     edgePadding: 0,
-                    autoScrollInterval: 7
+                    autoScrollInterval: HomeLayoutMetrics.carouselAutoScrollInterval
                     ) { recipe in
                         RecipeCard(
                             recipe: recipe,
                             isFavorite: favoritesStore.isFavorite(recipe.id),
                             imageHeight: HomeLayoutMetrics.carouselImageHeight,
                             action: {
-                                navigationPath.append(.recipeIntro(recipe.id))
+                                navigationPath.append(.recipe(recipe.id))
                             },
                             favoriteAction: {
                                 favoritesStore.toggleFavorite(recipe.id)
@@ -249,6 +234,8 @@ struct HomeView: View {
     }
 
     private func updateSelectedSegment(from positions: [HomeSectionPosition]) {
+        guard programmaticCategoryScrollTargetID == nil else { return }
+
         let visibleIDs = Set(topSegments.map(\.id))
         let sectionPositions = positions.filter { visibleIDs.contains($0.id) }
         let activationOffset = HomeLayoutMetrics.sectionActivationOffset
@@ -267,19 +254,19 @@ struct HomeView: View {
     private func scrollToSection(_ id: String, proxy: ScrollViewProxy) {
         guard topSegments.contains(where: { $0.id == id }) else { return }
 
+        programmaticCategoryScrollTargetID = id
         selectedSegment = id
 
-        withAnimation(.easeInOut(duration: 0.24)) {
+        withAnimation(.easeInOut(duration: 0.35)) {
             proxy.scrollTo(id, anchor: .top)
         }
-    }
 
-    private func startCooking(from recipeID: String) {
-        if !navigationPath.isEmpty, case .recipeIntro = navigationPath.last {
-            navigationPath.removeLast()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
+            guard programmaticCategoryScrollTargetID == id else { return }
+
+            selectedSegment = id
+            programmaticCategoryScrollTargetID = nil
         }
-
-        navigationPath.append(.recipe(recipeID))
     }
 }
 
@@ -293,10 +280,10 @@ private enum HomeLayoutMetrics {
     static let carouselVisibleItemCount: CGFloat = 2.55
     static let carouselImageHeight: CGFloat = 105
     static let heroImageWidthScale: CGFloat = 1.05
+    static let carouselAutoScrollInterval: TimeInterval = 10
 }
 
 private enum HomeRoute: Hashable {
-    case recipeIntro(String)
     case recipe(String)
     case ingredients(String)
     case cart

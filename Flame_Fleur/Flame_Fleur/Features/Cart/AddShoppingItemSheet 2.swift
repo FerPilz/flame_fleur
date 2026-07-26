@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AddShoppingItemSheet: View {
+private struct LegacyAddShoppingItemSheet: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var cartStore: ShoppingCartStore
 
@@ -265,6 +265,6 @@ struct AddShoppingItemSheet: View {
 }
 
 #Preview {
-    AddShoppingItemSheet()
+    LegacyAddShoppingItemSheet()
         .environmentObject(ShoppingCartStore.shared)
 }

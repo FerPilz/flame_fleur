@@ -6,6 +6,22 @@ struct AddShoppingSuggestedItemRow: View {
     let isAdded: Bool
     let onAdd: () -> Void
 
+    init(
+        item: ShoppingCartItem,
+        quantity: Binding<Int>,
+        isAdded: Bool,
+        onAdd: @escaping () -> Void
+    ) {
+        self.item = item
+        self._quantity = quantity
+        self.isAdded = isAdded
+        self.onAdd = onAdd
+    }
+
+    init(item: ShoppingCartItem, onAdd: @escaping () -> Void) {
+        self.init(item: item, quantity: .constant(1), isAdded: false, onAdd: onAdd)
+    }
+
     var body: some View {
         HStack(spacing: AppSpacing.xs) {
             ShoppingCartIngredientImageView(item: item, size: 44)

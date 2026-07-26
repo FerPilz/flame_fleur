@@ -28,6 +28,7 @@ enum FoodImageKind: String {
 enum FoodImagePlaceholderStyle {
     case hero
     case card
+    case cardTop
     case thumbnail
     case circle
 
@@ -35,7 +36,7 @@ enum FoodImagePlaceholderStyle {
         switch self {
         case .hero:
             return 1.08
-        case .card:
+        case .card, .cardTop:
             return 1.04
         case .thumbnail:
             return 1
@@ -48,7 +49,7 @@ enum FoodImagePlaceholderStyle {
         switch self {
         case .hero:
             return AppRadius.extraLarge
-        case .card:
+        case .card, .cardTop:
             return AppRadius.medium
         case .thumbnail:
             return AppRadius.small
@@ -97,6 +98,8 @@ struct FoodImagePlaceholder: View {
                     Circle()
                         .stroke(AppColors.warmBorder.opacity(0.70), lineWidth: 1)
                 )
+        } else if case .cardTop = style {
+            content
         } else {
             content
                 .clipShape(RoundedRectangle(cornerRadius: style.cornerRadius, style: .continuous))
@@ -338,7 +341,7 @@ private enum ResolvedFoodImageSource {
 private enum AssetImageAvailability {
     static func assetLookupName(for imageName: String) -> String {
         let candidates = candidateNames(for: imageName)
-        return candidates.first(where: isAssetCatalogImage(named:)) ?? imageName
+        return candidates.first { isAssetCatalogImage(named: $0) } ?? imageName
     }
 
     static func exists(named imageName: String) -> Bool {

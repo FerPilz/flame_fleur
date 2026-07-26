@@ -10,8 +10,9 @@ struct RecipeDetailView: View {
     @EnvironmentObject private var favoritesStore: FavoritesStore
     @EnvironmentObject private var cartStore: ShoppingCartStore
     @Environment(\.dismiss) private var dismiss
-    @State private var isChefPilotEnabled = false
+    @StateObject private var chefPilotController = ChefPilotController()
     @State private var isCartPresented = false
+    @State private var isNutritionExpanded = false
     @State private var expandedStepID: Int?
 
     private let recipeRepository = RecipeRepository.shared
@@ -40,18 +41,21 @@ struct RecipeDetailView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
+        .alert(item: $chefPilotController.presentedAlert) { alert in
+            Alert(
+                title: Text(alert.title),
+                message: Text(alert.message),
+                dismissButton: .default(Text("OK"))
+            )
+        }
         .navigationDestination(isPresented: $isCartPresented) {
             ShoppingCartView {
                 isCartPresented = false
             }
             .toolbar(.hidden, for: .tabBar)
         }
-        .onAppear {
-            guard let recipe = recipeRepository.recipe(id: recipeID) else {
-                return
-            }
-
-            UsageTrackingStore.shared.recordRecipeViewIfNeeded(for: recipe)
+        .onDisappear {
+            chefPilotController.deactivate(resetStepIndex: true)
         }
     }
 
@@ -67,29 +71,35 @@ struct RecipeDetailView: View {
                     VStack(spacing: 0) {
                         Color.clear
                             .frame(height: heroHeight - RecipeDetailLayout.panelOverlap)
+                            .allowsHitTesting(false)
 
                         contentPanel(recipe)
                     }
                 }
-                .zIndex(0)
+                .zIndex(1)
 
                 RecipeHeroHeader(
                     recipe: recipe,
                     isFavorite: favoritesStore.isFavorite(recipe.id),
                     shareText: shareText(for: recipe),
                     showsBackButton: true,
-                    showsBrandTitle: false,
                     onCartTap: { isCartPresented = true },
-                    cartBadgeValue: cartStore.totalItemCount,
+                    cartBadgeValue: cartStore.totalItemCount > 0 ? cartStore.totalItemCount : nil,
                     onBack: { goBack() },
                     onFavoriteTap: { favoritesStore.toggleFavorite(recipe.id) }
                 )
                 .frame(height: heroHeight)
                 .ignoresSafeArea(edges: .top)
-                .zIndex(1)
+                .zIndex(0)
             }
             .safeAreaInset(edge: .bottom) {
                 bottomActionBar(recipe)
+            }
+            .onAppear {
+                chefPilotController.updateSteps(recipe.instructions)
+            }
+            .onChange(of: recipe.instructions) { _, newValue in
+                chefPilotController.updateSteps(newValue)
             }
         }
     }
@@ -106,10 +116,18 @@ struct RecipeDetailView: View {
         VStack(alignment: .leading, spacing: AppSpacing.lg) {
             titleBlock(recipe)
             RecipeInfoCarousel(recipe: recipe)
+                .padding(.top,-8)
             sourcePreview(recipe)
             notesPreview(recipe)
             nutritionPreview(recipe)
-            ChefPilotCard(isEnabled: $isChefPilotEnabled)
+                .padding(.top,-8)
+            ChefPilotCard(
+                state: chefPilotController.state,
+                currentStepIndex: chefPilotController.currentStepIndex,
+                action: {
+                    chefPilotController.toggle()
+                }
+            )
             ingredientsPreview(recipe)
             cookingSteps(recipe)
             equipmentPreview(recipe)
@@ -120,7 +138,13 @@ struct RecipeDetailView: View {
         .padding(.bottom, AppSpacing.xxxl + AppSpacing.xxl)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
-            RoundedRectangle(cornerRadius: AppRadius.hero, style: .continuous)
+            UnevenRoundedRectangle(
+                topLeadingRadius: 40,
+                bottomLeadingRadius: 0,
+                bottomTrailingRadius: 0,
+                topTrailingRadius: 40,
+                style: .continuous
+            )
                 .fill(AppColors.appBackground)
                 .shadow(color: AppShadow.cardColor, radius: AppShadow.cardRadius, x: 0, y: -AppShadow.cardYOffset)
         )
@@ -136,10 +160,6 @@ struct RecipeDetailView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
 
-            Text(recipe.subtitle)
-                .font(AppTypography.bodyEmphasis)
-                .foregroundStyle(AppColors.olive)
-                .lineLimit(2)
 
             Text(recipe.description)
                 .font(AppTypography.body)
@@ -191,61 +211,79 @@ struct RecipeDetailView: View {
     private func nutritionPreview(_ recipe: Recipe) -> some View {
         let nutrition = recipe.nutritionPerServing
 
-        return VStack(alignment: .leading, spacing: AppSpacing.sm) {
-            SectionHeaderView("Approx. nutrition per serving", style: .compact)
-
-            SurfaceCard(
-                backgroundColor: AppColors.elevatedCardBackground,
-                borderColor: AppColors.warmBorder,
-                cornerRadius: AppRadius.large,
-                contentPadding: AppSpacing.sm,
-                showsShadow: false
-            ) {
-                VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                    HStack(alignment: .firstTextBaseline, spacing: AppSpacing.sm) {
-                        Text("\(nutrition.calories) kcal")
-                            .font(AppTypography.sectionTitle)
-                            .foregroundStyle(AppColors.primaryText)
-                            .lineLimit(1)
+        return SurfaceCard(
+            backgroundColor: AppColors.elevatedCardBackground,
+            borderColor: AppColors.warmBorder,
+            cornerRadius: AppRadius.large,
+            contentPadding: AppSpacing.sm,
+            showsShadow: false
+        ) {
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                Button {
+                    withAnimation(.easeInOut(duration: 0.24)) {
+                        isNutritionExpanded.toggle()
+                    }
+                } label: {
+                    HStack(spacing: AppSpacing.sm) {
+                        Text("Nutrition Info")
+                            .font(.system(size: 20, weight: .semibold, design: .serif))
+                            .foregroundStyle(Color("DeepBasil"))
 
                         Spacer(minLength: 0)
 
-                        Text(recipe.servingsText)
+                        Image(systemName: isNutritionExpanded ? "chevron.up" : "chevron.down")
                             .font(AppTypography.metadata)
-                            .foregroundStyle(AppColors.secondaryText)
-                            .lineLimit(1)
+                            .foregroundStyle(Color("DeepBasil"))
                     }
+                }
+                .buttonStyle(.plain)
 
-                    HStack(spacing: AppSpacing.sm) {
-                        nutritionMetric(title: "Protein", value: "\(nutrition.proteinGrams) g")
-                        nutritionMetric(title: "Carbs", value: "\(nutrition.carbsGrams) g")
-                        nutritionMetric(title: "Fat", value: "\(nutrition.fatGrams) g")
+                if isNutritionExpanded {
+                    VStack(alignment: .leading, spacing: AppSpacing.sm) {
+                        HStack(alignment: .firstTextBaseline, spacing: AppSpacing.sm) {
+                            Text("\(nutrition.calories) kcal")
+                                .font(AppTypography.sectionTitle)
+                                .foregroundStyle(AppColors.primaryText)
+                                .lineLimit(1)
+
+                            Spacer(minLength: 0)
+
+                            Text(recipe.servingsText)
+                                .font(AppTypography.metadata)
+                                .foregroundStyle(AppColors.secondaryText)
+                                .lineLimit(1)
+                        }
+
+                        HStack(spacing: AppSpacing.sm) {
+                            NutritionMetricView(title: "Protein", value: "\(nutrition.proteinGrams) g", iconName: "ProteinIcon")
+                            NutritionMetricView(title: "Carbs", value: "\(nutrition.carbsGrams) g", iconName: "CarbsIcon")
+                            NutritionMetricView(title: "Fat", value: "\(nutrition.fatGrams) g", iconName: "FatIcon")
+                        }
+
+                        HStack(spacing: AppSpacing.sm) {
+                            NutritionMetricView(title: "Fiber", value: "\(nutrition.fiberGrams) g", iconName: "FiberIcon")
+                            NutritionMetricView(title: "Sugar", value: "\(nutrition.sugarGrams) g", iconName: "SugarIcon")
+                            NutritionMetricView(title: "Sodium", value: "\(nutrition.sodiumMilligrams) mg", iconName: "SodiumIcon")
+                        }
                     }
+                } else {
+                    HStack(alignment: .firstTextBaseline, spacing: AppSpacing.sm) {
+                            Text("Protein: \(nutrition.proteinGrams)g • Carbs: \(nutrition.carbsGrams)g • Fat: \(nutrition.fatGrams)g")
+                                .font(AppTypography.body)
+                                .foregroundStyle(AppColors.primaryText)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.8)
 
-                    HStack(spacing: AppSpacing.sm) {
-                        nutritionMetric(title: "Fiber", value: "\(nutrition.fiberGrams) g")
-                        nutritionMetric(title: "Sugar", value: "\(nutrition.sugarGrams) g")
-                        nutritionMetric(title: "Sodium", value: "\(nutrition.sodiumMilligrams) mg")
+                            Spacer(minLength: AppSpacing.sm)
+
+                            Text("Expand for details")
+                                .font(AppTypography.metadata)
+                                .foregroundStyle(AppColors.secondaryText)
+                                .lineLimit(1)
                     }
                 }
             }
         }
-    }
-
-    private func nutritionMetric(title: String, value: String) -> some View {
-        VStack(alignment: .leading, spacing: 1) {
-            Text(title)
-                .font(AppTypography.metadata)
-                .foregroundStyle(AppColors.secondaryText)
-                .lineLimit(1)
-
-            Text(value)
-                .font(AppTypography.bodyEmphasis)
-                .foregroundStyle(AppColors.primaryText)
-                .lineLimit(1)
-                .minimumScaleFactor(0.82)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     @ViewBuilder
@@ -422,14 +460,16 @@ struct RecipeDetailView: View {
                 }
                 .buttonStyle(.plain)
             } else {
-                PrimaryButton("View Ingredients", systemImage: "list.bullet.clipboard", style: .recipe, height: 50) {
+                PrimaryButton("View Ingredients", systemImage: "list.bullet.clipboard", style: .recipe, height: 60,
+                              font: .system(size: 20, weight: .semibold)
+                ) {
                     onViewIngredients()
                 }
             }
         }
         .padding(.horizontal, AppSpacing.lg)
         .padding(.top, AppSpacing.sm)
-        .padding(.bottom, AppSpacing.sm)
+        .padding(.bottom, AppSpacing.xs)
         .background(
             LinearGradient(
                 colors: [
@@ -478,7 +518,7 @@ struct RecipeDetailView: View {
     }
 
     private func shareText(for recipe: Recipe) -> String {
-        "Check out this recipe: \(recipe.title) in ALLSPICED. \(recipe.totalTimeText) total, \(recipe.servingsText)."
+        "Check out this recipe: \(recipe.title) in Flame & Fleur. \(recipe.totalTimeText) total, \(recipe.servingsText)."
     }
 
     private func stepTitle(for stepNumber: Int) -> String {
@@ -502,10 +542,42 @@ struct RecipeDetailView: View {
 }
 
 private enum RecipeDetailLayout {
-    static let minHeroHeight: CGFloat = 278
-    static let maxHeroHeight: CGFloat = 344
-    static let heroHeightRatio: CGFloat = 0.37
-    static let panelOverlap: CGFloat = 72
+    static let minHeroHeight: CGFloat = 325
+    static let maxHeroHeight: CGFloat = 416
+    static let heroHeightRatio: CGFloat = 0.455
+    static let panelOverlap: CGFloat = 100
+}
+
+private struct NutritionMetricView: View {
+    let title: String
+    let value: String
+    let iconName: String
+
+    var body: some View {
+        HStack(alignment: .top, spacing: AppSpacing.xs) {
+            Image(iconName)
+                .renderingMode(.template)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 25, height: 25)
+                .foregroundStyle(Color("DeepBasil"))
+                .padding(.top, 1)
+
+            VStack(alignment: .leading, spacing: 1) {
+                Text(title)
+                    .font(AppTypography.metadata)
+                    .foregroundStyle(AppColors.secondaryText)
+                    .lineLimit(1)
+
+                Text(value)
+                    .font(AppTypography.bodyEmphasis)
+                    .foregroundStyle(AppColors.primaryText)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.82)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
 }
 
 #Preview {

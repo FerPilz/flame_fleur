@@ -60,7 +60,12 @@ struct ExploreCategoryOptionsView: View {
                             titleFont: AppTypography.exploreSubcategoryCircleLabel,
                             isSelected: selectedSubcategoryID == subcategory.id
                         ) {
-                            selectedSubcategoryID = selectedSubcategoryID == subcategory.id ? nil : subcategory.id
+                            if selectedSubcategoryID == subcategory.id {
+                                selectedSubcategoryID = nil
+                            } else {
+                                selectedSubcategoryID = subcategory.id
+                            }
+
                             onSubcategorySelected(subcategory)
                         }
                     }

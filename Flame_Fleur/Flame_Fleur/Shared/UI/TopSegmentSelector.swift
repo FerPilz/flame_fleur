@@ -3,12 +3,12 @@ import SwiftUI
 struct TopSegmentOption: Identifiable, Hashable {
     let id: String
     let title: String
-    let systemImage: String
+    let iconAssetName: String
 
-    init(id: String, title: String, systemImage: String) {
+    init(id: String, title: String, iconAssetName: String) {
         self.id = id
         self.title = title
-        self.systemImage = systemImage
+        self.iconAssetName = iconAssetName
     }
 }
 
@@ -39,12 +39,12 @@ struct TopSegmentSelector: View {
                             segmentContent(option)
                         }
                         .buttonStyle(.plain)
-                        .id(scrollID(for: option.id))
+                        .id(option.id)
                     }
                 }
-                .padding(.vertical, 2)
+                .padding(.vertical, 3)
             }
-            .frame(height: AppSpacing.xl + AppSpacing.xxs)
+            .frame(height: TopSegmentSelectorMetrics.height)
             .onAppear {
                 scrollToSelection(selection, proxy: proxy, animated: false)
             }
@@ -59,11 +59,17 @@ struct TopSegmentSelector: View {
 
         return VStack(spacing: 3) {
             HStack(spacing: AppSpacing.xxs) {
-                Image(systemName: option.systemImage)
-                    .font(.system(size: 16, weight: .semibold))
+                Image(option.iconAssetName)
+                    .renderingMode(.template)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
+                    .accessibilityHidden(true)
 
                 Text(option.title)
-                    .font(AppTypography.metadata)
+                    .font(.system(size: TopSegmentSelectorMetrics.titleFontSize, weight: isActive ? .semibold : .medium))
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: false)
             }
             .foregroundStyle(isActive ? AppColors.deepBasil : AppColors.secondaryText)
             .lineLimit(1)
@@ -82,7 +88,7 @@ struct TopSegmentSelector: View {
         guard options.contains(where: { $0.id == selection }) else { return }
 
         let scrollAction = {
-            proxy.scrollTo(scrollID(for: selection), anchor: .center)
+            proxy.scrollTo(selection, anchor: .center)
         }
 
         DispatchQueue.main.async {
@@ -96,9 +102,11 @@ struct TopSegmentSelector: View {
         }
     }
 
-    private func scrollID(for selection: String) -> String {
-        "top-segment-\(selection)"
-    }
+}
+
+private enum TopSegmentSelectorMetrics {
+    static let titleFontSize: CGFloat = 16.5
+    static let height: CGFloat = 40
 }
 
 private struct TopSegmentSelectorPreview: View {
@@ -107,18 +115,18 @@ private struct TopSegmentSelectorPreview: View {
     var body: some View {
         TopSegmentSelector(
             options: [
-                TopSegmentOption(id: "featured", title: "Featured", systemImage: "leaf.fill"),
-                TopSegmentOption(id: "beef", title: "Beef", systemImage: "fork.knife"),
-                TopSegmentOption(id: "vegetarian", title: "Vegetarian", systemImage: "leaf.fill"),
-                TopSegmentOption(id: "chickenSalad", title: "Chicken Salad", systemImage: "leaf.circle.fill"),
-                TopSegmentOption(id: "tuna", title: "Tuna", systemImage: "fish.fill"),
-                TopSegmentOption(id: "plantBasedBowls", title: "Plant Based Bowls", systemImage: "takeoutbag.and.cup.and.straw.fill"),
-                TopSegmentOption(id: "piesAndTarts", title: "Pies & Tarts", systemImage: "birthday.cake.fill"),
-                TopSegmentOption(id: "mexican", title: "Mexican", systemImage: "taco.fill"),
-                TopSegmentOption(id: "korean", title: "Korean", systemImage: "bowl.fill"),
-                TopSegmentOption(id: "breakfastBakes", title: "Breakfast Bakes", systemImage: "croissant.fill"),
-                TopSegmentOption(id: "cookies", title: "Cookies", systemImage: "cookie.fill"),
-                TopSegmentOption(id: "highProtein", title: "High Protein", systemImage: "dumbbell.fill")
+                TopSegmentOption(id: "featured", title: "Featured", iconAssetName: "icon_featured"),
+                TopSegmentOption(id: "beef", title: "Beef", iconAssetName: "icon_beef"),
+                TopSegmentOption(id: "vegetarian", title: "Vegetarian", iconAssetName: "icon_vegetarian"),
+                TopSegmentOption(id: "chickenSalad", title: "Chicken Salad", iconAssetName: "icon_chicken_salad"),
+                TopSegmentOption(id: "tuna", title: "Tuna", iconAssetName: "icon_tuna"),
+                TopSegmentOption(id: "plantBasedBowls", title: "Plant Based Bowls", iconAssetName: "icon_plant_based_bowls"),
+                TopSegmentOption(id: "piesAndTarts", title: "Pies & Tarts", iconAssetName: "icon_pies_tarts"),
+                TopSegmentOption(id: "mexican", title: "Mexican", iconAssetName: "icon_mexican"),
+                TopSegmentOption(id: "korean", title: "Korean", iconAssetName: "icon_korean"),
+                TopSegmentOption(id: "breakfastBakes", title: "Breakfast Bakes", iconAssetName: "icon_breakfast_bakes"),
+                TopSegmentOption(id: "cookies", title: "Cookies", iconAssetName: "icon_cookies"),
+                TopSegmentOption(id: "highProtein", title: "High Protein", iconAssetName: "icon_high_protein")
             ],
             selection: $selection
         )

@@ -74,32 +74,32 @@ enum HomeShowcaseSection: String, CaseIterable, Identifiable {
         }
     }
 
-    var systemImage: String {
+    var iconAssetName: String {
         switch self {
         case .featured:
-            return "leaf.fill"
+            return "icon_featured"
         case .beef:
-            return "fork.knife"
+            return "icon_beef"
         case .vegetarian:
-            return "leaf.fill"
+            return "icon_vegetarian"
         case .chickenSalad:
-            return "leaf.circle.fill"
+            return "icon_chicken_salad"
         case .tuna:
-            return "fish.fill"
+            return "icon_tuna"
         case .plantBasedBowls:
-            return "takeoutbag.and.cup.and.straw.fill"
+            return "icon_plant_based_bowls"
         case .piesAndTarts:
-            return "birthday.cake.fill"
+            return "icon_pies_tarts"
         case .mexican:
-            return "taco.fill"
+            return "icon_mexican"
         case .korean:
-            return "bowl.fill"
+            return "icon_korean"
         case .breakfastBakes:
-            return "croissant.fill"
+            return "icon_breakfast_bakes"
         case .cookies:
-            return "cookie.fill"
+            return "icon_cookies"
         case .highProtein:
-            return "dumbbell.fill"
+            return "icon_high_protein"
         }
     }
 
@@ -121,7 +121,7 @@ enum HomeShowcaseSection: String, CaseIterable, Identifiable {
     }
 
     var selectorOption: TopSegmentOption {
-        TopSegmentOption(id: id, title: selectorTitle, systemImage: systemImage)
+        TopSegmentOption(id: id, title: selectorTitle, iconAssetName: iconAssetName)
     }
 
     static let carouselSections: [HomeShowcaseSection] = [
