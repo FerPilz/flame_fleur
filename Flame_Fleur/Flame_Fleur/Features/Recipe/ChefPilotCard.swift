@@ -1,185 +1,67 @@
 import SwiftUI
 
 struct ChefPilotCard: View {
-    let state: ChefPilotController.State
-    let currentStepIndex: Int?
-    let action: () -> Void
+    @Binding var isEnabled: Bool
 
     var body: some View {
-        Button(action: action) {
-            SurfaceCard(
-                backgroundColor: cardBackgroundColor,
-                borderColor: cardBorderColor,
-                cornerRadius: AppRadius.large,
-                contentPadding: AppSpacing.xs,
-                showsShadow: false
-            ) {
-                HStack(spacing: AppSpacing.xs) {
-                    Circle()
-                        .fill(iconBackgroundColor)
-                        .frame(width: AppSpacing.xxl - AppSpacing.xxs, height: AppSpacing.xxl - AppSpacing.xxs)
-                        .overlay(
-                            Image(systemName: iconName)
-                                .font(AppTypography.caption)
-                                .foregroundStyle(iconForegroundColor)
-                        )
+        SurfaceCard(
+            //backgroundColor: AppColors.basil2.opacity(0.17),
+            backgroundColor: Color(
+                red: 220 / 255,
+                green: 207 / 255,
+                blue: 194 / 255
+            ).opacity(0.3),
+            borderColor: .clear,
+            cornerRadius: AppRadius.extraLarge,
+            contentPadding: 0,
+            showsShadow: false
+        ) {
+            HStack(spacing: AppSpacing.sm) {
+                icon
 
-                    VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-                        HStack(spacing: AppSpacing.xs) {
-                            Text("Chef Pilot")
-                                .font(AppTypography.bodyEmphasis)
-                                .foregroundStyle(AppColors.primaryText)
-                                .lineLimit(1)
+                VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                    Text("Chef Pilot")
+                        .font(.system(size: 18, weight: .semibold, design: .serif))
+                        .foregroundStyle(AppColors.primaryText)
+                        .lineLimit(1)
 
-                            Text(stateBadgeTitle)
-                                .font(AppTypography.metadata)
-                                .foregroundStyle(stateBadgeTextColor)
-                                .padding(.horizontal, AppSpacing.xs)
-                                .frame(height: 22)
-                                .background(
-                                    Capsule(style: .continuous)
-                                        .fill(stateBadgeBackgroundColor)
-                                )
-                        }
-
-                        Text(statusText)
-                            .font(AppTypography.metadata)
-                            .foregroundStyle(AppColors.secondaryText)
-                            .lineLimit(2)
-                            .truncationMode(.tail)
-                    }
-
-                    Spacer(minLength: AppSpacing.sm)
-
-                    Image(systemName: state == .idle ? "power" : "stop.fill")
-                        .font(AppTypography.callout)
-                        .foregroundStyle(AppColors.olive)
+                    Text("Tap to have this recipe read and coach hands-free.")
+                        .font(AppTypography.metadata)
+                        .foregroundStyle(AppColors.secondaryText)
+                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                Toggle("Chef Pilot", isOn: $isEnabled)
+                    .labelsHidden()
+                    .tint(AppColors.basil)
+                    .accessibilityLabel("Chef Pilot")
+                    .accessibilityValue(isEnabled ? "On" : "Off")
+                    .accessibilityHint("Turns the Chef Pilot display on or off.")
             }
+            .padding(.horizontal, AppSpacing.md)
+            .padding(.vertical, AppSpacing.xs)
+            .frame(minHeight: 50)
         }
-        .buttonStyle(.plain)
+        .accessibilityElement(children: .contain)
     }
 
-    private var cardBackgroundColor: Color {
-        switch state {
-        case .idle:
-            AppColors.elevatedCardBackground
-        case .announcing:
-            AppColors.softOrange.opacity(0.52)
-        case .listening:
-            AppColors.softOlive
-        case .speaking:
-            AppColors.softOrange.opacity(0.34)
-        }
-    }
-
-    private var cardBorderColor: Color {
-        switch state {
-        case .idle:
-            AppColors.warmBorder
-        case .announcing:
-            AppColors.burntOrange.opacity(0.30)
-        case .listening:
-            AppColors.olive.opacity(0.26)
-        case .speaking:
-            AppColors.burntOrange.opacity(0.26)
-        }
-    }
-
-    private var iconBackgroundColor: Color {
-        switch state {
-        case .idle:
-            AppColors.softOlive
-        case .announcing:
-            AppColors.burntOrange
-        case .listening:
-            AppColors.olive
-        case .speaking:
-            AppColors.burntOrange
-        }
-    }
-
-    private var iconForegroundColor: Color {
-        switch state {
-        case .idle:
-            AppColors.olive
-        case .announcing, .listening, .speaking:
-            AppColors.elevatedCardBackground
-        }
-    }
-
-    private var iconName: String {
-        switch state {
-        case .idle:
-            "mic"
-        case .announcing:
-            "speaker.wave.2.fill"
-        case .listening:
-            "waveform"
-        case .speaking:
-            "text.bubble.fill"
-        }
-    }
-
-    private var stateBadgeTitle: String {
-        switch state {
-        case .idle:
-            "Off"
-        case .announcing:
-            "Ready"
-        case .listening:
-            "Listening"
-        case .speaking:
-            "Speaking"
-        }
-    }
-
-    private var stateBadgeBackgroundColor: Color {
-        switch state {
-        case .idle:
-            AppColors.cardBackground
-        case .announcing:
-            AppColors.softOrange
-        case .listening:
-            AppColors.softOlive
-        case .speaking:
-            AppColors.softOrange
-        }
-    }
-
-    private var stateBadgeTextColor: Color {
-        switch state {
-        case .idle:
-            AppColors.secondaryText
-        case .announcing:
-            AppColors.burntOrange
-        case .listening:
-            AppColors.darkOlive
-        case .speaking:
-            AppColors.burntOrange
-        }
-    }
-
-    private var statusText: String {
-        switch state {
-        case .idle:
-            "Hands-free recipe reader"
-        case .announcing:
-            "Chef Pilot is introducing the available voice commands."
-        case .listening:
-            "Listening for start, next, repeat, or stop."
-        case .speaking:
-            if let currentStepIndex {
-                "Reading step \(currentStepIndex + 1) aloud."
-            } else {
-                "Reading the recipe aloud."
+    private var icon: some View {
+        Circle()
+            .fill(AppColors.basil)
+            .frame(width: 45, height: 45)
+            .overlay {
+                Image(systemName: "mic.fill")
+                    .font(.system(size: 25, weight: .medium))
+                    .foregroundStyle(AppColors.elevatedCardBackground)
             }
-        }
+            .accessibilityHidden(true)
     }
 }
 
 #Preview {
-    ChefPilotCard(state: .listening, currentStepIndex: 0, action: {})
+    ChefPilotCard(isEnabled: .constant(false))
         .padding()
         .background(AppColors.appBackground)
 }

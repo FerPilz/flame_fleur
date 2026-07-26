@@ -6,12 +6,12 @@ struct IngredientPreviewRow: View {
     var body: some View {
         HStack(alignment: .top, spacing: AppSpacing.sm) {
             Circle()
-                .fill(AppColors.softOlive)
+                .fill(AppColors.basil)
                 .frame(width: AppSpacing.lg, height: AppSpacing.lg)
                 .overlay(
                     Image(systemName: "checkmark")
                         .font(AppTypography.tabLabel)
-                        .foregroundStyle(AppColors.olive)
+                        .foregroundStyle(AppColors.warmCream)
                 )
                 .padding(.top, 1)
 
