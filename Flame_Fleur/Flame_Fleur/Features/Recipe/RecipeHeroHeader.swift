@@ -1,11 +1,23 @@
 import SwiftUI
 
+enum RecipeScreenHeroLayout {
+    static let minHeroHeight: CGFloat = 325
+    static let maxHeroHeight: CGFloat = 416
+    static let heroHeightRatio: CGFloat = 0.455
+    static let panelOverlap: CGFloat = 100
+    static let topControlsPadding: CGFloat = 24
+}
+
 struct RecipeHeroHeader: View {
     let recipe: Recipe
     let isFavorite: Bool
     let shareText: String
+    let showsBackground: Bool
     let showsBackButton: Bool
+    let showsShareButton: Bool
     let showsBrandTitle: Bool
+    let showsFavoriteButton: Bool
+    let topControlsPadding: CGFloat
     let onCartTap: (() -> Void)?
     let cartBadgeValue: Int?
     let onBack: () -> Void
@@ -15,8 +27,12 @@ struct RecipeHeroHeader: View {
         recipe: Recipe,
         isFavorite: Bool,
         shareText: String,
+        showsBackground: Bool = true,
         showsBackButton: Bool,
+        showsShareButton: Bool = true,
         showsBrandTitle: Bool = true,
+        showsFavoriteButton: Bool = true,
+        topControlsPadding: CGFloat? = nil,
         onCartTap: (() -> Void)?,
         cartBadgeValue: Int?,
         onBack: @escaping () -> Void,
@@ -25,8 +41,12 @@ struct RecipeHeroHeader: View {
         self.recipe = recipe
         self.isFavorite = isFavorite
         self.shareText = shareText
+        self.showsBackground = showsBackground
         self.showsBackButton = showsBackButton
+        self.showsShareButton = showsShareButton
         self.showsBrandTitle = showsBrandTitle
+        self.showsFavoriteButton = showsFavoriteButton
+        self.topControlsPadding = topControlsPadding ?? AppTopActionMetrics.minimumTopOffset
         self.onCartTap = onCartTap
         self.cartBadgeValue = cartBadgeValue
         self.onBack = onBack
@@ -36,17 +56,19 @@ struct RecipeHeroHeader: View {
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .top) {
-                heroSurface(in: proxy)
+                if showsBackground {
+                    heroSurface(in: proxy)
 
-                LinearGradient(
-                    colors: [
-                        AppColors.shadow.opacity(0.20),
-                        AppColors.shadow.opacity(0.04),
-                        AppColors.shadow.opacity(0.18)
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
+                    LinearGradient(
+                        colors: [
+                            AppColors.shadow.opacity(0.20),
+                            AppColors.shadow.opacity(0.04),
+                            AppColors.shadow.opacity(0.18)
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                }
 
                 VStack(spacing: showsBrandTitle ? AppSpacing.xs : 0) {
                     if showsBrandTitle {
@@ -56,29 +78,35 @@ struct RecipeHeroHeader: View {
 
                     HStack(spacing: AppSpacing.sm) {
                         if showsBackButton {
-                            Button(action: onBack) {
-                                RecipeHeroActionIcon(systemName: "chevron.left")
-                            }
-                            .buttonStyle(.plain)
-                            .accessibilityLabel(Text("Back"))
+                        Button(action: onBack) {
+                            RecipeHeroActionIcon(systemName: "chevron.left")
                         }
+                        .buttonStyle(.plain)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                        .accessibilityLabel(Text("Back"))
+                    }
 
                         Spacer()
 
+                        if showsShareButton {
                         ShareLink(item: shareText) {
                             RecipeHeroActionIcon(systemName: "square.and.arrow.up")
                         }
                         .buttonStyle(.plain)
                         .accessibilityLabel(Text("Share recipe"))
-
-                        Button(action: onFavoriteTap) {
-                            RecipeHeroActionIcon(
-                                systemName: isFavorite ? "heart.fill" : "heart",
-                                foregroundColor: isFavorite ? AppColors.error : AppColors.olive
-                            )
                         }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel(Text(isFavorite ? "Unsave recipe" : "Save recipe"))
+
+                        if showsFavoriteButton {
+                            Button(action: onFavoriteTap) {
+                                RecipeHeroActionIcon(
+                                    systemName: isFavorite ? "heart.fill" : "heart",
+                                    foregroundColor: isFavorite ? AppColors.error : AppColors.olive
+                                )
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel(Text(isFavorite ? "Unsave recipe" : "Save recipe"))
+                        }
 
                         if let onCartTap {
                             Button(action: onCartTap) {
@@ -93,7 +121,7 @@ struct RecipeHeroHeader: View {
                     }
                 }
                 .padding(.horizontal, AppSpacing.lg)
-                .padding(.top, max(proxy.safeAreaInsets.top + AppSpacing.xxs, AppTopActionMetrics.minimumTopOffset))
+                .padding(.top, max(proxy.safeAreaInsets.top, topControlsPadding))
             }
         }
     }
