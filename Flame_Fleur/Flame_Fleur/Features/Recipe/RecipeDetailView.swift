@@ -10,8 +10,12 @@ struct RecipeDetailView: View {
     @EnvironmentObject private var favoritesStore: FavoritesStore
     @EnvironmentObject private var cartStore: ShoppingCartStore
     @Environment(\.dismiss) private var dismiss
-    @State private var isChefPilotEnabled = false
+    @StateObject private var chefPilotController = ChefPilotController()
     @State private var isCartPresented = false
+    @State private var isShowingIngredients = false
+    @State private var ingredientServings = 1
+    @State private var selectedIngredientIndexes: Set<Int> = []
+    @State private var addSelectedMessage: String?
     @State private var isNutritionExpanded = false
     @State private var expandedStepID: Int?
 
@@ -41,11 +45,21 @@ struct RecipeDetailView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
+        .alert(item: $chefPilotController.presentedAlert) { alert in
+            Alert(
+                title: Text(alert.title),
+                message: Text(alert.message),
+                dismissButton: .default(Text("OK"))
+            )
+        }
         .navigationDestination(isPresented: $isCartPresented) {
             ShoppingCartView {
                 isCartPresented = false
             }
             .toolbar(.hidden, for: .tabBar)
+        }
+        .onDisappear {
+            chefPilotController.deactivate(resetStepIndex: true)
         }
     }
 
@@ -72,7 +86,31 @@ struct RecipeDetailView: View {
                     recipe: recipe,
                     isFavorite: favoritesStore.isFavorite(recipe.id),
                     shareText: shareText(for: recipe),
+                    showsBackground: true,
+                    showsBackButton: false,
+                    showsShareButton: false,
+                    showsBrandTitle: false,
+                    showsFavoriteButton: false,
+                    topControlsPadding: RecipeDetailLayout.topControlsPadding,
+                    onCartTap: nil,
+                    cartBadgeValue: nil,
+                    onBack: { goBack() },
+                    onFavoriteTap: { favoritesStore.toggleFavorite(recipe.id) }
+                )
+                .frame(height: heroHeight)
+                .ignoresSafeArea(edges: .top)
+                .zIndex(0)
+
+                RecipeHeroHeader(
+                    recipe: recipe,
+                    isFavorite: favoritesStore.isFavorite(recipe.id),
+                    shareText: shareText(for: recipe),
+                    showsBackground: false,
                     showsBackButton: true,
+                    showsShareButton: true,
+                    showsBrandTitle: false,
+                    showsFavoriteButton: false,
+                    topControlsPadding: RecipeDetailLayout.topControlsPadding,
                     onCartTap: { isCartPresented = true },
                     cartBadgeValue: cartStore.totalItemCount > 0 ? cartStore.totalItemCount : nil,
                     onBack: { goBack() },
@@ -80,10 +118,18 @@ struct RecipeDetailView: View {
                 )
                 .frame(height: heroHeight)
                 .ignoresSafeArea(edges: .top)
-                .zIndex(0)
+                .zIndex(2)
+
             }
             .safeAreaInset(edge: .bottom) {
                 bottomActionBar(recipe)
+            }
+            .onAppear {
+                chefPilotController.updateSteps(recipe.instructions)
+                syncIngredientsState(for: recipe)
+            }
+            .onChange(of: recipe.instructions) { _, newValue in
+                chefPilotController.updateSteps(newValue)
             }
         }
     }
@@ -99,17 +145,7 @@ struct RecipeDetailView: View {
     private func contentPanel(_ recipe: Recipe) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.lg) {
             titleBlock(recipe)
-            RecipeInfoCarousel(recipe: recipe)
-                .padding(.top,-8)
-            sourcePreview(recipe)
-            notesPreview(recipe)
-            nutritionPreview(recipe)
-                .padding(.top,-8)
-            ChefPilotCard(isEnabled: $isChefPilotEnabled)
-            ingredientsPreview(recipe)
-            cookingSteps(recipe)
-            equipmentPreview(recipe)
-            tipsPreview(recipe)
+            contentPanelBody(recipe)
         }
         .padding(.horizontal, AppSpacing.lg)
         .padding(.top, AppSpacing.md)
@@ -133,7 +169,6 @@ struct RecipeDetailView: View {
             Text(recipe.title)
                 .font(AppTypography.recipeDetailTitle)
                 .foregroundStyle(AppColors.primaryText)
-                .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .lineSpacing(2)
                 .fixedSize(horizontal: false, vertical: true)
@@ -165,15 +200,84 @@ struct RecipeDetailView: View {
         }
     }
 
+    @ViewBuilder
+    private func contentPanelBody(_ recipe: Recipe) -> some View {
+        if isShowingIngredients {
+            ingredientsPanelContent(recipe)
+        } else {
+            recipePanelContent(recipe)
+        }
+    }
+
+    @ViewBuilder
+    private func recipePanelContent(_ recipe: Recipe) -> some View {
+        RecipeInfoCarousel(recipe: recipe)
+            .padding(.top, -8)
+        sourcePreview(recipe)
+        notesPreview(recipe)
+        nutritionPreview(recipe)
+            .padding(.top, -8)
+        ChefPilotCard(
+            state: chefPilotController.state,
+            currentStepIndex: chefPilotController.currentStepIndex,
+            action: {
+                chefPilotController.toggle()
+            }
+        )
+        ingredientsPreview(recipe)
+        cookingSteps(recipe)
+        equipmentPreview(recipe)
+        tipsPreview(recipe)
+    }
+
+    private func ingredientsPanelContent(_ recipe: Recipe) -> some View {
+        VStack(alignment: .leading, spacing: AppSpacing.md) {
+            HStack(alignment: .top, spacing: AppSpacing.sm) {
+                VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                    Text("Ingredients")
+                        .font(AppTypography.sectionTitle)
+                        .foregroundStyle(AppColors.primaryText)
+
+                    Text("Adjust servings, select items, and add them to your cart.")
+                        .font(AppTypography.callout)
+                        .foregroundStyle(AppColors.secondaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Spacer(minLength: AppSpacing.sm)
+
+                Button {
+                    withAnimation(nil) {
+                        isShowingIngredients = false
+                        addSelectedMessage = nil
+                    }
+                } label: {
+                    HStack(spacing: AppSpacing.xxs) {
+                        Image(systemName: "chevron.left")
+                        Text("Back to Recipe")
+                    }
+                    .font(AppTypography.metadata)
+                    .foregroundStyle(AppColors.olive)
+                }
+                .buttonStyle(.plain)
+            }
+
+            ingredientsServingsControl
+            ingredientsChecklistHeader(recipe)
+            ingredientsChecklist(recipe)
+        }
+        .transition(.opacity)
+    }
+
     private func ingredientsPreview(_ recipe: Recipe) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.sm) {
             SectionHeaderView("Ingredients", actionTitle: "View Ingredients", style: .compact) {
-                onViewIngredients()
+                presentIngredientsOverlay()
             }
 
             SurfaceCard(
                 backgroundColor: AppColors.elevatedCardBackground,
-                borderColor: AppColors.basil,
+                borderColor: AppColors.warmBorder,
                 cornerRadius: AppRadius.large,
                 contentPadding: AppSpacing.sm,
                 showsShadow: false
@@ -187,12 +291,84 @@ struct RecipeDetailView: View {
         }
     }
 
+    private var ingredientsServingsControl: some View {
+        SurfaceCard(
+            backgroundColor: AppColors.elevatedCardBackground,
+            borderColor: AppColors.warmBorder,
+            cornerRadius: AppRadius.large,
+            contentPadding: AppSpacing.sm,
+            showsShadow: false
+        ) {
+            HStack(spacing: AppSpacing.sm) {
+                VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+                    Text("Servings")
+                        .font(AppTypography.bodyEmphasis)
+                        .foregroundStyle(AppColors.primaryText)
+
+                    Text("Adjusts this checklist locally")
+                        .font(AppTypography.metadata)
+                        .foregroundStyle(AppColors.secondaryText)
+                }
+
+                Spacer(minLength: AppSpacing.sm)
+
+                ingredientsStepperButton(systemName: "minus") {
+                    ingredientServings = max(1, ingredientServings - 1)
+                }
+
+                Text("\(ingredientServings)")
+                    .font(AppTypography.bodyEmphasis)
+                    .foregroundStyle(AppColors.primaryText)
+                    .frame(width: AppSpacing.xl)
+
+                ingredientsStepperButton(systemName: "plus") {
+                    ingredientServings += 1
+                }
+            }
+        }
+    }
+
+    private func ingredientsChecklistHeader(_ recipe: Recipe) -> some View {
+        HStack(spacing: AppSpacing.sm) {
+            Button {
+                toggleSelectAllIngredients(recipe)
+            } label: {
+                HStack(spacing: AppSpacing.xxs) {
+                    Image(systemName: isAllIngredientsSelected(recipe) ? "checkmark.circle.fill" : "circle")
+                    Text("Select all")
+                }
+                .font(AppTypography.metadata)
+                .foregroundStyle(AppColors.olive)
+            }
+            .buttonStyle(.plain)
+
+            Spacer(minLength: AppSpacing.sm)
+
+            Text("\(selectedIngredientIndexes.count) selected")
+                .font(AppTypography.metadata)
+                .foregroundStyle(AppColors.secondaryText)
+        }
+    }
+
+    private func ingredientsChecklist(_ recipe: Recipe) -> some View {
+        VStack(spacing: AppSpacing.xs) {
+            ForEach(Array(recipe.structuredIngredients.enumerated()), id: \.offset) { index, ingredient in
+                IngredientChecklistRow(
+                    ingredient: ingredient,
+                    isSelected: selectedIngredientIndexes.contains(index)
+                ) {
+                    toggleIngredientSelection(at: index)
+                }
+            }
+        }
+    }
+
     private func nutritionPreview(_ recipe: Recipe) -> some View {
         let nutrition = recipe.nutritionPerServing
 
         return SurfaceCard(
-            backgroundColor: Color(red: 220 / 255, green: 207 / 255, blue: 194 / 255).opacity(0.30),
-            borderColor: .clear,
+            backgroundColor: AppColors.elevatedCardBackground,
+            borderColor: AppColors.warmBorder,
             cornerRadius: AppRadius.large,
             contentPadding: AppSpacing.sm,
             showsShadow: false
@@ -206,12 +382,13 @@ struct RecipeDetailView: View {
                     HStack(spacing: AppSpacing.sm) {
                         Text("Nutrition Info")
                             .font(.system(size: 20, weight: .semibold, design: .serif))
+                            .foregroundStyle(Color("DeepBasil"))
 
                         Spacer(minLength: 0)
 
                         Image(systemName: isNutritionExpanded ? "chevron.up" : "chevron.down")
-                            .font(.system(size: 15, weight: .semibold,))
-                            .foregroundStyle(AppColors.basil)
+                            .font(AppTypography.metadata)
+                            .foregroundStyle(Color("DeepBasil"))
                     }
                 }
                 .buttonStyle(.plain)
@@ -248,7 +425,6 @@ struct RecipeDetailView: View {
                     HStack(alignment: .firstTextBaseline, spacing: AppSpacing.sm) {
                             Text("Protein: \(nutrition.proteinGrams)g • Carbs: \(nutrition.carbsGrams)g • Fat: \(nutrition.fatGrams)g")
                                 .font(AppTypography.body)
-                                .foregroundStyle(AppColors.secondaryText)
                                 .foregroundStyle(AppColors.primaryText)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.8)
@@ -364,9 +540,7 @@ struct RecipeDetailView: View {
                         title: stepTitle(for: stepNumber),
                         detail: instruction,
                         durationText: stepDurationText(for: recipe, stepNumber: stepNumber),
-                        isExpanded: expandedStepID == stepNumber,
-                        showsTopConnector: index > 0,
-                        showsBottomConnector: index < recipe.instructions.count - 1
+                        isExpanded: expandedStepID == stepNumber
                     ) {
                         withAnimation(.easeInOut) {
                             expandedStepID = expandedStepID == stepNumber ? nil : stepNumber
@@ -427,13 +601,31 @@ struct RecipeDetailView: View {
 
     private func bottomActionBar(_ recipe: Recipe) -> some View {
         VStack(spacing: AppSpacing.xs) {
-            if let plannerSelectionContext, let onAddToPlanner {
+            if isShowingIngredients {
+                if let addSelectedMessage {
+                    Text(addSelectedMessage)
+                        .font(AppTypography.metadata)
+                        .foregroundStyle(AppColors.secondaryText)
+                        .lineLimit(1)
+                        .transition(.opacity)
+                }
+
+                PrimaryButton(
+                    "Add Selected to Cart",
+                    systemImage: "cart.badge.plus",
+                    style: .recipe,
+                    height: RecipeDetailLayout.viewIngredientsButtonHeight,
+                    font: RecipeDetailLayout.viewIngredientsButtonFont
+                ) {
+                    addSelectedIngredientsToCart(recipe)
+                }
+            } else if let plannerSelectionContext, let onAddToPlanner {
                 PrimaryButton(plannerSelectionContext.actionTitle, systemImage: "plus", style: .recipe, height: 50) {
                     onAddToPlanner(recipe)
                 }
 
                 Button {
-                    onViewIngredients()
+                    presentIngredientsOverlay()
                 } label: {
                     Text("View Ingredients")
                         .font(AppTypography.smallButton)
@@ -441,10 +633,10 @@ struct RecipeDetailView: View {
                 }
                 .buttonStyle(.plain)
             } else {
-                PrimaryButton("View Ingredients", systemImage: "list.bullet.clipboard", style: .recipe, height: 60,
-                              font: .system(size: 20, weight: .semibold)
+                PrimaryButton("View Ingredients", systemImage: "list.bullet.clipboard", style: .recipe, height: RecipeDetailLayout.viewIngredientsButtonHeight,
+                              font: RecipeDetailLayout.viewIngredientsButtonFont
                 ) {
-                    onViewIngredients()
+                    presentIngredientsOverlay()
                 }
             }
         }
@@ -502,6 +694,75 @@ struct RecipeDetailView: View {
         "Check out this recipe: \(recipe.title) in Flame & Fleur. \(recipe.totalTimeText) total, \(recipe.servingsText)."
     }
 
+    private func presentIngredientsOverlay() {
+        withAnimation(nil) {
+            isShowingIngredients = true
+            addSelectedMessage = nil
+        }
+    }
+
+    private func syncIngredientsState(for recipe: Recipe) {
+        ingredientServings = max(recipe.servings, 1)
+        selectedIngredientIndexes = Set(recipe.structuredIngredients.indices)
+    }
+
+    private func ingredientsStepperButton(systemName: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Circle()
+                .fill(AppColors.cardBackground)
+                .frame(width: AppSpacing.xxl, height: AppSpacing.xxl)
+                .overlay(
+                    Image(systemName: systemName)
+                        .font(AppTypography.caption)
+                        .foregroundStyle(AppColors.olive)
+                )
+                .overlay(
+                    Circle()
+                        .stroke(AppColors.warmBorder, lineWidth: 1)
+                )
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func toggleIngredientSelection(at index: Int) {
+        if selectedIngredientIndexes.contains(index) {
+            selectedIngredientIndexes.remove(index)
+        } else {
+            selectedIngredientIndexes.insert(index)
+        }
+    }
+
+    private func toggleSelectAllIngredients(_ recipe: Recipe) {
+        if isAllIngredientsSelected(recipe) {
+            selectedIngredientIndexes.removeAll()
+        } else {
+            selectedIngredientIndexes = Set(recipe.structuredIngredients.indices)
+        }
+    }
+
+    private func isAllIngredientsSelected(_ recipe: Recipe) -> Bool {
+        selectedIngredientIndexes.count == recipe.structuredIngredients.count
+    }
+
+    private func addSelectedIngredientsToCart(_ recipe: Recipe) {
+        let selectedIngredients = recipe.structuredIngredients.enumerated().compactMap { index, ingredient in
+            selectedIngredientIndexes.contains(index) ? ingredient : nil
+        }
+
+        guard !selectedIngredients.isEmpty else {
+            withAnimation(.easeInOut) {
+                addSelectedMessage = "Select ingredients to add."
+            }
+            return
+        }
+
+        cartStore.addRecipeIngredients(selectedIngredients, from: recipe)
+
+        withAnimation(.easeInOut) {
+            addSelectedMessage = "\(selectedIngredients.count) ingredients added to the cart."
+        }
+    }
+
     private func stepTitle(for stepNumber: Int) -> String {
         let titles = [
             "Prepare Ingredients",
@@ -523,10 +784,13 @@ struct RecipeDetailView: View {
 }
 
 private enum RecipeDetailLayout {
-    static let minHeroHeight: CGFloat = 325
-    static let maxHeroHeight: CGFloat = 416
-    static let heroHeightRatio: CGFloat = 0.455
-    static let panelOverlap: CGFloat = 100
+    static let minHeroHeight: CGFloat = RecipeScreenHeroLayout.minHeroHeight
+    static let maxHeroHeight: CGFloat = RecipeScreenHeroLayout.maxHeroHeight
+    static let heroHeightRatio: CGFloat = RecipeScreenHeroLayout.heroHeightRatio
+    static let panelOverlap: CGFloat = RecipeScreenHeroLayout.panelOverlap
+    static let topControlsPadding: CGFloat = RecipeScreenHeroLayout.topControlsPadding
+    static let viewIngredientsButtonHeight: CGFloat = 34
+    static let viewIngredientsButtonFont: Font = .system(size: 16, weight: .semibold)
 }
 
 private struct NutritionMetricView: View {

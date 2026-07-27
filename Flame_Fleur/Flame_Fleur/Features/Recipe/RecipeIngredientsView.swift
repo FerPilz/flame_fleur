@@ -7,6 +7,7 @@ struct RecipeIngredientsView: View {
     @EnvironmentObject private var favoritesStore: FavoritesStore
     @EnvironmentObject private var cartStore: ShoppingCartStore
     @Environment(\.dismiss) private var dismiss
+    @State private var isCartPresented = false
     @State private var servings: Int
     @State private var selectedIngredientIndexes: Set<Int>
     @State private var addSelectedMessage: String?
@@ -32,6 +33,12 @@ struct RecipeIngredientsView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
+        .navigationDestination(isPresented: $isCartPresented) {
+            ShoppingCartView {
+                isCartPresented = false
+            }
+            .toolbar(.hidden, for: .tabBar)
+        }
     }
 
     private func recipeContent(_ recipe: Recipe) -> some View {
@@ -46,17 +53,23 @@ struct RecipeIngredientsView: View {
                     VStack(spacing: 0) {
                         Color.clear
                             .frame(height: heroHeight - RecipeIngredientsLayout.panelOverlap)
+                            .allowsHitTesting(false)
 
                         contentPanel(recipe)
                     }
                 }
-                .zIndex(0)
+                .zIndex(1)
 
                 RecipeHeroHeader(
                     recipe: recipe,
                     isFavorite: favoritesStore.isFavorite(recipe.id),
                     shareText: shareText(for: recipe),
-                    showsBackButton: true,
+                    showsBackground: true,
+                    showsBackButton: false,
+                    showsShareButton: false,
+                    showsBrandTitle: false,
+                    showsFavoriteButton: false,
+                    topControlsPadding: RecipeIngredientsLayout.topControlsPadding,
                     onCartTap: nil,
                     cartBadgeValue: nil,
                     onBack: { goBack() },
@@ -64,7 +77,26 @@ struct RecipeIngredientsView: View {
                 )
                 .frame(height: heroHeight)
                 .ignoresSafeArea(edges: .top)
-                .zIndex(1)
+                .zIndex(0)
+
+                RecipeHeroHeader(
+                    recipe: recipe,
+                    isFavorite: favoritesStore.isFavorite(recipe.id),
+                    shareText: shareText(for: recipe),
+                    showsBackground: false,
+                    showsBackButton: true,
+                    showsShareButton: true,
+                    showsBrandTitle: false,
+                    showsFavoriteButton: false,
+                    topControlsPadding: RecipeIngredientsLayout.topControlsPadding,
+                    onCartTap: { isCartPresented = true },
+                    cartBadgeValue: cartStore.totalItemCount > 0 ? cartStore.totalItemCount : nil,
+                    onBack: { goBack() },
+                    onFavoriteTap: { favoritesStore.toggleFavorite(recipe.id) }
+                )
+                .frame(height: heroHeight)
+                .ignoresSafeArea(edges: .top)
+                .zIndex(2)
             }
             .safeAreaInset(edge: .bottom) {
                 bottomActionBar(recipe)
@@ -303,16 +335,17 @@ struct RecipeIngredientsView: View {
     }
 
     private func shareText(for recipe: Recipe) -> String {
-        "Check out this recipe: \(recipe.title) in ALLSPICED. \(recipe.totalTimeText) total, \(recipe.servingsText)."
+        "Check out this recipe: \(recipe.title) in Flame & Fleur. \(recipe.totalTimeText) total, \(recipe.servingsText)."
     }
 
 }
 
 private enum RecipeIngredientsLayout {
-    static let minHeroHeight: CGFloat = 220
-    static let maxHeroHeight: CGFloat = 270
-    static let heroHeightRatio: CGFloat = 0.29
-    static let panelOverlap: CGFloat = 72
+    static let minHeroHeight: CGFloat = RecipeScreenHeroLayout.minHeroHeight
+    static let maxHeroHeight: CGFloat = RecipeScreenHeroLayout.maxHeroHeight
+    static let heroHeightRatio: CGFloat = RecipeScreenHeroLayout.heroHeightRatio
+    static let panelOverlap: CGFloat = RecipeScreenHeroLayout.panelOverlap
+    static let topControlsPadding: CGFloat = RecipeScreenHeroLayout.topControlsPadding
 }
 
 #Preview {
