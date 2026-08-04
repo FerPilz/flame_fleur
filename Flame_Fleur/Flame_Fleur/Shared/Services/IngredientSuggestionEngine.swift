@@ -43,6 +43,7 @@ enum IngredientSuggestionEngine {
 
     static func normalize(_ value: String) -> String {
         value
+            .folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .lowercased()
             .replacingOccurrences(of: #"[^\p{L}\p{N}]+"#, with: " ", options: .regularExpression)

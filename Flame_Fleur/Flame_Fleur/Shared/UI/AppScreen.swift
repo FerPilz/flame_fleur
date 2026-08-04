@@ -6,6 +6,7 @@ struct AppScreen<Header: View, Content: View>: View {
     let contentHorizontalPadding: CGFloat
     let contentTopPadding: CGFloat
     let contentBottomPadding: CGFloat
+    let scrollsContent: Bool
     let backgroundColor: Color
     let header: Header
     let content: Content
@@ -16,6 +17,7 @@ struct AppScreen<Header: View, Content: View>: View {
         contentHorizontalPadding: CGFloat = AppSpacing.screenHorizontal,
         contentTopPadding: CGFloat = AppSpacing.sm,
         contentBottomPadding: CGFloat = AppSpacing.bottomTabClearance,
+        scrollsContent: Bool = true,
         backgroundColor: Color = AppColors.appBackground,
         @ViewBuilder header: () -> Header,
         @ViewBuilder content: () -> Content
@@ -25,6 +27,7 @@ struct AppScreen<Header: View, Content: View>: View {
         self.contentHorizontalPadding = contentHorizontalPadding
         self.contentTopPadding = contentTopPadding
         self.contentBottomPadding = contentBottomPadding
+        self.scrollsContent = scrollsContent
         self.backgroundColor = backgroundColor
         self.header = header()
         self.content = content()
@@ -43,17 +46,26 @@ struct AppScreen<Header: View, Content: View>: View {
                 .padding(.top, headerTopPadding)
                 .background(backgroundColor)
 
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: contentSpacing) {
-                        content
+                if scrollsContent {
+                    ScrollView(showsIndicators: false) {
+                        contentContainer
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, contentHorizontalPadding)
-                    .padding(.top, contentTopPadding)
-                    .padding(.bottom, contentBottomPadding)
+                } else {
+                    contentContainer
+                        .frame(maxHeight: .infinity, alignment: .top)
                 }
             }
         }
+    }
+
+    private var contentContainer: some View {
+        VStack(alignment: .leading, spacing: contentSpacing) {
+            content
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, contentHorizontalPadding)
+        .padding(.top, contentTopPadding)
+        .padding(.bottom, contentBottomPadding)
     }
 }
 
