@@ -27,8 +27,11 @@ enum IngredientFilterService {
                 let rawValues = rawIngredientLines[recipe.id] ?? []
                 let resolvedIDs = rawValues.reduce(into: directIDs) { ids, value in
                     ids.formUnion(resolver.ingredientIDs(in: value))
+                    ids.formUnion(IngredientPickerCatalog.canonicalProteinIDs(in: value))
                 }
-                let indexedIDs = resolvedIDs.union(resolver.metadataIngredientIDs(for: recipe))
+                let indexedIDs = resolvedIDs
+                    .union(resolver.metadataIngredientIDs(for: recipe))
+                    .union(IngredientPickerCatalog.canonicalProteinIDs(for: recipe))
 
                 return (recipe.id, indexedIDs)
             })
@@ -221,6 +224,84 @@ enum IngredientFilterService {
             textTokens[startIndex..<(startIndex + phraseTokens.count)].elementsEqual(phraseTokens)
         }
     }
+}
+
+enum IngredientPickerCatalog {
+    static let chickenID = "protein_chicken"
+    static let beefID = "protein_beef"
+    static let porkID = "protein_pork"
+    static let lambID = "protein_lamb"
+    static let fishID = "protein_fish"
+    static let seafoodID = "protein_seafood"
+    static let eggsID = "protein_eggs"
+    static let tofuID = "protein_tofu"
+    static let beansID = "protein_beans"
+
+    static func items(from catalog: [ShoppingIngredientCatalogItem]) -> [ShoppingIngredientCatalogItem] {
+        let nonProteinItems = catalog.filter { !isReplacedByCanonicalProtein($0) }
+        return nonProteinItems + canonicalProteinItems(from: catalog)
+    }
+
+    static func canonicalProteinIDs(in rawIngredient: String) -> Set<String> {
+        let normalizedIngredient = IngredientFilterService.normalize(rawIngredient)
+        guard !normalizedIngredient.isEmpty else { return [] }
+
+        return Set(proteinAliases.compactMap { proteinID, aliases in
+            aliases.contains { IngredientFilterService.containsPhrase($0, in: normalizedIngredient) }
+                ? proteinID
+                : nil
+        })
+    }
+
+    static func canonicalProteinIDs(for recipe: Recipe) -> Set<String> {
+        // Seed chicken recipes occasionally omit the protein from their ingredient
+        // list; their category remains the authoritative fallback.
+        recipe.category == .chicken ? [chickenID] : []
+    }
+
+    private static func canonicalProteinItems(
+        from catalog: [ShoppingIngredientCatalogItem]
+    ) -> [ShoppingIngredientCatalogItem] {
+        canonicalProteinDefinitions.map { definition in
+            ShoppingIngredientCatalogItem(
+                id: definition.id,
+                displayName: definition.title,
+                normalizedName: IngredientFilterService.normalize(definition.title),
+                category: "Protein",
+                defaultUnit: "",
+                estimatedPrice: 0,
+                imageName: catalog.first(where: { $0.id == definition.imageSourceID })?.imageName
+            )
+        }
+    }
+
+    private static func isReplacedByCanonicalProtein(_ item: ShoppingIngredientCatalogItem) -> Bool {
+        item.category == "Protein" || canonicalProteinIDs(in: item.normalizedName).isEmpty == false
+    }
+
+    private static let canonicalProteinDefinitions: [(id: String, title: String, imageSourceID: String)] = [
+        (chickenID, "Chicken", "ingredient_chicken_breast"),
+        (beefID, "Beef", "ingredient_ground_beef"),
+        (porkID, "Pork", "ingredient_pork_chops"),
+        (lambID, "Lamb", "ingredient_lamb_chops"),
+        (fishID, "Fish", "ingredient_white_fish_fillets"),
+        (seafoodID, "Seafood", "ingredient_shrimp"),
+        (eggsID, "Eggs", "ingredient_eggs"),
+        (tofuID, "Tofu", "ingredient_tofu"),
+        (beansID, "Beans", "ingredient_beans")
+    ]
+
+    private static let proteinAliases: [String: Set<String>] = [
+        chickenID: ["chicken", "chicken breast", "chicken breasts", "chicken thigh", "chicken thighs", "chicken wing", "chicken wings", "whole chicken", "ground chicken", "roast chicken", "cooked chicken", "shredded chicken"],
+        beefID: ["beef", "ground beef", "beef steak", "steak", "sirloin", "ribeye", "flank steak", "beef chuck", "roast beef"],
+        porkID: ["pork", "pork chop", "pork chops", "pork shoulder", "pork loin", "pork tenderloin", "ground pork", "bacon", "ham"],
+        lambID: ["lamb", "lamb chop", "lamb chops", "ground lamb", "lamb shoulder", "lamb leg"],
+        fishID: ["salmon", "tuna", "cod", "tilapia", "trout", "halibut", "haddock", "white fish", "fish fillet", "fish fillets"],
+        seafoodID: ["shrimp", "prawn", "prawns", "crab", "lobster", "scallop", "scallops", "mussel", "mussels", "clam", "clams", "squid", "octopus"],
+        eggsID: ["egg", "eggs", "whole egg", "whole eggs", "large egg", "large eggs", "beaten egg", "beaten eggs"],
+        tofuID: ["tofu", "firm tofu", "extra firm tofu", "silken tofu"],
+        beansID: ["beans", "black beans", "kidney beans", "cannellini beans", "pinto beans", "navy beans", "chickpeas", "lentils", "brown lentils", "green lentils"]
+    ]
 }
 
 private struct IngredientAliasResolver {

@@ -8,7 +8,7 @@ struct ExploreView: View {
     @EnvironmentObject private var mealPlannerStore: MealPlannerStore
 
     @State private var searchText = ""
-    @State private var explorerSearchMode: ExplorerSearchMode = .recipes
+    @State private var isIngredientSearchPresented = false
     @State private var ingredientSearchText = ""
     @State private var selectedIngredientIDs: [String] = []
     @State private var draftSelectedIngredientIDs: [String] = []
@@ -19,7 +19,7 @@ struct ExploreView: View {
         index: IngredientFilterService.RecipeIngredientIndex(recipes: [])
     )
     @FocusState private var isSearchFieldFocused: Bool
-    @State private var selectedFilter: ExploreFilter = .all
+    @State private var selectedFilter: ExploreFilter?
     @State private var selectedSubcategoryID: String?
     @State private var isAddRecipeOptionsPresented = false
     @State private var isAddRecipePresented = false
@@ -58,12 +58,9 @@ struct ExploreView: View {
     var body: some View {
         NavigationStack(path: $navigationPath) {
             AppScreen(
-                contentSpacing: explorerSearchMode == .ingredients ? 0 : AppSpacing.md,
+                contentSpacing: AppSpacing.md,
                 headerTopPadding: AppSpacing.xs,
-                contentHorizontalPadding: explorerSearchMode == .ingredients ? AppSpacing.md : AppSpacing.screenHorizontal,
-                contentTopPadding: explorerSearchMode == .ingredients ? 6 : AppSpacing.sm,
-                contentBottomPadding: explorerSearchMode == .ingredients ? 0 : AppSpacing.xxxl + AppSpacing.xxl,
-                scrollsContent: explorerSearchMode != .ingredients
+                contentBottomPadding: AppSpacing.xxxl + AppSpacing.xxl
             ) {
                 AppHeader(
                     leadingActions: [
@@ -76,19 +73,10 @@ struct ExploreView: View {
                     ]
                 )
             } content: {
-                if explorerSearchMode == .ingredients {
-                    ingredientSearchContent
-                } else {
-                    titleBlock
-                    plannerSelectionBanner
-                    searchBar
-                    recipeSearchContent
-                }
-            }
-            .safeAreaInset(edge: .bottom, spacing: 0) {
-                if explorerSearchMode == .ingredients {
-                    ingredientSearchActionBar
-                }
+                titleBlock
+                plannerSelectionBanner
+                searchBar
+                recipeSearchContent
             }
             .navigationDestination(for: ExploreRoute.self) { route in
                 switch route {
@@ -195,6 +183,16 @@ struct ExploreView: View {
                 )
             }
             .toolbar(.hidden, for: .navigationBar)
+            .fullScreenCover(isPresented: $isIngredientSearchPresented) {
+                IngredientSearchScreen(
+                    availableIngredients: availableIngredientPickerItems,
+                    draftSelection: $draftSelectedIngredientIDs,
+                    ingredientSearchText: $ingredientSearchText,
+                    matchingRecipes: ingredientMatchingRecipes,
+                    onDismiss: cancelIngredientSearch,
+                    onApply: applyIngredientSearch
+                )
+            }
         }
     }
 
@@ -214,21 +212,21 @@ struct ExploreView: View {
         draftSelectedIngredientIDs.removeAll()
         appliedIngredientMatchingRecipes.removeAll()
         ingredientSearchText = ""
-        explorerSearchMode = .recipes
+        isIngredientSearchPresented = false
 
         switch context {
         case .featured, .community, .topPicks, .aiRecommended, .worldCuisine, .snacks, .breakfast:
-            selectedFilter = .all
+            selectedFilter = nil
             searchText = ""
         case .highProtein:
-            selectedFilter = .highProtein
+            selectedFilter = .protein
             searchText = ""
         case .eggBased:
-            selectedFilter = .all
+            selectedFilter = nil
             searchText = ""
             selectedSubcategoryID = "breakfast-egg-based"
         case .salmon:
-            selectedFilter = .carnivore
+            selectedFilter = .protein
             searchText = "salmon"
         }
     }
@@ -238,6 +236,44 @@ struct ExploreView: View {
         let index = IngredientFilterService.RecipeIngredientIndex(recipes: recipes)
         ingredientRecipeIndex = index
         ingredientFacet = IngredientFilterService.IngredientFacet(recipes: recipes, index: index)
+        logIngredientProteinCoverage(index: index, recipes: recipes, selectedIDs: Set(draftSelectedIngredientIDs))
+    }
+
+    private func logIngredientProteinCoverage(
+        index: IngredientFilterService.RecipeIngredientIndex,
+        recipes: [Recipe],
+        selectedIDs: Set<String>
+    ) {
+        #if DEBUG
+        let pickerCatalog = IngredientPickerCatalog.items(from: SampleShoppingIngredientCatalog.all)
+        let facet = IngredientFilterService.IngredientFacet(recipes: recipes, index: index)
+        let proteinOptions = pickerCatalog.filter { $0.category == "Protein" }
+
+        print("INGREDIENT PROTEIN COVERAGE")
+        print("Selected protein IDs:", selectedIDs)
+        print("Protein | Canonical ID | Reverse-index recipes | Projected recipes | Visible")
+
+        for option in proteinOptions {
+            let reverseCount = index.recipeIDsByIngredientID[option.id]?.count ?? 0
+            let projectedCount = facet.projectedMatchCount(adding: option.id, to: selectedIDs)
+            let visible = selectedIDs.contains(option.id) || projectedCount > 0
+            print("\(option.displayName) | \(option.id) | \(reverseCount) | \(projectedCount) | \(visible)")
+
+            if let recipeID = index.recipeIDsByIngredientID[option.id]?.first,
+               let recipe = recipes.first(where: { $0.id == recipeID }) {
+                let explanation = IngredientFilterService.explainMatch(
+                    recipe: recipe,
+                    selectedIngredientIDs: [option.id],
+                    index: index
+                )
+                print("Example for \(option.id):", recipe.title)
+                print("Raw structured values:", explanation.rawIngredients)
+                print("Normalized values:", explanation.normalizedIngredients)
+                print("Canonical IDs generated:", explanation.resolvedCanonicalIDs)
+                print("Expected canonical ID:", option.id)
+            }
+        }
+        #endif
     }
 
     private func logIngredientSearchDiagnostics() {
@@ -250,7 +286,7 @@ struct ExploreView: View {
         print("Selected IDs:", draftSelectedIngredientIDs)
         print("Index entries:", ingredientRecipeIndex.ingredientIDsByRecipeID.count)
         print("Recipe search text:", searchText)
-        print("Active Explorer filter:", selectedFilter.title)
+        print("Active Explorer filter:", selectedFilter?.title ?? "None")
 
         for diagnosticID in ["ingredient_chicken_breast", "ingredient_rice", "ingredient_garlic"] {
             guard let recipe = recipeRepository.allRecipes.first(where: {
@@ -286,11 +322,7 @@ struct ExploreView: View {
     }
 
     private var leadingHeaderAction: AppHeaderAction {
-        if explorerSearchMode == .ingredients {
-            AppHeaderAction(systemName: "chevron.left", accessibilityLabel: "Cancel ingredient filters") {
-                cancelIngredientSearch()
-            }
-        } else if plannerSelectionContext != nil {
+        if plannerSelectionContext != nil {
             AppHeaderAction(systemName: "xmark", accessibilityLabel: "Cancel planner recipe selection") {
                 cancelPlannerRecipeSelection()
             }
@@ -311,26 +343,6 @@ struct ExploreView: View {
                 .accessibilityAddTraits(.isHeader)
         }
         .frame(maxWidth: .infinity, alignment: .center)
-    }
-
-    private var ingredientSearchContent: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            searchBar
-
-            IngredientSearchView(
-                availableIngredients: availableIngredientPickerItems,
-                draftSelection: $draftSelectedIngredientIDs,
-                ingredientSearchText: $ingredientSearchText,
-                recipeSearchText: "",
-                matchingRecipes: ingredientMatchingRecipes,
-                onRecipeSelected: { recipeID in
-                    navigationPath.append(.recipe(recipeID))
-                }
-            )
-            .padding(.top, 7)
-            .frame(maxHeight: .infinity, alignment: .top)
-        }
-        .frame(maxHeight: .infinity, alignment: .top)
     }
 
     @ViewBuilder
@@ -374,8 +386,8 @@ struct ExploreView: View {
 
             TextField(
                 "",
-                text: activeSearchText,
-                prompt: Text(explorerSearchMode == .ingredients ? "Search ingredients" : "Search recipes")
+                text: $searchText,
+                prompt: Text("Search recipes")
                     .foregroundStyle(AppColors.tertiaryText)
             )
             .font(AppTypography.callout)
@@ -384,24 +396,10 @@ struct ExploreView: View {
             .autocorrectionDisabled()
             .focused($isSearchFieldFocused)
 
-            if explorerSearchMode == .ingredients, !ingredientSearchText.isEmpty {
-                Button {
-                    ingredientSearchText = ""
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(AppTypography.caption)
-                        .foregroundStyle(AppColors.tertiaryText)
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel("Clear ingredient search")
-            }
-
-            if explorerSearchMode == .recipes {
-                ingredientsModeButton
-            }
+            ingredientsModeButton
         }
-        .padding(.horizontal, explorerSearchMode == .ingredients ? 11 : AppSpacing.sm)
-        .frame(height: explorerSearchMode == .ingredients ? 42 : AppTopActionMetrics.buttonSize + AppSpacing.xs)
+        .padding(.horizontal, AppSpacing.sm)
+        .frame(height: AppTopActionMetrics.buttonSize + AppSpacing.xs)
         .background(
             RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous)
                 .fill(AppColors.elevatedCardBackground)
@@ -413,20 +411,11 @@ struct ExploreView: View {
     }
 
     private var filterChips: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: AppSpacing.xs) {
-                ForEach(ExploreFilter.allCases) { filter in
-                    FilterChip(
-                        filter.title,
-                        systemImage: filter.systemImage,
-                        isSelected: selectedFilter == filter,
-                        selectedColor: filter.selectedColor
-                    ) {
-                        selectedFilter = filter
-                    }
-                }
-            }
-        }
+        TopSegmentSelector(
+            options: ExploreFilter.allCases.map(\.selectorOption),
+            selection: selectedFilterID,
+            allowsDeselection: true
+        )
     }
 
     private var ingredientsModeButton: some View {
@@ -468,8 +457,8 @@ struct ExploreView: View {
     }
 
     private var recipeSearchContent: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.md) {
-            if hasAppliedIngredientFilters || isRecipeTextSearchActive {
+        VStack(alignment: .leading, spacing: AppSpacing.xxl) {
+            if hasAppliedIngredientFilters || isRecipeTextSearchActive || hasActiveExplorerFilter {
                 if hasAppliedIngredientFilters {
                     appliedIngredientFilters
                 }
@@ -522,17 +511,21 @@ struct ExploreView: View {
 
             if recipeSearchResults.isEmpty {
                 SurfaceCard(cornerRadius: AppRadius.large, contentPadding: AppSpacing.md) {
-                    if hasAppliedIngredientFilters {
+                    if selectedFilter == .favorites && !hasAppliedIngredientFilters && !isRecipeTextSearchActive {
+                        Text("Your favorite recipes will appear here.")
+                            .font(AppTypography.callout)
+                            .foregroundStyle(AppColors.secondaryText)
+                    } else if hasAppliedIngredientFilters {
                         Text("Try another ingredient or remove a filter.")
                             .font(AppTypography.callout)
                             .foregroundStyle(AppColors.secondaryText)
                     } else {
                         VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-                            Text("No recipes match this search.")
+                            Text(hasActiveExplorerFilter ? "No recipes match this filter." : "No recipes match this search.")
                                 .font(AppTypography.bodyEmphasis)
                                 .foregroundStyle(AppColors.primaryText)
 
-                            Text("Try another recipe search.")
+                            Text(hasActiveExplorerFilter ? "Try another filter." : "Try another recipe search.")
                                 .font(AppTypography.callout)
                                 .foregroundStyle(AppColors.secondaryText)
                         }
@@ -553,58 +546,6 @@ struct ExploreView: View {
                 }
             }
         }
-    }
-
-    private var ingredientSearchActionBar: some View {
-        HStack(spacing: 10) {
-            ingredientActionButton("Clear all", isPrimary: false) {
-                draftSelectedIngredientIDs.removeAll()
-                ingredientSearchText = ""
-            }
-            .accessibilityLabel("Clear all ingredient filters")
-
-            ingredientActionButton("Show results (\(ingredientMatchingRecipes.count))", isPrimary: true, action: applyIngredientSearch)
-                .disabled(!canApplyIngredientSearch)
-                .opacity(canApplyIngredientSearch ? 1 : 0.48)
-                .accessibilityLabel("Apply \(draftSelectedIngredientIDs.count) ingredient filters and show \(ingredientMatchingRecipes.count) results")
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.horizontal, AppSpacing.md)
-        .padding(.vertical, AppSpacing.xs)
-        .background(AppColors.appBackground)
-        .overlay(alignment: .top) {
-            Rectangle()
-                .fill(AppColors.warmBorder)
-                .frame(height: 1)
-        }
-    }
-
-    private func ingredientActionButton(
-        _ title: String,
-        isPrimary: Bool,
-        action: @escaping () -> Void
-    ) -> some View {
-        Button(action: action) {
-            Text(title)
-                .font(AppTypography.ingredientActionButton)
-                .foregroundStyle(isPrimary ? AppColors.elevatedCardBackground : AppColors.olive)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                .multilineTextAlignment(.center)
-                .lineLimit(1)
-                .minimumScaleFactor(0.78)
-                .allowsTightening(true)
-        }
-        .frame(maxWidth: .infinity)
-        .frame(height: 44)
-        .background(
-            Capsule(style: .continuous)
-                .fill(isPrimary ? AppColors.darkOlive : AppColors.elevatedCardBackground)
-        )
-        .overlay(
-            Capsule(style: .continuous)
-                .stroke(isPrimary ? AppColors.darkOlive : AppColors.warmBorder, lineWidth: 1)
-        )
-        .buttonStyle(.plain)
     }
 
     private var myRecipesSection: some View {
@@ -677,7 +618,7 @@ struct ExploreView: View {
 
     private func categorySection(_ group: ExploreCategoryGroup) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.xl) {
-            SectionHeaderView(group.title, style: .explore)
+            exploreCategoryTitle(group.title)
 
             LazyVGrid(columns: categoryColumns, spacing: AppSpacing.xl) {
                 ForEach(bubbleItems(for: group)) { bubble in
@@ -693,6 +634,14 @@ struct ExploreView: View {
                 }
             }
         }
+    }
+
+    private func exploreCategoryTitle(_ title: String) -> some View {
+        Text(title)
+            .font(AppTypography.exploreSectionTitle)
+            .foregroundStyle(AppColors.primaryText)
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity, alignment: .center)
     }
 
     @ViewBuilder
@@ -725,23 +674,19 @@ struct ExploreView: View {
         return count == 1 ? "1 saved recipe" : "\(count) saved recipes"
     }
 
-    private var activeSearchText: Binding<String> {
-        Binding(
-            get: {
-                explorerSearchMode == .ingredients ? ingredientSearchText : searchText
-            },
-            set: { value in
-                if explorerSearchMode == .ingredients {
-                    ingredientSearchText = value
-                } else {
-                    searchText = value
-                }
-            }
-        )
-    }
-
     private var hasAppliedIngredientFilters: Bool {
         !selectedIngredientIDs.isEmpty
+    }
+
+    private var hasActiveExplorerFilter: Bool {
+        selectedFilter != nil
+    }
+
+    private var selectedFilterID: Binding<String> {
+        Binding(
+            get: { selectedFilter?.rawValue ?? "" },
+            set: { selectedFilter = ExploreFilter(rawValue: $0) }
+        )
     }
 
     private var isRecipeTextSearchActive: Bool {
@@ -755,11 +700,16 @@ struct ExploreView: View {
 
     private var recipeTextSearchResults: [Recipe] {
         recipeRepository.recipes(matching: searchText)
-            .filter { selectedFilter.matches($0) }
+            .filter { selectedFilter?.matches($0, favoriteRecipeIDs: Set(favoritesStore.favoriteRecipeIDs)) ?? true }
     }
 
     private var recipeSearchResults: [Recipe] {
-        hasAppliedIngredientFilters ? appliedIngredientMatchingRecipes : recipeTextSearchResults
+        guard hasAppliedIngredientFilters else {
+            return recipeTextSearchResults
+        }
+
+        let ingredientMatchedIDs = Set(appliedIngredientMatchingRecipes.map(\.id))
+        return recipeTextSearchResults.filter { ingredientMatchedIDs.contains($0.id) }
     }
 
     private var ingredientBaseRecipes: [Recipe] {
@@ -775,12 +725,13 @@ struct ExploreView: View {
     }
 
     private var availableIngredientPickerItems: [ShoppingIngredientCatalogItem] {
+        let pickerCatalog = IngredientPickerCatalog.items(from: SampleShoppingIngredientCatalog.all)
         let eligibleIDs = ingredientFacet.availableIngredientIDs(
-            catalog: SampleShoppingIngredientCatalog.all,
+            catalog: pickerCatalog,
             selectedIDs: Set(draftSelectedIngredientIDs)
         )
 
-        return SampleShoppingIngredientCatalog.all.filter { eligibleIDs.contains($0.id) }
+        return pickerCatalog.filter { eligibleIDs.contains($0.id) }
     }
 
     private var recipeSearchResultsCountText: String {
@@ -794,10 +745,6 @@ struct ExploreView: View {
         }
 
         return count == 1 ? "1 recipe matches “\(searchText)”" : "\(count) recipes match “\(searchText)”"
-    }
-
-    private var canApplyIngredientSearch: Bool {
-        !draftSelectedIngredientIDs.isEmpty && !ingredientMatchingRecipes.isEmpty
     }
 
     private var visibleMyRecipes: [Recipe] {
@@ -829,11 +776,11 @@ struct ExploreView: View {
             }
 
             let visibleSubcategories: [ExploreSubcategory]
-            if selectedFilter == .all {
+            if selectedFilter == nil {
                 visibleSubcategories = searchMatchedSubcategories
             } else {
                 visibleSubcategories = searchMatchedSubcategories.filter { subcategory in
-                    selectedFilter.matches(subcategory)
+                    selectedFilter?.matches(subcategory) == true
                 }
             }
 
@@ -901,32 +848,33 @@ struct ExploreView: View {
         }
 
         selectedSubcategoryID = nil
-        selectedFilter = .all
+        selectedFilter = nil
         searchText = ""
         selectedIngredientIDs.removeAll()
         draftSelectedIngredientIDs.removeAll()
         appliedIngredientMatchingRecipes.removeAll()
         ingredientSearchText = ""
-        explorerSearchMode = .recipes
+        isIngredientSearchPresented = false
         navigationPath.removeAll()
     }
 
     private func beginIngredientSearch() {
         draftSelectedIngredientIDs = selectedIngredientIDs
         ingredientSearchText = ""
+        logIngredientProteinCoverage(
+            index: ingredientRecipeIndex,
+            recipes: ingredientBaseRecipes,
+            selectedIDs: Set(selectedIngredientIDs)
+        )
 
-        withAnimation(.easeInOut(duration: 0.2)) {
-            explorerSearchMode = .ingredients
-        }
+        isIngredientSearchPresented = true
     }
 
     private func cancelIngredientSearch() {
         draftSelectedIngredientIDs = selectedIngredientIDs
         ingredientSearchText = ""
 
-        withAnimation(.easeInOut(duration: 0.2)) {
-            explorerSearchMode = .recipes
-        }
+        isIngredientSearchPresented = false
     }
 
     private func applyIngredientSearch() {
@@ -934,9 +882,7 @@ struct ExploreView: View {
         appliedIngredientMatchingRecipes = ingredientMatchingRecipes
         ingredientSearchText = ""
 
-        withAnimation(.easeInOut(duration: 0.2)) {
-            explorerSearchMode = .recipes
-        }
+        isIngredientSearchPresented = false
     }
 
     private func removeAppliedIngredient(_ ingredientID: String) {
@@ -995,11 +941,6 @@ private enum ExploreBubbleDestination {
     case subcategory(ExploreSubcategory)
 }
 
-private enum ExplorerSearchMode {
-    case recipes
-    case ingredients
-}
-
 private enum AddRecipeAction {
     case manual
     case importWebsite
@@ -1018,103 +959,96 @@ private enum ExploreRoute: Hashable {
     case settings
 }
 
-private enum ExploreFilter: String, CaseIterable, Identifiable {
-    case all
+enum ExploreFilter: String, CaseIterable, Identifiable {
     case protein
     case vegetarian
-    case highProtein
     case budget
-    case carnivore
     case quickMeals
+    case chicken
+    case favorites
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
-        case .all:
-            return "All"
         case .protein:
             return "Protein"
         case .vegetarian:
             return "Vegetarian"
-        case .highProtein:
-            return "High Protein"
         case .budget:
             return "Budget"
-        case .carnivore:
-            return "Carnivore"
         case .quickMeals:
             return "Quick Meals"
+        case .chicken:
+            return "Chicken"
+        case .favorites:
+            return "Favorites"
         }
     }
 
-    var systemImage: String? {
+    var assetName: String {
         switch self {
-        case .all:
-            return nil
         case .protein:
-            return "fork.knife"
+            return "icon_high_protein"
         case .vegetarian:
-            return "leaf"
-        case .highProtein:
-            return "bolt.fill"
+            return "icon_vegetarian"
         case .budget:
-            return "dollarsign.circle"
-        case .carnivore:
-            return "flame"
+            return "icon_budget"
         case .quickMeals:
-            return "clock"
+            return "icon_quick_meals"
+        case .chicken:
+            return "icon_chicken_salad"
+        case .favorites:
+            return "icon_featured"
         }
     }
 
-    var selectedColor: Color {
-        switch self {
-        case .all, .protein, .quickMeals:
-            return AppColors.burntOrange
-        case .vegetarian, .budget:
-            return AppColors.olive
-        case .highProtein:
-            return AppColors.premiumGold
-        case .carnivore:
-            return AppColors.darkOlive
-        }
+    var selectorOption: TopSegmentOption {
+        TopSegmentOption(id: id, title: title, iconAssetName: assetName)
     }
 
     func matches(_ subcategory: ExploreSubcategory) -> Bool {
         switch self {
-        case .all:
-            return true
         case .protein:
             return matches(subcategory, categories: proteinCategories, keywords: ["protein", "chicken", "fish", "seafood", "lean", "egg", "yogurt"])
         case .vegetarian:
             return matches(subcategory, categories: vegetarianCategories, keywords: ["tofu", "tempeh", "beans", "lentils", "mushroom", "vegetable", "plant"])
-        case .highProtein:
-            return matches(subcategory, categories: highProteinCategories, keywords: ["protein", "yogurt", "egg", "lean", "fitness", "seafood"])
         case .budget:
             return matches(subcategory, categories: budgetCategories, keywords: ["budget", "pantry", "quick", "simple", "everyday", "weekly"])
-        case .carnivore:
-            return matches(subcategory, categories: carnivoreCategories, keywords: ["meat", "seafood", "fish", "chicken", "grill"])
         case .quickMeals:
             return matches(subcategory, categories: quickMealCategories, keywords: ["bowl", "taco", "salad", "skewer", "protein"])
+        case .chicken:
+            return matches(subcategory, categories: chickenCategories, keywords: ["chicken"])
+        case .favorites:
+            return false
         }
     }
 
-    func matches(_ recipe: Recipe) -> Bool {
+    func matches(_ recipe: Recipe, favoriteRecipeIDs: Set<Recipe.ID>) -> Bool {
         switch self {
-        case .all:
-            return true
         case .protein:
-            return proteinCategories.contains(recipe.category) || matchesRecipeTags(recipe, keywords: ["protein", "chicken", "fish", "seafood", "lean", "egg", "yogurt"])
+            return recipe.categoryGroupID == "high-protein"
+                || proteinCategories.contains(recipe.category)
+                || matchesRecipeTags(recipe, keywords: ["protein", "chicken", "fish", "seafood", "lean", "egg", "yogurt"])
         case .vegetarian:
             return vegetarianCategories.contains(recipe.category) || matchesRecipeTags(recipe, keywords: ["vegetarian", "vegan", "tofu", "tempeh", "beans", "lentils", "mushroom", "plant"])
-        case .highProtein:
-            return highProteinCategories.contains(recipe.category) || matchesRecipeTags(recipe, keywords: ["highprotein", "high-protein", "protein", "yogurt", "egg", "lean", "fitness", "seafood"])
         case .budget:
-            return budgetCategories.contains(recipe.category) || matchesRecipeTags(recipe, keywords: ["budget", "pantry", "quick", "simple", "everyday", "weekly"])
-        case .carnivore:
-            return carnivoreCategories.contains(recipe.category) || matchesRecipeTags(recipe, keywords: ["meat", "seafood", "fish", "chicken", "grill"])
+            return budgetCategories.contains(recipe.category)
+                || matchesRecipeTags(recipe, keywords: ["budget", "pantry", "affordable", "everyday", "simple", "weekly"])
+                || recipe.totalTimeMinutes <= 30
         case .quickMeals:
-            return quickMealCategories.contains(recipe.category) || recipe.cookingTimeMinutes <= 30
+            return matchesRecipeTags(recipe, keywords: ["quick", "fast", "easy"])
+                || recipe.totalTimeMinutes <= 30
+        case .chicken:
+            return recipe.categoryGroupID == "chicken"
+                || chickenCategories.contains(recipe.category)
+                || matchesRecipeTags(recipe, keywords: ["chicken"])
+                || recipe.structuredIngredients.contains { ingredient in
+                    let values = [ingredient.catalogNormalizedName, ingredient.name, ingredient.rawText].compactMap { $0 }
+                    return values.contains { IngredientPickerCatalog.canonicalProteinIDs(in: $0).contains(IngredientPickerCatalog.chickenID) }
+                }
+        case .favorites:
+            return favoriteRecipeIDs.contains(recipe.id)
         }
     }
 
@@ -1161,19 +1095,6 @@ private enum ExploreFilter: String, CaseIterable, Identifiable {
         ]
     }
 
-    private var highProteinCategories: Set<RecipeCategory> {
-        [
-            .highProtein,
-            .proteinBowls,
-            .leanMeals,
-            .fitnessMeals,
-            .fish,
-            .seafood,
-            .chicken,
-            .grilledChicken
-        ]
-    }
-
     private var budgetCategories: Set<RecipeCategory> {
         [
             .pantry,
@@ -1187,11 +1108,8 @@ private enum ExploreFilter: String, CaseIterable, Identifiable {
         ]
     }
 
-    private var carnivoreCategories: Set<RecipeCategory> {
+    private var chickenCategories: Set<RecipeCategory> {
         [
-            .meat,
-            .seafood,
-            .fish,
             .chicken,
             .grilledChicken,
             .chickenBowls,

@@ -101,10 +101,10 @@ struct IngredientSearchView: View {
                 }
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 7) {
+                    HStack(spacing: 6) {
                         ForEach(section.ingredients.prefix(5)) { ingredient in
                             ingredientCard(ingredient, layout: .compact)
-                                .frame(width: IngredientSearchLayoutMetrics.compactCardWidth)
+                                .frame(minWidth: IngredientSearchLayoutMetrics.compactCardWidth)
                         }
                     }
                     .padding(.trailing, AppSpacing.xs)
@@ -307,5 +307,5 @@ private enum IngredientPresentationCategory: String, CaseIterable, Identifiable 
 }
 
 private enum IngredientSearchLayoutMetrics {
-    static let compactCardWidth: CGFloat = 116
+    static let compactCardWidth: CGFloat = 90
 }

@@ -25,15 +25,16 @@ struct IngredientOptionCell: View {
 
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 7) {
+            HStack(spacing: 5) {
                 ingredientImage
 
                 Text(ingredient.displayName)
-                    .font(AppTypography.exploreIngredientLabel)
+                    .font(AppTypography.ingredientOptionLabel)
                     .foregroundStyle(isSelected ? AppColors.elevatedCardBackground : AppColors.primaryText)
                     .lineLimit(1)
                     .truncationMode(.tail)
-                    .minimumScaleFactor(0.9)
+                    .minimumScaleFactor(0.82)
+                    .allowsTightening(true)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
@@ -87,7 +88,7 @@ struct IngredientOptionCell: View {
     }
 
     private var horizontalPadding: CGFloat {
-        8
+        7
     }
 
     private var cornerRadius: CGFloat {

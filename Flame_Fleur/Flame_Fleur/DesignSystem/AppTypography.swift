@@ -20,7 +20,7 @@ enum AppTypography {
     static let heroTitle = Font.custom("Charter-Bold", size: 24)
 
     static let sectionTitle = Font.custom("Charter-Bold", size: 20)
-    static let exploreSectionTitle = Font.custom("Charter-Bold", size: 16)
+    static let exploreSectionTitle = Font.custom("Charter-Bold", size: 24)
 
     static let cardTitle = Font.custom("Charter-Bold", size: 16)
     static let compactRecipeTitle = Font.custom("Charter-Bold", size: 12.5)
@@ -36,7 +36,8 @@ enum AppTypography {
     static let bodyEmphasis = Font.system(size: 15.5, weight: .semibold)
     static let callout = Font.system(size: 13.5, weight: .regular)
     static let caption = Font.system(size: 12, weight: .medium)
-    static let exploreIngredientLabel = Font.system(size: 12, weight: .medium)
+    static let ingredientOptionLabel = Font.system(size: 10, weight: .medium)
+    static let exploreIngredientLabel = ingredientOptionLabel
     static let metadata = Font.system(size: 11, weight: .medium)
     static let button = Font.system(size: 15, weight: .semibold)
     static let smallButton = Font.system(size: 12, weight: .semibold)

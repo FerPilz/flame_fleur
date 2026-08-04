@@ -125,7 +125,7 @@ struct IngredientFilterServiceTests {
             catalog: [chicken, garlic, rice]
         )
 
-        #expect(index.ingredientIDs(for: recipe.id) == Set([chicken.id, garlic.id, rice.id]))
+        #expect(index.ingredientIDs(for: recipe.id).isSuperset(of: Set([chicken.id, garlic.id, rice.id, IngredientPickerCatalog.chickenID])))
         #expect(
             IngredientFilterService.matchingRecipes(
                 [recipe],
@@ -301,6 +301,109 @@ struct IngredientFilterServiceTests {
         #expect(Set(matching.map(\.id)) == facet.matchingRecipeIDs(for: [garlic.id]))
     }
 
+    @Test func chickenBreastAndThighsIndexAsCanonicalChicken() {
+        let recipes = [
+            recipe(id: "breast", title: "Breast", ingredients: ["boneless skinless chicken breasts"]),
+            recipe(id: "thigh", title: "Thigh", ingredients: ["chicken thighs"])
+        ]
+        let index = IngredientFilterService.RecipeIngredientIndex(recipes: recipes, catalog: [])
+
+        #expect(index.recipeIDsByIngredientID[IngredientPickerCatalog.chickenID] == Set(["breast", "thigh"]))
+    }
+
+    @Test func beefAndLambVariantsIndexAsTheirCanonicalProteins() {
+        let recipes = [
+            recipe(id: "beef", title: "Beef", ingredients: ["1 lb ground beef"]),
+            recipe(id: "lamb", title: "Lamb", ingredients: ["lamb chops"])
+        ]
+        let index = IngredientFilterService.RecipeIngredientIndex(recipes: recipes, catalog: [])
+
+        #expect(index.ingredientIDs(for: "beef").contains(IngredientPickerCatalog.beefID))
+        #expect(index.ingredientIDs(for: "lamb").contains(IngredientPickerCatalog.lambID))
+    }
+
+    @Test func salmonIndexesAsCanonicalFish() {
+        let recipe = recipe(id: "salmon", title: "Salmon", ingredients: ["salmon fillet"])
+        let index = IngredientFilterService.RecipeIngredientIndex(recipes: [recipe], catalog: [])
+
+        #expect(index.ingredientIDs(for: recipe.id).contains(IngredientPickerCatalog.fishID))
+    }
+
+    @Test func canonicalChickenIsShownInsteadOfDetailedChickenCatalogItems() {
+        let chickenBreast = catalogItem(id: "ingredient_chicken_breast", name: "Chicken Breast")
+        let chickenThighs = catalogItem(id: "ingredient_chicken_thighs", name: "Chicken Thighs")
+        let items = IngredientPickerCatalog.items(from: [chickenBreast, chickenThighs])
+
+        #expect(items.contains(where: { $0.id == IngredientPickerCatalog.chickenID && $0.displayName == "Chicken" }))
+        #expect(!items.contains(where: { $0.id == chickenBreast.id || $0.id == chickenThighs.id }))
+    }
+
+    @Test func canonicalChickenCoverageAndMatchAllUseCombinedVariants() {
+        let garlic = catalogItem(id: "garlic", name: "Garlic")
+        let chicken = ShoppingIngredientCatalogItem(id: IngredientPickerCatalog.chickenID, displayName: "Chicken", normalizedName: "chicken", category: "Protein", defaultUnit: "", estimatedPrice: 0, imageName: nil)
+        let recipes = [
+            recipe(id: "breast-garlic", title: "Chicken", ingredients: ["chicken breast", "garlic"]),
+            recipe(id: "thigh", title: "Chicken", ingredients: ["chicken thighs"])
+        ]
+        let index = IngredientFilterService.RecipeIngredientIndex(recipes: recipes, catalog: [garlic])
+        let facet = IngredientFilterService.IngredientFacet(recipes: recipes, index: index)
+
+        #expect(index.recipeIDsByIngredientID[IngredientPickerCatalog.chickenID] == Set(["breast-garlic", "thigh"]))
+        #expect(facet.availableIngredientIDs(catalog: [chicken, garlic], selectedIDs: []).contains(chicken.id))
+        #expect(facet.matchingRecipeIDs(for: [chicken.id, garlic.id]) == Set(["breast-garlic"]))
+    }
+
+    @Test func proteinFacetStillHidesCombinationsWithoutMatches() {
+        let chicken = ShoppingIngredientCatalogItem(id: IngredientPickerCatalog.chickenID, displayName: "Chicken", normalizedName: "chicken", category: "Protein", defaultUnit: "", estimatedPrice: 0, imageName: nil)
+        let lamb = ShoppingIngredientCatalogItem(id: IngredientPickerCatalog.lambID, displayName: "Lamb", normalizedName: "lamb", category: "Protein", defaultUnit: "", estimatedPrice: 0, imageName: nil)
+        let recipes = [
+            recipe(id: "chicken", title: "Chicken", ingredients: ["chicken breast"]),
+            recipe(id: "lamb", title: "Lamb", ingredients: ["lamb chops"])
+        ]
+        let index = IngredientFilterService.RecipeIngredientIndex(recipes: recipes, catalog: [])
+        let facet = IngredientFilterService.IngredientFacet(recipes: recipes, index: index)
+
+        #expect(!facet.availableIngredientIDs(catalog: [chicken, lamb], selectedIDs: [chicken.id]).contains(lamb.id))
+    }
+
+    @Test func loadedSeedProvidesCoverageForEveryCanonicalProtein() {
+        let recipes = RecipeRepository().allRecipes
+        let index = IngredientFilterService.RecipeIngredientIndex(recipes: recipes)
+
+        for proteinID in [
+            IngredientPickerCatalog.chickenID,
+            IngredientPickerCatalog.beefID,
+            IngredientPickerCatalog.porkID,
+            IngredientPickerCatalog.lambID,
+            IngredientPickerCatalog.fishID,
+            IngredientPickerCatalog.seafoodID,
+            IngredientPickerCatalog.eggsID,
+            IngredientPickerCatalog.tofuID,
+            IngredientPickerCatalog.beansID
+        ] {
+            #expect(!(index.recipeIDsByIngredientID[proteinID] ?? []).isEmpty)
+        }
+    }
+
+    @Test func explorerUsesExactlyTheSixApprovedFiltersAndAssets() {
+        #expect(ExploreFilter.allCases.map(\.rawValue) == ["protein", "vegetarian", "budget", "quickMeals", "chicken", "favorites"])
+        #expect(ExploreFilter.protein.assetName == "icon_high_protein")
+        #expect(ExploreFilter.vegetarian.assetName == "icon_vegetarian")
+        #expect(ExploreFilter.budget.assetName == "icon_budget")
+        #expect(ExploreFilter.quickMeals.assetName == "icon_quick_meals")
+        #expect(ExploreFilter.chicken.assetName == "icon_chicken_salad")
+        #expect(ExploreFilter.favorites.assetName == "icon_featured")
+    }
+
+    @Test func explorerChickenAndFavoritesFiltersUseTheirCorrectPredicates() {
+        let chicken = recipe(id: "chicken", title: "Chicken", ingredients: ["chicken thighs"], category: .chicken)
+        let favorite = recipe(id: "favorite", title: "Favorite", ingredients: ["pasta"])
+
+        #expect(ExploreFilter.chicken.matches(chicken, favoriteRecipeIDs: []))
+        #expect(ExploreFilter.favorites.matches(favorite, favoriteRecipeIDs: Set([favorite.id])))
+        #expect(!ExploreFilter.favorites.matches(chicken, favoriteRecipeIDs: []))
+    }
+
     private func ingredientFacet(
         recipes: [Recipe],
         catalog: [ShoppingIngredientCatalogItem]
@@ -309,12 +412,17 @@ struct IngredientFilterServiceTests {
         return IngredientFilterService.IngredientFacet(recipes: recipes, index: index)
     }
 
-    private func recipe(id: String, title: String, ingredients: [String]) -> Recipe {
+    private func recipe(
+        id: String,
+        title: String,
+        ingredients: [String],
+        category: RecipeCategory = .vegetarian
+    ) -> Recipe {
         Recipe(
             id: id,
             title: title,
             subtitle: title,
-            category: .vegetarian,
+            category: category,
             sectionTags: [],
             cookingTimeMinutes: 20,
             calories: 400,

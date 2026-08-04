@@ -1,6 +1,10 @@
 import Foundation
 
 enum RecipeSeedLoader {
+    /// The enriched seed currently replaces recipe-level image names with generic tokens.
+    /// Keep the legacy seed primary until those mappings are reconciled by stable recipe ID.
+    static let primarySeedResourceName = "recipes.seed"
+
     static func loadRecipes(
         bundle: Bundle = .main,
         fallbackRecipes: @autoclosure () -> [Recipe] = []
@@ -16,10 +20,8 @@ enum RecipeSeedLoader {
 
     private static func loadPrimarySeedRecipes(bundle: Bundle) -> [Recipe] {
         let candidateURLs = [
-            bundle.url(forResource: "recipes.seed", withExtension: "json"),
-            bundle.url(forResource: "recipes.seed.enriched.full", withExtension: "json"),
-            bundle.url(forResource: "recipes.seed", withExtension: "json", subdirectory: "Resources"),
-            bundle.url(forResource: "recipes.seed.enriched.full", withExtension: "json", subdirectory: "Resources")
+            bundle.url(forResource: primarySeedResourceName, withExtension: "json"),
+            bundle.url(forResource: primarySeedResourceName, withExtension: "json", subdirectory: "Resources")
         ]
 
         guard let url = candidateURLs.compactMap({ $0 }).first,

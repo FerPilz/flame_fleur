@@ -15,15 +15,18 @@ struct TopSegmentOption: Identifiable, Hashable {
 struct TopSegmentSelector: View {
     let options: [TopSegmentOption]
     @Binding var selection: String
+    let allowsDeselection: Bool
     let onSelect: (TopSegmentOption) -> Void
 
     init(
         options: [TopSegmentOption],
         selection: Binding<String>,
+        allowsDeselection: Bool = false,
         onSelect: @escaping (TopSegmentOption) -> Void = { _ in }
     ) {
         self.options = options
         self._selection = selection
+        self.allowsDeselection = allowsDeselection
         self.onSelect = onSelect
     }
 
@@ -33,7 +36,7 @@ struct TopSegmentSelector: View {
                 LazyHStack(spacing: AppSpacing.md) {
                     ForEach(options) { option in
                         Button {
-                            selection = option.id
+                            selection = allowsDeselection && selection == option.id ? "" : option.id
                             onSelect(option)
                         } label: {
                             segmentContent(option)

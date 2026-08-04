@@ -27,62 +27,70 @@ struct RecipeListRow: View {
     }
 
     var body: some View {
-        SurfaceCard(
-            backgroundColor: AppColors.elevatedCardBackground,
-            borderColor: AppColors.warmBorder,
-            cornerRadius: AppRadius.large,
-            contentPadding: layout == .compact ? 6 : AppSpacing.xs,
-            showsShadow: false
-        ) {
-            HStack(alignment: .center, spacing: AppSpacing.sm) {
-                Button(action: onTap) {
-                    HStack(alignment: .center, spacing: AppSpacing.sm) {
-                        FoodImagePlaceholder(imageName: recipe.imageName, style: .thumbnail)
-                            .frame(width: imageSize, height: imageSize)
-                            .clipShape(RoundedRectangle(cornerRadius: AppRadius.medium, style: .continuous))
+        HStack(alignment: .center, spacing: 0) {
+            FoodImagePlaceholder(imageName: recipe.imageName, style: .cardTop)
+                .frame(width: imageWidth, height: rowHeight)
+                .clipped()
 
-                        VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-                            Text(recipe.title)
-                                .font(layout == .compact ? AppTypography.compactRecipePreviewTitle : AppTypography.cardTitle)
-                                .foregroundStyle(AppColors.primaryText)
-                                .lineLimit(layout == .compact ? 2 : 1)
-                                .truncationMode(.tail)
-
-                            Text(layout == .compact ? "Matches all selected ingredients" : recipe.subtitle)
-                                .font(AppTypography.metadata)
-                                .foregroundStyle(layout == .compact ? AppColors.basil : AppColors.secondaryText)
-                                .lineLimit(layout == .compact ? 1 : 2)
-                                .truncationMode(.tail)
-
-                            metadataRow
-                                .padding(.top, AppSpacing.xxs)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-                Group {
-                    if layout == .compact {
-                        Image(systemName: "chevron.right")
-                            .font(AppTypography.caption)
-                            .foregroundStyle(AppColors.tertiaryText)
-                            .accessibilityHidden(true)
-                    } else {
-                        IconCircleButton(
-                            systemName: isFavorite ? "heart.fill" : "heart",
-                            accessibilityLabel: isFavorite ? "Unsave \(recipe.title)" : "Save \(recipe.title)",
-                            size: 28,
-                            backgroundColor: AppColors.elevatedCardBackground,
-                            foregroundColor: isFavorite ? AppColors.error : AppColors.burntOrange,
-                            action: onFavoriteTap
-                        )
-                    }
-                }
-                .frame(width: 36)
+            Button(action: onTap) {
+                textContent
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, textLeadingPadding)
+                .padding(.vertical, textVerticalPadding)
+                .contentShape(Rectangle())
             }
+            .buttonStyle(.plain)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+
+            actionControl
+                .frame(width: 36)
+                .padding(.trailing, AppSpacing.sm)
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: rowHeight)
+        .background(AppColors.elevatedCardBackground)
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
+                .stroke(AppColors.warmBorder, lineWidth: 1)
+        )
+    }
+
+    private var textContent: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.xxs) {
+            Text(recipe.title)
+                .font(layout == .compact ? AppTypography.compactRecipePreviewTitle : AppTypography.cardTitle)
+                .foregroundStyle(AppColors.primaryText)
+                .lineLimit(2)
+                .truncationMode(.tail)
+
+            Text(layout == .compact ? "Matches all selected ingredients" : recipe.subtitle)
+                .font(AppTypography.metadata)
+                .foregroundStyle(layout == .compact ? AppColors.basil : AppColors.secondaryText)
+                .lineLimit(layout == .compact ? 1 : 2)
+                .truncationMode(.tail)
+
+            metadataRow
+                .padding(.top, AppSpacing.xxs)
+        }
+    }
+
+    @ViewBuilder
+    private var actionControl: some View {
+        if layout == .compact {
+            Image(systemName: "chevron.right")
+                .font(AppTypography.caption)
+                .foregroundStyle(AppColors.tertiaryText)
+                .accessibilityHidden(true)
+        } else {
+            IconCircleButton(
+                systemName: isFavorite ? "heart.fill" : "heart",
+                accessibilityLabel: isFavorite ? "Unsave \(recipe.title)" : "Save \(recipe.title)",
+                size: 28,
+                backgroundColor: AppColors.elevatedCardBackground,
+                foregroundColor: isFavorite ? AppColors.error : AppColors.burntOrange,
+                action: onFavoriteTap
+            )
         }
     }
 
@@ -98,8 +106,20 @@ struct RecipeListRow: View {
         }
     }
 
-    private var imageSize: CGFloat {
-        layout == .compact ? 74 : 82
+    private var rowHeight: CGFloat {
+        layout == .compact ? 104 : 112
+    }
+
+    private var imageWidth: CGFloat {
+        layout == .compact ? 112 : 120
+    }
+
+    private var textLeadingPadding: CGFloat {
+        12
+    }
+
+    private var textVerticalPadding: CGFloat {
+        10
     }
 
     private func metadataItem(systemName: String, text: String) -> some View {

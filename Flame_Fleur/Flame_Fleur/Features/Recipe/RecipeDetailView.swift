@@ -233,7 +233,7 @@ struct RecipeDetailView: View {
                         }
 
                         HStack(spacing: AppSpacing.sm) {
-                            NutritionMetricView(title: "Protein", value: "\(nutrition.proteinGrams) g", iconName: "ProteinIcon")
+                            NutritionMetricView(title: "Protein", value: "\(nutrition.proteinGrams) g", iconName: "icon_beef")
                             NutritionMetricView(title: "Carbs", value: "\(nutrition.carbsGrams) g", iconName: "CarbsIcon")
                             NutritionMetricView(title: "Fat", value: "\(nutrition.fatGrams) g", iconName: "FatIcon")
                         }
